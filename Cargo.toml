@@ -1,0 +1,10 @@
+[package]
+name = "blackbird"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+avian3d = "0.2.0"
+bevy = "0.15.1"
+bevy_hanabi = "0.14.0"
+leafwing-input-manager = "0.16.0"
