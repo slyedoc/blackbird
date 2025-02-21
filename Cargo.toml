@@ -1,10 +1,182 @@
+
+[workspace]
+resolver = "2"
+
+members = [
+    "crates/*",
+    "games/*"
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+[workspace.dependencies]
+# Local Crates
+sly_camera = { path = "crates/cameras" }
+sly_window_state = { path = "crates/window_state" }
+sly_editor = { path = "crates/editor" }
+# transform_gizmo = { path = "crates/transform_gizmo" }
+# billboard  = { path = "crates/billboard" }
+# go = { path = "crates/go" }
+# tic_tac_toe = { path = "crates/tic_tac_toe" }
+
+# Crates
+bevy = "0.15" 
+avian3d = "0.2.1"
+approx = "0.5"
+bevy-inspector-egui = { version = "0.29.1", features = [
+    "bevy_pbr",
+    "highlight_changes",
+] }
+bevy_hanabi = "0.14.0"
+bevy_panorbit_camera = "0.22.1"
+leafwing-input-manager = "0.16.0"
+rand = "0.9.0"
+
+# # Crates inner libraries
+# anyhow = "1.0"
+# bevy_asset_loader = "0.22.0"
+# bevy_debug_grid = { git = "https://github.com/romenjelly/bevy_debug_grid.git"}
+# bevy_egui = "0.32.0"
+#bevy_mod_billboard = { branch = "migrate-0.15", git = "https://github.com/voximity/bevy_mod_billboard.git"}
+bevy_mod_outline = { git = "https://github.com/komadori/bevy_mod_outline.git" }
+# convert_case = "0.7.1"
+# egui_dock = "0.15.0"
+# egui_extras = { version = "0.30.0", features = ["all_loaders"] }
+# egui_file = { rev = "bcacedf", git = "https://github.com/Barugon/egui_file.git"}
+
+# egui-toast = "0.16.0"
+# image = {version = "0.25.5", features = ["png"] }
+# pretty-type-name = "1"
+# ron = "0.8"
+
+# egui = "0.30"
+# eframe = "0.30"
+# emath = "0.30"
+# epaint = "0.30"
+# ecolor = "0.30"
+# glam = { version = "0.29.1", features = ["mint"] }
+# mint = "0.5"
+# enum_dispatch = "0.3.12"
+# ahash = "0.8.7"
+# enumset = "1.1.3"
+# bytemuck = "1.5"
+# uuid = "1.1"
+strum = { version = "0.26", features = ["derive"] }
+strum_macros = "0.26"
+serde = { version = "1.0", features = ["derive"] }
+
+
+paste = "1.0.15"
+clap = { version = "4.5.28", features = ["derive"] }
+
 [package]
 name = "blackbird"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
-avian3d = "0.2.0"
-bevy = "0.15.1"
-bevy_hanabi = "0.14.0"
-leafwing-input-manager = "0.16.0"
+
+# leptos 
+anyhow = "1.0"
+console_log = "1.0"
+rand = { version = "0.8.0", features = ["min_const_gen"], optional = true }
+console_error_panic_hook = "0.1.0"
+futures = "0.3.0"
+leptos = { git = "https://github.com/leptos-rs/leptos.git" }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos.git" }
+leptos_axum = { git = "https://github.com/leptos-rs/leptos.git", optional = true }
+leptos_router = { git = "https://github.com/leptos-rs/leptos.git" }
+log = "0.4.0"
+simple_logger = "5.0"
+serde = { version = "1.0", features = ["derive"] }
+axum = { version = "0.7.0", optional = true, features = ["macros"] }
+tower = { version = "0.4.0", optional = true }
+tower-http = { version = "0.5.0", features = ["fs"], optional = true }
+tokio = { version = "1.0", features = ["full"], optional = true }
+http = { version = "1.0" }
+sqlx = { version = "0.8.0", features = [
+  "runtime-tokio-rustls",
+  "sqlite",
+], optional = true }
+thiserror = "1.0"
+wasm-bindgen = "0.2.0"
+axum_session_auth = { version = "0.14.0", features = [], optional = true }
+axum_session = { version = "0.14.0", features = [], optional = true }
+axum_session_sqlx = { version = "0.3.0", features = [ "sqlite", "tls-rustls"], optional = true }
+bcrypt = { version = "0.15.0", optional = true }
+async-trait = { version = "0.1.0", optional = true }
+
+[features]
+default = ["ssr"]
+hydrate = ["leptos/hydrate"]
+ssr = [
+  "dep:axum",
+  "dep:tower",
+  "dep:tower-http",
+  "dep:tokio",
+  "dep:axum_session_sqlx",
+  "dep:axum_session_auth",
+  "dep:axum_session",
+  "dep:async-trait",
+  "dep:sqlx",
+  "dep:bcrypt",
+  "dep:rand",
+  "leptos/ssr",
+  "leptos_meta/ssr",
+  "leptos_router/ssr",
+  "dep:leptos_axum",
+]
+
+[package.metadata.cargo-all-features]
+denylist = ["axum", "tower", "tower-http", "tokio", "sqlx", "leptos_axum"]
+skip_feature_sets = [["ssr", "hydrate"]]
+
+[package.metadata.leptos]
+# The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name
+output-name = "session_auth_axum"
+# The site root folder is where cargo-leptos generate all output. WARNING: all content of this folder will be erased on a rebuild. Use it in your server setup.
+site-root = "target/site"
+# The site-root relative folder where all compiled output (JS, WASM and CSS) is written
+# Defaults to pkg
+site-pkg-dir = "pkg"
+# [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
+style-file = "./style.css"
+# [Optional] Files in the asset-dir will be copied to the site-root directory
+assets-dir = "public"
+# The IP and port (ex: 127.0.0.1:3000) where the server serves the content. Use it in your server setup.
+site-addr = "127.0.0.1:3000"
+# The port to use for automatic reload monitoring
+reload-port = 3001
+# [Optional] Command to use when running end2end tests. It will run in the end2end dir.
+end2end-cmd = "npx playwright test"
+#  The browserlist query used for optimizing the CSS.
+browserquery = "defaults"
+# Set by cargo-leptos watch when building with that tool. Controls whether autoreload JS will be included in the head
+watch = false
+# The environment Leptos will run in, usually either "DEV" or "PROD"
+env = "DEV"
+# The features to use when compiling the bin target
+#
+# Optional. Can be over-ridden with the command line parameter --bin-features
+bin-features = ["ssr"]
+
+# If the --no-default-features flag should be used when compiling the bin target
+#
+# Optional. Defaults to false.
+bin-default-features = false
+
+# The features to use when compiling the lib target
+#
+# Optional. Can be over-ridden with the command line parameter --lib-features
+lib-features = ["hydrate"]
+
+# If the --no-default-features flag should be used when compiling the lib target
+#
+# Optional. Defaults to false.
+lib-default-features = false
+

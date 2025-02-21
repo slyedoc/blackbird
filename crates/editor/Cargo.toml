@@ -1,0 +1,37 @@
+[package]
+name = "sly_editor"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["fps", "outline" ]
+outline = ["dep:bevy_mod_outline"]
+fps = []
+avian3d = ["dep:avian3d"]
+
+
+
+[dependencies]
+sly_camera.workspace = true
+# billboard.workspace = true
+# transform_gizmo.workspace = true
+# space_editor.workspace = true
+# bevy_debug_grid.workspace = true
+
+# tic_tac_toe.workspace = true
+# go.workspace = true
+
+bevy = { workspace = true, features = ["asset_processor"] }
+bevy-inspector-egui.workspace = true
+bevy_mod_outline = { workspace = true, optional = true }
+
+
+avian3d = { workspace = true, optional = true }
+bevy_hanabi.workspace = true
+leafwing-input-manager.workspace = true
+strum = { workspace = true, features = ["derive"] }
+strum_macros.workspace = true
+approx.workspace = true
+serde = { workspace = true, features = ["derive"] }
+
+

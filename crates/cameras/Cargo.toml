@@ -1,0 +1,10 @@
+[package]
+name = "sly_camera"
+version.workspace = true
+edition.workspace = true
+
+
+[dependencies]
+bevy.workspace = true
+approx.workspace = true
+serde.workspace = true
