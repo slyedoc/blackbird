@@ -1,3 +1,4 @@
+#[allow(warnings)]
 use axum::{
     body::Body as AxumBody,
     extract::{Path, State},
@@ -10,15 +11,15 @@ use axum_session::{SessionConfig, SessionLayer, SessionStore};
 use axum_session_auth::{AuthConfig, AuthSessionLayer};
 use axum_session_sqlx::SessionSqlitePool;
 use leptos::{
-    config::get_configuration, logging::log, prelude::provide_context,
+    config::get_configuration, logging::log, prelude::*,
 };
 use leptos_axum::{
     generate_route_list, handle_server_fns_with_context, LeptosRoutes,
 };
 use blackbird::{
+    app::*,
     auth::{ssr::AuthSession, User},
     state::AppState,
-    todo::*,
 };
 use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
 
@@ -86,7 +87,7 @@ async fn main() {
     let conf = get_configuration(None).unwrap();
     let leptos_options = conf.leptos_options;
     let addr = leptos_options.site_addr;
-    let routes = generate_route_list(TodoApp);
+    let routes = generate_route_list(App);
 
     let app_state = AppState {
         leptos_options,
@@ -119,3 +120,7 @@ async fn main() {
         .await
         .unwrap();
 }
+
+
+
+

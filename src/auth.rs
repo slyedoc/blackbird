@@ -38,7 +38,7 @@ pub mod ssr {
         SessionSqlitePool,
         SqlitePool,
     >;
-    pub use crate::todo::ssr::{auth, pool};
+    pub use crate::todos::ssr::{auth, pool};
     pub use async_trait::async_trait;
     pub use bcrypt::{hash, verify, DEFAULT_COST};
 
@@ -183,7 +183,7 @@ pub async fn foo() -> Result<String, ServerFnError> {
 
 #[server]
 pub async fn get_user() -> Result<Option<User>, ServerFnError> {
-    use crate::todo::ssr::auth;
+    use crate::todos::ssr::auth;
 
     let auth = auth()?;
 

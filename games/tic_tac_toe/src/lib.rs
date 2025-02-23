@@ -2,7 +2,7 @@
 #![allow(unused_imports)]
 use std::f32::consts::PI;
 
-use bevy::{color::palettes::tailwind::*, picking::pointer::PointerInteraction, prelude::*, window::WindowResolution};
+use bevy::{color::palettes::tailwind::*, log::LogPlugin, picking::pointer::PointerInteraction, prelude::*, window::WindowResolution};
 use sly_window_state::{prelude::*, WindowState};
 use sly_editor::prelude::*;
 
@@ -37,9 +37,6 @@ pub fn run() {
         window_state.size.1 as f32,
     );
 
-    dbg!(&position);
-    dbg!(&resolution);
-
     app.add_plugins((
         DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
@@ -49,16 +46,23 @@ pub fn run() {
                 ..Default::default()
             }),
             ..default()
+        }).set(LogPlugin {
+            filter: "wgpu_hal=error,wgpu_core=error,bevy_render=error,bevy_persistent=error".into(),
+            level: bevy::log::Level::INFO,
+            ..default()
         }),        
-        MeshPickingPlugin,
-        
+        MeshPickingPlugin,        
         SlyEditorPlugin,
         WindowStatePlugin,
         StatePlugin,
         UiPlugin,
         BoardPlugin,
     ))
+    //.insert_resource(WinitSettings::desktop_app())
     .insert_resource(window_state)    
     .run();
 }
 
+pub fn exit(mut commands: Commands) {
+    commands.send_event(AppExit::Success);
+}

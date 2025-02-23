@@ -1,0 +1,110 @@
+use crate::{auth::*, error_template::ErrorTemplate};
+use leptos::prelude::*;
+use leptos_meta::*;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Todo {
+    pub id: u32,
+    pub user: Option<User>,
+    pub title: String,
+    pub created_at: String,
+    pub completed: bool,
+}
+
+#[cfg(feature = "ssr")]
+pub mod ssr {
+    use super::Todo;
+    use crate::auth::{ssr::AuthSession, User};
+    use leptos::prelude::*;
+    use sqlx::SqlitePool;
+
+    pub fn pool() -> Result<SqlitePool, ServerFnError> {
+        use_context::<SqlitePool>()
+            .ok_or_else(|| ServerFnError::ServerError("Pool missing.".into()))
+    }
+
+    pub fn auth() -> Result<AuthSession, ServerFnError> {
+        use_context::<AuthSession>().ok_or_else(|| {
+            ServerFnError::ServerError("Auth session missing.".into())
+        })
+    }
+
+    #[derive(sqlx::FromRow, Clone)]
+    pub struct SqlTodo {
+        id: u32,
+        user_id: i64,
+        title: String,
+        created_at: String,
+        completed: bool,
+    }
+
+    impl SqlTodo {
+        pub async fn into_todo(self, pool: &SqlitePool) -> Todo {
+            Todo {
+                id: self.id,
+                user: User::get(self.user_id, pool).await,
+                title: self.title,
+                created_at: self.created_at,
+                completed: self.completed,
+            }
+        }
+    }
+}
+
+#[server(GetTodos, "/api")]
+pub async fn get_todos() -> Result<Vec<Todo>, ServerFnError> {
+    use self::ssr::{pool, SqlTodo};
+    use futures::future::join_all;
+
+    let pool = pool()?;
+
+    Ok(join_all(
+        sqlx::query_as::<_, SqlTodo>("SELECT * FROM todos")
+            .fetch_all(&pool)
+            .await?
+            .iter()
+            .map(|todo: &SqlTodo| todo.clone().into_todo(&pool)),
+    )
+    .await)
+}
+
+#[server(AddTodo, "/api")]
+pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
+    use self::ssr::*;
+
+    let user = get_user().await?;
+    let pool = pool()?;
+
+    let id = match user {
+        Some(user) => user.id,
+        None => -1,
+    };
+
+    // fake API delay
+    std::thread::sleep(std::time::Duration::from_millis(1250));
+
+    Ok(sqlx::query(
+        "INSERT INTO todos (title, user_id, completed) VALUES (?, ?, false)",
+    )
+    .bind(title)
+    .bind(id)
+    .execute(&pool)
+    .await
+    .map(|_| ())?)
+}
+
+// The struct name and path prefix arguments are optional.
+#[server]
+pub async fn delete_todo(id: u16) -> Result<(), ServerFnError> {
+    use self::ssr::*;
+
+    let pool = pool()?;
+
+    Ok(sqlx::query("DELETE FROM todos WHERE id = $1")
+        .bind(id)
+        .execute(&pool)
+        .await
+        .map(|_| ())?)
+}
+

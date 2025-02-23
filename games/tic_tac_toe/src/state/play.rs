@@ -16,6 +16,8 @@ fn setup(mut commands: Commands) {
         StateScoped(AppState::Play),
     ));
 
+    
+
     commands
         .spawn((
             Node {
@@ -27,6 +29,7 @@ fn setup(mut commands: Commands) {
                 align_items: AlignItems::Start,
                 ..Default::default()
             },
+            PickingBehavior::IGNORE,
             StateScoped(AppState::Play),
         ))
         .with_children(|parent| {
@@ -62,7 +65,7 @@ fn setup(mut commands: Commands) {
                 });
         });
 
-
+    //board
     commands.spawn((
         Transform::from_xyz(0.0, 0.0, 0.0),
         TicTacToeBoard::default(),

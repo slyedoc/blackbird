@@ -1,6 +1,8 @@
 use bevy::{prelude::*, color::palettes::tailwind::*};
 
+pub const PANEL_BACKGROUND: Color = Color::Srgba(GRAY_900);
 pub const BUTTON_BORDER: Srgba = RED_600;
+pub const BUTTON_TEXT: Color = Color::Srgba(GRAY_100);
 pub const NORMAL_BUTTON: Color = Color::srgb(0.15, 0.15, 0.15);
 pub const HOVERED_BUTTON: Color = Color::srgb(0.25, 0.25, 0.25);
 pub const PRESSED_BUTTON: Color = Color::srgb(0.35, 0.75, 0.35);
@@ -46,6 +48,38 @@ fn button_system(
         }
     }
 }
+
+#[derive(Component)]
+#[require(    
+    BackgroundColor(|| BackgroundColor(PANEL_BACKGROUND))
+)]
+pub struct MenuPanel;
+
+#[derive(Component)]
+#[require(Button)]
+#[require(Node(|| Node {
+    padding: UiRect::all(Val::Px(10.0)),
+    margin: UiRect::all(Val::Px(10.0)),    
+    width: Val::Percent(100.0),
+    // horizontally center child text
+    flex_direction: FlexDirection::Column,
+    justify_content: JustifyContent::Center,
+    // vertically center child text
+    align_items: AlignItems::Center,
+    ..default()
+}))]
+#[require(BackgroundColor( || BackgroundColor(NORMAL_BUTTON)))]
+pub struct MenuButton;
+
+
+#[derive(Component)]
+#[require(TextFont(|| TextFont {
+    font_size: 33.0,
+    ..Default::default()
+}))]
+#[require(TextColor(|| TextColor(BUTTON_TEXT)))]
+pub struct MenuButtonText;
+
 
 /// Returns an observer that updates the entity's material to the one specified.
 pub fn update_material_on<E>(

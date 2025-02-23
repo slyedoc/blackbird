@@ -1,0 +1,13 @@
+[package]
+name = "breakout"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = ["editor"]
+editor = ["dep:sly_editor"]
+
+[dependencies]
+bevy = { workspace = true, features = ["wayland"] }
+leafwing-input-manager = { workspace = true }
+sly_editor = { workspace = true, optional = true }

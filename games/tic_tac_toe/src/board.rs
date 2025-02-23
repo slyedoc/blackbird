@@ -1,5 +1,5 @@
-use bevy::prelude::*;
 use avian3d::prelude::*;
+use bevy::{prelude::*, transform};
 
 use bevy_inspector_egui::prelude::*;
 use rand::prelude::*;
@@ -9,29 +9,24 @@ pub struct BoardPlugin;
 impl Plugin for BoardPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<TicTacToeAssets>()
-        .add_systems(Update, asset_changed.run_if(resource_changed::<TicTacToeAssets>))
-            .add_observer(on_add_board);
+            .add_systems(
+                Update,
+                asset_changed.run_if(resource_changed::<TicTacToeAssets>),
+            )
+            .add_observer(on_add_board)
+            .register_type::<TicTacToeAssets>();
     }
 }
 
-fn asset_changed(
-    mut commands: Commands,
-    query: Query<(Entity, &Children), With<TicTacToeBoard>>,
-) {
-    for (e, children) in query.iter() {
-        for c in children.iter() {
-            if let Some(mut cmd) = commands.get_entity(*c) {
-                cmd.despawn();
-            }
-        }
+fn asset_changed(mut commands: Commands, query: Query<(Entity, &Transform), With<TicTacToeBoard>>) {
+    for (e, transform) in query.iter() {
+        let t = transform.clone();
+        commands.entity(e).despawn_recursive();
 
-        commands.entity(e)
-            .remove::<Mesh3d>()
-            .remove::<MeshMaterial3d<StandardMaterial>>()
-            .remove::<RigidBody>()
-            .remove::<Collider>();
-
-        commands.trigger_targets(OnAdd, e);
+        commands.spawn((
+            t,            
+            TicTacToeBoard::default(),
+        ));
     }
 }
 
@@ -41,7 +36,7 @@ pub fn on_add_board(
     //mut meshes: ResMut<Assets<Mesh>>,
     a: Res<TicTacToeAssets>,
 ) {
-    let e = trigger.entity();    
+    let e = trigger.entity();
 
     cmd.entity(e).insert((
         Mesh3d(a.board_mesh.clone()),
@@ -51,14 +46,14 @@ pub fn on_add_board(
     ));
 
     // lines
-    for i in 0..2 {                    
+    for i in 0..2 {
         let offset = -(a.board_size * 0.5) + ((a.board_size / 3.0) * i as f32 + a.board_size / 3.0);
         // Horizontal
         cmd.spawn((
             Transform {
                 translation: Vec3::new(0.0, (a.board_depth * 0.5) + a.line_depth, offset),
-                rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2) ,
-                  
+                rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2),
+
                 ..Default::default()
             },
             Mesh3d(a.line_mesh.clone()),
@@ -69,8 +64,8 @@ pub fn on_add_board(
         //Vertical
         cmd.spawn((
             Transform {
-                translation: Vec3::new(offset, (a.board_depth * 0.5) + a.line_depth, 0.0 ),
-                rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2) 
+                translation: Vec3::new(offset, (a.board_depth * 0.5) + a.line_depth, 0.0),
+                rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2)
                     * Quat::from_rotation_z(std::f32::consts::FRAC_PI_2),
                 ..default()
             },
@@ -121,6 +116,7 @@ impl Cell {
     }
 }
 
+
 fn on_click_cell(
     trigger: Trigger<Pointer<Click>>,
     mut commands: Commands,
@@ -128,7 +124,6 @@ fn on_click_cell(
     mut boards: Query<&mut TicTacToeBoard>,
     board_assets: Res<TicTacToeAssets>,
 ) {
-    info!("on_click_cell");
     let e = trigger.entity();
     let (mut cell, parent) = cells.get_mut(trigger.entity()).unwrap();
     let mut board = boards.get_mut(parent.get()).unwrap();
@@ -144,55 +139,77 @@ fn on_click_cell(
             }
 
             // update model
-            commands
-                .entity(e)
-                .with_children(|parent| 
-                    cell.model = match board.player {
+            commands.entity(e).with_children(|parent| {
+                cell.model = match board.player {
                     Player::X => Some(spawn_x(&board_assets, parent, false)),
                     Player::O => Some(spawn_o(&board_assets, parent, false)),
-                });
+                }
+            });
 
             board.make_move(cell.pos as usize);
         }
     }
 }
 
-fn spawn_x(board_assets: &Res<'_, TicTacToeAssets>, parent: &mut ChildBuilder<'_>, hover: bool) -> Entity {
-    parent.spawn((
-        Transform::default(),
-        GlobalTransform::default(),
-        InheritedVisibility::default()
-    ))
-    .with_children(|p| {
-        p.spawn((
-            Transform {
-                rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2)
-                * Quat::from_rotation_z(std::f32::consts::FRAC_PI_4),
-                ..Default::default()
-            },
-            Mesh3d(board_assets.x_mesh.clone()),
-            MeshMaterial3d( if !hover { board_assets.x_mat.clone() } else { board_assets.x_hover_mat.clone() }),
-        ));
-        p.spawn((
-            Transform {
-                rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2)
-                * Quat::from_rotation_z(-std::f32::consts::FRAC_PI_4),
-                ..default()
-            },
-            Mesh3d(board_assets.x_mesh.clone()),
-            MeshMaterial3d( if !hover { board_assets.x_mat.clone() } else { board_assets.x_hover_mat.clone() }),
-        ));
-    }).id()
+
+fn spawn_x(
+    board_assets: &Res<'_, TicTacToeAssets>,
+    parent: &mut ChildBuilder<'_>,
+    hover: bool,
+) -> Entity {
+    parent
+        .spawn((
+            Transform::default(),
+            GlobalTransform::default(),
+            InheritedVisibility::default(),
+        ))
+        .with_children(|p| {
+            p.spawn((
+                Transform {
+                    rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2)
+                        * Quat::from_rotation_z(std::f32::consts::FRAC_PI_4),
+                    ..Default::default()
+                },
+                Mesh3d(board_assets.x_mesh.clone()),
+                MeshMaterial3d(if !hover {
+                    board_assets.x_mat.clone()
+                } else {
+                    board_assets.x_hover_mat.clone()
+                }),
+            ));
+            p.spawn((
+                Transform {
+                    rotation: Quat::from_rotation_x(std::f32::consts::FRAC_PI_2)
+                        * Quat::from_rotation_z(-std::f32::consts::FRAC_PI_4),
+                    ..default()
+                },
+                Mesh3d(board_assets.x_mesh.clone()),
+                MeshMaterial3d(if !hover {
+                    board_assets.x_mat.clone()
+                } else {
+                    board_assets.x_hover_mat.clone()
+                }),
+            ));
+        })
+        .id()
 }
 
-fn spawn_o(board_assets: &Res<'_, TicTacToeAssets>, parent: &mut ChildBuilder<'_>, hover: bool) -> Entity {
-    parent.spawn((
-        Transform {
-            ..default()
-        },
-        Mesh3d(board_assets.o_mesh.clone()),
-        MeshMaterial3d( if !hover { board_assets.o_mat.clone() } else { board_assets.o_hover_mat.clone() }),
-    )).id()
+fn spawn_o(
+    board_assets: &Res<'_, TicTacToeAssets>,
+    parent: &mut ChildBuilder<'_>,
+    hover: bool,
+) -> Entity {
+    parent
+        .spawn((
+            Transform { ..default() },
+            Mesh3d(board_assets.o_mesh.clone()),
+            MeshMaterial3d(if !hover {
+                board_assets.o_mat.clone()
+            } else {
+                board_assets.o_hover_mat.clone()
+            }),
+        ))
+        .id()
 }
 
 fn on_over_cell(
@@ -206,28 +223,26 @@ fn on_over_cell(
     let (mut cell, parent) = cells.get_mut(trigger.entity()).unwrap();
     let board = boards.get(parent.get()).unwrap();
     if cell.peice.is_none() && cell.model.is_none() {
-        commands
-            .entity(trigger.entity())
-            .with_children(|parent| {
-                let m = match board.player {
-                    Player::X => spawn_x(&a, parent, true),
-                    Player::O => spawn_o(&a, parent, true),
-                };
-                cell.model = Some(m);
-            });
+        commands.entity(trigger.entity()).with_children(|parent| {
+            let m = match board.player {
+                Player::X => spawn_x(&a, parent, true),
+                Player::O => spawn_o(&a, parent, true),
+            };
+            cell.model = Some(m);
+        });
     }
 }
 
 fn on_out_cell(
     trigger: Trigger<Pointer<Out>>,
     mut commands: Commands,
-    mut cells: Query<&mut Cell>,    
+    mut cells: Query<&mut Cell>,
 ) {
     let mut cell = cells.get_mut(trigger.entity()).unwrap();
     if cell.peice.is_some() {
         return;
     }
-    if let Some(m) = cell.model {        
+    if let Some(m) = cell.model {
         commands.entity(m).despawn_recursive();
         cell.model = None;
     }

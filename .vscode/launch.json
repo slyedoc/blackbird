@@ -1,0 +1,311 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'app'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=app",
+                    "--package=app"
+                ],
+                "filter": {
+                    "name": "app",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'app'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=app",
+                    "--package=app"
+                ],
+                "filter": {
+                    "name": "app",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'sly_camera'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=sly_camera"
+                ],
+                "filter": {
+                    "name": "sly_camera",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'sly_editor'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=sly_editor"
+                ],
+                "filter": {
+                    "name": "sly_editor",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'sly_window_state'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=sly_window_state"
+                ],
+                "filter": {
+                    "name": "sly_window_state",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'breakout'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=breakout"
+                ],
+                "filter": {
+                    "name": "breakout",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'breakout'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=breakout",
+                    "--package=breakout"
+                ],
+                "filter": {
+                    "name": "breakout",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "BEVY_ASSET_ROOT": "${workspaceFolder}"
+            }
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'breakout'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=breakout",
+                    "--package=breakout"
+                ],
+                "filter": {
+                    "name": "breakout",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'tic_tac_toe'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=tic_tac_toe"
+                ],
+                "filter": {
+                    "name": "tic_tac_toe",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'tic_tac_toe'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=tic_tac_toe",
+                    "--package=tic_tac_toe"
+                ],
+                "filter": {
+                    "name": "tic_tac_toe",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'tic_tac_toe'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=tic_tac_toe",
+                    "--package=tic_tac_toe"
+                ],
+                "filter": {
+                    "name": "tic_tac_toe",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'blackbird'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=blackbird"
+                ],
+                "filter": {
+                    "name": "blackbird",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'blackbird'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=blackbird",
+                    "--package=blackbird"
+                ],
+                "filter": {
+                    "name": "blackbird",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'blackbird'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=blackbird",
+                    "--package=blackbird"
+                ],
+                "filter": {
+                    "name": "blackbird",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'mesh_picking'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=mesh_picking",
+                    "--package=blackbird"
+                ],
+                "filter": {
+                    "name": "mesh_picking",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'mesh_picking'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=mesh_picking",
+                    "--package=blackbird"
+                ],
+                "filter": {
+                    "name": "mesh_picking",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

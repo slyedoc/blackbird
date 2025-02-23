@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 rand = { workspace = true }
-bevy = { workspace = true, features = ["wayland"] } 
+bevy = { workspace = true, features = ["wayland", "bevy_dev_tools"] } 
 avian3d = { workspace = true }
 bevy-inspector-egui = { workspace = true}
 leafwing-input-manager = { workspace = true }
