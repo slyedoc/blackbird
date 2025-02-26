@@ -3,8 +3,14 @@
 //! Demonstrates Bevy's stepping capabilities if compiled with the `bevy_debug_stepping` feature.
 
 use bevy::{
-    math::bounding::{Aabb2d, BoundingCircle, BoundingVolume, IntersectsVolume}, prelude::*
+    math::bounding::{Aabb2d, BoundingCircle, BoundingVolume, IntersectsVolume},
+    prelude::*,
 };
+#[cfg(target_arch = "wasm32")]
+use bus::prelude::*;
+
+use sly_common::prelude::*;
+
 use leafwing_input_manager::prelude::*;
 
 // These constants are defined in `Transform` units.
@@ -48,42 +54,50 @@ const WALL_COLOR: Color = Color::srgb(0.8, 0.8, 0.8);
 const TEXT_COLOR: Color = Color::srgb(0.5, 0.5, 1.0);
 const SCORE_COLOR: Color = Color::srgb(1.0, 0.5, 0.5);
 
-pub fn run() {
-    App::new()
-        .add_plugins((
-            DefaultPlugins,
-            #[cfg(feature = "editor")]
-            sly_editor::SlyEditorPlugin,
-            InputManagerPlugin::<PlayerAction>::default(),
-        ))
-        .init_resource::<ActionState<PlayerAction>>()        
-        .insert_resource(PlayerAction::input_map())
-        
-        .insert_resource(Score(0))
-        .insert_resource(ClearColor(BACKGROUND_COLOR))
-        .add_event::<CollisionEvent>()
-        .add_systems(Startup, setup)
-        // Add our gameplay simulation systems to the fixed timestep schedule
-        // which runs at 64 Hz by default
-        .add_systems(
-            FixedUpdate,
-            (
-                apply_velocity,
-                move_paddle,
-                check_for_collisions,
-                play_collision_sound,
-            )
-                // `chain`ing systems together runs them in order
-                .chain(),
+pub fn new() -> App {
+    let mut app = App::new();
+
+    app.add_plugins((
+        SlyDefaultPlugins {
+            title: "Breakout".to_owned(),
+            position: (0, 0),
+            size: (900, 600),      
+            ..default()
+
+        }, // uses DefaultPlugins
+        InputManagerPlugin::<PlayerAction>::default(),
+    ))
+    .init_resource::<ActionState<PlayerAction>>()
+    .insert_resource(PlayerAction::input_map())
+    .insert_resource(Score(0))
+    .insert_resource(ClearColor(BACKGROUND_COLOR))
+    .add_event::<CollisionEvent>()
+    .add_systems(Startup, setup)
+    // Add our gameplay simulation systems to the fixed timestep schedule
+    // which runs at 64 Hz by default
+    .add_systems(
+        FixedUpdate,
+        (
+            apply_velocity,
+            move_paddle,
+            check_for_collisions,
+            play_collision_sound,
         )
-        .add_systems(Update, update_scoreboard)
-        .run();
+            // `chain`ing systems together runs them in order
+            .chain(),
+    )
+    .add_systems(Update, update_scoreboard);
+
+    //#[cfg(target_arch = "wasm32")]
+    //app.add_systems(Update, handle_bevy_event);
+
+    app
 }
 
 #[derive(Actionlike, PartialEq, Eq, Clone, Copy, Hash, Debug, Reflect)]
 enum PlayerAction {
     #[actionlike(Axis)]
-    Move,    
+    Move,
 }
 
 // Exhaustively match `PlayerAction` and define the default bindings to the input
@@ -91,7 +105,7 @@ impl PlayerAction {
     fn input_map() -> InputMap<Self> {
         InputMap::default()
             .with_axis(Self::Move, VirtualAxis::horizontal_arrow_keys())
-            .with_axis(Self::Move, VirtualAxis::new( KeyCode::KeyA, KeyCode::KeyD))
+            .with_axis(Self::Move, VirtualAxis::new(KeyCode::KeyA, KeyCode::KeyD))
     }
 }
 
@@ -198,7 +212,15 @@ fn setup(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
     asset_server: Res<AssetServer>,
+    #[cfg(target_arch = "wasm32")] resource: Res<SharedResource>,
 ) {
+    #[cfg(target_arch = "wasm32")]
+    let name = resource.0.lock().unwrap().name.clone();
+    #[cfg(not(target_arch = "wasm32"))]
+    let name = "--breakout";
+
+    commands.spawn((Text::new(name), TextFont::default()));
+
     // Camera
     commands.spawn((Camera2d, IsDefaultUiCamera));
 
@@ -319,10 +341,8 @@ fn move_paddle(
     mut paddle_transform: Single<&mut Transform, With<Paddle>>,
     time: Res<Time>,
 ) {
-    
-
     let direction = action_state.clamped_value(&PlayerAction::Move);
-    
+
     // Calculate the new horizontal paddle position based on player input
     let new_paddle_position =
         paddle_transform.translation.x + direction * PADDLE_SPEED * time.delta_secs();
@@ -448,3 +468,25 @@ fn ball_collision(ball: BoundingCircle, bounding_box: Aabb2d) -> Option<Collisio
 
     Some(side)
 }
+
+// Move the Cube on event
+// #[cfg(target_arch = "wasm32")]
+// fn handle_bevy_event(
+//     mut counter_event_reader: EventReader<CounterEvtData>,
+//     mut paddle_transform: Single<&mut Transform, With<Paddle>>,
+//     time: Res<Time>,
+// ) {
+//     for _ev in counter_event_reader.read() {
+//         let direction = Vec3::new(_ev.value, 0.0, 0.0);
+
+//         let new_paddle_position =
+//             paddle_transform.translation.x + direction * PADDLE_SPEED * time.delta_secs();
+
+//         // Update the paddle position,
+//         // making sure it doesn't cause the paddle to leave the arena
+//         let left_bound = LEFT_WALL + WALL_THICKNESS / 2.0 + PADDLE_SIZE.x / 2.0 + PADDLE_PADDING;
+//         let right_bound = RIGHT_WALL - WALL_THICKNESS / 2.0 - PADDLE_SIZE.x / 2.0 - PADDLE_PADDING;
+
+//         paddle_transform.translation.x = new_paddle_position.clamp(left_bound, right_bound);
+//     }
+// }

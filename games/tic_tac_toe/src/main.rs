@@ -2,7 +2,8 @@
 // use tic_tac_toe::*;
 
 fn main() {
-    tic_tac_toe::run();
+    tic_tac_toe::new()
+    .run();
 }
 
 // fn main() {

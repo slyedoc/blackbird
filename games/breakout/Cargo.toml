@@ -4,10 +4,14 @@ version.workspace = true
 edition.workspace = true
 
 [features]
-default = ["editor"]
-editor = ["dep:sly_editor"]
+default = []
+editor = ["sly_common/editor"]
+
 
 [dependencies]
-bevy = { workspace = true, features = ["wayland"] }
+bevy = { workspace = true, features = [] }
 leafwing-input-manager = { workspace = true }
-sly_editor = { workspace = true, optional = true }
+sly_common = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+bus = { workspace= true }

@@ -1,6 +1,5 @@
-use crate::{auth::*, error_template::ErrorTemplate};
+use crate::auth::*;
 use leptos::prelude::*;
-use leptos_meta::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]

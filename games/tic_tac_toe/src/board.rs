@@ -499,7 +499,7 @@ pub fn mcts_search(root_board: TicTacToeBoard, iterations: u32) -> usize {
     // current turn is for `player`.
     let mut nodes: Vec<TreeNode> = Vec::new();
     nodes.push(TreeNode::new(root_board, None));
-    let mut rng = rand::rng();
+    let mut rng = rand::thread_rng();
 
     for _ in 0..iterations {
         // 1. **Selection:** Start at the root node.
@@ -532,7 +532,7 @@ pub fn mcts_search(root_board: TicTacToeBoard, iterations: u32) -> usize {
         // 2. **Expansion:** If the node is non-terminal and has untried moves, expand one.
         if !nodes[node_index].board.is_terminal() && !nodes[node_index].untried_moves.is_empty() {
             let untried = &mut nodes[node_index].untried_moves;
-            let move_index = rng.random_range(0..untried.len());
+            let move_index = rng.gen_range(0..untried.len());
             let m = untried.swap_remove(move_index); // Remove the chosen move.
                                                      //let current_player = nodes[node_index].player_just_moved.opponent();
             let mut new_board = nodes[node_index].board.clone();

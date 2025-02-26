@@ -2,14 +2,23 @@ use std::fmt::Display;
 
 use leptos::prelude::*;
 use leptos_router::components::*;
-use leptos_meta::*;
 use strum::{ EnumIter, IntoEnumIterator};
+use bus::scene::Scene;
 
 #[derive(Debug, Default, EnumIter, Clone, Copy)]
 pub enum Game {
     #[default]
     Breakout,
     TicTacToe,
+}
+
+impl Game {
+    pub fn new_scene(&self) -> Scene {
+        match self {
+             Game::Breakout => Scene::new("#bevy".to_string(), || breakout::new()),
+             Game::TicTacToe => Scene::new("#bevy".to_string(), || tic_tac_toe::new()),
+         }
+    }
 }
 
 impl Display for Game {
@@ -23,7 +32,7 @@ impl Display for Game {
 }
 
 impl Game {
-    pub fn path(self) -> &'static str {
+    pub fn path(self) ->  &'static str {
         match self {
             Game::Breakout => "/breakout",
             Game::TicTacToe => "/tictactoe",
@@ -37,18 +46,51 @@ pub fn Games() -> impl IntoView {
         <h1>"Games"</h1>
 
         <main>
-            {
-                Game::iter().map(|game| {
-                    let path = game.path();
-                    view! {                        
-                        <div>
-                            <A href=path >
-                                { format!("{:?}", game)}
-                            </A>
+
+        <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+            Game::iter().map(|game| {
+                let name = format!("{}", game);
+                view! {
+                    <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow-sm">
+                        <div class="flex w-full items-center justify-between space-x-6 p-6">
+                           <div class="flex-1 truncate">
+                                <div class="flex items-center space-x-3">
+                                    <h3 class="truncate text-sm font-medium text-gray-900">{ name }</h3>
+                                    <A href=game.path()>"Play"</A>
+                                    //<span class="inline-flex shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Admin</span>
+                                </div>
+                                //<p class="mt-1 truncate text-sm text-gray-500">Regional Paradigm Technician</p>
+                           </div>
+                           <img class="size-10 shrink-0 rounded-full bg-gray-300" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="" />
                         </div>
-                    }
-                }).collect_view()
-            }
+                        //   <div>
+                        //     <div class="-mt-px flex divide-x divide-gray-200">
+                        //       <div class="flex w-0 flex-1">
+                        //         <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        //           <svg class="size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        //             <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
+                        //             <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
+                        //           </svg>
+                        //           Email
+                        //         </a>
+                        //       </div>
+                        //       <div class="-ml-px flex w-0 flex-1">
+                        //         <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        //           <svg class="size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        //             <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
+                        //           </svg>
+                        //           Call
+                        //         </a>
+                        //       </div>
+                        //     </div>
+                        //   </div>
+                    </li>        
+                }
+            }).collect_view()
+        }
+      </ul>
+
             
         </main>
     }
@@ -57,7 +99,56 @@ pub fn Games() -> impl IntoView {
 
 #[component]
 pub fn PlayGame(game: Game) -> impl IntoView {
+
+    use bus::eventqueue::events::{
+        ClientInEvents, CounterEvtData,
+    };
+
+
+    // Setup a Counter
+    let initial_value: i32 = 0;
+    let step: i32 = 1;
+    let (value, set_value) = signal(initial_value);
+
+    // Setup a bevy 3d scene
+    let scene =  game.new_scene();
+
+    let sender = scene.get_processor().sender;
+    let (sender_sig, _set_sender_sig) = signal(sender);
+    let (scene_sig, _set_scene_sig) = signal(scene);
+
+    // We need to add the 3D view onto the canvas post render.
+    Effect::new(move |_| {
+        request_animation_frame(move || {
+            scene_sig.get_untracked().setup();
+        });
+    });
+
     view! {
+
         <h1>{ format!("{:?}", game) }</h1>
+
+        <div>
+            <button on:click=move |_| set_value.set(0)>"Clear"</button>
+            <button on:click=move |_| {
+                set_value.update(|value| *value -= step);
+                let newpos = (step as f32) / 10.0;
+                sender_sig
+                    .get()
+                    .send(ClientInEvents::CounterEvt(CounterEvtData { value: -newpos }))
+                    .expect("could not send event");
+            }>"-1"</button>
+            <span>"Value: " {value} "!"</span>
+            <button on:click=move |_| {
+                set_value.update(|value| *value += step);
+                let newpos = step as f32 / 10.0;
+                sender_sig
+                    .get()
+                    .send(ClientInEvents::CounterEvt(CounterEvtData { value: newpos }))
+                    .expect("could not send event");
+            }>"+1"</button>
+        </div>
+
+        <canvas id="bevy" width="800" height="600"></canvas>
     }
 }

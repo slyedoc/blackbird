@@ -1,3 +1,4 @@
 fn main() {
-    breakout::run();
+    breakout::new()
+        .run();
 }

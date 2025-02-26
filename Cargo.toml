@@ -13,13 +13,19 @@ edition = "2021"
 
 [workspace.dependencies]
 # Local Crates
+sly_common = { path = "crates/common" }
 sly_camera = { path = "crates/cameras" }
-sly_window_state = { path = "crates/window_state" }
 sly_editor = { path = "crates/editor" }
+bus = { path = "crates/bus" }
+
 # transform_gizmo = { path = "crates/transform_gizmo" }
 # billboard  = { path = "crates/billboard" }
 # go = { path = "crates/go" }
-# tic_tac_toe = { path = "crates/tic_tac_toe" }
+
+# Games
+breakout = { path = "games/breakout" }
+tic_tac_toe = { path = "games/tic_tac_toe" }
+
 
 # Crates
 bevy = "0.15" 
@@ -32,7 +38,7 @@ bevy-inspector-egui = { version = "0.29.1", features = [
 bevy_hanabi = "0.14.0"
 bevy_panorbit_camera = "0.22.1"
 leafwing-input-manager = "0.16.0"
-rand = "0.9.0"
+rand = "0.8"
 
 # # Crates inner libraries
 # anyhow = "1.0"
@@ -80,11 +86,17 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+bevy.workspace = true
+bus.workspace = true
+
+# games
+breakout.workspace = true
+tic_tac_toe.workspace = true
 
 # leptos 
 anyhow = "1.0"
 console_log = "1.0"
-rand = { version = "0.8.0", features = ["min_const_gen"], optional = true }
+rand = { version = "0.8", features = ["min_const_gen"], optional = true }
 console_error_panic_hook = "0.1.0"
 futures = "0.3.0"
 leptos = { git = "https://github.com/leptos-rs/leptos.git" }
@@ -128,6 +140,7 @@ ssr = [
   "dep:bcrypt",
   "dep:rand",
   "leptos/ssr",
+  "leptos/nightly",
   "leptos_meta/ssr",
   "leptos_router/ssr",
   "dep:leptos_axum",
@@ -185,3 +198,17 @@ lib-default-features = false
 
 [dev-dependencies]
 bevy.workspace = true
+
+# [dependencies.uuid]
+# version = "1.13"
+# features = ["v4", "rng-getrandom"]
+
+# [dependencies.getrandom_v03]
+# package = "getrandom"
+# version = "0.3"
+# features = ["wasm-js"]
+
+# [dependencies.getrandom_v02]
+# package = "getrandom"
+# version = "0.2"
+# features = ["js"]

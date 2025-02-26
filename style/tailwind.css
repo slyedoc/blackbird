@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-2xl;
+    }
+
+    h2 {
+        @apply text-xl;
+    }
+}
+
+/* @layer base {
+    @font-face {
+        font-family: "Noto Sans", serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+        src: url(/public/fonts/NotoSans-VariableFont_wdth,wght.ttf) format("tff");
+    }
+
+    @font-face {
+        font-family: "Noto Sans", serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;                  
+        src: url(/fonts/NotoSans-VariableFont_wdth,wght.ttf) format("tff"); 
+    }
+} */

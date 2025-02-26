@@ -1,0 +1,4 @@
+#https://github.com/uuid-rs/uuid/issues/792
+
+#[target.wasm32-unknown-unknown]
+#rustflags = ['--cfg', 'getrandom_backend="wasm_js"']

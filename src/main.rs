@@ -22,6 +22,7 @@ use blackbird::{
     state::AppState,
 };
 use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
+use tower_http::services::ServeDir;
 
 async fn server_fn_handler(
     State(app_state): State<AppState>,
@@ -101,6 +102,7 @@ async fn main() {
             "/api/*fn_name",
             get(server_fn_handler).post(server_fn_handler),
         )
+        .nest_service("/assets", ServeDir::new("assets"))
         .leptos_routes_with_handler(routes, get(leptos_routes_handler))
         .fallback(leptos_axum::file_and_error_handler::<AppState, _>(shell))
         .layer(

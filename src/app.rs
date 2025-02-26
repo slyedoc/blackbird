@@ -10,7 +10,7 @@ use crate::{auth::*, components::*, routes::*, error_template::ErrorTemplate};
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
-        <html lang="en">
+        <html lang="en" class="text-gray-900 antialiased leading-tight">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -20,7 +20,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
                 <MetaTags/>
             </head>
-            <body>
+            <body class="min-h-screen bg-gray-100">
                 <App/>
             </body>
         </html>
@@ -64,29 +64,12 @@ pub fn App() -> impl IntoView {
                     // Route
                     <Route path=path!("") view=move || view! { <Home /> }/>
                     <Route path=path!("games") view=move || view! { <Games /> }/>
-                    {
-                        // Game::iter().map(|g| {
-                        //     view! {
-                        //         <Route path=path!("breakout") view=move || view! { <PlayGame game=g /> }/>
-                        //     }
-                        // }).collect_view()
-                        
-                        
-                            // Game::iter().map(|game| {
-                            //     let path = game.path();
-                            //     view! {                        
-                            //         <div>
-                            //             <A href=path >
-                            //                 { format!("{:?}", game)}
-                            //             </A>
-                            //         </div>
-                            //     }
-                            // }).collect_view()
-                        
-                    }
-                    //<Route path=path!("breakout") view=move || view! { <PlayGame game=Game::Breakout /> } />
+
+                    // Games
+                    <Route path=path!("breakout") view=move || view! { <PlayGame game=Game::Breakout /> } />                            
+                    <Route path=path!("tictactoe") view=move || view! { <PlayGame game=Game::TicTacToe /> } />                            
+
                     <Route path=path!("todos") view=Todos/>   
-                                     
                     <Route path=path!("signup") view=move || view! { <Signup action=signup/> }/>                    
                     <Route path=path!("login") view=move || view! { <Login action=login/> }/>
                     <ProtectedRoute
