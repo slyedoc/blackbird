@@ -60,7 +60,7 @@ async fn main() {
     simple_logger::init_with_level(log::Level::Info).expect("couldn't initialize logging");
 
     let pool = SqlitePoolOptions::new()
-        .connect("sqlite:Todos.db")
+        .connect("sqlite:db.db")
         .await
         .expect("Could not make pool.");
 

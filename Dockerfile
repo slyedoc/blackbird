@@ -1,8 +1,10 @@
 # Get started with a build env with Rust nightly
 FROM rustlang/rust:nightly-alpine as builder
 
+
 RUN apk update && \
-    apk add --no-cache bash curl npm libc-dev binaryen
+    apk add --no-cache bash curl npm libc-dev binaryen ca-certificates fuse3 sqlite
+
 
 RUN npm install
 
@@ -20,6 +22,8 @@ FROM rustlang/rust:nightly-alpine as runner
 
 WORKDIR /app
 
+COPY --from=flyio/litefs:0.5 /usr/local/bin/litefs /usr/local/bin/litefs
+
 COPY --from=builder /work/target/release/blackbird /app/
 COPY --from=builder /work/target/site /app/site
 COPY --from=builder /work/public /app/public
@@ -32,4 +36,6 @@ ENV LEPTOS_SITE_ADDR="0.0.0.0:8080"
 ENV LEPTOS_SITE_ROOT=./site
 EXPOSE 8080
 
-CMD ["/app/blackbird"]
+ENTRYPOINT litefs mount
+
+CMD [ "sh", "-c" "litefs mount; /app/blackbird"]
