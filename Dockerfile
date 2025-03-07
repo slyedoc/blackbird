@@ -6,7 +6,7 @@ RUN apk update && \
     apk add --no-cache bash curl nodejs npm libc-dev binaryen ca-certificates fuse3 sqlite
 
 
-RUN npm install
+
 
 #RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/leptos-rs/cargo-leptos/releases/latest/download/cargo-leptos-installer.sh | sh
 RUN cargo install leptosfmt
@@ -17,6 +17,9 @@ RUN cargo install --git https://github.com/leptos-rs/cargo-leptos --locked cargo
 RUN rustup target add wasm32-unknown-unknown
 
 WORKDIR /work
+
+RUN npm install
+
 COPY . .
 
 RUN cargo leptos build --release -vv
