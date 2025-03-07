@@ -3,7 +3,7 @@ FROM rustlang/rust:nightly-alpine as builder
 
 
 RUN apk update && \
-    apk add --no-cache bash curl nodejs libc-dev binaryen ca-certificates fuse3 sqlite
+    apk add --no-cache bash curl nodejs npm libc-dev binaryen ca-certificates fuse3 sqlite
 
 
 RUN npm install
