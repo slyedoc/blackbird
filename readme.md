@@ -45,6 +45,10 @@ Install node packages
 npm install
 ```
 
+## Deployment
+
+using fly.io with setup from [leptos book](https://book.leptos.dev/deployment/ssr.html#deploy-to-flyio)
+
 ## Commands
 
 -Dev Site
