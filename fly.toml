@@ -6,6 +6,10 @@
 app = 'blackbird'
 primary_region = 'iad'
 
+[mounts]
+  source = "litefs"
+  destination = "/var/lib/litefs"
+  
 [build]
 
 [env]
@@ -25,6 +29,3 @@ primary_region = 'iad'
   cpus = 1
   memory_mb = 1024
 
-[mounts]
-  source = "litefs"
-  destination = "/var/lib/litefs"

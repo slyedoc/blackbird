@@ -45,33 +45,44 @@ Install node packages
 npm install
 ```
 
+Docker
+
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# fix permissions
+sudo usermod -a -G docker $USER
+newgrp docker
+```
+
+
+
 ## Deployment
 
 using fly.io with setup from [leptos book](https://book.leptos.dev/deployment/ssr.html#deploy-to-flyio)
 
-## Commands
+# Commands
 
--Dev Site
+Common commands (run one):
 
 ```bash
+# run server locally
 cargo leptos watch
+
+# run local game
+cargo run -p breakout
 ```
 
--App client side
+Docker commands (run one):
 
-cargo run -p breakout
+```bash
+# build docker
+docker build .
 
+# clear docker cache
+docker buildx prune -f
+```
+
+## Addons
 
 Install [Tailwind CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
-
-Install [VS Browser](https://marketplace.visualstudio.com/items?itemName=Phu1237.vs-browser) extension (allows you to open a browser at the right window).
-
-Allow vscode Ports forward: 3000, 3001.
-
-### Attribution
-
-Many thanks to GreatGreg for putting together this guide. You can find the original, with added details, [here](https://github.com/leptos-rs/leptos/discussions/125).
-
-## Quick Start
-
-Run `trunk serve --open` to run this example.
