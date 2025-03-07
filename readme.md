@@ -20,18 +20,42 @@ Set env var for asset path from project root:
 export BEVY_ASSET_ROOT=${PWD}
 ```
 
-See the [Examples README](../README.md) for setup and run instructions.
-
-## Tailwind
-
-`Trunk.toml` is configured to build the CSS automatically.
+get open ssl
 
 ```bash
-npm install -D tailwindcss
+sudo apt-get install libssl-dev
 ```
 
-## Setting up with VS Code and Additional Tools
+setup rust 
+```bash 
+rustup toolchain install nightly
+rustup target add wasm32-unknown-unknown
+```
 
+setup cargo leptos and leptosfmt
+
+```bash
+cargo install leptosfmt
+cargo install --git https://github.com/leptos-rs/cargo-leptos --locked cargo-leptos
+```
+
+Install node packages
+
+```bash
+npm install
+```
+
+## Commands
+
+-Dev Site
+
+```bash
+cargo leptos watch
+```
+
+-App client side
+
+cargo run -p breakout
 
 
 Install [Tailwind CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).

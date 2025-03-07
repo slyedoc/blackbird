@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "masterustacean.leptos-fmt", // Leptos formatter
+        "github.vscode-github-actions", // Github actions
+    ]
+}

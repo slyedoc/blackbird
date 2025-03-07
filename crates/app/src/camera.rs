@@ -6,13 +6,13 @@ pub struct PlayerCameraController {
     pub yaw: f32,
     pub pitch: f32,
 
-    pub target_zoom: f32,    
+    pub target_zoom: f32,
     pub target_yaw: f32,
     pub target_pitch: f32,
 }
 
 impl PlayerCameraController {
-    pub fn new(zoom: f32, yaw: f32, pitch: f32 ) -> Self {
+    pub fn new(zoom: f32, yaw: f32, pitch: f32) -> Self {
         Self {
             zoom: zoom,
             yaw: yaw,
@@ -35,8 +35,5 @@ impl PlayerCameraController {
 
         self.pitch = self.pitch.clamp(-89.0, 89.0);
         self.yaw = self.yaw % 360.0;
-
-        
     }
 }
-

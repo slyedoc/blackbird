@@ -1,9 +1,11 @@
-use crate::{define_on_controller_enabled_changed, CameraController, LookAngles, LookTransform, Smoother};
+use crate::{
+    CameraController, LookAngles, LookTransform, Smoother, define_on_controller_enabled_changed,
+};
 
-use bevy::{    
+use bevy::{
     input::mouse::{MouseMotion, MouseWheel},
     prelude::*,
-    reflect::Reflect,    
+    reflect::Reflect,
 };
 use serde::{Deserialize, Serialize};
 
@@ -37,8 +39,6 @@ impl Plugin for UnrealCameraPlugin {
 #[reflect(Component, Default, Debug)]
 #[require(LookTransform, Transform, CameraController)]
 pub struct UnrealCameraController {
-
-
     /// How many radians per frame for each rotation axis (yaw, pitch) when rotating with the mouse
     pub rotate_sensitivity: Vec2,
 
@@ -200,14 +200,19 @@ fn default_input_map(
 fn control_system(
     time: Res<Time>,
     mut events: EventReader<ControlEvent>,
-    mut cameras: Query<(&UnrealCameraController, &mut LookTransform, &CameraController)>,
+    mut cameras: Query<(
+        &UnrealCameraController,
+        &mut LookTransform,
+        &CameraController,
+    )>,
 ) {
     // Can only control one camera at a time.
-    let mut transform = if let Some((_, transform, _)) = cameras.iter_mut().find(|(_, _, c)| c.enabled) {
-        transform
-    } else {
-        return;
-    };
+    let mut transform =
+        if let Some((_, transform, _)) = cameras.iter_mut().find(|(_, _, c)| c.enabled) {
+            transform
+        } else {
+            return;
+        };
 
     let look_vector = match transform.look_direction() {
         Some(safe_look_vector) => safe_look_vector,

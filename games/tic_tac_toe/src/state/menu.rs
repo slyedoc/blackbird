@@ -14,9 +14,7 @@ impl Plugin for MenuPlugin {
             .add_systems(OnEnter(AppState::Menu), (setup_scene, setup_ui))
             .add_systems(
                 Update,
-                (
-                    exit.run_if(action_just_pressed(MenuAction::Exit)),
-                )
+                (exit.run_if(action_just_pressed(MenuAction::Exit)),)
                     .run_if(in_state(AppState::Menu)),
             );
     }
@@ -35,8 +33,6 @@ impl MenuAction {
         input_map
     }
 }
-
-
 
 fn setup_ui(mut commands: Commands) {
     // Instructions

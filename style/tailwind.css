@@ -1,8 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
+@custom-variant dark (&:where(.dark, .dark *));
+/* @custom-variant system (&:where(.system, .system *)); */
+
+/* @layer base {
     h1 {
         @apply text-2xl;
     }
@@ -11,6 +12,17 @@
         @apply text-xl;
     }
 }
+ */
+
+
+@theme {
+    --font-sans: InterVariable, sans-serif;
+}
+
+/* .dark {
+    background-color: black;
+    color: white;
+} */
 
 /* @layer base {
     @font-face {

@@ -24,9 +24,8 @@ pub mod ssr {
     }
 
     pub fn auth() -> Result<AuthSession, ServerFnError> {
-        use_context::<AuthSession>().ok_or_else(|| {
-            ServerFnError::ServerError("Auth session missing.".into())
-        })
+        use_context::<AuthSession>()
+            .ok_or_else(|| ServerFnError::ServerError("Auth session missing.".into()))
     }
 
     #[derive(sqlx::FromRow, Clone)]
@@ -83,14 +82,14 @@ pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
     // fake API delay
     std::thread::sleep(std::time::Duration::from_millis(1250));
 
-    Ok(sqlx::query(
-        "INSERT INTO todos (title, user_id, completed) VALUES (?, ?, false)",
+    Ok(
+        sqlx::query("INSERT INTO todos (title, user_id, completed) VALUES (?, ?, false)")
+            .bind(title)
+            .bind(id)
+            .execute(&pool)
+            .await
+            .map(|_| ())?,
     )
-    .bind(title)
-    .bind(id)
-    .execute(&pool)
-    .await
-    .map(|_| ())?)
 }
 
 // The struct name and path prefix arguments are optional.
@@ -106,4 +105,3 @@ pub async fn delete_todo(id: u16) -> Result<(), ServerFnError> {
         .await
         .map(|_| ())?)
 }
-

@@ -90,41 +90,41 @@ fn setup(
         ))
         .id();
 
-    let player = cmd.spawn((
-        Player,
-        PlayerCamera(player_camera),
-        player_seplls.clone(),
-        Transform::from_xyz(0.0, 1.5, 0.0),
-        InputManagerBundle::with_map(input_map),
-        // physics
-        RigidBody::Dynamic,
-        Collider::capsule(0.4, 1.0),
-        Friction::ZERO.with_combine_rule(CoefficientCombine::Min),
-        Restitution::ZERO.with_combine_rule(CoefficientCombine::Min),
-        GravityScale(2.0),
-        ShapeCaster::new(caster_shape, Vec3::ZERO, Quaternion::default(), Dir3::NEG_Y)
-            .with_max_distance(0.2),
-        LockedAxes::ROTATION_LOCKED,
-    ))
-    .insert((
-        // movement
-        MovementAcceleration(30.0),
-        MovementDampingFactor(0.92),
-        JumpImpulse(7.0),
-        MaxSlopeAngle((30.0 as f32).to_radians()),
-        // visual
-        Mesh3d(meshes.add(Capsule3d::new(0.4, 1.0))),
-        MeshMaterial3d(materials.add(Color::srgb(0.8, 0.7, 0.6))),
-    ))
-    .with_children(|parent| {
-        // eyes
-        parent.spawn((
-            Transform::from_xyz(0.0, 0.5, -0.5),
-            Mesh3d(meshes.add(Cuboid::from_size(Vec3::splat(0.2)))),
+    cmd
+        .spawn((
+            Player,
+            PlayerCamera(player_camera),
+            player_seplls.clone(),
+            Transform::from_xyz(0.0, 1.5, 0.0),
+            InputManagerBundle::with_map(input_map),
+            // physics
+            RigidBody::Dynamic,
+            Collider::capsule(0.4, 1.0),
+            Friction::ZERO.with_combine_rule(CoefficientCombine::Min),
+            Restitution::ZERO.with_combine_rule(CoefficientCombine::Min),
+            GravityScale(2.0),
+            ShapeCaster::new(caster_shape, Vec3::ZERO, Quaternion::default(), Dir3::NEG_Y)
+                .with_max_distance(0.2),
+            LockedAxes::ROTATION_LOCKED,
+        ))
+        .insert((
+            // movement
+            MovementAcceleration(30.0),
+            MovementDampingFactor(0.92),
+            JumpImpulse(7.0),
+            MaxSlopeAngle((30.0 as f32).to_radians()),
+            // visual
+            Mesh3d(meshes.add(Capsule3d::new(0.4, 1.0))),
             MeshMaterial3d(materials.add(Color::srgb(0.8, 0.7, 0.6))),
-        ));
-    })
-    .id();
+        ))
+        .with_children(|parent| {
+            // eyes
+            parent.spawn((
+                Transform::from_xyz(0.0, 0.5, -0.5),
+                Mesh3d(meshes.add(Cuboid::from_size(Vec3::splat(0.2)))),
+                MeshMaterial3d(materials.add(Color::srgb(0.8, 0.7, 0.6))),
+            ));
+        });
 
     // Static physics object with a collision shape
     cmd.spawn((
@@ -199,7 +199,6 @@ fn setup(
                     BackgroundColor(NORMAL_BUTTON),
                     s.clone(),
                 ))
- 
                 .with_child((
                     Text::new(format!("{:?}", s)),
                     TextFont {
@@ -209,7 +208,6 @@ fn setup(
                     },
                     TextColor(Color::srgb(0.9, 0.9, 0.9)),
                 ));
-
         }
     });
 }
@@ -217,7 +215,15 @@ fn setup(
 /// Returns an observer that updates the entity's material to the one specified.
 fn on_spell_click(
     player: Entity,
-) -> impl Fn(Trigger<Pointer<Click>>, (Query<&Spell>, Query<&Transform, With<Player>>, &mut Commands, SpellEffects)) {
+) -> impl Fn(
+    Trigger<Pointer<Click>>,
+    (
+        Query<&Spell>,
+        Query<&Transform, With<Player>>,
+        &mut Commands,
+        SpellEffects,
+    ),
+) {
     // An observer closure that captures `new_material`. We do this to avoid needing to write four
     // versions of this observer, each triggered by a different event and with a different hardcoded
     // material. Instead, the event type is a generic, and the material is passed in.
@@ -228,7 +234,7 @@ fn on_spell_click(
 
             let player_trans = player_query.get_mut(player).unwrap();
             let effect = &spell_effects.hashmap[spell];
-            cmd.spawn(( 
+            cmd.spawn((
                 Name::new("firework"),
                 ParticleEffectBundle {
                     effect: ParticleEffect::new(effect.clone()),

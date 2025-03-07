@@ -23,10 +23,7 @@ fn asset_changed(mut commands: Commands, query: Query<(Entity, &Transform), With
         let t = transform.clone();
         commands.entity(e).despawn_recursive();
 
-        commands.spawn((
-            t,            
-            TicTacToeBoard::default(),
-        ));
+        commands.spawn((t, TicTacToeBoard::default()));
     }
 }
 
@@ -116,7 +113,6 @@ impl Cell {
     }
 }
 
-
 fn on_click_cell(
     trigger: Trigger<Pointer<Click>>,
     mut commands: Commands,
@@ -150,7 +146,6 @@ fn on_click_cell(
         }
     }
 }
-
 
 fn spawn_x(
     board_assets: &Res<'_, TicTacToeAssets>,

@@ -13,10 +13,13 @@ pub struct SpellEffects {
 impl FromWorld for SpellEffects {
     fn from_world(world: &mut World) -> Self {
         let mut effects = world.resource_mut::<Assets<EffectAsset>>();
-        
+
         let mut hashmap = HashMap::default();
         hashmap.insert(Spell::FrostBolt, effects.add(Spell::FrostBolt.effect()));
-        hashmap.insert(Spell::ArcaneExplosion, effects.add(Spell::ArcaneExplosion.effect()));
+        hashmap.insert(
+            Spell::ArcaneExplosion,
+            effects.add(Spell::ArcaneExplosion.effect()),
+        );
         hashmap.insert(Spell::Blizzard, effects.add(Spell::Blizzard.effect()));
         Self { hashmap }
     }
@@ -84,5 +87,3 @@ impl Spell {
             })
     }
 }
-
-

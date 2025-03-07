@@ -6,8 +6,6 @@ use bevy::{
     math::bounding::{Aabb2d, BoundingCircle, BoundingVolume, IntersectsVolume},
     prelude::*,
 };
-#[cfg(target_arch = "wasm32")]
-use bus::prelude::*;
 
 use sly_common::prelude::*;
 
@@ -54,16 +52,16 @@ const WALL_COLOR: Color = Color::srgb(0.8, 0.8, 0.8);
 const TEXT_COLOR: Color = Color::srgb(0.5, 0.5, 1.0);
 const SCORE_COLOR: Color = Color::srgb(1.0, 0.5, 0.5);
 
-pub fn new() -> App {
+pub const RENDER_HEIGHT: f32 = 600.;
+pub const RENDER_WIDTH: f32 = 800.;
+pub fn init_bevy_app() -> App {
     let mut app = App::new();
-
     app.add_plugins((
         SlyDefaultPlugins {
             title: "Breakout".to_owned(),
             position: (0, 0),
-            size: (900, 600),      
+            size: (900, 600),
             ..default()
-
         }, // uses DefaultPlugins
         InputManagerPlugin::<PlayerAction>::default(),
     ))
@@ -87,10 +85,6 @@ pub fn new() -> App {
             .chain(),
     )
     .add_systems(Update, update_scoreboard);
-
-    //#[cfg(target_arch = "wasm32")]
-    //app.add_systems(Update, handle_bevy_event);
-
     app
 }
 
@@ -212,11 +206,7 @@ fn setup(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
     asset_server: Res<AssetServer>,
-    #[cfg(target_arch = "wasm32")] resource: Res<SharedResource>,
 ) {
-    #[cfg(target_arch = "wasm32")]
-    let name = resource.0.lock().unwrap().name.clone();
-    #[cfg(not(target_arch = "wasm32"))]
     let name = "--breakout";
 
     commands.spawn((Text::new(name), TextFont::default()));

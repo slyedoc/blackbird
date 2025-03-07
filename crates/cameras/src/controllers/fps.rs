@@ -1,9 +1,7 @@
-use bevy::{
-    input::mouse::MouseMotion, prelude::*, reflect::Reflect, time::Time, 
-};
+use bevy::{input::mouse::MouseMotion, prelude::*, reflect::Reflect, time::Time};
 use serde::{Deserialize, Serialize};
 
-use crate::{define_on_controller_enabled_changed, LookAngles, LookTransform, Smoother};
+use crate::{LookAngles, LookTransform, Smoother, define_on_controller_enabled_changed};
 
 #[derive(Default)]
 pub struct FpsCameraPlugin {
@@ -23,7 +21,6 @@ impl Plugin for FpsCameraPlugin {
         }
     }
 }
-
 
 /// Your typical first-person camera controller.
 #[derive(Clone, Component, Copy, Debug, Reflect, Deserialize, Serialize)]
@@ -64,7 +61,6 @@ fn default_input_map(
     let controller = if let Some(controller) = controllers.iter().find(|c| c.enabled) {
         controller
     } else {
-
         return;
     };
     let FpsCameraController {
@@ -121,7 +117,6 @@ fn control_system(
 
     let dt = time.delta_secs();
     for event in events.read() {
-
         match event {
             ControlEvent::Rotate(delta) => {
                 // Rotates with pitch and yaw.
@@ -138,6 +133,4 @@ fn control_system(
     look_angles.assert_not_looking_up();
 
     transform.target = transform.eye + transform.radius() * look_angles.unit_vector();
-
-
 }

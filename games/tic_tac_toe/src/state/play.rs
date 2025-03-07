@@ -16,8 +16,6 @@ fn setup(mut commands: Commands) {
         StateScoped(AppState::Play),
     ));
 
-    
-
     commands
         .spawn((
             Node {

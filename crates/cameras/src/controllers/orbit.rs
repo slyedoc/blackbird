@@ -1,7 +1,11 @@
-use crate::{define_on_controller_enabled_changed, CameraController, LookAngles, LookTransform, Smoother};
+use crate::{
+    CameraController, LookAngles, LookTransform, Smoother, define_on_controller_enabled_changed,
+};
 
 use bevy::{
-    prelude::*, input::mouse::{MouseMotion, MouseScrollUnit, MouseWheel},        reflect::Reflect
+    input::mouse::{MouseMotion, MouseScrollUnit, MouseWheel},
+    prelude::*,
+    reflect::Reflect,
 };
 use serde::{Deserialize, Serialize};
 
@@ -22,7 +26,10 @@ impl Plugin for OrbitCameraPlugin {
     fn build(&self, app: &mut App) {
         let app = app
             //.add_systems(PreUpdate, on_controller_enabled_changed)
-            .add_systems(Update, (on_controller_enabled_changed, control_system).chain())
+            .add_systems(
+                Update,
+                (on_controller_enabled_changed, control_system).chain(),
+            )
             .add_event::<ControlEvent>();
 
         if !self.override_input_system {
@@ -31,12 +38,11 @@ impl Plugin for OrbitCameraPlugin {
     }
 }
 
-
 /// A 3rd person camera that orbits around the target.
 #[derive(Clone, Component, Copy, Debug, Reflect, Deserialize, Serialize)]
 #[reflect(Component, Default, Debug)]
 #[require(LookTransform, Transform, CameraController)]
-pub struct OrbitCameraController {    
+pub struct OrbitCameraController {
     pub mouse_rotate_sensitivity: Vec2,
     pub mouse_translate_sensitivity: Vec2,
     pub mouse_wheel_zoom_sensitivity: f32,
@@ -50,7 +56,7 @@ impl Default for OrbitCameraController {
             mouse_rotate_sensitivity: Vec2::splat(0.08),
             mouse_translate_sensitivity: Vec2::splat(0.1),
             mouse_wheel_zoom_sensitivity: 0.2,
-            smoothing_weight: 0.8,            
+            smoothing_weight: 0.8,
             pixels_per_line: 53.0,
         }
     }
@@ -117,14 +123,21 @@ fn default_input_map(
 fn control_system(
     time: Res<Time>,
     mut events: EventReader<ControlEvent>,
-    mut cameras: Query<(&OrbitCameraController, &mut LookTransform, &Transform, &CameraController)>,
+    mut cameras: Query<(
+        &OrbitCameraController,
+        &mut LookTransform,
+        &Transform,
+        &CameraController,
+    )>,
 ) {
     // Can only control one camera at a time.
-    let (mut transform, scene_transform) = if let Some((_, transform, scene_transform, _)) = cameras.iter_mut().find(|c| c.3.enabled) {
-            (transform, scene_transform)
-        } else {
-            return;
-        };
+    let (mut transform, scene_transform) = if let Some((_, transform, scene_transform, _)) =
+        cameras.iter_mut().find(|c| c.3.enabled)
+    {
+        (transform, scene_transform)
+    } else {
+        return;
+    };
 
     let mut look_angles = LookAngles::from_vector(-transform.look_direction().unwrap());
     let mut radius_scalar = 1.0;

@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 #[cfg(feature = "outline")]
-use bevy_mod_outline::{OutlinePlugin, OutlineVolume, OutlineMode};
+use bevy_mod_outline::{OutlineMode, OutlinePlugin, OutlineVolume};
 
 #[cfg(not(feature = "outline"))]
 use bevy::pbr::wireframe::{Wireframe, WireframePlugin};
@@ -86,7 +86,10 @@ fn selected_entity_wireframe_update(
 }
 
 #[cfg(feature = "outline")]
-fn clear_wireframes(mut cmds: Commands, del_wireframe: Query<Entity, (With<EditorSelected>, With<OutlineVolume>)>) {
+fn clear_wireframes(
+    mut cmds: Commands,
+    del_wireframe: Query<Entity, (With<EditorSelected>, With<OutlineVolume>)>,
+) {
     for e in del_wireframe.iter() {
         cmds.entity(e)
             .remove::<OutlineVolume>()

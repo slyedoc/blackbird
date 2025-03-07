@@ -1,19 +1,37 @@
 {
-    "emmet.includeLanguages": {
-        "rust": "html",
-        "*.rs": "html"
-      },
-      "tailwindCSS.includeLanguages": {
-          "rust": "html",
-          "*.rs": "html"
-      },
-      "files.associations": {
-          "*.rs": "rust"
-      },
-      "editor.quickSuggestions": {
-        "other": "on",
-        "comments": "on",
-        "strings": true
-      },
-      "css.validate": false,
+  "emmet.includeLanguages": {
+    "rust": "html",
+    "*.rs": "html"
+  },
+  "tailwindCSS.includeLanguages": {
+    "rust": "html",
+    "*.rs": "html"
+  },
+  "files.associations": {
+    "*.rs": "rust"
+  },
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "on",
+    "strings": true
+  },
+  "css.validate": false,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  
+  "rust-analyzer.procMacro.ignored": {
+    "leptos_macro": [
+      "server"
+    ]
+  },
+  "rust-analyzer.rustfmt.overrideCommand": [
+    "leptosfmt",
+    "--stdin",
+    "--rustfmt",
+    "--tab-spaces",
+    "2",
+    "--experimental-tailwind"
+  ],
+  "rust-analyzer.cargo.features": [
+    "ssr"
+  ],
 }

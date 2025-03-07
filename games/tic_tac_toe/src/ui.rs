@@ -1,4 +1,4 @@
-use bevy::{prelude::*, color::palettes::tailwind::*};
+use bevy::{color::palettes::tailwind::*, prelude::*};
 
 pub const PANEL_BACKGROUND: Color = Color::Srgba(GRAY_900);
 pub const BUTTON_BORDER: Srgba = RED_600;
@@ -50,7 +50,7 @@ fn button_system(
 }
 
 #[derive(Component)]
-#[require(    
+#[require(
     BackgroundColor(|| BackgroundColor(PANEL_BACKGROUND))
 )]
 pub struct MenuPanel;
@@ -59,7 +59,7 @@ pub struct MenuPanel;
 #[require(Button)]
 #[require(Node(|| Node {
     padding: UiRect::all(Val::Px(10.0)),
-    margin: UiRect::all(Val::Px(10.0)),    
+    margin: UiRect::all(Val::Px(10.0)),
     width: Val::Percent(100.0),
     // horizontally center child text
     flex_direction: FlexDirection::Column,
@@ -71,7 +71,6 @@ pub struct MenuPanel;
 #[require(BackgroundColor( || BackgroundColor(NORMAL_BUTTON)))]
 pub struct MenuButton;
 
-
 #[derive(Component)]
 #[require(TextFont(|| TextFont {
     font_size: 33.0,
@@ -79,7 +78,6 @@ pub struct MenuButton;
 }))]
 #[require(TextColor(|| TextColor(BUTTON_TEXT)))]
 pub struct MenuButtonText;
-
 
 /// Returns an observer that updates the entity's material to the one specified.
 pub fn update_material_on<E>(

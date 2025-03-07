@@ -1,9 +1,5 @@
-// use std::io;
-// use tic_tac_toe::*;
-
 fn main() {
-    tic_tac_toe::new()
-    .run();
+    tic_tac_toe::init_bevy_app().run();
 }
 
 // fn main() {

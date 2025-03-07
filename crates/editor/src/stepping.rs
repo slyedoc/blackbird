@@ -31,7 +31,7 @@ impl SteppingPlugin {
 }
 
 impl Plugin for SteppingPlugin {
-    fn build(&self, app: &mut App) {        
+    fn build(&self, app: &mut App) {
         app.add_systems(Startup, build_stepping_hint);
 
         // create and insert our debug schedule into the main schedule order.
@@ -181,7 +181,7 @@ fn build_ui(
 
 fn build_stepping_hint(mut commands: Commands) {
     let hint_text = "Press ` to toggle stepping mode (S: step system, Space: step frame)";
-    
+
     // info!("{}", hint_text);
     // stepping description box
     commands.spawn((

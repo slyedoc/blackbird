@@ -9,15 +9,14 @@ pub struct LookTransformPlugin;
 impl Plugin for LookTransformPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Update, look_transform_system)
-        .register_type::<LookTransform>()
-        .register_type::<Smoother>();
+            .register_type::<LookTransform>()
+            .register_type::<Smoother>();
     }
 }
 
 /// An eye and the target it's looking at. As a component, this can be modified in place of bevy's `Transform`, and the two will
 /// stay in sync.
 #[derive(Component, Debug, PartialEq, Clone, Copy, Reflect, Serialize, Deserialize)]
-
 #[reflect(Component, Default, Debug, PartialEq)]
 #[require(Smoother)]
 pub struct LookTransform {

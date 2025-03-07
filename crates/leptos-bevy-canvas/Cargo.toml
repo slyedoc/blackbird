@@ -1,0 +1,15 @@
+[package]
+name = "leptos-bevy-canvas"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+
+[dependencies]
+
+bevy = { workspace = true }
+crossbeam-channel = "0.5"
+leptos.workspace = true
+leptos-use = { version = "0.15.1", default-features = false, features = ["use_raf_fn"] }
+paste = "1.0.15"

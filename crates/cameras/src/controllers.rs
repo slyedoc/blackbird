@@ -11,7 +11,6 @@ mod unreal;
 
 pub use unreal::*;
 
-
 #[macro_use]
 mod macros {
     #[macro_export]
@@ -37,5 +36,3 @@ impl Default for CameraController {
         Self { enabled: true }
     }
 }
-
-

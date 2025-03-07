@@ -12,6 +12,3 @@ editor = ["sly_common/editor"]
 bevy = { workspace = true, features = [] }
 leafwing-input-manager = { workspace = true }
 sly_common = { workspace = true }
-
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-bus = { workspace= true }
