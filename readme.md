@@ -20,10 +20,15 @@ Set env var for asset path from project root:
 export BEVY_ASSET_ROOT=${PWD}
 ```
 
+Install clang
+
+```
+sudo apt install clang
+```
 get open ssl
 
 ```bash
-sudo apt-get install libssl-dev
+sudo apt install libssl-dev
 ```
 
 setup rust 

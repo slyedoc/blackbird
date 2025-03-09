@@ -27,7 +27,6 @@ pub mod prelude {
     pub use leptos_router::params::Params;
     pub use leptos_router::hooks::{use_params, use_query};
     pub use leptos_meta::*;
-    pub use leptos_icons::Icon;
     pub use icondata as i; // list at https://carloskiki.github.io/icondata/
 
     pub use leptos_bevy_canvas::prelude::*;

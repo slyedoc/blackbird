@@ -1,23 +1,42 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
-/* @custom-variant system (&:where(.system, .system *)); */
-
-/* @layer base {
-    h1 {
-        @apply text-2xl;
-    }
-
-    h2 {
-        @apply text-xl;
-    }
-}
- */
-
 
 @theme {
     --font-sans: InterVariable, sans-serif;
 }
+
+
+@layer components {
+    .card {
+        @apply bg-gray-800 rounded-lg p-6 ring shadow-xl ring-gray-900/5;
+      
+    }
+
+    .btn {
+        @apply bg-indigo-500 dark:bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-400 dark:hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:focus-visible:outline-indigo-600;        
+    }
+
+    .input {              
+        @apply rounded-md bg-white dark:bg-white/5  px-3 py-1.5 text-base text-gray-900 dark:text-white  outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10   placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:focus:outline-indigo-500 sm:text-sm/6;    
+    }
+    
+}
+
+.text-secondary{
+    @apply text-gray-500 dark:text-gray-400;
+}
+
+.text-s {
+    @apply text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300;
+
+}
+ 
+
+
+
+
+
 
 /* .dark {
     background-color: black;

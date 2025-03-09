@@ -17,7 +17,7 @@ use strum::IntoEnumIterator;
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
       <!DOCTYPE html>
-      <html lang="en" class="h-full bg-slate-200 dark:bg-slate-500 text-gray-900 dark:text-white">
+      <html lang="en" class="h-full bg-slate-200 dark:bg-slate-900 text-gray-900 dark:text-white">
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -82,8 +82,8 @@ pub fn App() -> impl IntoView {
 
             <FlatRoutes fallback=|| "Not found.">
               // Route
-              <Route path=path!("") view=move || view! { <Home /> } />
-              <Route path=path!("games") view=move || view! { <Games /> } />
+              <Route path=path!("") view=Home />
+              <Route path=path!("games") view=Games />
 
               // Games
               // {

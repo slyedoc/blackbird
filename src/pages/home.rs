@@ -14,7 +14,6 @@ use leptos_use::{
 #[component]
 pub fn Home() -> impl IntoView {
 
-    
     // Creates a reactive value to update the button
     let (count, set_count, _) = use_local_storage_with_options::<i32, FromToStringCodec>(
         "count-state",
@@ -63,17 +62,22 @@ pub fn Home() -> impl IntoView {
 
     view! {
 
-        <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5">
+        <div class="card">
             <div>
                 <span class="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
                     <Icon icon={i::AiCloseOutlined}  {..} class="h-6 w-6 stroke-white" />              
                 </span>
             </div>
-            <h3 class="text-gray-900 dark:text-white mt-5 text-base font-medium tracking-tight ">Writes upside-down</h3>
-            <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm ">
+            <h3 class="mt-5 text-base font-medium tracking-tight">Writes upside-down</h3>
+            <p class="text-secondary mt-2 text-sm ">
             The Zero Gravity Pen can be used to write in any orientation, including upside-down. It even works in outer space.
             </p>
         </div>
+
+        <div class="card mt-4">
+            "asdfasdf"
+        </div>
+        
 
         <h1>Leptos-Use SSR Example</h1>
         <button on:click=on_click>Click Me: {count}</button>

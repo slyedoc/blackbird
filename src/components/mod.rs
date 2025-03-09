@@ -10,3 +10,6 @@ pub use app_footer::*;
 
 mod app_nav;
 pub use app_nav::*;
+
+mod icon;
+pub use icon::*;

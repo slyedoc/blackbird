@@ -1,10 +1,12 @@
 #!/bin/bash
 
+cd /app/
+
 # Start the first process
 litefs mount &
 
 # Start the second process
-/app/blackbird &
+./blackbird &
 
 # Wait for any process to exit
 wait -n

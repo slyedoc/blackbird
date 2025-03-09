@@ -1,18 +1,18 @@
-use icondata as i; // list at https://carloskiki.github.io/icondata/
+
 use leptos::{html::Html, prelude::*};
-use leptos_icons::Icon;
+
 use leptos_router::{components::*, *};
 use leptos_use::{
     use_color_mode_with_options, use_cycle_list_with_options, use_preferred_dark, use_timestamp,
     ColorMode, UseColorModeOptions, UseColorModeReturn, UseCycleListOptions, UseCycleListReturn,
 };
 
-use crate::auth::*;
+use crate::prelude::*;
 
 #[component]
 pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
-    const navigation: [(&str, &str, bool); 2] =
-        [("Games", "/games", true), ("Todos", "/todos", false)];
+    const navigation: [(&str, &str, bool); 3] =
+        [("Home", "/", true), ("Games", "/games", true), ("Todos", "/todos", false)];
 
     let user_resource = use_context::<Resource<Result<Option<User>, ServerFnError>>>()
         .expect("User context not found");
