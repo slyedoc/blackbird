@@ -20,11 +20,13 @@ Set env var for asset path from project root:
 export BEVY_ASSET_ROOT=${PWD}
 ```
 
-Install clang
+Install lld and mold, see bevy [notes](https://bevyengine.org/learn/quick-start/getting-started/setup/#cranelift) for more info
 
+```bash
+sudo apt-get install lld clang
+rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
-sudo apt install clang
-```
+
 get open ssl
 
 ```bash

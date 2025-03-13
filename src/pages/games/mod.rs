@@ -1,16 +1,16 @@
-mod tic_tac_toe;
-pub use tic_tac_toe::TicTacToe;
-
+#[cfg(feature = "unidir_events")]
 mod unidir_events;
+#[cfg(feature = "unidir_events")]
 pub use unidir_events::UnidirEvents;
 
+#[cfg(feature = "sync_app")]
 mod sync_app;
-pub use sync_app::SyncApp;
+#[cfg(feature = "sync_app")]
+pub use sync_app::*;
 
 use std::fmt::Display;
 
 use leptos::prelude::*;
-use leptos_router::components::*;
 use strum::{EnumIter, IntoEnumIterator};
 
 use crate::prelude::*;
@@ -20,6 +20,8 @@ pub enum Game {
     #[default]
     Breakout,
     TicTacToe,
+    CastApp,
+
     UnidirEvents,
     SyncApp,
 }
@@ -31,18 +33,35 @@ impl Display for Game {
             Game::TicTacToe => "Tic Tac Toe",
             Game::UnidirEvents => "Unidir Events",
             Game::SyncApp => "Sync App",
+            Game::CastApp => "Cast App",
         };
         write!(f, "{}", s)
     }
 }
 
 impl Game {
+    pub fn init(self) -> Option<bevy::app::App> {
+        match self {
+            #[cfg(all(feature = "breakout", feature = "hydrate"))]
+            Game::Breakout => Some(breakout::init_bevy_app()),
+            #[cfg(all(feature = "tic_tac_toe", feature = "hydrate"))]
+            Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
+            #[cfg(all(feature = "cast_app", feature = "hydrate"))]
+            Game::CastApp => Some(cast_app::init_bevy_app()),
+            _ => {
+                log::error!("Game feature not include or game not supported");
+                None
+            }
+        }
+    }
+
     pub fn path(self) -> &'static str {
         match self {
             Game::Breakout => "/breakout",
             Game::TicTacToe => "/tictactoe",
             Game::UnidirEvents => "/unidir_events",
             Game::SyncApp => "/sync_app",
+            Game::CastApp => "/cast_app",
         }
     }
 
@@ -50,9 +69,9 @@ impl Game {
         match self {
             Game::Breakout => "/img/breakout.png",
             Game::TicTacToe => "/img/tic_tac_toe.png",
-            Game::TicTacToe => "/img/breakout.png",
             Game::UnidirEvents => "/img/breakout.png",
             Game::SyncApp => "/img/breakout.png",
+            Game::CastApp => "/img/cast_app.png",
         }
     }
 }
@@ -60,7 +79,7 @@ impl Game {
 #[component]
 pub fn Games() -> impl IntoView {
     view! {
-      <h1>"Games"</h1>
+      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight">"Games"</h2>
       <ul
         role="list"
         class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
@@ -116,20 +135,3 @@ pub fn NoGame() -> impl IntoView {
     view! { "No Games" }
 }
 
-// <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow-sm">
-//   <div class="flex w-full items-center justify-between space-x-6 p-6">
-//     <div class="flex-1 truncate">
-//       <div class="flex items-center space-x-3">
-//         <h3 class="truncate text-sm font-medium text-gray-900">{name}</h3>
-//         <A href=game.path()>"Play"</A>
-//       // <span class="inline-flex shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">Admin</span>
-//       </div>
-//     // <p class="mt-1 truncate text-sm text-gray-500">Regional Paradigm Technician</p>
-//     </div>
-//     <img
-//       class="size-10 shrink-0 rounded-full bg-gray-300"
-//       src=game.image()
-//       alt=""
-//     />
-//   </div>
-// </li>

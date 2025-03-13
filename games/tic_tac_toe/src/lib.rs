@@ -44,12 +44,27 @@ impl Default for TicTacToePlugin {
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
     app.add_plugins((
-        SlyDefaultPlugins {
-            title: GAME_NAME.to_string(),
-            position: (0, 0),
-            size: (800, 600),
-            ..default()
-        },
+        DefaultPlugins
+            .set(AssetPlugin {
+                #[cfg(target_arch = "wasm32")]
+                meta_check: bevy::asset::AssetMetaCheck::Never,
+                ..default()
+            })
+            .set(WindowPlugin {
+                primary_window: Some(Window {
+                    focused: false,
+                    fit_canvas_to_parent: true,
+                    title: GAME_NAME.to_string(),
+                    
+                    canvas: Some("#bevy_canvas".to_string()),
+                    ..default()
+                }),
+                ..default()
+            }),
+            
+            //.disable::<LogPlugin>(),
+        #[cfg(feature = "editor")]
+        sly_editor::SlyEditorPlugin,
         MeshPickingPlugin,
         StatePlugin,
         UiPlugin,

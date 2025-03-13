@@ -17,12 +17,6 @@
   },
   "css.validate": false,
   "editor.inlayHints.enabled": "offUnlessPressed",
-  
-  "rust-analyzer.procMacro.ignored": {
-    "leptos_macro": [
-      "server"
-    ]
-  },
   "rust-analyzer.rustfmt.overrideCommand": [
     "leptosfmt",
     "--stdin",
@@ -31,7 +25,6 @@
     "2",
     "--experimental-tailwind"
   ],
-  "rust-analyzer.cargo.features": [
-    "ssr"
-  ],
+
+  "rust-analyzer.cargo.features": ["ssr", "all_games"],
 }

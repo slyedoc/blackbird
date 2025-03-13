@@ -1,6 +1,4 @@
-use std::sync::Arc;
-
-use leptos::{html::Button, prelude::*};
+use leptos::prelude::*;
 use leptos_use::{use_toggle, UseToggleReturn};
 
 
@@ -36,8 +34,6 @@ pub fn Disclosure(
         set_value.set(false);
     };
 
-    
-
     let api = DisclosureContext {
         value: value.clone(),
         set_value: set_value.clone(),
@@ -48,7 +44,6 @@ pub fn Disclosure(
     provide_context(api);
 
     let children = StoredValue::new(children);
-
 
     view! {
         <div>

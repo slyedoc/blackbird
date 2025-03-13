@@ -35,17 +35,17 @@ impl MenuAction {
 }
 
 fn setup_ui(mut commands: Commands) {
-    // Instructions
-    commands.spawn((
-        Text::new("Hover over the shapes to pick them\nDrag to rotate"),
-        Node {
-            position_type: PositionType::Absolute,
-            top: Val::Px(12.0),
-            left: Val::Px(12.0),
-            ..default()
-        },
-        StateScoped(AppState::Menu),
-    ));
+    // // Instructions
+    // commands.spawn((
+    //     Text::new("Hover over the shapes to pick them\nDrag to rotate"),
+    //     Node {
+    //         position_type: PositionType::Absolute,
+    //         top: Val::Px(12.0),
+    //         left: Val::Px(12.0),
+    //         ..default()
+    //     },
+    //     StateScoped(AppState::Menu),
+    // ));
 
     commands
         .spawn((
@@ -106,22 +106,30 @@ fn setup_ui(mut commands: Commands) {
                     });
 
                 // play
-                parent.spawn(MenuButton).with_children(|parent| {
-                    parent.spawn((MenuButtonText, Text::new("Play"))).observe(
+                parent
+                    .spawn(MenuButton)
+                    .with_children(|parent| {
+                        parent.spawn((MenuButtonText, Text::new("Play")));
+                    })
+                    .observe(
                         |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
+                            info!("Play button clicked");
                             commands.set_state(AppState::Play);
                         },
                     );
-                });
 
                 // exit
-                parent.spawn(MenuButton).with_children(|parent| {
-                    parent.spawn((MenuButtonText, Text::new("Exit"))).observe(
+                #[cfg(not(target_arch = "wasm32"))]
+                parent
+                    .spawn(MenuButton)
+                    .with_children(|parent| {
+                        parent.spawn((MenuButtonText, Text::new("Exit")));
+                    })
+                    .observe(
                         |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
                             commands.send_event(AppExit::Success);
                         },
                     );
-                });
             });
         });
 }

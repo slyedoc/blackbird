@@ -46,21 +46,20 @@ fn setup(mut commands: Commands) {
                     BackgroundColor(NORMAL_BUTTON),
                 ))
                 .with_children(|parent| {
-                    parent
-                        .spawn((
-                            Text::new("Exit"),
-                            TextFont {
-                                font_size: 33.0,
-                                ..Default::default()
-                            },
-                            TextColor(Color::srgb(0.9, 0.9, 0.9)),
-                        ))
-                        .observe(
-                            |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
-                                commands.set_state(AppState::Menu);
-                            },
-                        );
-                });
+                    parent.spawn((
+                        Text::new("Exit"),
+                        TextFont {
+                            font_size: 33.0,
+                            ..Default::default()
+                        },
+                        TextColor(Color::srgb(0.9, 0.9, 0.9)),
+                    ));
+                })
+                .observe(
+                    |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
+                        commands.set_state(AppState::Menu);
+                    },
+                );
         });
 
     //board

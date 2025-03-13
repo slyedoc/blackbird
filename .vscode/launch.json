@@ -7,6 +7,19 @@
         {
             "type": "lldb",
             "request": "launch",
+            "name": "Leptos Watch",
+            "cargo": {
+                "args": [
+                    "leptos",
+                    "watch",                    
+                ],                
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
             "name": "Debug executable 'app'",
             "cargo": {
                 "args": [

@@ -92,13 +92,13 @@ impl Plugin for SlyDefaultPlugins {
                     }),
                     ..default()
                 })
-                .set(LogPlugin {
-                    filter:
-                        "wgpu_hal=error,wgpu_core=error,bevy_render=error,bevy_persistent=error"
-                            .into(),
-                    level: bevy::log::Level::INFO,
-                    ..default()
-                })
+                // .set(LogPlugin {
+                //     filter:
+                //         "wgpu_hal=error,wgpu_core=error,bevy_render=error,bevy_persistent=error"
+                //             .into(),
+                //     level: bevy::log::Level::INFO,
+                //     ..default()
+                // })
                 .disable::<LogPlugin>(),
             #[cfg(feature = "editor")]
             sly_editor::SlyEditorPlugin,

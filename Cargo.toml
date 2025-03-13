@@ -18,17 +18,16 @@ sly_camera = { path = "crates/cameras" }
 sly_editor = { path = "crates/editor" }
 
 leptos-bevy-canvas = { path = "crates/leptos-bevy-canvas" }
-
 # transform_gizmo = { path = "crates/transform_gizmo" }
 # billboard  = { path = "crates/billboard" }
 # go = { path = "crates/go" }
-
 
 # Games
 breakout = { path = "games/breakout" }
 tic_tac_toe = { path = "games/tic_tac_toe" }
 unidir_events = { path = "games/unidir_events" }
 sync_app = { path = "games/sync_app" }
+cast_app = { path = "games/cast_app" }
 
 # Crates
 bevy = "0.15" 
@@ -68,13 +67,35 @@ strum_macros = "0.26"
 [package]
 name = "blackbird"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+description = "Personal Site with bevy"
+repository = "http://github.com/slyedoc/blackbird"
+license = "TODO"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[profile.release]
+panic = "abort"
+
+[profile.wasm-release]
+inherits = "release"
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = "abort"
+
 [features]
-default = ["ssr"]
+default = [] #"breakout"
+
+# making games optional features for faster hot reload, 
+all_games = ["breakout", "tic_tac_toe", "unidir_events", "sync_app", "cast_app"]
+tic_tac_toe = ["dep:tic_tac_toe"] 
+breakout = ["dep:breakout"]
+unidir_events = ["dep:unidir_events"]
+sync_app = ["dep:sync_app"]
+cast_app = ["dep:cast_app"]
+
 hydrate = ["leptos/hydrate"]
 ssr = [
   "dep:axum",
@@ -102,10 +123,11 @@ ssr = [
 leptos-bevy-canvas.workspace = true
 
 # Local Games
-breakout.workspace = true
-tic_tac_toe.workspace = true
-unidir_events.workspace = true
-sync_app.workspace = true
+breakout = { workspace = true, optional = true }
+tic_tac_toe = { workspace = true, optional = true }
+unidir_events = { workspace = true, optional = true }
+sync_app = { workspace = true, optional = true }
+cast_app = { workspace = true, optional = true }
 
 # bevy
 bevy.workspace = true
@@ -113,66 +135,50 @@ bevy_rand = { version = "0.9", features = ["wyrand"] }
 
 # wasm and leptos 
 wasm-bindgen = { workspace = true }
-web-sys = "0.3"
-anyhow = "1.0"
-console_log = "1.0"
 
-console_error_panic_hook.workspace = true
-futures = "0.3.0"
 leptos = { workspace = true, features = ["nightly"] }
 leptos_meta.workspace = true
 leptos_axum = { workspace = true, optional = true }
 leptos_router = { workspace = true, features = ["nightly"] }
 leptos-use = { version = "0.15", features = [] }
-codee = "0.3"
+
+web-sys = "0.3"
+anyhow = "1.0"
+console_log = "1.0"
+console_error_panic_hook.workspace = true
+futures = "0.3.0"
 
 # icons
 icondata_core = "0.1"
 icondata = "0.5"
 
 # Server
-log = "0.4.0"
-simple_logger = "5.0"
-serde = { version = "1.0", features = ["derive"] }
 axum = { version = "0.7", optional = true, features = ["macros"] }
 tower = { version = "0.4", optional = true }
 tower-http = { version = "0.5", features = ["fs"], optional = true }
 tokio = { version = "1", features = ["full"], optional = true }
 http = { version = "1" }
-sqlx = { version = "0.8.0", features = [
-  "runtime-tokio-rustls",
-  "sqlite",
-], optional = true }
-thiserror = "1.0"
-async-trait = { version = "0.1.0", optional = true }
+# TODO: do we need this openssl 
+sqlx = { version = "0.8.0", features = ["runtime-tokio-rustls", "sqlite"], optional = true }
 axum_session_auth = { version = "0.14.0", features = [], optional = true }
 axum_session = { version = "0.14.0", features = [], optional = true }
 axum_session_sqlx = { version = "0.3.0", features = [ "sqlite", "tls-rustls"], optional = true }
 bcrypt = { version = "0.15.0", optional = true }
 
+# TODO" feature gate this for size later
+serde = { version = "1.0", features = ["derive"] }
+
 # Util
+log = "0.4.0"
 strum.workspace = true
-rand = { version = "0.8", features = ["min_const_gen"], optional = true }
 rand_core = "0.6"
+simple_logger = "5.0"
 
-
-[profile.release]
-panic = "abort"
-
-####### 
-# Pofiles
-[profile.wasm-release]
-inherits = "release"
-opt-level = 'z'
-lto = true
-codegen-units = 1
-panic = "abort"
-
-#######
-# Lepots
-[package.metadata.cargo-all-features]
-denylist = ["axum", "tower", "tower-http", "tokio", "sqlx", "leptos_axum"]
-skip_feature_sets = [["ssr", "hydrate"]]
+cfg-if = "1.0.0"
+thiserror = "1.0"
+rand = { version = "0.8", features = ["min_const_gen"], optional = true }
+dotenvy = { version = "0.15.6", optional = true }
+async-trait = { version = "0.1.0", optional = true }
 
 [package.metadata.leptos]
 lib-profile-release = "wasm-release"
@@ -185,7 +191,7 @@ site-root = "target/site"
 # Defaults to pkg
 site-pkg-dir = "pkg"
 # [Optional] The source CSS file. If it ends with .sass or .scss-pkg>/ then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<siteapp.css
-#style-file = "./style.css"
+style-file = "style/empty.css"
 tailwind-input-file = "style/tailwind.css"
 
 # [Optional] Files in the asset-dir will be copied to the site-root directory
@@ -210,7 +216,7 @@ bin-features = ["ssr"]
 # If the --no-default-features flag should be used when compiling the bin target
 #
 # Optional. Defaults to false.
-bin-default-features = false
+bin-default-features = true
 
 # The features to use when compiling the lib target
 #
@@ -220,16 +226,14 @@ lib-features = ["hydrate"]
 # If the --no-default-features flag should be used when compiling the lib target
 #
 # Optional. Defaults to false.
-lib-default-features = false
+lib-default-features = true
 
 [dev-dependencies]
 bevy.workspace = true
-icondata = "0.5"
-wasm-bindgen-test = "0.3.5"
+# icondata = "0.5"
+# wasm-bindgen-test = "0.3.5"
 
-#############
 # Patches
-
 [patch.crates-io]
 leptos-use = { git = "https://github.com/Synphonyte/leptos-use.git"}
 
