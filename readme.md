@@ -9,9 +9,9 @@
     - [Leptos](https://github.com/leptos-rs/leptos) web framework
     - [TailwindCSS](https://tailwindcss.com/)   
 - Tools
+    
     - [trunk](https://github.com/thedodd/trunk) tool.
 
-- 
 ## Getting Started
 
 Set env var for asset path from project root:
@@ -46,11 +46,14 @@ cargo install leptosfmt
 cargo install --git https://github.com/leptos-rs/cargo-leptos --locked cargo-leptos
 ```
 
-Install node packages
+> cargo-leptos does not use tailwind vite cli, so dont need to get anything from node right now
+<!--
+> Install node packages
 
-```bash
-npm install
-```
+> ```bash
+> npm install
+> ```
+> -->
 
 Docker
 
@@ -61,8 +64,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo usermod -a -G docker $USER
 newgrp docker
 ```
-
-
 
 ## Deployment
 
@@ -93,3 +94,4 @@ docker buildx prune -f
 ## Addons
 
 Install [Tailwind CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
+

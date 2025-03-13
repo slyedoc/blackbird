@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Blackbird</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="blackbird">Blackbird</h1>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>
+<p>Frontend</p>
+<ul>
+<li><a href="https://bevyengine.org">Bevy</a></li>
+<li><a href="https://github.com/leptos-rs/leptos">Leptos</a> web framework</li>
+<li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+</ul>
+</li>
+<li>
+<p>Tools</p>
+<ul>
+<li><a href="https://github.com/thedodd/trunk">trunk</a> tool.</li>
+</ul>
+</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<p>Set env var for asset path from project root:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">export</span> BEVY_ASSET_ROOT=<span class="hljs-variable">${PWD}</span>
+</code></pre>
+<p>Install lld and mold, see bevy <a href="https://bevyengine.org/learn/quick-start/getting-started/setup/#cranelift">notes</a> for more info</p>
+<pre><code class="language-bash">sudo apt-get install lld clang
+rustup component add rustc-codegen-cranelift-preview --toolchain nightly
+</code></pre>
+<p>get open ssl</p>
+<pre><code class="language-bash">sudo apt install libssl-dev
+</code></pre>
+<p>setup rust</p>
+<pre><code class="language-bash">rustup toolchain install nightly
+rustup target add wasm32-unknown-unknown
+</code></pre>
+<p>setup cargo leptos and leptosfmt</p>
+<pre><code class="language-bash">cargo install leptosfmt
+cargo install --git https://github.com/leptos-rs/cargo-leptos --locked cargo-leptos
+</code></pre>
+<blockquote>
+<p>cargo-leptos does not use tailwind vite cli, so dont need to get anything from node right now</p>
+</blockquote>
+<!--
+> Install node packages
+
+> ```bash
+> npm install
+> ```
+> -->
+<p>Docker</p>
+<pre><code class="language-bash">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+<span class="hljs-comment"># fix permissions</span>
+sudo usermod -a -G docker <span class="hljs-variable">$USER</span>
+newgrp docker
+</code></pre>
+<h2 id="deployment">Deployment</h2>
+<p>using <a href="http://fly.io">fly.io</a> with setup from <a href="https://book.leptos.dev/deployment/ssr.html#deploy-to-flyio">leptos book</a></p>
+<h1 id="commands">Commands</h1>
+<p>Common commands (run one):</p>
+<pre><code class="language-bash"><span class="hljs-comment"># run server locally</span>
+cargo leptos watch
+
+<span class="hljs-comment"># run local game</span>
+cargo run -p breakout
+</code></pre>
+<p>Docker commands (run one):</p>
+<pre><code class="language-bash"><span class="hljs-comment"># build docker</span>
+docker build .
+
+<span class="hljs-comment"># clear docker cache</span>
+docker buildx prune -f
+</code></pre>
+<h2 id="addons">Addons</h2>
+<p>Install <a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss">Tailwind CSS Intellisense</a>.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

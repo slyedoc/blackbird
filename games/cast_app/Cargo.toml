@@ -1,0 +1,13 @@
+[package]
+name = "cast_app"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+
+[dependencies]
+avian3d.workspace = true
+bevy.workspace = true
+bevy_hanabi.workspace = true
+leafwing-input-manager.workspace = true
