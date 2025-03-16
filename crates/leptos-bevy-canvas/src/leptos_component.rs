@@ -21,26 +21,25 @@ pub fn BevyCanvas(
     /// Optional canvas id. Defaults to `bevy_canvas`.
     #[prop(into, default = "bevy_canvas".to_string())]
     canvas_id: String,
-) -> impl IntoView {    
+) -> impl IntoView {
     {
         let (stop_l, stop_b) = event_l2b::<Stop>();
 
         Effect::new(move |_| {
-             let _stop = stop_b.clone();
-             request_animation_frame(move || {                
-                 //let mut app = init();
-        //         app.import_event_from_leptos(stop)
-        //             .add_systems(Update, handle_stop_signal.run_if(on_event::<Stop>))
-                     //app.run();
-             });
+            let _stop = stop_b.clone();
+            request_animation_frame(move || {
+                //let mut app = init();
+                //         app.import_event_from_leptos(stop)
+                //             .add_systems(Update, handle_stop_signal.run_if(on_event::<Stop>))
+                //app.run();
+            });
         });
-        
 
         Owner::on_cleanup(move || {
-             let _ = stop_l.send(Stop);
-             info!("Cleaning up BevyCanvas");
-             // errors on page refresh, but that's ok            
-         });
+            let _ = stop_l.send(Stop);
+            info!("Cleaning up BevyCanvas");
+            // errors on page refresh, but that's ok
+        });
     }
 
     view! { <canvas id=canvas_id></canvas> }

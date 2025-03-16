@@ -1,7 +1,7 @@
+use cfg_if::cfg_if;
 use leptos::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
-use cfg_if::cfg_if;
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct User {
@@ -25,8 +25,6 @@ impl Default for User {
         }
     }
 }
-
-
 
 cfg_if! {
     if #[cfg(feature = "ssr")] {
@@ -181,8 +179,6 @@ pub async fn login(
     password: String,
     remember: Option<String>,
 ) -> Result<(), ServerFnError> {
-    
-
     let pool = pool()?;
     let auth = auth()?;
 
@@ -211,7 +207,6 @@ pub async fn signup(
     password_confirmation: String,
     remember: Option<String>,
 ) -> Result<(), ServerFnError> {
-
     let pool = pool()?;
     let auth = auth()?;
 
@@ -243,7 +238,6 @@ pub async fn signup(
 
 #[server(Logout, "/api")]
 pub async fn logout() -> Result<(), ServerFnError> {
-
     let auth = auth()?;
 
     auth.logout_user();

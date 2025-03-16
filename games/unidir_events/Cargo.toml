@@ -3,21 +3,24 @@ name = "unidir_events"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
-console_error_panic_hook.workspace = true
-leptos.workspace = true
-leptos-bevy-canvas.workspace = true
-leptos-use.workspace = true
-meshtext = "0.3.1"
+[features]
+default = []
+editor = ["sly_common/editor"]
+web = ["bevy/webgpu"]
 
-[dependencies.bevy]
-workspace = true
-features = [
+
+[dependencies]
+bevy = { workspace = true, features = [
     "bevy_mesh_picking_backend",
     "bevy_pbr",
     "bevy_picking",
     "bevy_window",
     "bevy_winit",
     "tonemapping_luts",
-    "webgl2"
-]
+] }
+console_error_panic_hook.workspace = true
+sly_common = { workspace = true }
+leptos.workspace = true
+leptos-bevy-canvas.workspace = true
+leptos-use.workspace = true
+meshtext = "0.3.1"

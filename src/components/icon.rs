@@ -1,4 +1,3 @@
-
 use leptos::{prelude::*, svg};
 
 /// The Icon component.

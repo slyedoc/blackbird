@@ -8,6 +8,7 @@ use leptos_bevy_canvas::prelude::*;
 use leptos_use::use_debounce_fn;
 
 use crate::components::*;
+use crate::pages::StopSignal;
 
 #[derive(Copy, Clone)]
 pub enum EventDirection {
@@ -16,6 +17,11 @@ pub enum EventDirection {
     BevyToLeptos,
 }
 
+#[cfg(not(feature = "unidir_events"))]
+#[component]
+pub fn UnidirEvents() -> impl IntoView {}
+
+#[cfg(feature = "unidir_events")]
 #[component]
 pub fn UnidirEvents() -> impl IntoView {
     let (exit_leptos_tx, exit_bevy_rx) = event_l2b::<StopSignal>();
@@ -63,27 +69,24 @@ pub fn UnidirEvents() -> impl IntoView {
     });
 
     view! {
-      <div class="flex w-full mx-auto max-w-[1400px] p-5 items-center">
-        <Frame class="border-red-500 bg-red-500/5 flex-1">
-          <h2 class="text-xl font-bold text-red-500 relative top-[-10px]">Bevy</h2>
-          <div
-            class="aspect-[6/5] rounded-lg overflow-hidden"
-            style:max-width=format!("{}px", unidir_events::RENDER_WIDTH)
-            style:max-height=format!("{}px", unidir_events::RENDER_HEIGHT)
-          >
-            <div class="w-full">
-              <canvas class="bg-white dark:bg-black w-full" id="bevy_canvas"></canvas>
-            </div>
-          </div>
-        </Frame>
 
-        <EventDisplay event_str event_direction />
+      <h2 class="text-xl font-bold text-red-500 relative">Unidir Events</h2>
+      <div class="w-full flex flex-row">
+        <div class="grow aspect-video border-red-500 bg-red-500/5">
+        // class="aspect-[6/5] rounded-lg overflow-hidden"
+        // style:max-width=format!("{}px", unidir_events::RENDER_WIDTH)
+        // style:max-height=format!("{}px", unidir_events::RENDER_HEIGHT)
+           <canvas class=" bg-white dark:bg-black" id="bevy_canvas" />        
+        </div>
+        <div>
+          <EventDisplay event_str event_direction />
 
-        <Frame class="border-blue-500 bg-blue-500/5 max-w-[200px]">
-          <h2 class="text-xl font-bold text-blue-500 relative top-[-10px]">Leptos</h2>
-          <TextInput on_input=on_input />
-          <TextDisplay text click_event_receiver />
-        </Frame>
+          <Frame class="border-blue-500 bg-blue-500/5 max-w-[200px]">
+            <h2 class="text-xl font-bold text-blue-500 relative top-[-10px]">Leptos</h2>
+            <TextInput on_input=on_input />
+            <TextDisplay text click_event_receiver />
+          </Frame>
+        </div>
       </div>
     }
 }

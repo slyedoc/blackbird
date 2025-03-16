@@ -1,78 +1,72 @@
-#[cfg(feature = "unidir_events")]
-mod unidir_events;
-#[cfg(feature = "unidir_events")]
-pub use unidir_events::UnidirEvents;
 
-#[cfg(feature = "sync_app")]
+
 mod sync_app;
-#[cfg(feature = "sync_app")]
 pub use sync_app::*;
 
-use std::fmt::Display;
+mod unidir_events;
+pub use unidir_events::*;
 
-use leptos::prelude::*;
-use strum::{EnumIter, IntoEnumIterator};
+use bevy::prelude::*;
+use leptos::{prelude::*, task::spawn_local};
+use leptos_bevy_canvas::prelude::*;
+
+use strum::{EnumIter, EnumProperty, IntoEnumIterator};
 
 use crate::prelude::*;
+use gloo_timers::future::*;
 
-#[derive(Debug, Default, EnumIter, Clone, Copy)]
+#[derive(Debug, Default, EnumIter, Clone, Copy, PartialEq, Eq, EnumProperty)]
 pub enum Game {
     #[default]
+    #[strum(props(img = "/img/mine.png", path = "mine"))]
+    Mine,
+    #[strum(props(img = "/img/breakout.png", path = "breakout"))]
     Breakout,
+    #[strum(props(img = "/img/tic_tac_toe.png", path = "tic_tac_toe"))]
     TicTacToe,
+    #[strum(props(img = "/img/cast_app.png", path = "cast-app"))]
     CastApp,
+}
 
+
+#[derive(Debug, EnumIter, Clone, Copy, PartialEq, Eq, EnumProperty)]
+pub enum UniqueGame { 
+    #[strum(props(img = "/img/unidir_events.png", path = "unidir-events"))]
     UnidirEvents,
+    #[strum(props(img = "/img/sync_app.png", path = "sync-app"))]
     SyncApp,
 }
 
-impl Display for Game {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let s = match self {
-            Game::Breakout => "Breakout",
-            Game::TicTacToe => "Tic Tac Toe",
-            Game::UnidirEvents => "Unidir Events",
-            Game::SyncApp => "Sync App",
-            Game::CastApp => "Cast App",
-        };
-        write!(f, "{}", s)
-    }
-}
-
 impl Game {
-    pub fn init(self) -> Option<bevy::app::App> {
-        match self {
+    pub fn init(self) -> Option<LeptosEventSender<StopSignal>> {
+
+        let (eptos_tx, bevy_rx) = event_l2b::<StopSignal>();
+
+        let app: Option<App> = match self {
             #[cfg(all(feature = "breakout", feature = "hydrate"))]
             Game::Breakout => Some(breakout::init_bevy_app()),
             #[cfg(all(feature = "tic_tac_toe", feature = "hydrate"))]
             Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
             #[cfg(all(feature = "cast_app", feature = "hydrate"))]
             Game::CastApp => Some(cast_app::init_bevy_app()),
-            _ => {
-                log::error!("Game feature not include or game not supported");
+            #[cfg(all(feature = "mine", feature = "hydrate"))]
+            Game::Mine => Some(mine::init_bevy_app()),
+            #[cfg(not(feature = "hydrate"))]
+            game => {
+                log::error!(" feature for game: {:?} not included", game);
                 None
             }
-        }
-    }
+        };
+        if let Some(mut app) = app {
+            app.import_event_from_leptos(bevy_rx)
+                .add_systems(Update, stop_bevy.run_if(on_event::<StopSignal>));
 
-    pub fn path(self) -> &'static str {
-        match self {
-            Game::Breakout => "/breakout",
-            Game::TicTacToe => "/tictactoe",
-            Game::UnidirEvents => "/unidir_events",
-            Game::SyncApp => "/sync_app",
-            Game::CastApp => "/cast_app",
+                request_animation_frame(move || {
+                    app.run();
+                });                
         }
-    }
+        Some(eptos_tx)
 
-    pub fn image(self) -> &'static str {
-        match self {
-            Game::Breakout => "/img/breakout.png",
-            Game::TicTacToe => "/img/tic_tac_toe.png",
-            Game::UnidirEvents => "/img/breakout.png",
-            Game::SyncApp => "/img/breakout.png",
-            Game::CastApp => "/img/cast_app.png",
-        }
     }
 }
 
@@ -87,20 +81,52 @@ pub fn Games() -> impl IntoView {
         {Game::iter()
           .map(|game| {
             view! {
-              <li class="relative">
-                <div class="group overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
-                  <a href=game.path() class="block">
-                    <span class="block text-sm font-medium text-gray-900">
-                      {format!("{}", game)}
-                    </span>
-                    <img src=game.image() />
-                  </a>
-                </div>
+              <li>
+                <A
+                  href=game.get_str("path").unwrap()
+                  {..}
+                  class="block overflow-hidden rounded-lg bg-gray-100 aria-[current=page]:ring-2 aria-[current=page]:ring-indigo-500 aria-[current=page]:ring-offset-2 aria-[current=page]:ring-offset-gray-100 "
+                >
+                  <span class="block text-sm font-medium text-gray-900">
+                    {format!("{:?}", game)}
+                  </span>
+                  <div class="w-full h-full aspect-w-16 aspect-h-9">
+                    <img src=game.get_str("img").unwrap() class="w-full h-full object-cover" />
+                  </div>
+                </A>
               </li>
             }
           })
           .collect_view()}
       </ul>
+
+      <ul
+        role="list"
+        class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+      >
+        {UniqueGame::iter()
+          .map(|game| {
+            view! {
+              <li>
+                <A
+                  href=game.get_str("path").unwrap()
+                  {..}
+                  class="block overflow-hidden rounded-lg bg-gray-100 aria-[current=page]:ring-2 aria-[current=page]:ring-indigo-500 aria-[current=page]:ring-offset-2 aria-[current=page]:ring-offset-gray-100 "
+                >
+                  <span class="block text-sm font-medium text-gray-900">
+                    {format!("{:?}", game)}
+                  </span>
+                  <div class="w-full h-full aspect-w-16 aspect-h-9">
+                    <img src=game.get_str("img").unwrap() class="w-full h-full object-cover" />
+                  </div>
+                </A>
+              </li>
+            }
+          })
+          .collect_view()}
+      </ul>
+
+      <Outlet />
     }
 }
 
@@ -112,26 +138,90 @@ struct GameParams {
 #[component]
 pub fn GameProfile() -> impl IntoView {
     let params = use_params::<GameParams>();
-    //let query = use_query::<ContactSearch>();
 
-    let name = move || {
+    let id = Signal::derive(move || {
         params
             .read()
             .as_ref()
             .ok()
-            .and_then(|params| params.id.clone())
+            .and_then(|p| p.id.clone())
             .unwrap_or_default()
-    };
+    });
+
+    let game = Signal::derive(move || {
+        let game_id = id.get();
+
+        Game::iter()
+            .filter_map(|g| {
+                if let Some(p) = g.get_str("path") {
+                    if p == game_id {
+                        return Some(g);
+                    }
+                }
+                None
+            })
+            .next()
+            .unwrap_or_default()
+    });
+
+    // create new event channels
+    let exit_tx_signal: RwSignal<Option<LeptosEventSender<StopSignal>>> = RwSignal::new(None);
+
+    Effect::watch(
+        move || game.get(),
+        move |curr, prev, _| {
+            //log::info!("Previous: {:?}, Current: {}", prev, curr);
+            if prev.is_some() {
+                let c = curr.clone();
+                if let Some(tx) = exit_tx_signal.get_untracked() {
+                    match tx.send(StopSignal) {
+                        Err(_) => log::error!("StopSignal failed"),
+                        _ => ()
+                    };
+                }                
+                spawn_local(async move {
+                    TimeoutFuture::new(1000).await; // 100ms delay
+                    let tx = c.init();
+                    exit_tx_signal.set(tx); 
+                });
+            } else {
+                // nothing to stop, just start the new game
+                let tx = curr.init();
+                exit_tx_signal.set(tx);
+            }
+        },
+        true,
+    );
+
+    // stop any game on page exit
+    Owner::on_cleanup(move || {
+        if let Some(tx) = exit_tx_signal.get() {
+            match tx.send(StopSignal) {                
+                Err(_) => log::info!("cleanup StopSignal failed"),
+                _ => ()
+            };
+        }
+        log::info!("TODO: Cleaning up BevyCanvas");
+    });
 
     view! {
-      <div>
-        <p>{name()}</p>
+      <h2 class="text-center text-primary">{move || format!("{:?} {:?}", id.get(), game.get())}</h2>
+      <div class="w-full">
+        <canvas class="w-full bg-white dark:bg-black" id="bevy_canvas" />
       </div>
     }
 }
 
+
 #[component]
 pub fn NoGame() -> impl IntoView {
-    view! { "No Games" }
+    view! { <p>"Select a game."</p> }
 }
 
+#[derive(bevy::prelude::Event, Debug)]
+pub struct StopSignal;
+
+fn stop_bevy(mut app_exit: EventWriter<AppExit>) {
+    log::info!("STOP BEVY");
+    app_exit.send(AppExit::Success);
+}

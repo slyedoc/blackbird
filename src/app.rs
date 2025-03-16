@@ -2,12 +2,11 @@ use crate::prelude::*;
 
 use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::{components::*, *};
-use leptos_use::{
-    use_color_mode_with_options, ColorMode, UseColorModeOptions, UseColorModeReturn,
+use leptos_router::{
+    components::{Outlet, ParentRoute, ProtectedRoute, Route, Router, Routes},
+    path,
 };
-use log::info;
-
+use leptos_use::{ColorMode, UseColorModeOptions, UseColorModeReturn, use_color_mode_with_options};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -52,101 +51,43 @@ pub fn App() -> impl IntoView {
     provide_context(user);
 
     // color mode
-    let UseColorModeReturn {
-        mode: color_mode,
-        set_mode: set_color_mode,
-        ..
-    } = use_color_mode_with_options(UseColorModeOptions::default().custom_modes(vec![
-        // custom colors in addition to light/dark
-        "dim".to_string(),
-        "cafe".to_string(),
-    ]));
-    provide_context::<(Signal<ColorMode>, WriteSignal<ColorMode>)>((color_mode, set_color_mode));
+    let UseColorModeReturn { .. } = use_color_mode_with_options(
+        UseColorModeOptions::default()
+            .initial_value(ColorMode::Dark)
+            .storage(leptos_use::storage::StorageType::Local),
+    );
+    //provide_context::<(Signal<ColorMode>, WriteSignal<ColorMode>)>((color_mode, set_color_mode));
 
-    info!("test: {}", "hello");
     // App setup based on https://tailwindcss.com/plus/ui-blocks/application-ui/application-shells/stacked
     view! {
       <Router>
         <AppNav logout />
         <div class="flex-grow py-10">
-          // <header>
-          // <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          // <h1 class="text-3xl font-bold tracking-tight text-white">Dashboard3</h1>
-          // </div>
-          // </header>
           <main class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-
-            <FlatRoutes fallback=|| "Not found.">
-              // Route
-              <Route path=path!("") view=Home />
-              <Route path=path!("games") view=Games />
-
-              // Games
-              // {
-              // Game::iter()
-              // .map(|game| {
-              // view! {
-              // <Route path=game.path()
-              // view=move || {
-              // view! {
-              // {game}
-              // // <BevyCanvas init=move || { breakout::init_bevy_app() } {..} class="bg-white dark:bg-black w-full" />
-              // }
-              // }
-              // />
-              // }
-              // })
-              // .
-              // }
-              <Route
-                path=path!("breakout")
-                view=move || {
-                  view! { <GameCanvas game=Game::Breakout /> }
-                }
-              />
-              <Route
-                path=path!("tictactoe")
-                view=move || {
-                  view! { <GameCanvas game=Game::TicTacToe /> }
-                }
-              />
-              <Route
-                path=path!("unidir_events")
-                view=move || {
-                  #[cfg(feature = "unidir_events")]
-                  view! { <UnidirEvents /> }
-                  #[cfg(not(feature = "unidir_events"))]
-                  view! { "Not included" }
-                }
-              />
-              <Route
-                path=path!("sync_app")
-                view=move || {
-                  #[cfg(feature = "unidir_events")]
-                  view! { <SyncApp /> }
-                  #[cfg(not(feature = "unidir_events"))]
-                  view! { "Not included" }
-                }
-              />
-
+            <Routes fallback=|| "Route not found.">
+              <Route path=path!("/") view=Home />
+              // <Route path=path!("games") view=Games/>
+              <ParentRoute path=path!("/games") view=Games>
+                <Route path=path!("unidir-events") view=UnidirEvents />
+                <Route path=path!("sync-app") view=SyncApp />
+                <Route path=path!(":id") view=GameProfile />
+                <Route path=path!("") view=NoGame />
+              </ParentRoute>
               <Route path=path!("todos") view=Todos />
               <Route path=path!("signup") view=move || view! { <SignupPage action=signup /> } />
               <Route path=path!("login") view=move || view! { <LoginPage action=login /> } />
               <ParentRoute path=path!("/users") view=Users>
                 <Route path=path!(":id") view=UserProfile />
+                <Route path=path!("") view=NoUser />
               </ParentRoute>
               <ProtectedRoute
                 path=path!("/settings")
                 condition=move || { user.get().map(|r| r.ok().flatten().is_some()) }
                 redirect_path=|| "/"
-                view=move || {
-                  view! { <Settings logout /> }
-                }
+                view=move || view! { <Settings logout /> }
               />
-            </FlatRoutes>
-
+            </Routes>
           </main>
-
         </div>
         <AppFooter />
       </Router>
@@ -159,7 +100,10 @@ pub fn Users() -> impl IntoView {
       <div>
         // the nested child, if any
         // don’t forget this!
-        Users: <p>add user list</p> <Outlet />
+        <h2>Users</h2>
+        <p>add user list</p>
+
+        <Outlet />
       </div>
     }
 }
@@ -171,5 +115,5 @@ pub fn UserProfile() -> impl IntoView {
 
 #[component]
 pub fn NoUser() -> impl IntoView {
-    view! { <div>No User</div> }
+    view! { <p>"Select a user."</p> }
 }

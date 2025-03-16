@@ -3,13 +3,15 @@ name = "breakout"
 version.workspace = true
 edition.workspace = true
 
+
 [features]
 default = []
 editor = ["sly_common/editor"]
+dev = ["editor", "bevy/wayland", "bevy/file_watcher", "bevy/asset_processor"]
 web = ["bevy/webgpu"]
 
 
 [dependencies]
 bevy = { workspace = true, features = [] }
+sly_common.workspace = true
 leafwing-input-manager = { workspace = true }
-sly_common = { workspace = true }

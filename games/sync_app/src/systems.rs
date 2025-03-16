@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use bevy_rand::prelude::*;
-use rand_core::RngCore;
+use rand::prelude::*;
 
 pub fn change_name(mut query: Query<&mut Name, With<Transform>>, mut rng: GlobalEntropy<WyRand>) {
     query

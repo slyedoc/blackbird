@@ -1,5 +1,14 @@
+- [Bevy WebGL2 and WebGPU](https://github.com/bevyengine/bevy/tree/main/examples#webgl2-and-webgpu)
+- [webgpu support](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility)
+- [bevy_hanabi overfiew](https://github.com/djeedai/bevy_hanabi/blob/main/docs/wasm.md)
 
-# 
+
+
+## TODOS
+
+ - [Audio autoplay](https://developer.chrome.com/blog/web-audio-autoplay/)
+
+# WASM, for 
 
 This is run down of build times for hot reload debugging
 

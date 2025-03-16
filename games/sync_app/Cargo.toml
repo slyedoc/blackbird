@@ -6,6 +6,7 @@ edition.workspace = true
 [features]
 default = []
 editor = ["sly_common/editor"]
+web = ["bevy/webgpu"]
 
 
 [dependencies]
@@ -13,12 +14,13 @@ sly_common = { workspace = true }
 
 bevy-inspector-egui.workspace = true
 bevy_rand.workspace = true
+rand.workspace = true
+
 console_error_panic_hook.workspace = true
+
 leptos.workspace = true
 leptos-bevy-canvas.workspace = true
-
 leptos-use.workspace = true
-rand_core.workspace = true
 
 [dependencies.bevy]
 workspace = true

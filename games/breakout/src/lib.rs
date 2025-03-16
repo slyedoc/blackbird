@@ -7,8 +7,6 @@ use bevy::{
     prelude::*,
 };
 
-use sly_common::prelude::*;
-
 use leafwing_input_manager::prelude::*;
 
 // These constants are defined in `Transform` units.
@@ -54,15 +52,11 @@ const SCORE_COLOR: Color = Color::srgb(1.0, 0.5, 0.5);
 
 pub const RENDER_HEIGHT: f32 = 600.;
 pub const RENDER_WIDTH: f32 = 800.;
+
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
     app.add_plugins((
-        SlyDefaultPlugins {
-            title: "Breakout".to_owned(),
-            position: (0, 0),
-            size: (900, 600),
-            ..default()
-        }, // uses DefaultPlugins
+        sly_common::SlyCommonPlugin { title: "Breakout" },
         InputManagerPlugin::<PlayerAction>::default(),
     ))
     .init_resource::<ActionState<PlayerAction>>()

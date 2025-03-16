@@ -69,7 +69,7 @@ impl LeptosBevyApp for App {
                 read_and_export_leptos_events::<R, E>.in_set(ExportLeptosEventSet),
             )
     }
-  fn add_duplex_leptos_event<D, E>(&mut self, bevy_duplex: D) -> &mut Self
+    fn add_duplex_leptos_event<D, E>(&mut self, bevy_duplex: D) -> &mut Self
     where
         E: Event + Clone,
         D: HasReceiver<E> + HasSender<E> + Resource,
@@ -91,7 +91,7 @@ impl LeptosBevyApp for App {
         E: Event + Clone,
         D: HasReceiver<E> + HasSender<E> + Resource,
     {
-        //TODO : test E already exists        
+        //TODO : test E already exists
         self.insert_resource(bevy_duplex)
             //.add_event::<E>()
             .add_systems(
@@ -103,7 +103,6 @@ impl LeptosBevyApp for App {
                 read_and_export_leptos_events::<D, E>.in_set(ExportLeptosEventSet),
             )
     }
-  
 
     fn sync_leptos_signal_with_resource<D, R>(&mut self, bevy_duplex: D) -> &mut Self
     where

@@ -1,0 +1,19 @@
+[package]
+name = "mine"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = ["editor"]
+editor = ["sly_common/editor"]
+web = [] #"bevy/webgpu"
+
+[dependencies]
+sly_common.workspace = true
+bevy.workspace = true
+
+bevy_rand = { workspace = true }
+bevy_prng = { workspace = true, features = ["wyrand"] }
+rand.workspace = true
+#[target.'cfg(all(target_family = "wasm", any(target_os = "unknown", target_os = "none")))'.dependencies]
+#bevy_rand = { workspace = true, features = ["wasm_js"] }

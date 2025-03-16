@@ -1,8 +1,7 @@
-use leptos::prelude::*;
 use crate::prelude::*;
-use serde::{Deserialize, Serialize};
 use cfg_if::cfg_if;
-
+use leptos::prelude::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Todo {
@@ -52,7 +51,6 @@ cfg_if! {
 
 #[server(GetTodos, "/api")]
 pub async fn get_todos() -> Result<Vec<Todo>, ServerFnError> {
-    
     use futures::future::join_all;
 
     let pool = pool()?;
@@ -69,7 +67,6 @@ pub async fn get_todos() -> Result<Vec<Todo>, ServerFnError> {
 
 #[server(AddTodo, "/api")]
 pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
-
     let user = get_user().await?;
     let pool = pool()?;
 
@@ -94,7 +91,6 @@ pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
 // The struct name and path prefix arguments are optional.
 #[server]
 pub async fn delete_todo(id: u16) -> Result<(), ServerFnError> {
-
     let pool = pool()?;
 
     Ok(sqlx::query("DELETE FROM todos WHERE id = $1")

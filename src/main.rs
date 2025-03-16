@@ -1,9 +1,10 @@
 use cfg_if::cfg_if;
 
+
 cfg_if! {
     if #[cfg(feature = "ssr")] {
         use blackbird::prelude::*;
-        
+
         use axum::{
             body::Body as AxumBody,
             extract::{Path, State},
@@ -12,6 +13,10 @@ cfg_if! {
             routing::get,
             Router,
         };
+
+        use http::StatusCode;
+        use tower_http::trace::{self, TraceLayer};
+        
 
         use axum_session::{SessionConfig, SessionLayer, SessionStore};
         use axum_session_auth::{AuthConfig, AuthSessionLayer};
@@ -26,10 +31,10 @@ cfg_if! {
         use leptos::prelude::LeptosOptions;
         use leptos_axum::AxumRouteListing;
 
-
+        use tracing::Level;
 
         #[tokio::main]
-        async fn main() {            
+        async fn main() {
 
             simple_logger::init_with_level(log::Level::Info).expect("couldn't initialize logging");
 
@@ -51,7 +56,7 @@ cfg_if! {
             if let Err(e) = sqlx::migrate!().run(&pool).await {
                 eprintln!("{e:?}");
             }
-            
+
             let conf = get_configuration(Some("Cargo.toml")).unwrap();
             let leptos_options = conf.leptos_options;
             let addr = leptos_options.site_addr;
@@ -65,11 +70,13 @@ cfg_if! {
 
             // build our application with a route
             let app = Router::new()
+                .route("/health", get(health))
                 .route(
                     "/api/*fn_name",
                     get(server_fn_handler).post(server_fn_handler),
                 )
                 .nest_service("/assets", ServeDir::new("assets"))
+                .nest_service("/imported_assets", ServeDir::new("imported_assets"))
                 .leptos_routes_with_handler(routes, get(leptos_routes_handler))
                 .fallback(leptos_axum::file_and_error_handler::<AppState, _>(blackbird::app::shell))
                 .layer(
@@ -77,6 +84,11 @@ cfg_if! {
                         .with_config(auth_config),
                 )
                 .layer(SessionLayer::new(session_store))
+                .layer(
+                    TraceLayer::new_for_http()
+                        .make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO))
+                        .on_response(trace::DefaultOnResponse::new().level(Level::INFO)),
+                )
                 .with_state(app_state);
 
             // run our app with hyper
@@ -133,8 +145,14 @@ cfg_if! {
             );
             handler(state, req).await.into_response()
         }
+
+        async fn health() -> Result<&'static str, StatusCode> {
+            Ok("UP")
+        }
     }
     else {
-        pub fn main() {}
+        pub fn main() {
+            println!("Not running in SSR mode");
+        }
     }
 }

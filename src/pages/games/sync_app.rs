@@ -1,10 +1,14 @@
-use bevy::
-    prelude::{*, With as With};
+use bevy::prelude::{With, *};
 use leptos::prelude::*;
 use leptos_bevy_canvas::prelude::*;
 
-use crate::components::*;
+use crate::{components::*, pages::StopSignal};
 
+#[cfg(not(feature = "sync_app"))]
+#[component]
+pub fn SyncApp() -> impl IntoView {}
+
+#[cfg(feature = "sync_app")]
 #[component]
 pub fn SyncApp() -> impl IntoView {
     let (selected, selected_query_duplex) = single_query_signal::<(Name,), With<Transform>>();
@@ -12,7 +16,6 @@ pub fn SyncApp() -> impl IntoView {
     let (exit_leptos_tx, exit_bevy_rx) = event_l2b::<StopSignal>();
 
     Effect::new(move |_| {
-        
         let selected = selected_query_duplex.clone();
         let bevy_rx = exit_bevy_rx.clone();
         request_animation_frame(move || {

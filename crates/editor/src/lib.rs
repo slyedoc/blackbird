@@ -17,6 +17,7 @@ use bevy::{
 use bevy_inspector_egui::quick::{ResourceInspectorPlugin, WorldInspectorPlugin};
 
 mod selected;
+use fps::FpsPlugin;
 pub use selected::*;
 
 mod stepping;
@@ -40,7 +41,7 @@ impl Plugin for SlyEditorPlugin {
             DebugUiPlugin,
             //ResourceInspectorPlugin::<LevelSetup>::default(),
             //#[cfg(feature = "debug")]
-            WorldInspectorPlugin::new().run_if(input_toggle_active(true, KeyCode::F1)),
+            WorldInspectorPlugin::new().run_if(input_toggle_active(false, KeyCode::F1)),
             // ResourceInspectorPlugin::<AppStatus>::default()
             //     .run_if(input_toggle_active(true, KeyCode::F1)),
             SteppingPlugin::default()
@@ -49,9 +50,8 @@ impl Plugin for SlyEditorPlugin {
                 .at(Val::Percent(35.0), Val::Percent(50.0)),
             EditorSelectedPlugin,
             #[cfg(feature = "fps")]
-            FrameTimeDiagnosticsPlugin::default(),
             #[cfg(feature = "fps")]
-            fps::plugin,
+            FpsPlugin,
         ))
         .init_state::<EditorState>()
         .enable_state_scoped_entities::<EditorState>()

@@ -1,7 +1,6 @@
 
 [workspace]
 resolver = "2"
-
 members = [
     "crates/*",
     "games/*"
@@ -10,6 +9,76 @@ members = [
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
+
+[package]
+name = "blackbird"
+version = "0.1.0"
+edition = "2024"
+description = "Game site with bevy and leptos"
+repository = "http://github.com/slyedoc/blackbird"
+license = "TODO"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[profile.dev.package."*"]
+opt-level = 3
+
+#[profile.release]
+#panic = "abort"
+
+[profile.release]
+# Compile the entire crate as one unit.
+# Slows compile times, marginal improvements.
+#codegen-units = 1
+# Do a second optimization pass over the entire program, including dependencies.
+# Slows compile times, marginal improvements.
+#lto = "thin"
+
+
+[profile.wasm-release]
+inherits = "release"
+# Optimize with size in mind (also try "z", sometimes it is better).
+# Slightly slows compile times, great improvements to file size and runtime performance.
+opt-level = 's' 
+#lto = true
+codegen-units = 1
+#panic = "abort"
+strip = "debuginfo"
+
+[features]
+default = ["all_games"] #"breakout" "bevy/dynamic_linking"
+
+# making games optional features for faster hot reload, 
+all_games = ["breakout", "tic_tac_toe", "unidir_events", "sync_app", "cast_app", "mine"]
+tic_tac_toe = ["dep:tic_tac_toe"] 
+breakout = ["dep:breakout"]
+unidir_events = ["dep:unidir_events"]
+sync_app = ["dep:sync_app"]
+cast_app = ["dep:cast_app"]
+mine = ["dep:mine"]
+
+hydrate = ["leptos/hydrate"]
+ssr = [
+  "dep:axum",
+  "dep:tower",
+  "dep:tower-http",
+  "dep:tokio",
+  "dep:axum_session_sqlx",
+  "dep:axum_session_auth",
+  "dep:axum_session",
+  "dep:async-trait",
+  "dep:sqlx",
+  "dep:bcrypt",
+  #"dep:rand",
+  "leptos/ssr",
+  "leptos/nightly",
+  "leptos_meta/ssr",
+  "leptos_router/ssr",
+  "dep:leptos_axum",
+  "leptos-use/ssr",
+  "leptos-use/axum",
+]
 
 [workspace.dependencies]
 # Local Crates
@@ -28,9 +97,10 @@ tic_tac_toe = { path = "games/tic_tac_toe" }
 unidir_events = { path = "games/unidir_events" }
 sync_app = { path = "games/sync_app" }
 cast_app = { path = "games/cast_app" }
+mine = { path = "games/mine" }
 
 # Crates
-bevy = "0.15" 
+bevy =  { version = "0.15" }
 avian3d = "0.2.1"
 approx = "0.5"
 bevy-inspector-egui = { version = "0.29.1", features = [
@@ -41,97 +111,42 @@ bevy_mod_outline = { git = "https://github.com/komadori/bevy_mod_outline.git" }
 bevy_hanabi = "0.14.0"
 bevy_panorbit_camera = "0.22.1"
 leafwing-input-manager = "0.16.0"
-rand = "0.8"
-
-bevy_rand = { version = "0.9", features = ["wyrand"] }
-leptos-use = "0.15"
-rand_core = "0.6"
-web-sys = "0.3"
-wasm-bindgen-test = "0.3.0"
-console_error_panic_hook = "0.1.0"
 
 serde = { version = "1.0", features = ["derive"] }
 paste = "1.0.15"
 clap = { version = "4.5", features = ["derive"] }
 
 leptos = { version = "0.7" }
+leptos-use = "0.15"
 leptos_meta = { version = "0.7" }
 leptos_axum = { version = "0.7" }
 leptos_router = { version = "0.7" }
 wasm-bindgen = "0.2.100"
+web-sys = "0.3"
+wasm-bindgen-test = "0.3.0"
+console_error_panic_hook = "0.1.0"
 
 strum = { version = "0.26", features = ["derive"] }
 strum_macros = "0.26"
- 
-# Packages
-[package]
-name = "blackbird"
-version = "0.1.0"
-edition = "2024"
-description = "Personal Site with bevy"
-repository = "http://github.com/slyedoc/blackbird"
-license = "TODO"
-
-[lib]
-crate-type = ["cdylib", "rlib"]
-
-[profile.release]
-panic = "abort"
-
-[profile.wasm-release]
-inherits = "release"
-opt-level = 'z'
-lto = true
-codegen-units = 1
-panic = "abort"
-
-[features]
-default = [] #"breakout"
-
-# making games optional features for faster hot reload, 
-all_games = ["breakout", "tic_tac_toe", "unidir_events", "sync_app", "cast_app"]
-tic_tac_toe = ["dep:tic_tac_toe"] 
-breakout = ["dep:breakout"]
-unidir_events = ["dep:unidir_events"]
-sync_app = ["dep:sync_app"]
-cast_app = ["dep:cast_app"]
-
-hydrate = ["leptos/hydrate"]
-ssr = [
-  "dep:axum",
-  "dep:tower",
-  "dep:tower-http",
-  "dep:tokio",
-  "dep:axum_session_sqlx",
-  "dep:axum_session_auth",
-  "dep:axum_session",
-  "dep:async-trait",
-  "dep:sqlx",
-  "dep:bcrypt",
-  "dep:rand",
-  "leptos/ssr",
-  "leptos/nightly",
-  "leptos_meta/ssr",
-  "leptos_router/ssr",
-  "dep:leptos_axum",
-  "leptos-use/ssr",
-  "leptos-use/axum",
-]
+rand_core = "0.9"
+bevy_rand = "0.9"
+bevy_prng = "0.9"
+rand = "0.8"
 
 [dependencies]
 # Local Crates
 leptos-bevy-canvas.workspace = true
 
 # Local Games
-breakout = { workspace = true, optional = true }
-tic_tac_toe = { workspace = true, optional = true }
-unidir_events = { workspace = true, optional = true }
-sync_app = { workspace = true, optional = true }
-cast_app = { workspace = true, optional = true }
+breakout = { workspace = true, optional = true, features = ["web"] }
+tic_tac_toe = { workspace = true, optional = true, features = ["web"] }
+unidir_events = { workspace = true, optional = true, features = ["web"] }
+sync_app = { workspace = true, optional = true, features = ["web"] }
+cast_app = { workspace = true, optional = true, features = ["web"] }
+mine = { workspace = true, optional = true, features = ["web"] }
 
 # bevy
-bevy.workspace = true
-bevy_rand = { version = "0.9", features = ["wyrand"] }
+bevy = { workspace = true }
 
 # wasm and leptos 
 wasm-bindgen = { workspace = true }
@@ -142,12 +157,6 @@ leptos_axum = { workspace = true, optional = true }
 leptos_router = { workspace = true, features = ["nightly"] }
 leptos-use = { version = "0.15", features = [] }
 
-web-sys = "0.3"
-anyhow = "1.0"
-console_log = "1.0"
-console_error_panic_hook.workspace = true
-futures = "0.3.0"
-
 # icons
 icondata_core = "0.1"
 icondata = "0.5"
@@ -155,7 +164,7 @@ icondata = "0.5"
 # Server
 axum = { version = "0.7", optional = true, features = ["macros"] }
 tower = { version = "0.4", optional = true }
-tower-http = { version = "0.5", features = ["fs"], optional = true }
+tower-http = { version = "0.5", features = ["fs", "trace"], optional = true }
 tokio = { version = "1", features = ["full"], optional = true }
 http = { version = "1" }
 # TODO: do we need this openssl 
@@ -164,21 +173,26 @@ axum_session_auth = { version = "0.14.0", features = [], optional = true }
 axum_session = { version = "0.14.0", features = [], optional = true }
 axum_session_sqlx = { version = "0.3.0", features = [ "sqlite", "tls-rustls"], optional = true }
 bcrypt = { version = "0.15.0", optional = true }
-
-# TODO" feature gate this for size later
-serde = { version = "1.0", features = ["derive"] }
+tracing = "0.1"
 
 # Util
+
+anyhow = "1.0"
+futures = "0.3.0"
+
+console_log = "1.0"
+console_error_panic_hook.workspace = true
 log = "0.4.0"
-strum.workspace = true
-rand_core = "0.6"
 simple_logger = "5.0"
 
-cfg-if = "1.0.0"
-thiserror = "1.0"
-rand = { version = "0.8", features = ["min_const_gen"], optional = true }
 dotenvy = { version = "0.15.6", optional = true }
 async-trait = { version = "0.1.0", optional = true }
+
+strum.workspace = true
+cfg-if = "1.0.0"
+thiserror = "1.0"
+gloo-timers = { version = "0.3.0", features = ["futures"] }
+serde = { version = "1.0", features = ["derive"] } # TODO" feature gate this for size later
 
 [package.metadata.leptos]
 lib-profile-release = "wasm-release"

@@ -13,17 +13,19 @@ use bevy::{
     core_pipeline::{bloom::Bloom, tonemapping::Tonemapping},
     prelude::*,
 };
-use bevy_hanabi::prelude::*;
+//use bevy_hanabi::prelude::*;
 use leafwing_input_manager::prelude::*;
 
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
 
     app.add_plugins((
-        DefaultPlugins,
+        sly_common::SlyCommonPlugin {
+            title: "Spell Caster",
+        },
         PhysicsPlugins::default(),
         InputManagerPlugin::<PlayerAction>::default(),
-        HanabiPlugin,
+        //HanabiPlugin,
         UiPlugin,
         SpellPlugin,
     ))
@@ -237,11 +239,11 @@ fn _on_spell_click(
             let effect = &spell_effects.hashmap[spell];
             cmd.spawn((
                 Name::new("firework"),
-                ParticleEffectBundle {
-                    effect: ParticleEffect::new(effect.clone()),
-                    transform: Transform::from_translation(player_trans.translation),
-                    ..Default::default()
-                },
+                // ParticleEffectBundle {
+                //     effect: ParticleEffect::new(effect.clone()),
+                //     transform: Transform::from_translation(player_trans.translation),
+                //     ..Default::default()
+                // },
             ));
         }
     }

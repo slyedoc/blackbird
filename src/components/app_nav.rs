@@ -1,20 +1,13 @@
 use leptos::prelude::*;
-use leptos_use::ColorMode;
-
-
+use leptos_use::{ColorMode, UseColorModeReturn, use_color_mode};
 
 use crate::prelude::*;
 
-const NAVIGATION: [(&str, &str); 3] = [
-  ("Home", "/"),
-  ("Games", "/games"),
-  ("Todos", "/todos"),
-];
-
+const NAVIGATION: [(&'static str, &'static str); 3] =
+    [("Home", "/"), ("Games", "/games"), ("Todos", "/todos")];
 
 #[component]
 pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
-
     let user_resource = use_context::<Resource<Result<Option<User>, ServerFnError>>>()
         .expect("User context not found");
     // simplified version of the user resource
@@ -73,16 +66,14 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
               </div>
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4">
-                  {NAVIGATION
+                  { NAVIGATION
                     .iter()
                     .map(|(name, href)| {
                       view! {
-                        <a
-                          href=*href
-                          class="rounded-md px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-300 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-700 dark:hover:text-white"
-                        >
+                        //<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                        <A href={ *href } {..} class="rounded-md px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-300 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-700 dark:hover:text-white aria-[current=page]:bg-gray-100 aria-[current=page]:text-gray-900   dark:aria-[current=page]:bg-gray-900 dark:aria-[current=page]:text-white">
                           {*name}
-                        </a>
+                        </A>
                       }
                     })
                     .collect_view()}
@@ -91,7 +82,7 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               // dark mode
-              <ThemeButton class="hidden md:inline-block" />
+              <ThemeButton {..} class="hidden md:inline-block relative rounded-sm p-1 m-3 text-gray-800 dark:text-gray-300 hover:text-gray-300 dark:hover:text-white focus:ring-2 focus:outline-hidden" />
 
               // profile dropwdown
               <Transition>
@@ -99,12 +90,12 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                   match user.get() {
                     None => {
                       view! {
-                        <a href="/signup" class="flex w-25 btn-primary mr-2">
+                        <A href="/signup" {..} class="flex w-25 btn-primary mr-2">
                           "Signup"
-                        </a>
-                        <a href="/login" class="flex w-25 btn-primary">
+                        </A>
+                        <A href="/login" {..} class="flex w-25 btn-primary">
                           "Login"
-                        </a>
+                        </A>
                       }
                         .into_any()
                     }
@@ -188,12 +179,12 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                   None => {
                     view! {
                       <div class="border-t border-gray-700 pt-4 pb-3 flex flex-row justify-evenly">
-                        <a href="/signup" class="flex w-25 btn-primary mr-2">
+                        <A href="/signup" {..} class="flex w-25 btn-primary mr-2">
                           "Signup"
-                        </a>
-                        <a href="/login" class="flex w-25 btn-primary">
+                        </A>
+                        <A href="/login" {..} class="flex w-25 btn-primary">
                           "Login"
-                        </a>
+                        </A>
                       </div>
                     }
                       .into_any()
@@ -262,12 +253,8 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
 }
 
 #[component]
-pub fn ThemeButton(
-  #[prop(into, optional)] class: MaybeProp<String>,
-) -> impl IntoView {
-    let (mode, set_mode) = use_context::<(Signal<ColorMode>, WriteSignal<ColorMode>)>()
-        .expect("Color mode context not found");
-
+pub fn ThemeButton() -> impl IntoView {
+    let UseColorModeReturn { mode, set_mode, .. } = use_color_mode();
     let icon = Signal::derive(move || {
         if mode.get() == ColorMode::Dark {
             i::BsSun
@@ -279,7 +266,6 @@ pub fn ThemeButton(
     view! {
       <button
         type="button"
-        class=format!("{} relative rounded-sm p-1 m-3 text-gray-800 dark:text-gray-300 hover:text-gray-300 dark:hover:text-white focus:ring-2 focus:outline-hidden", class.get().unwrap_or("".to_string()))
         on:click=move |_| {
           match mode.get() {
             ColorMode::Dark => set_mode.set(ColorMode::Light),
