@@ -1,0 +1,8 @@
+[package]
+name = "asset_processor"
+version.workspace = true
+edition.workspace = true
+
+
+[dependencies]
+bevy = { workspace = true, features = ["asset_processor"] }

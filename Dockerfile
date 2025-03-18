@@ -13,8 +13,8 @@ RUN rustup show
 
 #RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/leptos-rs/cargo-leptos/releases/latest/download/cargo-leptos-installer.sh | sh
 #RUN cargo install --git https://github.com/bram209/leptosfmt.git 
-RUN cargo install --git https://github.com/leptos-rs/cargo-leptos cargo-leptos
-
+# install cargo-leptos with wasm-opt disabled
+RUN cargo install --git https://github.com/slyedoc/cargo-leptos cargo-leptos
 
 # Add the WASM target
 RUN rustup target add wasm32-unknown-unknown
@@ -26,7 +26,7 @@ COPY . .
 
 # Build the app
 RUN npm install
-RUN cargo leptos build --release -vv
+RUN cargo leptos build --release -v --features all_games
 
 FROM debian:bookworm-slim as runtime
 WORKDIR /app
@@ -40,6 +40,7 @@ COPY --from=flyio/litefs:0.5 /usr/local/bin/litefs /usr/local/bin/litefs
 COPY --from=builder /app/target/release/blackbird /app/
 COPY --from=builder /app/target/site /app/site
 COPY --from=builder /app/public /app/public
+COPY --from=builder /app/assets /app/asssets
 COPY --from=builder /app/assets /app/asssets
 COPY --from=builder /app/Cargo.toml /app/
 COPY --from=builder /app/tools/docker_start.sh /app/

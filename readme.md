@@ -14,10 +14,10 @@
 
 ## Getting Started
 
-Set env var for asset path from project root:
+Set sqlx-cli
 
 ```bash
-export BEVY_ASSET_ROOT=${PWD}
+cargo install sqlx-cli --no-default-features --features rustls,postgres
 ```
 
 Install lld and mold, see bevy [notes](https://bevyengine.org/learn/quick-start/getting-started/setup/#cranelift) for more info
@@ -39,10 +39,11 @@ rustup toolchain install nightly
 rustup target add wasm32-unknown-unknown
 ```
 
-setup cargo leptos and leptosfmt
+setup cargo leptos, leptosfmt, wasm-opt
 
 ```bash
 cargo install leptosfmt
+cargo install wasm-opt --locked
 cargo install --git https://github.com/leptos-rs/cargo-leptos --locked cargo-leptos
 ```
 

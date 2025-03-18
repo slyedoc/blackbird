@@ -2,18 +2,20 @@ mod systems;
 
 use systems::*;
 
-
 pub const RENDER_HEIGHT: f32 = 600.;
 pub const RENDER_WIDTH: f32 = 800.;
-use bevy::{color::palettes::tailwind::*, core_pipeline::Skybox, input::common_conditions::input_pressed, prelude::*};
+use bevy::{
+    color::palettes::tailwind::*, core_pipeline::Skybox, input::common_conditions::input_pressed,
+    prelude::*,
+};
 use bevy_rand::prelude::*;
 
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
     app.add_plugins((
         sly_common::SlyCommonPlugin {
-            title: "Sync App".into(),            
-        },        
+            title: "Sync App".into(),
+        },
         MeshPickingPlugin,
         EntropyPlugin::<WyRand>::default(),
         bevy_inspector_egui::quick::WorldInspectorPlugin::new(),

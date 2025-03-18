@@ -3,3 +3,4 @@
 /node_modules
 /imported_assets
 *.meta
+command_times.log

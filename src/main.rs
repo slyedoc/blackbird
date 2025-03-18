@@ -1,53 +1,45 @@
 use cfg_if::cfg_if;
 
-
 cfg_if! {
     if #[cfg(feature = "ssr")] {
         use blackbird::prelude::*;
 
         use axum::{
             body::Body as AxumBody,
-            extract::{Path, State},
+            extract::{Path, State, FromRef},
             http::Request,
             response::{IntoResponse, Response},
             routing::get,
             Router,
         };
-
-        use http::StatusCode;
-        use tower_http::trace::{self, TraceLayer};
-        
-
         use axum_session::{SessionConfig, SessionLayer, SessionStore};
         use axum_session_auth::{AuthConfig, AuthSessionLayer};
-        use axum_session_sqlx::SessionSqlitePool;
 
+        use http::StatusCode;
+        use tower_http::services::ServeDir;
         use leptos::{config::get_configuration, logging::log};
         use leptos_axum::{generate_route_list, handle_server_fns_with_context, LeptosRoutes};
-        use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
-        use tower_http::services::ServeDir;
-
-        use axum::extract::FromRef;
         use leptos::prelude::LeptosOptions;
         use leptos_axum::AxumRouteListing;
 
-        use tracing::Level;
+
+        use std::env::var;
 
         #[tokio::main]
         async fn main() {
+            dotenvy::dotenv().expect("couldn't find .env file");
 
             simple_logger::init_with_level(log::Level::Info).expect("couldn't initialize logging");
-
-            let pool = SqlitePoolOptions::new()
-                .connect("sqlite:db.db")
+            let pool = DbPoolOptions::new()
+                .connect(var("DATABASE_URL").expect("DATABASE_URL must be set").as_str())
                 .await
                 .expect("Could not make pool.");
 
             // Auth section
             let session_config = SessionConfig::default().with_table_name("axum_sessions");
-            let auth_config = AuthConfig::<i64>::default();
-            let session_store = SessionStore::<SessionSqlitePool>::new(
-                Some(SessionSqlitePool::from(pool.clone())),
+            let auth_config = AuthConfig::<i32>::default();
+            let session_store = SessionStore::<SessionDbPool>::new(
+                Some(SessionDbPool::from(pool.clone())),
                 session_config,
             )
             .await
@@ -80,15 +72,15 @@ cfg_if! {
                 .leptos_routes_with_handler(routes, get(leptos_routes_handler))
                 .fallback(leptos_axum::file_and_error_handler::<AppState, _>(blackbird::app::shell))
                 .layer(
-                    AuthSessionLayer::<User, i64, SessionSqlitePool, SqlitePool>::new(Some(pool.clone()))
+                    AuthSessionLayer::<User, i32, SessionDbPool, DbPool>::new(Some(pool.clone()))
                         .with_config(auth_config),
                 )
                 .layer(SessionLayer::new(session_store))
-                .layer(
-                    TraceLayer::new_for_http()
-                        .make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO))
-                        .on_response(trace::DefaultOnResponse::new().level(Level::INFO)),
-                )
+                // .layer(
+                //     tower_http::trace::TraceLayer::new_for_http()
+                //         .make_span_with(trace::DefaultMakeSpan::new().level(tracing::Level::INFO))
+                //         .on_response(trace::DefaultOnResponse::new().level(tracing::Level::INFO)),
+                // )
                 .with_state(app_state);
 
             // run our app with hyper
@@ -105,7 +97,7 @@ cfg_if! {
         #[derive(FromRef, Debug, Clone)]
         pub struct AppState {
             pub leptos_options: LeptosOptions,
-            pub pool: SqlitePool,
+            pub pool: DbPool,
             pub routes: Vec<AxumRouteListing>,
         }
 

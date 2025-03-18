@@ -30,10 +30,10 @@ opt-level = 3
 [profile.release]
 # Compile the entire crate as one unit.
 # Slows compile times, marginal improvements.
-#codegen-units = 1
+codegen-units = 1
 # Do a second optimization pass over the entire program, including dependencies.
 # Slows compile times, marginal improvements.
-#lto = "thin"
+lto = "thin"
 
 
 [profile.wasm-release]
@@ -41,13 +41,12 @@ inherits = "release"
 # Optimize with size in mind (also try "z", sometimes it is better).
 # Slightly slows compile times, great improvements to file size and runtime performance.
 opt-level = 's' 
-#lto = true
-codegen-units = 1
-#panic = "abort"
+# Strip all debugging information from the binary to slightly reduce file size.
 strip = "debuginfo"
+#panic = "abort"
 
 [features]
-default = ["all_games"] #"breakout" "bevy/dynamic_linking"
+default = [] #"breakout" "bevy/dynamic_linking"
 
 # making games optional features for faster hot reload, 
 all_games = ["breakout", "tic_tac_toe", "unidir_events", "sync_app", "cast_app", "mine"]
@@ -71,8 +70,8 @@ ssr = [
   "dep:sqlx",
   "dep:bcrypt",
   #"dep:rand",
+  "dotenvy",
   "leptos/ssr",
-  "leptos/nightly",
   "leptos_meta/ssr",
   "leptos_router/ssr",
   "dep:leptos_axum",
@@ -81,6 +80,8 @@ ssr = [
 ]
 
 [workspace.dependencies]
+
+
 # Local Crates
 sly_common = { path = "crates/common" }
 sly_camera = { path = "crates/cameras" }
@@ -116,7 +117,7 @@ serde = { version = "1.0", features = ["derive"] }
 paste = "1.0.15"
 clap = { version = "4.5", features = ["derive"] }
 
-leptos = { version = "0.7" }
+leptos = { version = "0.7", features = ["nightly"]}
 leptos-use = "0.15"
 leptos_meta = { version = "0.7" }
 leptos_axum = { version = "0.7" }
@@ -125,7 +126,7 @@ wasm-bindgen = "0.2.100"
 web-sys = "0.3"
 wasm-bindgen-test = "0.3.0"
 console_error_panic_hook = "0.1.0"
-
+chrono = "0.4"
 strum = { version = "0.26", features = ["derive"] }
 strum_macros = "0.26"
 rand_core = "0.9"
@@ -134,6 +135,7 @@ bevy_prng = "0.9"
 rand = "0.8"
 
 [dependencies]
+
 # Local Crates
 leptos-bevy-canvas.workspace = true
 
@@ -147,11 +149,9 @@ mine = { workspace = true, optional = true, features = ["web"] }
 
 # bevy
 bevy = { workspace = true }
-
 # wasm and leptos 
 wasm-bindgen = { workspace = true }
-
-leptos = { workspace = true, features = ["nightly"] }
+leptos = { workspace = true }
 leptos_meta.workspace = true
 leptos_axum = { workspace = true, optional = true }
 leptos_router = { workspace = true, features = ["nightly"] }
@@ -168,30 +168,30 @@ tower-http = { version = "0.5", features = ["fs", "trace"], optional = true }
 tokio = { version = "1", features = ["full"], optional = true }
 http = { version = "1" }
 # TODO: do we need this openssl 
-sqlx = { version = "0.8.0", features = ["runtime-tokio-rustls", "sqlite"], optional = true }
+sqlx = { version = "0.8.0", features = ["runtime-tokio-rustls", "postgres", "chrono", "json", "macros"], optional = true }
 axum_session_auth = { version = "0.14.0", features = [], optional = true }
 axum_session = { version = "0.14.0", features = [], optional = true }
-axum_session_sqlx = { version = "0.3.0", features = [ "sqlite", "tls-rustls"], optional = true }
+axum_session_sqlx = { version = "0.3.0", features = [ "postgres", "tls-rustls"], optional = true }
 bcrypt = { version = "0.15.0", optional = true }
 tracing = "0.1"
 
 # Util
-
-anyhow = "1.0"
+chrono = { version = "0.4", features = ["serde"]}
 futures = "0.3.0"
+gloo-timers = { version = "0.3.0", features = ["futures"] }
 
 console_log = "1.0"
 console_error_panic_hook.workspace = true
 log = "0.4.0"
 simple_logger = "5.0"
 
-dotenvy = { version = "0.15.6", optional = true }
+dotenvy = { version = "0.15", optional = true }
 async-trait = { version = "0.1.0", optional = true }
-
 strum.workspace = true
 cfg-if = "1.0.0"
 thiserror = "1.0"
-gloo-timers = { version = "0.3.0", features = ["futures"] }
+anyhow = "1.0"
+
 serde = { version = "1.0", features = ["derive"] } # TODO" feature gate this for size later
 
 [package.metadata.leptos]

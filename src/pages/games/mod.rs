@@ -1,5 +1,3 @@
-
-
 mod sync_app;
 pub use sync_app::*;
 
@@ -13,6 +11,7 @@ use leptos_bevy_canvas::prelude::*;
 use strum::{EnumIter, EnumProperty, IntoEnumIterator};
 
 use crate::prelude::*;
+use cfg_if::cfg_if;
 use gloo_timers::future::*;
 
 #[derive(Debug, Default, EnumIter, Clone, Copy, PartialEq, Eq, EnumProperty)]
@@ -28,9 +27,8 @@ pub enum Game {
     CastApp,
 }
 
-
 #[derive(Debug, EnumIter, Clone, Copy, PartialEq, Eq, EnumProperty)]
-pub enum UniqueGame { 
+pub enum UniqueGame {
     #[strum(props(img = "/img/unidir_events.png", path = "unidir-events"))]
     UnidirEvents,
     #[strum(props(img = "/img/sync_app.png", path = "sync-app"))]
@@ -39,34 +37,38 @@ pub enum UniqueGame {
 
 impl Game {
     pub fn init(self) -> Option<LeptosEventSender<StopSignal>> {
-
+        #[allow(unused_variables)]
         let (eptos_tx, bevy_rx) = event_l2b::<StopSignal>();
 
-        let app: Option<App> = match self {
-            #[cfg(all(feature = "breakout", feature = "hydrate"))]
-            Game::Breakout => Some(breakout::init_bevy_app()),
-            #[cfg(all(feature = "tic_tac_toe", feature = "hydrate"))]
-            Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
-            #[cfg(all(feature = "cast_app", feature = "hydrate"))]
-            Game::CastApp => Some(cast_app::init_bevy_app()),
-            #[cfg(all(feature = "mine", feature = "hydrate"))]
-            Game::Mine => Some(mine::init_bevy_app()),
-            #[cfg(not(feature = "hydrate"))]
-            game => {
-                log::error!(" feature for game: {:?} not included", game);
-                None
-            }
-        };
-        if let Some(mut app) = app {
-            app.import_event_from_leptos(bevy_rx)
-                .add_systems(Update, stop_bevy.run_if(on_event::<StopSignal>));
+        // only start bevy client side
+        cfg_if! {
+            if #[cfg(feature = "hydrate")] {
+              let app: Option<App> = match self {
+                #[cfg(feature = "breakout")]
+                Game::Breakout => Some(breakout::init_bevy_app()),
+                #[cfg(feature = "tic_tac_toe")]
+                Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
+                #[cfg(feature = "cast_app")]
+                Game::CastApp => Some(cast_app::init_bevy_app()),
+                #[cfg(feature = "mine" )]
+                Game::Mine => Some(mine::init_bevy_app()),
+                #[cfg(not(feature = "all_games"))]
+                game => {
+                    log::error!("game feature '{:?}' wasn't enabled", game);
+                    None
+                }
+              };
 
-                request_animation_frame(move || {
-                    app.run();
-                });                
+              if let Some(mut app) = app {
+                app.import_event_from_leptos(bevy_rx)
+                    .add_systems(Update, stop_bevy.run_if(on_event::<StopSignal>));
+                    request_animation_frame(move || {
+                        app.run();
+                    });
+              }
+            }
         }
         Some(eptos_tx)
-
     }
 }
 
@@ -176,13 +178,13 @@ pub fn GameProfile() -> impl IntoView {
                 if let Some(tx) = exit_tx_signal.get_untracked() {
                     match tx.send(StopSignal) {
                         Err(_) => log::error!("StopSignal failed"),
-                        _ => ()
+                        _ => (),
                     };
-                }                
+                }
                 spawn_local(async move {
                     TimeoutFuture::new(1000).await; // 100ms delay
                     let tx = c.init();
-                    exit_tx_signal.set(tx); 
+                    exit_tx_signal.set(tx);
                 });
             } else {
                 // nothing to stop, just start the new game
@@ -196,9 +198,9 @@ pub fn GameProfile() -> impl IntoView {
     // stop any game on page exit
     Owner::on_cleanup(move || {
         if let Some(tx) = exit_tx_signal.get() {
-            match tx.send(StopSignal) {                
+            match tx.send(StopSignal) {
                 Err(_) => log::info!("cleanup StopSignal failed"),
-                _ => ()
+                _ => (),
             };
         }
         log::info!("TODO: Cleaning up BevyCanvas");
@@ -212,7 +214,6 @@ pub fn GameProfile() -> impl IntoView {
     }
 }
 
-
 #[component]
 pub fn NoGame() -> impl IntoView {
     view! { <p>"Select a game."</p> }
@@ -221,6 +222,7 @@ pub fn NoGame() -> impl IntoView {
 #[derive(bevy::prelude::Event, Debug)]
 pub struct StopSignal;
 
+#[allow(dead_code)]
 fn stop_bevy(mut app_exit: EventWriter<AppExit>) {
     log::info!("STOP BEVY");
     app_exit.send(AppExit::Success);

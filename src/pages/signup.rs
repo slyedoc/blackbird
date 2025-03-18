@@ -22,6 +22,20 @@ pub fn SignupPage(action: ServerAction<Signup>) -> impl IntoView {
               <div>
                 <div>
                   <label for="email" class="block text-sm/6 font-medium text">
+                    "Email"
+                  </label>
+                  <div class="mt-2">
+                    <input
+                      type="text"
+                      maxlength="32"
+                      name="email"
+                      required
+                      class="block w-full input-primary"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label for="email" class="block text-sm/6 font-medium text">
                     "Username"
                   </label>
                   <div class="mt-2">
@@ -34,6 +48,7 @@ pub fn SignupPage(action: ServerAction<Signup>) -> impl IntoView {
                     />
                   </div>
                 </div>
+
                 <div>
                   <label for="password" class="block text-sm/6 font-medium text">
                     "Password"

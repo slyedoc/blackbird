@@ -1,5 +1,5 @@
 use bevy::{prelude::*, utils::HashMap};
-use bevy_hanabi::prelude::*;
+//use bevy_hanabi::prelude::*;
 
 pub struct SpellPlugin;
 
@@ -16,9 +16,10 @@ pub struct SpellEffects {
 
 impl FromWorld for SpellEffects {
     fn from_world(world: &mut World) -> Self {
-        let mut effects = world.resource_mut::<Assets<ColorMaterial>>();
+        let mut _effects = world.resource_mut::<Assets<ColorMaterial>>();
 
-        let mut hashmap = HashMap::default();
+        // mut
+        let hashmap = HashMap::default();
         // hashmap.insert(Spell::FrostBolt, effects.add(Spell::FrostBolt.effect()));
         // hashmap.insert(
         //     Spell::ArcaneExplosion,

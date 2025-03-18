@@ -310,6 +310,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "asset_processor"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+]
+
+[[package]]
 name = "async-broadcast"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1855,6 +1862,7 @@ dependencies = [
  "breakout",
  "cast_app",
  "cfg-if",
+ "chrono",
  "console_error_panic_hook",
  "console_log",
  "dotenvy",
@@ -4826,7 +4834,6 @@ version = "0.30.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2e99fb7a497b1e3339bc746195567ed8d3e24945ecd636e3619d20b9de9e9149"
 dependencies = [
- "cc",
  "pkg-config",
  "vcpkg",
 ]

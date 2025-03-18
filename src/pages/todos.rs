@@ -64,7 +64,7 @@ pub fn Todos() -> impl IntoView {
                                         by {todo.user.unwrap_or_default().username}
                                       </p>
                                       <p class="mt-1 text-xs/5 text-secondary">
-                                        Last seen {todo.created_at}
+                                        Last seen {todo.created_at.and_utc().timestamp()}
                                       </p>
                                     </div>
                                     <div class="flex flex-col justify-end items-end">

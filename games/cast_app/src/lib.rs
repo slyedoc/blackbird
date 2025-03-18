@@ -235,8 +235,8 @@ fn _on_spell_click(
             //material.0 = new_material.clone();
             dbg!(player, spell);
 
-            let player_trans = player_query.get_mut(player).unwrap();
-            let effect = &spell_effects.hashmap[spell];
+            let _player_trans = player_query.get_mut(player).unwrap();
+            let _effect = &spell_effects.hashmap[spell];
             cmd.spawn((
                 Name::new("firework"),
                 // ParticleEffectBundle {

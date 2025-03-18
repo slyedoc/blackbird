@@ -5,19 +5,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Todo {
-    pub id: u32,
+    pub id: i32,
     pub user: Option<User>,
     pub title: String,
-    pub created_at: String,
+    pub created_at: NaiveDateTime,
     pub completed: bool,
 }
 
 cfg_if! {
     if #[cfg(feature = "ssr")] {
-        use sqlx::SqlitePool;
 
-        pub fn pool() -> Result<SqlitePool, ServerFnError> {
-            use_context::<SqlitePool>()
+        pub fn pool() -> Result<DbPool, ServerFnError> {
+            use_context::<DbPool>()
                 .ok_or_else(|| ServerFnError::ServerError("Pool missing.".into()))
         }
 
@@ -28,15 +27,15 @@ cfg_if! {
 
         #[derive(sqlx::FromRow, Clone)]
         pub struct SqlTodo {
-            id: u32,
-            user_id: i64,
+            id: i32,
+            user_id: i32,
             title: String,
-            created_at: String,
+            created_at: NaiveDateTime,
             completed: bool,
         }
 
         impl SqlTodo {
-            pub async fn into_todo(self, pool: &SqlitePool) -> Todo {
+            pub async fn into_todo(self, pool: &DbPool) -> Todo {
                 Todo {
                     id: self.id,
                     user: User::get(self.user_id, pool).await,
@@ -56,7 +55,7 @@ pub async fn get_todos() -> Result<Vec<Todo>, ServerFnError> {
     let pool = pool()?;
 
     Ok(join_all(
-        sqlx::query_as::<_, SqlTodo>("SELECT * FROM todos")
+        sqlx::query_as!( SqlTodo, "SELECT * FROM todos")
             .fetch_all(&pool)
             .await?
             .iter()
@@ -79,9 +78,9 @@ pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
     std::thread::sleep(std::time::Duration::from_millis(1250));
 
     Ok(
-        sqlx::query("INSERT INTO todos (title, user_id, completed) VALUES (?, ?, false)")
-            .bind(title)
-            .bind(id)
+        sqlx::query!("INSERT INTO todos (title, user_id, completed) VALUES ($1, $2, false)",
+            title,
+            id)            
             .execute(&pool)
             .await
             .map(|_| ())?,
@@ -90,11 +89,10 @@ pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
 
 // The struct name and path prefix arguments are optional.
 #[server]
-pub async fn delete_todo(id: u16) -> Result<(), ServerFnError> {
+pub async fn delete_todo(id: i32) -> Result<(), ServerFnError> {
     let pool = pool()?;
 
-    Ok(sqlx::query("DELETE FROM todos WHERE id = $1")
-        .bind(id)
+    Ok(sqlx::query!("DELETE FROM todos WHERE id = $1", id)        
         .execute(&pool)
         .await
         .map(|_| ())?)

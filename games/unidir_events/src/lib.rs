@@ -15,7 +15,7 @@ pub fn init_bevy_app() -> App {
     let mut app = App::new();
     app.add_plugins((
         sly_common::SlyCommonPlugin {
-            title: "Unidirectional Events".into(),            
+            title: "Unidirectional Events".into(),
         },
         MeshPickingPlugin,
         // bevy_inspector_egui::quick::WorldInspectorPlugin::new(),

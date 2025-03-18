@@ -1,4 +1,4 @@
-use bevy::{log::LogPlugin, prelude::*, winit::{UpdateMode, WinitSettings}};
+use bevy::prelude::*;
 
 pub struct SlyCommonPlugin {
     pub title: &'static str,
@@ -7,66 +7,68 @@ pub struct SlyCommonPlugin {
 impl Plugin for SlyCommonPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins((
+            #[cfg(not(target_arch = "wasm32"))]
             DefaultPlugins
-            .set(WindowPlugin {
-                primary_window: Some(Window {
-                    title: self.title.to_string(),
-                    present_mode: bevy::window::PresentMode::AutoVsync,
-
-                    #[cfg(target_arch = "wasm32")]
-                    fit_canvas_to_parent: false,
-                    #[cfg(target_arch = "wasm32")]
-                    focused: false,
-                    #[cfg(target_arch = "wasm32")]
-                    canvas: Some("#bevy_canvas".to_string()),  
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: self.title.to_string(),
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .set(AssetPlugin {
+                    mode: AssetMode::Processed,
                     ..default()
                 }),
-                ..default()
-            })
-            .set(AssetPlugin {
-                mode: AssetMode::Processed,
-                #[cfg(target_arch = "wasm32")]
-                meta_check: bevy::asset::AssetMetaCheck::Never,
-                #[cfg(target_arch = "wasm32")]
-                file_path: "/assets".to_string(),
-                #[cfg(target_arch = "wasm32")]
-                processed_file_path: "/imported_assets/Default".to_string(),                                
-                ..default()
-            })
-            .disable::<LogPlugin>(),
+            #[cfg(target_arch = "wasm32")]
+            DefaultPlugins
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: self.title.to_string(),
+                        fit_canvas_to_parent: false,
+                        focused: false,
+                        canvas: Some("#bevy_canvas".to_string()),
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .set(AssetPlugin {
+                    mode: AssetMode::Processed,
+                    meta_check: bevy::asset::AssetMetaCheck::Never,
+                    file_path: "/assets".to_string(),
+                    processed_file_path: "/imported_assets/Default".to_string(),
+                    ..default()
+                })
+                .disable::<bevy::log::LogPlugin>(),
             #[cfg(feature = "editor")]
             sly_editor::SlyEditorPlugin,
         ));
-        
         // https://github.com/bevyengine/bevy/issues/12126
-        #[cfg(target_arch = "wasm32")]
-        app.insert_resource(WinitSettings {
-            focused_mode: UpdateMode::Continuous,
-            unfocused_mode: UpdateMode::Continuous,
-        });
+        // #[cfg(target_arch = "wasm32")]
+        // app.insert_resource(WinitSettings {
+        //     focused_mode: UpdateMode::Continuous,
+        //     unfocused_mode: UpdateMode::Continuous,
+        // });
     }
 }
 
-
-    // DefaultPlugins
-    //     .set(WindowPlugin {
-    //         primary_window: Some(Window {
-    //             title: title.into(),
-    //             #[cfg(target_arch = "wasm32")]
-    //             canvas: Some("#bevy_canvas".to_string()),
-    //             ..default()
-    //         }),
-    //         ..default()
-    //     })
-    //     .set(AssetPlugin {
-    //         mode: AssetMode::Processed,
-    //         #[cfg(target_arch = "wasm32")]
-    //         meta_check: bevy::asset::AssetMetaCheck::Never,
-    //         ..default()
-    //     })
-    //     .disable::<LogPlugin>()
- 
-
+// DefaultPlugins
+//     .set(WindowPlugin {
+//         primary_window: Some(Window {
+//             title: title.into(),
+//             #[cfg(target_arch = "wasm32")]
+//             canvas: Some("#bevy_canvas".to_string()),
+//             ..default()
+//         }),
+//         ..default()
+//     })
+//     .set(AssetPlugin {
+//         mode: AssetMode::Processed,
+//         #[cfg(target_arch = "wasm32")]
+//         meta_check: bevy::asset::AssetMetaCheck::Never,
+//         ..default()
+//     })
+//     .disable::<LogPlugin>()
 
 // #[cfg(not(target_arch = "wasm32"))]
 // mod window_state;

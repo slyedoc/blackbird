@@ -22,7 +22,7 @@ pub fn LoginPage(action: ServerAction<Login>) -> impl IntoView {
             <div class="space-y-6">
               <div>
                 <label for="email" class="block text-sm/6 font-medium text">
-                  Email address
+                  Username
                 </label>
                 <div class="mt-2">
                   <input type="text" name="username" required class="block w-full input-primary" />

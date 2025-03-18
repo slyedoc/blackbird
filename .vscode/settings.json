@@ -17,14 +17,14 @@
   },
   "css.validate": false,
   "editor.inlayHints.enabled": "offUnlessPressed",
-  "rust-analyzer.rustfmt.overrideCommand": [
-    "leptosfmt",
-    "--stdin",
-    "--rustfmt",
-    "--tab-spaces",
-    "2",
-    "--experimental-tailwind"
-  ],
+  // "rust-analyzer.rustfmt.overrideCommand": [
+  //   "leptosfmt",
+  //   "--stdin",
+  //   "--rustfmt",
+  //   "--tab-spaces",
+  //   "2",
+  //   "--experimental-tailwind"
+  // ],
 
-  "rust-analyzer.cargo.features": ["ssr", "all_games"],
+  //"rust-analyzer.cargo.features": ["ssr", "all_games"],
 }

@@ -16,11 +16,22 @@ pub mod prelude {
         hooks::{use_navigate, use_params, use_query},
         params::Params,
         path,
-    }; 
+    };
+    pub use chrono::NaiveDateTime;
 
     pub use leptos_bevy_canvas::prelude::*;
 
     pub use crate::{app::*, auth::*, components::*, error_template::*, pages::*, todos::*};
+
+    cfg_if::cfg_if! {
+        if #[cfg(feature = "ssr")] {
+            
+            pub type DbPool = sqlx::PgPool;
+            pub type DbPoolOptions = sqlx::postgres::PgPoolOptions;
+            pub type SessionDbPool = axum_session_sqlx::SessionPgPool;
+            
+        }
+    }
 }
 
 #[cfg(feature = "hydrate")]
