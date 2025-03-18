@@ -125,7 +125,7 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                             >
                               <div class="py-1" role="none">
                                 // Active: "bg-gray-100 text-gray-900 outline-hidden", Not Active: "text-gray-700"
-                                <a href="/settings" class="block px-4 py-2 text-sm text-gray-700">
+                                <a href="/settings" class="block px-4 py-2 text-sm text-gray-700" on:click=move |_| set_settings.set(false)>
                                   "Settings"
                                 </a>
 
@@ -163,12 +163,14 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                 .iter()
                 .map(|(name, href)| {
                   view! {
-                    <a
-                      href=*href
+                    <A
+                      href={*href}
+                      on:click=move |_| set_menu.set(false)
+                      {..}
                       class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
                     >
                       {*name}
-                    </a>
+                    </A>
                   }
                 })
                 .collect_view()}
@@ -179,10 +181,10 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                   None => {
                     view! {
                       <div class="border-t border-gray-700 pt-4 pb-3 flex flex-row justify-evenly">
-                        <A href="/signup" {..} class="flex w-25 btn-primary mr-2">
+                        <A href="/signup" on:click=move |_| set_menu.set(false) {..} class="flex w-25 btn-primary mr-2">
                           "Signup"
                         </A>
-                        <A href="/login" {..} class="flex w-25 btn-primary">
+                        <A href="/login" on:click=move |_| set_menu.set(false) {..} class="flex w-25 btn-primary">
                           "Login"
                         </A>
                       </div>
@@ -218,20 +220,23 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                         </div>
                         <div class="mt-3 space-y-1 px-2 sm:px-3">
                           // Active: "bg-gray-100 outline-hidden", Not Active: ""
-                          <a
+                          <A
                             href="/settings"
+                            on:click=move |_| set_menu.set(false)
+                            {..}
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                           >
                             "Settings"
-                          </a>
+                          </A>
 
-                          <ActionForm action=logout>
+                          <ActionForm action=logout >
                             <button
                               type="submit"
                               class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                               // class="block w-full px-4 py-2 text-left text-sm text-gray-700"
                               role="menuitem"
                               tabindex="-1"
+                              on:click=move |_| set_menu.set(false)
                             >
                               "Log Out"
                             </button>
