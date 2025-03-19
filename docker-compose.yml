@@ -14,8 +14,3 @@ services:
       - '5432:5432'
     volumes:
       - postgres_volume:/var/lib/postgresql/data
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080

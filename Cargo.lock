@@ -1881,6 +1881,7 @@ dependencies = [
  "mine",
  "serde",
  "simple_logger",
+ "sly_common",
  "sqlx",
  "strum",
  "sync_app",

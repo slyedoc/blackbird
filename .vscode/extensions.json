@@ -2,5 +2,6 @@
     "recommendations": [
         "masterustacean.leptos-fmt", // Leptos formatter
         "github.vscode-github-actions", // Github actions
+        "antfu.file-nesting", // File nesting
     ]
 }

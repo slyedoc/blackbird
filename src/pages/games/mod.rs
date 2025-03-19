@@ -92,6 +92,13 @@ pub fn Games() -> impl IntoView {
                   <span class="block text-sm font-medium text-gray-900">
                     {format!("{:?}", game)}
                   </span>
+
+                  //<Show when={game == } fallback=move || view! { <p>"Loading..."</p> }>
+                  <span class="relative flex size-3">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                    <span class="relative inline-flex size-3 rounded-full bg-sky-500"></span>
+                  </span>
+                  //</Show>
                   <div class="w-full h-full aspect-w-16 aspect-h-9">
                     <img src=game.get_str("img").unwrap() class="w-full h-full object-cover" />
                   </div>

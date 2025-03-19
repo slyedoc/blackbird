@@ -1,0 +1,506 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "Name": {
+      "NoEcho": false,
+      "Description": "Name, is used in auth url and dns name",
+      "Type": "String",
+      "MinLength": "1",
+      "AllowedPattern": "[a-z0-9]*",
+      "Default": "demo"
+    },
+    "DBPassword": {
+      "NoEcho": false,
+      "Description": "The database admin account password",
+      "Type": "String",
+      "MinLength": "8",
+      "MaxLength": "41",
+      "AllowedPattern": "[a-zA-Z0-9]*",
+      "ConstraintDescription": "must contain only alphanumeric characters."
+    },
+    "CertificateArn": {
+      "NoEcho": false,
+      "Description": "",
+      "Type": "String",
+      "Default": "arn:aws:acm:us-east-1:440026511511:certificate/e5c358b9-73b3-4512-9565-0bfa83300f27"
+    },
+    "ImageArn": {
+      "NoEcho": false,
+      "Description": "",
+      "Type": "String",
+      "Default": "530438198337.dkr.ecr.us-east-1.amazonaws.com/sly/blackbird:latest"
+    },
+    "ExecutionRoleArn": {
+      "NoEcho": false,
+      "Description": "",
+      "Type": "String",
+      "Default": "arn:aws:iam::440026511511:role/ecsTaskExecutionRole"
+    },
+
+    "AdminPassword": {
+      "NoEcho": false,
+      "Description": "Default Admin password to site",
+      "Type": "String",
+      "Default": "5yxaLd5JYfwXRf"
+    },
+    "VPC": {
+      "NoEcho": false,
+      "Description": "",
+      "Type": "AWS::EC2::VPC::Id",
+      "Default": "vpc-0981a10c702e54d43"
+    },
+    "PublicSubnets": {
+      "Description": "",
+      "Type": "List<AWS::EC2::Subnet::Id>",
+      "Default": "subnet-05c14d58a7047e7e8,subnet-068a172df71d80549"
+    },
+    "DBSubnetGroup": {
+      "Description": "DB security group",
+      "Type": "String",
+      "Default": "blackbird-db-subnet-group"
+    },
+    "SecurityGroupSuffix": {
+      "Description": "SecurityGroup Suffix to allow update-stack",
+      "Type": "String",
+      "Default": ""
+    }
+  },
+  "Resources": {
+    "CloudwatchLogsGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "-",
+            [
+              "Blackbird-LogGroup",
+              {
+                "Ref": "Name"
+              }
+            ]
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "FargateCluster": {
+      "Type": "AWS::ECS::Cluster",
+      "Properties": {
+        "ClusterName": {
+          "Fn::Sub": "blackbird-${Name}-cluster"
+        }
+      }
+    },
+    "TaskDefinition": {
+      "Type": "AWS::ECS::TaskDefinition",
+      "Properties": {
+        "Family": {
+          "Fn::Sub": "blackbird-${Name}-task"
+        },
+        "Cpu": "512",
+        "Memory": "1.0GB",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": ["FARGATE"],
+        "ExecutionRoleArn": {
+          "Ref": "ExecutionRoleArn"
+        },
+        "ContainerDefinitions": [
+          {
+            "Name": "Blackbird",
+            "Image": {
+              "Ref": "ImageArn"
+            },
+            "PortMappings": [
+              {
+                "ContainerPort": 80,
+                "HostPort": 80,
+                "Protocol": "tcp",
+                "AppProtocol": "http"
+              }
+            ],
+            "HealthCheck": {
+              "Command": ["CMD-SHELL", "curl -f http://localhost/health || exit 1"],
+              "Interval": 30,
+              "Retries": 3,
+              "StartPeriod": 30,
+              "Timeout": 5
+            },
+            "Environment": [
+              {
+                "Name": "DATABASE_URL",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "postgresql://postgres:",
+                      {
+                        "Ref": "DBPassword"
+                      },
+                      "@",
+                      {
+                        "Fn::GetAtt": ["DB", "Endpoint.Address"]
+                      },
+                      ":5432/blackbird"
+                    ]
+                  ]
+                }
+              }
+            ],
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "CloudwatchLogsGroup"
+                },
+                "awslogs-region": {
+                  "Ref": "AWS::Region"
+                },
+                "awslogs-stream-prefix": {
+                  "Fn::Sub": "blackbird-${Name}-ecs"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "FargateService": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "ServiceName": {
+          "Fn::Sub": [
+            "blackbird-${Name}-service-${version}",
+            {
+              "version": {
+                "Fn::Join": [
+                  "_",
+                  {
+                    "Fn::Split": [
+                      ".",
+                      {
+                        "Fn::Select": [
+                          1,
+                          {
+                            "Fn::Split": [
+                              ":",
+                              {
+                                "Ref": "ImageArn"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "Cluster": {
+          "Ref": "FargateCluster"
+        },
+        "TaskDefinition": {
+          "Ref": "TaskDefinition"
+        },
+        "DesiredCount": 1,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroup"
+            },
+            "ContainerName": "Blackbird",
+            "ContainerPort": 80
+          }
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "Subnets": {
+              "Ref": "PublicSubnets"
+            },
+            "SecurityGroups": [
+              {
+                "Ref": "ServiceSecurityGroup"
+              }
+            ],
+            "AssignPublicIp": "ENABLED"
+          }
+        },
+        "DeploymentController": {
+          "Type": "ECS"
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true
+          }
+        }
+      }
+    },
+    "DB": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "AllocatedStorage": "20",
+        "DBInstanceClass": "db.t3.micro",
+        "DBInstanceIdentifier": {
+          "Fn::Sub": "blackbird-${Name}-db"
+        },
+        "DBName": "backbird",
+        "Engine": "postgres",
+        "EngineVersion": "17.4",
+        "MasterUsername": "postgres",
+        "MasterUserPassword": {
+          "Ref": "DBPassword"
+        },
+        "VPCSecurityGroups": [
+          {
+            "Ref": "DBSecurityGroup"
+          }
+        ],
+        "DBSubnetGroupName": {
+          "Ref": "DBSubnetGroup"
+        },
+        "BackupRetentionPeriod": 30,
+        "AvailabilityZone": "us-east-1a",
+        "MultiAZ": false,
+        "PubliclyAccessible": true
+      }
+    },
+    "ServiceSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": {
+          "Fn::Sub": "blackbird-${Name}-web-sg${SecurityGroupSuffix}"
+        },
+        "GroupDescription": "Allow inbound traffic on port 80",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "SourceSecurityGroupId": {
+              "Fn::GetAtt": ["ALBSecurityGroup", "GroupId"]
+            }
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Sub": "blackbird-${Name}-web-sg"
+            }
+          }
+        ]
+      }
+    },
+    "DBSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": {
+          "Fn::Sub": "blackbird-${Name}-db-sg${SecurityGroupSuffix}"
+        },
+        "GroupDescription": "Security group for RDS DB Instance",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 5432,
+            "ToPort": 5432,
+            "SourceSecurityGroupId": {
+              "Fn::GetAtt": ["ServiceSecurityGroup", "GroupId"]
+            }
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Sub": "blackbird-${Name}-db-sg"
+            }
+          }
+        ]
+      }
+    },
+    "ALBSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": {
+          "Fn::Sub": "blackbird-${Name}-alb-sg${SecurityGroupSuffix}"
+        },
+        "GroupDescription": {
+          "Fn::Sub": "Security Group for Blackbird ${Name} ALB"
+        },
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 443,
+            "ToPort": 443,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Sub": "blackbird-${Name}-alb-sg"
+            }
+          }
+        ]
+      }
+    },
+    "TargetGroup": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "blackbird-${Name}-tg${SecurityGroupSuffix}"
+        },
+        "TargetType": "ip",
+        "Port": 80,
+        "Protocol": "HTTP",
+        "ProtocolVersion": "HTTP1",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "HealthCheckPath": "/api/health",
+        "HealthCheckIntervalSeconds": 30,
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "UnhealthyThresholdCount": 3,
+        "Matcher": {
+          "HttpCode": "200"
+        }
+      }
+    },
+    "LoadBalancer": {
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "blackbird-${Name}-alb"
+        },
+        "Subnets": {
+          "Ref": "PublicSubnets"
+        },
+        "SecurityGroups": [
+          {
+            "Ref": "ALBSecurityGroup"
+          }
+        ],
+        "Scheme": "internet-facing"
+      }
+    },
+    "HttpListener": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "DefaultActions": [
+          {
+            "Type": "redirect",
+            "RedirectConfig": {
+              "Protocol": "HTTPS",
+              "Port": "443",
+              "Host": "#{host}",
+              "Path": "/#{path}",
+              "Query": "#{query}",
+              "StatusCode": "HTTP_301"
+            }
+          }
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancer"
+        },
+        "Port": 80,
+        "Protocol": "HTTP"
+      }
+    },
+    "HttpsListener": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateArn"
+            }
+          }
+        ],
+        "DefaultActions": [
+          {
+            "Type": "forward",
+            "TargetGroupArn": {
+              "Ref": "TargetGroup"
+            }
+          }
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancer"
+        },
+        "Port": 443,
+        "Protocol": "HTTPS"
+      }
+    }
+  },
+  "Outputs": {
+    "Url": {
+      "Description": "URL of the service",
+      "Value": {
+        "Fn::Sub": "https://${Name}.slygames.com"
+      }
+    },
+    "Database": {
+      "Description": "Database connection string",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "postgresql://postgres:",
+            {
+              "Ref": "DBPassword"
+            },
+            "@",
+            {
+              "Fn::GetAtt": ["DB", "Endpoint.Address"]
+            },
+            ":5432/blackbird"
+          ]
+        ]
+      }
+    },
+    "Version": {
+      "Description": "Deployment version",
+      "Value": {
+        "Fn::Select": [
+          1,
+          {
+            "Fn::Split": [
+              ":",
+              {
+                "Ref": "ImageArn"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

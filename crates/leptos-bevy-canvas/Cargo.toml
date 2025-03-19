@@ -8,7 +8,7 @@ default = []
 
 [dependencies]
 
-bevy = { workspace = true }
+bevy = { workspace = true, features = ["webgpu"] }
 crossbeam-channel = "0.5"
 leptos.workspace = true
 leptos-use = { version = "0.15.1", default-features = false, features = ["use_raf_fn"] }

@@ -50,6 +50,8 @@ default = [] #"breakout" "bevy/dynamic_linking"
 
 # making games optional features for faster hot reload, 
 all_games = ["breakout", "tic_tac_toe", "unidir_events", "sync_app", "cast_app", "mine"]
+
+editor = ["sly_common/editor"]
 tic_tac_toe = ["dep:tic_tac_toe"] 
 breakout = ["dep:breakout"]
 unidir_events = ["dep:unidir_events"]
@@ -57,7 +59,9 @@ sync_app = ["dep:sync_app"]
 cast_app = ["dep:cast_app"]
 mine = ["dep:mine"]
 
-hydrate = ["leptos/hydrate"]
+hydrate = [
+  "leptos/hydrate"
+]
 ssr = [
   "dep:axum",
   "dep:tower",
@@ -135,6 +139,7 @@ bevy_prng = "0.9"
 rand = "0.8"
 
 [dependencies]
+sly_common = { workspace = true, features = ["editor"] }
 
 # Local Crates
 leptos-bevy-canvas.workspace = true

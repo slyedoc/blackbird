@@ -8,9 +8,12 @@
     - [Bevy](https://bevyengine.org)
     - [Leptos](https://github.com/leptos-rs/leptos) web framework
     - [TailwindCSS](https://tailwindcss.com/)   
-- Tools
-    
-    - [trunk](https://github.com/thedodd/trunk) tool.
+ - Backend
+   - Axum
+   - Leptos SSR
+   - Postgres
+   
+
 
 ## Getting Started
 
@@ -56,7 +59,7 @@ cargo install --git https://github.com/leptos-rs/cargo-leptos --locked cargo-lep
 > ```
 > -->
 
-Docker
+## Docker Install (Linux)
 
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -68,7 +71,12 @@ newgrp docker
 
 ## Deployment
 
-using fly.io with setup from [leptos book](https://book.leptos.dev/deployment/ssr.html#deploy-to-flyio)
+Site is deployed to AWS
+
+Install [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+
+- Leptos SSR
 
 # Commands
 

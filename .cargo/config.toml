@@ -20,18 +20,18 @@ breakout = ["run", "-p", "breakout", "--features", "editor"]
 # build-std = ["std", "panic_abort", "core", "alloc"]
 # build-std-features = ["panic_immediate_abort"]
 
-[target.wasm32-unknown-unknown]
-rustflags = ['--cfg', 'getrandom_backend="wasm_js"']
+#[target.wasm32-unknown-unknown]
+#rustflags = ['--cfg', 'getrandom_backend="wasm_js"']
 
 #https://bevyengine.org/learn/quick-start/getting-started/setup/#cranelift
 [target.x86_64-unknown-linux-gnu]
-#linker = "clang"
+linker = "clang"
 rustflags = [
-    "-C",
+    #"-C",
     #"link-arg=-fuse-ld=lld",    
     # (Nightly) Make the current crate share its generic instantiations
-    #"-Zshare-generics=y", # breaks wasm release build
-    "link-args=-fuse-ld=mold",
+    "-Zshare-generics=y", # breaks wasm release build
+    #"link-args=-fuse-ld=mold",
 ]
 
 # for Windows
