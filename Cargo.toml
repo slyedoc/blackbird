@@ -46,12 +46,10 @@ strip = "debuginfo"
 #panic = "abort"
 
 [features]
-default = [] #"breakout" "bevy/dynamic_linking"
+default = ["all_games", "sly_common/editor"] #"breakout" "bevy/dynamic_linking"
 
 # making games optional features for faster hot reload, 
-all_games = ["breakout", "tic_tac_toe", "unidir_events", "sync_app", "cast_app", "mine"]
-
-editor = ["sly_common/editor"]
+all_games = ["breakout", "tic_tac_toe", "cast_app", "mine"] #  "sync_app", "unidir_events",
 tic_tac_toe = ["dep:tic_tac_toe"] 
 breakout = ["dep:breakout"]
 unidir_events = ["dep:unidir_events"]

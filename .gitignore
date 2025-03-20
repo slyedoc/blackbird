@@ -3,6 +3,7 @@
 /node_modules
 /imported_assets
 /dist
+/art/output
 *.meta
 .env
 command_times.log

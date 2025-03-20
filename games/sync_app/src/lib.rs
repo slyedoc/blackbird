@@ -17,8 +17,7 @@ pub fn init_bevy_app() -> App {
             title: "Sync App".into(),
         },
         MeshPickingPlugin,
-        EntropyPlugin::<WyRand>::default(),
-        bevy_inspector_egui::quick::WorldInspectorPlugin::new(),
+        EntropyPlugin::<WyRand>::default(),        
     ))
     .add_systems(Startup, (setup_scene,))
     .add_systems(Update, (change_name.run_if(input_pressed(KeyCode::Enter)),));

@@ -12,7 +12,6 @@ cfg_if! {
 
   pub fn SyncApp() -> impl IntoView {
       let (selected, selected_query_duplex) = single_query_signal::<(Name,), With<Transform>>();
-
       let (exit_leptos_tx, exit_bevy_rx) = event_l2b::<StopSignal>();
 
       Effect::new(move |_| {
@@ -20,7 +19,7 @@ cfg_if! {
           let bevy_rx = exit_bevy_rx.clone();
           request_animation_frame(move || {
               sync_app::init_bevy_app()
-                  .sync_leptos_signal_with_query(selected)
+
                   .import_event_from_leptos(bevy_rx)
                   .add_systems(Update, handle_stop_signal.run_if(on_event::<StopSignal>))
                   .run();

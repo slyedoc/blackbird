@@ -30,7 +30,7 @@ rustflags = [
     #"-C",
     #"link-arg=-fuse-ld=lld",    
     # (Nightly) Make the current crate share its generic instantiations
-    "-Zshare-generics=y", # breaks wasm release build
+    "-Zshare-generics=y",
     #"link-args=-fuse-ld=mold",
 ]
 

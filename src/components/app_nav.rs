@@ -90,10 +90,10 @@ pub fn AppNav(logout: ServerAction<Logout>) -> impl IntoView {
                   match user.get() {
                     None => {
                       view! {
-                        <A href="/signup" {..} class="flex w-25 btn-primary mr-2">
+                        <A href="/signup" {..} class="hidden md:inline-block w-25 mr-2 btn-primary text-center">
                           "Signup"
                         </A>
-                        <A href="/login" {..} class="flex w-25 btn-primary">
+                        <A href="/login" {..} class="hidden md:inline-block w-25 btn-primary text-center">
                           "Login"
                         </A>
                       }
