@@ -1,0 +1,1057 @@
+## ComfyUI-Manager: installing dependencies done.
+[2025-03-22 15:52:48.121] ** ComfyUI startup time: 2025-03-22 15:52:48.121
+[2025-03-22 15:52:48.121] ** Platform: Linux
+[2025-03-22 15:52:48.121] ** Python version: 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]
+[2025-03-22 15:52:48.121] ** Python executable: /home/slyedoc/code/p/ComfyUI/.venv/bin/python
+[2025-03-22 15:52:48.121] ** ComfyUI Path: /home/slyedoc/code/p/ComfyUI
+[2025-03-22 15:52:48.121] ** ComfyUI Base Folder Path: /home/slyedoc/code/p/ComfyUI
+[2025-03-22 15:52:48.121] ** User directory: /home/slyedoc/code/p/blackbird/art/user
+[2025-03-22 15:52:48.121] ** ComfyUI-Manager config path: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/config.ini
+[2025-03-22 15:52:48.121] ** Log path: /home/slyedoc/code/p/blackbird/art/user/comfyui.log
+
+Prestartup times for custom nodes:
+[2025-03-22 15:52:48.740]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
+[2025-03-22 15:52:48.740]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
+[2025-03-22 15:52:48.740]    1.3 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
+[2025-03-22 15:52:48.740] 
+[2025-03-22 15:52:49.803] Checkpoint files will always be loaded safely.
+[2025-03-22 15:52:49.978] Total VRAM 10821 MB, total RAM 64080 MB
+[2025-03-22 15:52:49.978] pytorch version: 2.6.0+cu126
+[2025-03-22 15:52:49.978] Set vram state to: LOW_VRAM
+[2025-03-22 15:52:49.979] Device: cuda:0 NVIDIA GeForce RTX 2080 Ti : cudaMallocAsync
+[2025-03-22 15:52:50.786] Using pytorch attention
+[2025-03-22 15:52:51.252] ComfyUI version: 0.3.26
+[2025-03-22 15:52:51.253] ComfyUI frontend version: 1.12.14
+[2025-03-22 15:52:51.254] [Prompt Server] web root: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package/static
+[2025-03-22 15:52:52.023] 
+[2025-03-22 15:52:52.023] [92m[rgthree-comfy] Loaded 42 fantastic nodes. 🎉[00m
+[2025-03-22 15:52:52.023] 
+[2025-03-22 15:52:52.070] [34m[ComfyUI-Easy-Use] server: [0mv1.2.8 [92mLoaded[0m
+[2025-03-22 15:52:52.070] [34m[ComfyUI-Easy-Use] web root: [0m/home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use/web_version/v2 [92mLoaded[0m
+[2025-03-22 15:52:52.071] ### Loading: ComfyUI-Impact-Pack (V8.8.1)
+[2025-03-22 15:52:52.093] [Impact Pack] Wildcards loading done.
+[2025-03-22 15:52:52.094] ### Loading: ComfyUI-Manager (V3.31.7)
+[2025-03-22 15:52:52.095] [ComfyUI-Manager] network_mode: public
+[2025-03-22 15:52:52.118] ### ComfyUI Version: v0.2.2-624-g3b19fc76 | Released on '2025-03-18'
+[2025-03-22 15:52:52.174] ### Loading: ComfyUI-Impact-Subpack (V1.2.9)
+[2025-03-22 15:52:52.290] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
+[2025-03-22 15:52:52.300] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
+[2025-03-22 15:52:52.328] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
+[2025-03-22 15:52:52.369] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+[2025-03-22 15:52:52.384] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+[2025-03-22 15:52:52.511] [Impact Subpack] ultralytics_bbox: /home/slyedoc/code/p/ComfyUI/models/ultralytics/bbox
+[2025-03-22 15:52:52.511] [Impact Subpack] ultralytics_segm: /home/slyedoc/code/p/ComfyUI/models/ultralytics/segm
+[2025-03-22 15:52:52.514] Total VRAM 10821 MB, total RAM 64080 MB
+[2025-03-22 15:52:52.514] pytorch version: 2.6.0+cu126
+[2025-03-22 15:52:52.514] Set vram state to: LOW_VRAM
+[2025-03-22 15:52:52.514] Device: cuda:0 NVIDIA GeForce RTX 2080 Ti : cudaMallocAsync
+[2025-03-22 15:52:52.924] [34mWAS Node Suite: [0mOpenCV Python FFMPEG support is enabled[0m
+[2025-03-22 15:52:52.924] [34mWAS Node Suite [93mWarning: [0m`ffmpeg_bin_path` is not set in `/home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui/was_suite_config.json` config file. Will attempt to use system ffmpeg binaries if available.[0m
+[2025-03-22 15:52:53.178] [34mWAS Node Suite: [0mFinished.[0m [32mLoaded[0m [0m220[0m [32mnodes successfully.[0m
+[2025-03-22 15:52:53.178] 
+	[3m[93m"Believe you deserve it and the universe will serve it."[0m[3m - Unknown[0m
+[2025-03-22 15:52:53.178] 
+[2025-03-22 15:52:53.192] ------------------------------------------
+[2025-03-22 15:52:53.192] [34mComfyroll Studio v1.76 : [92m 175 Nodes Loaded[0m
+[2025-03-22 15:52:53.192] ------------------------------------------
+[2025-03-22 15:52:53.192] ** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
+[2025-03-22 15:52:53.192] ** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
+[2025-03-22 15:52:53.192] ------------------------------------------
+[2025-03-22 15:52:53.195] 
+Import times for custom nodes:
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
+[2025-03-22 15:52:53.195]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-MVAdapter
+[2025-03-22 15:52:53.195]    0.3 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
+[2025-03-22 15:52:53.195]    0.4 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
+[2025-03-22 15:52:53.195]    0.7 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
+[2025-03-22 15:52:53.195] 
+[2025-03-22 15:52:53.201] Starting server
+
+[2025-03-22 15:52:53.201] To see the GUI go to: http://127.0.0.1:8188
+[2025-03-22 15:52:54.077] got prompt
+[2025-03-22 15:52:55.289] FETCH ComfyRegistry Data: 5/79
+[2025-03-22 15:52:58.561] FETCH ComfyRegistry Data: 10/79
+[2025-03-22 15:53:01.873] FETCH ComfyRegistry Data: 15/79
+[2025-03-22 15:53:01.976] Loading pipeline components...: 100%|█████████████| 6/6 [00:07<00:00,  1.09s/it]Loading pipeline components...: 100%|█████████████| 6/6 [00:07<00:00,  1.31s/it]
+[2025-03-22 15:53:03.351] model weight dtype torch.float16, manual cast: None
+[2025-03-22 15:53:03.353] model_type EPS
+[2025-03-22 15:53:05.186] FETCH ComfyRegistry Data: 20/79
+[2025-03-22 15:53:06.007] Using pytorch attention in VAE
+[2025-03-22 15:53:06.008] Using pytorch attention in VAE
+[2025-03-22 15:53:06.289] VAE load device: cuda:0, offload device: cpu, dtype: torch.float32
+[2025-03-22 15:53:06.331] Requested to load SD1ClipModel
+[2025-03-22 15:53:06.333] loaded completely 9.5367431640625e+25 235.84423828125 True
+[2025-03-22 15:53:06.333] CLIP/text encoder model load device: cpu, offload device: cpu, current: cpu, dtype: torch.float16
+[2025-03-22 15:53:07.045] /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/albumentations/__init__.py:13: UserWarning: A new version of Albumentations is available: 2.0.5 (you have 1.4.15). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+[2025-03-22 15:53:07.409] /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+[2025-03-22 15:53:08.500] FETCH ComfyRegistry Data: 25/79
+[2025-03-22 15:53:09.259] Settings -> Mode=base, Device=cuda:0, Torchscript=enabled
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_attn_proj.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_attn_qkv.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mlp_0.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mlp_2.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mod_lin.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_txt_attn_proj.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.910] lora key not loaded: lora_unet_double_blocks_0_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mlp_0.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mlp_2.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mod_lin.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_0_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_attn_proj.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_attn_qkv.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mlp_0.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mlp_2.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mod_lin.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_attn_proj.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mlp_0.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mlp_2.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mod_lin.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_10_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_attn_proj.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_attn_qkv.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mlp_0.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mlp_2.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mod_lin.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_attn_proj.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mlp_0.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mlp_2.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mod_lin.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_11_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_12_img_attn_proj.alpha
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_12_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_12_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.911] lora key not loaded: lora_unet_double_blocks_12_img_attn_qkv.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mlp_0.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mlp_2.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mod_lin.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_attn_proj.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mlp_0.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mlp_2.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mod_lin.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_12_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_attn_proj.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_attn_qkv.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mlp_0.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mlp_2.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mod_lin.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_attn_proj.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mlp_0.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mlp_2.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mod_lin.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_13_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_attn_proj.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_attn_qkv.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mlp_0.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mlp_2.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mod_lin.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_attn_proj.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mlp_0.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mlp_2.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mod_lin.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_14_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_15_img_attn_proj.alpha
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_15_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.912] lora key not loaded: lora_unet_double_blocks_15_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_attn_qkv.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mlp_0.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mlp_2.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mod_lin.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_attn_proj.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mlp_0.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mlp_2.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mod_lin.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_15_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_attn_proj.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_attn_qkv.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mlp_0.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mlp_2.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mod_lin.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_attn_proj.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mlp_0.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mlp_2.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mod_lin.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_16_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_attn_proj.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_attn_qkv.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mlp_0.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mlp_2.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mod_lin.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_attn_proj.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mlp_0.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mlp_2.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mod_lin.alpha
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_17_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.913] lora key not loaded: lora_unet_double_blocks_18_img_attn_proj.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_attn_qkv.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mlp_0.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mlp_2.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mod_lin.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_attn_proj.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mlp_0.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mlp_2.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mod_lin.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_18_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_attn_proj.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_attn_qkv.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mlp_0.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mlp_2.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mod_lin.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_attn_proj.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mlp_0.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mlp_2.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mod_lin.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_1_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_attn_proj.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_attn_qkv.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mlp_0.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mlp_2.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mod_lin.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_attn_proj.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mlp_0.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mlp_2.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mod_lin.alpha
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.914] lora key not loaded: lora_unet_double_blocks_2_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_attn_proj.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_attn_qkv.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mlp_0.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mlp_2.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mod_lin.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_attn_proj.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mlp_0.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mlp_2.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mod_lin.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_3_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_attn_proj.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_attn_qkv.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mlp_0.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mlp_2.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mod_lin.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_attn_proj.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mlp_0.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mlp_2.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mod_lin.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_4_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_attn_proj.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_attn_qkv.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mlp_0.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mlp_2.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mod_lin.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_attn_proj.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_mlp_0.alpha
+[2025-03-22 15:53:09.915] lora key not loaded: lora_unet_double_blocks_5_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mlp_2.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mod_lin.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_5_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_attn_proj.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_attn_qkv.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mlp_0.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mlp_2.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mod_lin.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_attn_proj.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mlp_0.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mlp_2.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mod_lin.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_6_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_attn_proj.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_attn_qkv.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mlp_0.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mlp_2.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mod_lin.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_attn_proj.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mlp_0.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mlp_2.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mod_lin.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_7_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_attn_proj.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_attn_qkv.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mlp_0.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mlp_2.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mod_lin.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_attn_proj.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_mlp_0.alpha
+[2025-03-22 15:53:09.916] lora key not loaded: lora_unet_double_blocks_8_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mlp_2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mod_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_8_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_attn_proj.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_attn_qkv.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mlp_0.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mlp_2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mod_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_img_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_attn_proj.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_attn_proj.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_attn_proj.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_attn_qkv.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_attn_qkv.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_attn_qkv.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mlp_0.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mlp_0.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mlp_0.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mlp_2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mlp_2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mlp_2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mod_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mod_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_double_blocks_9_txt_mod_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_linear1.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_linear1.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_linear1.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_linear2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_linear2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_linear2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_modulation_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_0_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_linear1.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_linear1.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_linear1.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_linear2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_linear2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_linear2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_modulation_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_10_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_linear1.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_linear1.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_linear1.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_linear2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_linear2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_linear2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_modulation_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_11_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_linear1.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_linear1.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_linear1.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_linear2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_linear2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_linear2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_modulation_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_12_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_linear1.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_linear1.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_linear1.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_linear2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_linear2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_linear2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_modulation_lin.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_13_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_linear1.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_linear1.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_linear1.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_linear2.alpha
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_linear2.lora_down.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_linear2.lora_up.weight
+[2025-03-22 15:53:09.917] lora key not loaded: lora_unet_single_blocks_14_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_14_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_14_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_15_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_16_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_17_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_18_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_19_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_1_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_20_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_21_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_22_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_linear1.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_linear1.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_linear1.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_linear2.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_linear2.lora_down.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_linear2.lora_up.weight
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_modulation_lin.alpha
+[2025-03-22 15:53:09.918] lora key not loaded: lora_unet_single_blocks_23_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_23_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_24_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_25_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_26_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_27_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_28_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_29_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_2_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_30_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_31_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_linear1.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_linear1.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_linear1.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_linear2.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_linear2.lora_down.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_linear2.lora_up.weight
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_modulation_lin.alpha
+[2025-03-22 15:53:09.919] lora key not loaded: lora_unet_single_blocks_32_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_32_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_33_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_34_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_35_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_36_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_37_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_3_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_4_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_5_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_linear1.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_linear1.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_linear1.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_linear2.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_linear2.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_linear2.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_modulation_lin.alpha
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_6_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.920] lora key not loaded: lora_unet_single_blocks_7_linear1.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_linear1.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_linear1.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_linear2.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_linear2.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_linear2.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_modulation_lin.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_7_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_linear1.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_linear1.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_linear1.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_linear2.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_linear2.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_linear2.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_modulation_lin.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_8_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_linear1.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_linear1.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_linear1.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_linear2.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_linear2.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_linear2.lora_up.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_modulation_lin.alpha
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_modulation_lin.lora_down.weight
+[2025-03-22 15:53:09.921] lora key not loaded: lora_unet_single_blocks_9_modulation_lin.lora_up.weight
+[2025-03-22 15:53:09.924] Requested to load SD1ClipModel
+[2025-03-22 15:53:09.926] loaded completely 9.5367431640625e+25 235.84423828125 True
+[2025-03-22 15:53:10.018] Requested to load BaseModel
+[2025-03-22 15:53:10.346] loaded completely 7591.533707427979 1639.406135559082 True
+[2025-03-22 15:53:12.063] FETCH ComfyRegistry Data: 30/79
+[2025-03-22 15:53:15.349] FETCH ComfyRegistry Data: 35/79
+[2025-03-22 15:53:18.637] FETCH ComfyRegistry Data: 40/79
+[2025-03-22 15:53:21.935] FETCH ComfyRegistry Data: 45/79
+[2025-03-22 15:53:25.198] FETCH ComfyRegistry Data: 50/79
+[2025-03-22 15:53:28.752] 100%|███████████████████████████████████████████| 30/30 [00:18<00:00,  1.65it/s]100%|███████████████████████████████████████████| 30/30 [00:18<00:00,  1.63it/s]
+[2025-03-22 15:53:28.753] Requested to load AutoencoderKL
+[2025-03-22 15:53:28.820] loaded completely 1804.2574272155762 319.11416244506836 True
+[2025-03-22 15:53:29.251] FETCH ComfyRegistry Data: 55/79
+[2025-03-22 15:53:30.609] Processing interrupted
+[2025-03-22 15:53:30.609] Prompt executed in 36.52 seconds
+[2025-03-22 15:53:32.542] FETCH ComfyRegistry Data: 60/79
+[2025-03-22 15:53:35.844] FETCH ComfyRegistry Data: 65/79
+[2025-03-22 15:53:39.129] FETCH ComfyRegistry Data: 70/79
+[2025-03-22 15:53:42.451] FETCH ComfyRegistry Data: 75/79
+[2025-03-22 15:53:45.567] FETCH ComfyRegistry Data [DONE]
+[2025-03-22 15:53:45.611] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+[2025-03-22 15:53:45.616] FETCH DATA from: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json [DONE]
+[2025-03-22 15:53:45.720] [ComfyUI-Manager] All startup tasks have been completed.
+[2025-03-22 15:54:08.630] got prompt
+[2025-03-22 15:54:09.459] image in shape torch.Size([1, 512, 512, 3])
+[2025-03-22 15:54:12.737] 100%|███████████████████████████████████████████| 50/50 [00:03<00:00, 19.27it/s]100%|███████████████████████████████████████████| 50/50 [00:03<00:00, 16.64it/s]
+[2025-03-22 15:54:13.309] Loading model from /home/slyedoc/code/p/ComfyUI/models/diffusion_models/hy3dgen/hunyuan3d-dit-v2-0-fp16.safetensors
+[2025-03-22 15:54:24.552] guidance:  None
+[2025-03-22 15:54:58.405] Diffusion Sampling:: 100%|██████████████████████| 50/50 [00:33<00:00,  1.51it/s]Diffusion Sampling:: 100%|██████████████████████| 50/50 [00:33<00:00,  1.48it/s]
+[2025-03-22 15:54:58.405] latents shape:  torch.Size([1, 3072, 64])
+[2025-03-22 15:54:58.405] Allocated memory: memory=2.453 GB
+[2025-03-22 15:54:58.405] Max allocated memory: max_memory=4.638 GB
+[2025-03-22 15:54:58.405] Max reserved memory: max_reserved=4.656 GB
+[2025-03-22 15:55:00.581] 2025-03-22 15:55:00,581 - hy3dgen.shapgen - INFO - FlashVDMVolumeDecoding Resolution: [95, 190, 380]
+[2025-03-22 15:55:00.581] FlashVDMVolumeDecoding Resolution: [95, 190, 380]
+[2025-03-22 15:55:00.702] FlashVDM Volume Decoding: 100%|████████████████| 32/32 [00:00<00:00, 486.08it/s]
+[2025-03-22 15:55:06.992] MC Surface Extractor
+[2025-03-22 15:55:09.169] Decoded mesh with 960548 vertices and 3888376 faces
+[2025-03-22 15:55:10.727] Removed floaters, resulting in 952558 vertices and 1905176 faces
+[2025-03-22 15:55:11.869] Removed degenerate faces, resulting in 952558 vertices and 1905176 faces
+[2025-03-22 15:55:29.403] Reduced faces, resulting in 24970 vertices and 50000 faces
+[2025-03-22 15:55:32.932] camera_distance: 1.45
+[2025-03-22 15:56:06.002] 100%|███████████████████████████████████████████| 25/25 [00:31<00:00,  1.16it/s]100%|███████████████████████████████████████████| 25/25 [00:31<00:00,  1.26s/it]
+[2025-03-22 15:56:11.630] Prompt executed in 123.00 seconds

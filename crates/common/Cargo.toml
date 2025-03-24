@@ -11,7 +11,7 @@ editor = ["dep:sly_editor"]
 [dependencies]
 bevy.workspace = true
 sly_editor = { workspace = true, optional = true }
-
+bevy-inspector-egui.workspace = true
 bevy-persistent = { version = "0.7.0", features = ["ron"] }
 serde.workspace = true
 dirs = "5.0"

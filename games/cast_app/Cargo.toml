@@ -5,13 +5,13 @@ edition = "2021"
 
 [features]
 default = []
-editor = ["sly_common/editor"]
+editor = ["sly_common/editor", ]
+dev = ["editor", "bevy/wayland", "bevy/file_watcher", "bevy/asset_processor"]
 web = ["bevy/webgpu"]
 
 [dependencies]
-sly_common.workspace = true
-
-bevy.workspace = true
+sly_common.workspace = true 
+bevy = { workspace = true }
 avian3d.workspace = true
-bevy_hanabi.workspace = true
+bevy_hanabi = { workspace = true, default-features = false, features = ["3d"] }
 leafwing-input-manager.workspace = true

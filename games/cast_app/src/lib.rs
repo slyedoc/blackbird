@@ -2,6 +2,7 @@ mod camera;
 pub use camera::*;
 
 mod spell;
+use sly_common::{WaterMaterial, WaterPlugin};
 pub use spell::*;
 
 mod ui;
@@ -11,9 +12,10 @@ use avian3d::{math::Quaternion, prelude::*};
 use bevy::{
     color::palettes::tailwind,
     core_pipeline::{bloom::Bloom, tonemapping::Tonemapping},
+    pbr::NotShadowCaster,
     prelude::*,
 };
-//use bevy_hanabi::prelude::*;
+use bevy_hanabi::prelude::*;
 use leafwing_input_manager::prelude::*;
 
 pub fn init_bevy_app() -> App {
@@ -25,9 +27,10 @@ pub fn init_bevy_app() -> App {
         },
         PhysicsPlugins::default(),
         InputManagerPlugin::<PlayerAction>::default(),
-        //HanabiPlugin,
+        HanabiPlugin,
         UiPlugin,
         SpellPlugin,
+        WaterPlugin,
     ))
     .add_systems(Startup, setup)
     .add_systems(
@@ -62,6 +65,7 @@ fn setup(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
     asset_server: Res<AssetServer>,
+    mut water_materials: ResMut<Assets<WaterMaterial>>,
 ) {
     // camera
     let input_map = InputMap::default()
@@ -84,6 +88,10 @@ fn setup(
     let player_camera = cmd
         .spawn((
             Camera3d::default(),
+            Camera {
+                hdr: true,
+                ..default()
+            },
             Tonemapping::None,
             Bloom {
                 intensity: 0.2,
@@ -165,6 +173,33 @@ fn setup(
         Collider::half_space(Vec3::Y),
     ));
 
+    // setup water
+    cmd.spawn((
+        Transform::from_xyz(0.0, 0.0, 0.0), // move water up a bit
+        Mesh3d(meshes.add(Plane3d::new(Vec3::Y, Vec2::splat(1000.0)))),
+        MeshMaterial3d(water_materials.add(WaterMaterial::default())),
+        NotShadowCaster,
+        Name::new("Water"),
+    ));
+
+    //dragon
+    cmd.spawn((
+        SceneRoot(asset_server.load(GltfAssetLabel::Scene(0).from_asset("models/dragon.glb"))),
+        //RigidBody::Dynamic,
+
+        //ColliderConstructorHierarchy::new(ColliderConstructor::TrimeshFromMeshWithConfig(TrimeshFlags::FIX_INTERNAL_EDGES)),
+        Transform::from_xyz(5.0, 3.0, 0.0).with_scale(Vec3::splat(5.0)),
+    ));
+
+    cmd.spawn((
+        SceneRoot(asset_server.load(GltfAssetLabel::Scene(0).from_asset("models/dragon2.glb"))),
+        RigidBody::Dynamic,
+        ColliderConstructorHierarchy::new(ColliderConstructor::TrimeshFromMeshWithConfig(
+            TrimeshFlags::FIX_INTERNAL_EDGES,
+        )),
+        Transform::from_xyz(-5.0, 3.5, 0.0).with_scale(Vec3::splat(5.0)),
+    ));
+
     // Light
     cmd.spawn((
         PointLight {
@@ -210,43 +245,29 @@ fn setup(
                         ..default()
                     },
                     TextColor(Color::srgb(0.9, 0.9, 0.9)),
-                ));
+                ))
+                .observe(on_spell_click);
         }
     });
 }
 
 /// Returns an observer that updates the entity's material to the one specified.
-fn _on_spell_click(
-    player: Entity,
-) -> impl Fn(
-    Trigger<Pointer<Click>>,
-    (
-        Query<&Spell>,
-        Query<&Transform, With<Player>>,
-        &mut Commands,
-        SpellEffects,
-    ),
+fn on_spell_click(
+    _trigger: Trigger<Pointer<Click>>,
+    mut cmd: Commands,
+    players: Single<&Transform, With<Player>>,
+    spell_effects: Res<SpellEffects>,
 ) {
-    // An observer closure that captures `new_material`. We do this to avoid needing to write four
-    // versions of this observer, each triggered by a different event and with a different hardcoded
-    // material. Instead, the event type is a generic, and the material is passed in.
-    move |trigger, (mut button_query, mut player_query, cmd, spell_effects)| {
-        if let Ok(spell) = button_query.get_mut(trigger.target) {
-            //material.0 = new_material.clone();
-            dbg!(player, spell);
-
-            let _player_trans = player_query.get_mut(player).unwrap();
-            let _effect = &spell_effects.hashmap[spell];
-            cmd.spawn((
-                Name::new("firework"),
-                // ParticleEffectBundle {
-                //     effect: ParticleEffect::new(effect.clone()),
-                //     transform: Transform::from_translation(player_trans.translation),
-                //     ..Default::default()
-                // },
-            ));
-        }
-    }
+    let player_pos = players.translation;
+    let effect = spell_effects.hashmap.get(&Spell::FrostBolt).unwrap();
+    cmd.spawn((
+        Name::new("firework"),
+        ParticleEffectBundle {
+            effect: ParticleEffect::new(effect.clone()),
+            transform: Transform::from_translation(player_pos),
+            ..Default::default()
+        },
+    ));
 }
 
 #[derive(Component)]

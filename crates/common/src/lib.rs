@@ -1,3 +1,6 @@
+mod water;
+pub use water::*;
+
 use bevy::prelude::*;
 
 pub struct SlyCommonPlugin {

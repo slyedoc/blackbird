@@ -111,7 +111,7 @@ bevy-inspector-egui = { version = "0.29.1", features = [
     "highlight_changes",
 ] }
 bevy_mod_outline = { git = "https://github.com/komadori/bevy_mod_outline.git" }
-bevy_hanabi = "0.14.0"
+bevy_hanabi = { version = "0.14", default-features = false }
 bevy_panorbit_camera = "0.22.1"
 leafwing-input-manager = "0.16.0"
 
@@ -252,7 +252,7 @@ bevy.workspace = true
 
 # Patches
 [patch.crates-io]
-leptos-use = { git = "https://github.com/Synphonyte/leptos-use.git"}
+#leptos-use = { git = "https://github.com/Synphonyte/leptos-use.git"}
 
 #TODO: bevy main already has fix for spawn_app, remove this once 0.16 releases
 bevy = { git = "https://github.com/slyedoc/bevy.git", branch = "wasm-allow-loop-recreation" }

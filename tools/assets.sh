@@ -1,0 +1,1 @@
+export BEVY_ASSET_ROOT=${PWD}

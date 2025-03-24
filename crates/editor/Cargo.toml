@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [features]
-default = ["fps", "outline" ]
+default = ["fps", "outline" , "avian3d" ]
 outline = ["dep:bevy_mod_outline"]
 fps = []
 avian3d = ["dep:avian3d"]

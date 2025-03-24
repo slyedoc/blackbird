@@ -6,7 +6,7 @@ use leptos_router::{
     components::{Outlet, ParentRoute, ProtectedRoute, Route, Router, Routes},
     path,
 };
-use leptos_use::{ColorMode, UseColorModeOptions, UseColorModeReturn, use_color_mode_with_options};
+//use leptos_use::{ColorMode, UseColorModeOptions, UseColorModeReturn, use_color_mode_with_options};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -50,12 +50,7 @@ pub fn App() -> impl IntoView {
     );
     provide_context(user);
 
-    // color mode
-    let UseColorModeReturn { .. } = use_color_mode_with_options(
-        UseColorModeOptions::default()
-            .initial_value(ColorMode::Dark)
-            .storage(leptos_use::storage::StorageType::Local),
-    );
+
     //provide_context::<(Signal<ColorMode>, WriteSignal<ColorMode>)>((color_mode, set_color_mode));
 
     // App setup based on https://tailwindcss.com/plus/ui-blocks/application-ui/application-shells/stacked

@@ -1,0 +1,33 @@
+[package]
+name = "sly_ref"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+dev = ["sly_common/editor", "bevy/wayland", "bevy/file_watcher", "bevy/asset_processor"]
+
+[dependencies]
+sly_common = { workspace = true }
+ron ={ version = "0.8" }
+bevy = { workspace = true }
+bevy-inspector-egui.workspace = true
+bevy_mod_outline = { workspace = true, optional = true }
+bevy_asset_loader = { version = "0.22", features = ["3d", "progress_tracking"] }
+bevy_common_assets = { version = "0.12", features = ["ron" ] }
+avian3d = { workspace = true }
+leafwing-input-manager.workspace = true
+strum = { workspace = true, features = ["derive"] }
+strum_macros.workspace = true
+approx.workspace = true
+serde = { workspace = true, features = ["derive"] }
+iyes_progress = "0.13.1"
+
+
+# bevy_common_assets = { version = "0.10", features = ["ron", "json" ] }
+# bevy_asset_loader = { version = "0.20", features = ["2d","3d","standard_dynamic_assets","progress_tracking"] }
+# iyes_progress = { version = "0.11", features = ["assets", "bevy_log", "debug"] }
+# serde_json = "1.0"
+# clap = { version = "4.5", features = ["derive"] }
+
+#bevy_editor_pls = { version = "0.8.1", optional = true }
