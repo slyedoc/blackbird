@@ -10,6 +10,7 @@ mod look_transform;
 pub use look_angles::*;
 pub use look_transform::*;
 
+
 pub struct SlyCameraPlugin;
 
 impl Plugin for SlyCameraPlugin {

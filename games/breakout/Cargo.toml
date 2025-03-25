@@ -7,7 +7,7 @@ edition.workspace = true
 [features]
 default = []
 editor = ["sly_common/editor"]
-dev = ["editor", "bevy/wayland", "bevy/file_watcher", "bevy/asset_processor"]
+dev = ["editor", "bevy/file_watcher", "bevy/asset_processor"]
 web = ["bevy/webgpu"]
 
 

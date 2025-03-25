@@ -14,6 +14,7 @@ pub fn init_bevy_app() -> App {
     app.add_plugins((
         sly_common::SlyCommonPlugin {
             title: "Mine".into(),
+            ..default()
         },
         EntropyPlugin::<WyRand>::default(),
     ))

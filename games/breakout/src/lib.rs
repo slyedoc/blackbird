@@ -3,8 +3,7 @@
 //! Demonstrates Bevy's stepping capabilities if compiled with the `bevy_debug_stepping` feature.
 
 use bevy::{
-    math::bounding::{Aabb2d, BoundingCircle, BoundingVolume, IntersectsVolume},
-    prelude::*,
+    audio::{PlaybackMode, Volume}, math::bounding::{Aabb2d, BoundingCircle, BoundingVolume, IntersectsVolume}, prelude::*
 };
 
 use leafwing_input_manager::prelude::*;
@@ -56,7 +55,7 @@ pub const RENDER_WIDTH: f32 = 800.;
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
     app.add_plugins((
-        sly_common::SlyCommonPlugin { title: "Breakout" },
+        sly_common::SlyCommonPlugin { title: "Breakout", ..default()},
         InputManagerPlugin::<PlayerAction>::default(),
     ))
     .init_resource::<ActionState<PlayerAction>>()
@@ -417,7 +416,11 @@ fn play_collision_sound(
     if !collision_events.is_empty() {
         // This prevents events staying active on the next frame.
         collision_events.clear();
-        commands.spawn((AudioPlayer(sound.clone()), PlaybackSettings::DESPAWN));
+        commands.spawn((AudioPlayer(sound.clone()), PlaybackSettings {
+            mode: PlaybackMode::Despawn,
+            volume: Volume::new(0.5),
+            ..default()
+        }));
     }
 }
 

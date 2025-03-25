@@ -24,7 +24,7 @@ mod stepping;
 pub use stepping::*;
 
 pub mod prelude {
-    pub use crate::{selected::*, stepping::*, *};
+    pub use crate::{selected::*, stepping::*, *};    
 }
 
 #[cfg(feature = "fps")]
@@ -44,6 +44,7 @@ impl Plugin for SlyEditorPlugin {
             WorldInspectorPlugin::new().run_if(input_toggle_active(false, KeyCode::F1)),
             // ResourceInspectorPlugin::<AppStatus>::default()
             //     .run_if(input_toggle_active(true, KeyCode::F1)),
+            // TODO: come back to stepping debugging
             SteppingPlugin::default()
                 .add_schedule(Update)
                 .add_schedule(FixedUpdate)
@@ -60,8 +61,8 @@ impl Plugin for SlyEditorPlugin {
         .add_systems(
             Update,
             (
-                toggle_ui_overlay.run_if(input_just_pressed(KeyCode::F2)),
-                #[cfg(feature = "avian3d")]
+                toggle_editor.run_if(input_toggle_active(false, KeyCode::Backquote)),
+                toggle_ui_overlay.run_if(input_just_pressed(KeyCode::F2)),        
                 toggle_physics.run_if(input_just_pressed(KeyCode::F2)),
                 toggle_wireframe.run_if(input_just_pressed(KeyCode::F3)),
                 toggle_aabb.run_if(input_just_pressed(KeyCode::F4)),
@@ -148,6 +149,17 @@ fn toggle_physics(mut config_store: ResMut<GizmoConfigStore>) {
 // The system that will enable/disable the debug outlines around the nodes
 fn toggle_ui_overlay(mut options: ResMut<bevy::dev_tools::ui_debug_overlay::UiDebugOptions>) {
     options.toggle();
+}
+
+fn toggle_editor(mut next_state: ResMut<NextState<EditorState>>, state: Res<State<EditorState>>) {
+    match state.get() {
+        EditorState::Enabled => {
+            next_state.set(EditorState::Disabled);
+        }
+        EditorState::Disabled => {
+            next_state.set(EditorState::Enabled);
+        }
+    }
 }
 
 fn toggle_wireframe(mut config: ResMut<WireframeConfig>) {

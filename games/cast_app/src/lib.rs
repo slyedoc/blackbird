@@ -24,6 +24,7 @@ pub fn init_bevy_app() -> App {
     app.add_plugins((
         sly_common::SlyCommonPlugin {
             title: "Spell Caster",
+            ..default()
         },
         PhysicsPlugins::default(),
         InputManagerPlugin::<PlayerAction>::default(),

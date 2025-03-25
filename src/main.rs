@@ -22,7 +22,6 @@ cfg_if! {
         use leptos::prelude::LeptosOptions;
         use leptos_axum::AxumRouteListing;
 
-
         use std::env::var;
 
         #[tokio::main]

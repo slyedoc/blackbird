@@ -5,7 +5,6 @@ use leafwing_input_manager::prelude::*;
 pub enum Action {
     #[actionlike(Axis)]
     Zoom,
-
     #[actionlike(DualAxis)]
     Move,
     #[actionlike(DualAxis)]
@@ -13,14 +12,13 @@ pub enum Action {
 
     Delete,
 
+    SelectAll,
     SelectMove,
     SelectMoveCamera,
     SelectScale,
     SelectOrder,
 
-    // debug
-    TogglePhysics,
-    ToggleAABB,
+    Paste,
 }
 
 impl Action {
@@ -28,14 +26,16 @@ impl Action {
         InputMap::default()
             .with_axis(Action::Zoom, MouseScrollAxis::Y)
             .with_dual_axis(Action::Move, VirtualDPad::wasd())
-            .with_dual_axis(Action::MoveDrag, MouseMove::default())
+            .with_dual_axis(Action::MoveDrag, MouseMove::default())            
+            .with(Action::SelectAll, KeyCode::ShiftLeft)
+            .with(Action::SelectAll, KeyCode::ShiftRight)
+            
             .with(Action::SelectMove, MouseButton::Left)
             .with(Action::SelectMoveCamera, MouseButton::Middle)
             .with(Action::SelectScale, KeyCode::ShiftLeft)
             .with(Action::SelectOrder, KeyCode::ControlLeft)
             .with(Action::Delete, KeyCode::KeyX)
+            .with(Action::Paste,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyV]))
             // f1 used to toggle editor
-            .with(Action::TogglePhysics, KeyCode::F2)
-            .with(Action::ToggleAABB, KeyCode::F3)
     }
 }

@@ -1,10 +1,24 @@
 mod water;
 pub use water::*;
 
-use bevy::prelude::*;
+use bevy::{log::LogPlugin, prelude::*};
 
+pub mod prelude {
+    pub use crate::water::*;
+    pub use sly_camera::*;
+}
 pub struct SlyCommonPlugin {
     pub title: &'static str,
+    pub level: bevy::log::Level,
+}
+
+impl Default for SlyCommonPlugin {
+    fn default() -> Self {
+        Self {
+            title: "Sly App",
+            level: bevy::log::Level::INFO,
+        }
+    }
 }
 
 impl Plugin for SlyCommonPlugin {
@@ -21,6 +35,11 @@ impl Plugin for SlyCommonPlugin {
                 })
                 .set(AssetPlugin {
                     mode: AssetMode::Processed,
+                    ..default()
+                })
+                .set(LogPlugin {
+                    filter: "wgpu_core=warn,wgpu_hal=warn,cosmic_text=warn,naga=warn".into(),                    
+                    level: self.level,
                     ..default()
                 }),
             #[cfg(target_arch = "wasm32")]
@@ -45,6 +64,8 @@ impl Plugin for SlyCommonPlugin {
                 .disable::<bevy::log::LogPlugin>(),
             #[cfg(feature = "editor")]
             sly_editor::SlyEditorPlugin,
+            #[cfg(feature = "camera")]
+            sly_camera::SlyCameraPlugin,
         ));
         // https://github.com/bevyengine/bevy/issues/12126
         // #[cfg(target_arch = "wasm32")]

@@ -15,6 +15,7 @@ pub fn init_bevy_app() -> App {
     app.add_plugins((
         sly_common::SlyCommonPlugin {
             title: "Sync App".into(),
+            ..default()
         },
         MeshPickingPlugin,
         EntropyPlugin::<WyRand>::default(),        

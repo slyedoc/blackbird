@@ -1,0 +1,12 @@
+(
+    camera_position: (
+        -4.107967,
+        5.5259957,
+        7.591358,
+    ),
+    images: [
+        /*[0]*/ (name: "gem2.png", path: "ref/gem2.png", position: (-4.6026573, 7.783441, 0.0), scale: 1.0),
+        /*[1]*/ (name: "gem.png", path: "ref/gem.png", position: (-8.48867, 7.450938, 0.0), scale: 1.0),
+        /*[2]*/ (name: "gem.png", path: "ref/gem.png", position: (-0.92781055, 7.6057715, 0.0), scale: 1.0),
+    ],
+)

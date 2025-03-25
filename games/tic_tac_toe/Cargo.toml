@@ -8,7 +8,6 @@ default = []
 editor = ["sly_common/editor"]
 web = ["bevy/webgpu"]
 
-
 [dependencies]
 bevy = { workspace = true, features = [
     "bevy_mesh_picking_backend",

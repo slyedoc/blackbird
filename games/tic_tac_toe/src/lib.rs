@@ -30,7 +30,8 @@ const GAME_NAME: &str = "Tic Tac Toe";
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
     app.add_plugins((
-        sly_common::SlyCommonPlugin { title: GAME_NAME },
+        sly_common::SlyCommonPlugin { title: GAME_NAME,
+            ..default() },
         MeshPickingPlugin,
         StatePlugin,
         UiPlugin,

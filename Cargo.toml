@@ -86,12 +86,12 @@ ssr = [
 
 # Local Crates
 sly_common = { path = "crates/common" }
-sly_camera = { path = "crates/cameras" }
+sly_camera = { path = "crates/camera" }
 sly_editor = { path = "crates/editor" }
 
 leptos-bevy-canvas = { path = "crates/leptos-bevy-canvas" }
 # transform_gizmo = { path = "crates/transform_gizmo" }
-# billboard  = { path = "crates/billboard" }
+billboard  = { path = "crates/billboard" }
 # go = { path = "crates/go" }
 
 # Games
