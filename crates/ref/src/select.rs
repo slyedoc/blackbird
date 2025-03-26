@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_mod_outline::OutlineVolume;
 
-use crate::RefImage;
+use crate::Prefab;
 
 
 
@@ -26,7 +26,7 @@ pub struct Selected;
 // }
 
 pub fn on_update_select(
-    mut selected_query: Query<Entity, (Added<Selected>, With<RefImage>)>,    
+    mut selected_query: Query<Entity, (Added<Selected>, With<Prefab>)>,    
     mut removed: RemovedComponents<Selected>,
     mut images: Query<&mut OutlineVolume>,  
 ) {
@@ -42,3 +42,5 @@ pub fn on_update_select(
         }
     });
 }
+
+

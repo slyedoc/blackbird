@@ -10792,6 +10792,16 @@
             "title": "ComfyUI_yanc"
         },
         {
+            "author": "ALatentPlace",
+            "description": "A custom node for a LMStudio integration into ComfyUI.",
+            "files": [
+                "https://github.com/ALatentPlace/YANC_LMStudio"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/ALatentPlace/YANC_LMStudio",
+            "title": "YANC_LMStudio"
+        },
+        {
             "author": "Wicloz",
             "description": "Simple nodes to help clean up your workflow, mostly focussed on text operations.",
             "files": [
@@ -15206,6 +15216,16 @@
             "title": "ComfyUI-Show-Text"
         },
         {
+            "author": "fairy-root",
+            "description": "The OpenAI FM TTS node is a custom node for ComfyUI that seamlessly integrates the OpenAI FM Text-to-Speech service into your audio workflows. This node allows you to easily convert text to speech with a variety of voices and emotional styles directly within ComfyUI.",
+            "files": [
+                "https://github.com/fairy-root/ComfyUI-OpenAI-FM"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/fairy-root/ComfyUI-OpenAI-FM",
+            "title": "ComfyUI-OpenAI-FM"
+        },
+        {
             "author": "ryanontheinside",
             "description": "Custom nodes introducing particle simulations, optical flow, audio manipulation & reactivity, and temporal masks",
             "files": [
@@ -17075,6 +17095,17 @@
             "install_type": "git-clone",
             "reference": "https://github.com/LAOGOU-666/ComfyUI-LG_HotReload",
             "title": "ComfyUI-LG_HotReload"
+        },
+        {
+            "author": "LAOGOU-666",
+            "description": "A ComfyUI extension that provides nodes for memory cleanup, including VRAM and RAM cleanup functions to optimize ComfyUI performance during long running workflows.",
+            "files": [
+                "https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup"
+            ],
+            "id": "comfyui_memory_cleanup",
+            "install_type": "git-clone",
+            "reference": "https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup",
+            "title": "Comfyui-Memory_Cleanup"
         },
         {
             "author": "VertexStudio",
@@ -21920,16 +21951,6 @@
             "title": "ComfyUI_StringOps"
         },
         {
-            "author": "svetozarov",
-            "description": "A ComfyUI node that combines an image with simple text parameters to create a prompt, sends it to the Google Gemini API via the google-generativeai SDK, and returns the generated text response along with the original prompt and an execution log",
-            "files": [
-                "https://github.com/svetozarov/AS_GeminiCaptioning"
-            ],
-            "install_type": "git-clone",
-            "reference": "https://github.com/svetozarov/AS_GeminiCaptioning",
-            "title": "AS_GeminiCaptioning Node"
-        },
-        {
             "author": "Pablerdo",
             "description": "Cut and and drag that allows you to cut and drag multiple images on a path",
             "files": [
@@ -22643,16 +22664,6 @@
             "title": "va-nodes"
         },
         {
-            "author": "vahidzxc",
-            "description": "A collection of custom nodes for ComfyUI, focusing on improving workflow efficiency and adding new functionality.(work in progress!!!)",
-            "files": [
-                "https://github.com/vahidzxc/va-nodes"
-            ],
-            "install_type": "git-clone",
-            "reference": "https://github.com/vahidzxc/va-nodes",
-            "title": "va-nodes"
-        },
-        {
             "author": "abuzreq",
             "description": "Use model bending to push your model beyond its visuals' limits. These nodes allow you to apply transformations to the intemediate densoising steps during sampling, e.g. add, multiplty, scale, rotate, dilate, erode ..etc.",
             "files": [
@@ -22751,6 +22762,56 @@
             "install_type": "git-clone",
             "reference": "https://github.com/ShmuelRonen/ComfyUI-PS_Flatten_Image",
             "title": "ComfyUI-PS_Flatten_Image"
+        },
+        {
+            "author": "RaymondProduction",
+            "description": "A set of nodes for batch processing of text and images.",
+            "files": [
+                "https://github.com/RaymondProduction/comfyui-zerna-pack"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/RaymondProduction/comfyui-zerna-pack",
+            "title": "Zerna Pack"
+        },
+        {
+            "author": "mw",
+            "description": "Super fast multilingual speech recognition model based on Whisper Large-v3 Turbo. A node for ComfyUI.",
+            "files": [
+                "https://github.com/billwuhao/ComfyUI_EraX-WoW-Turbo"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/billwuhao/ComfyUI_EraX-WoW-Turbo",
+            "title": "MW-ComfyUI_EraX-WoW-Turbo"
+        },
+        {
+            "author": "mw",
+            "description": "XiaoMi GemmaX: Support 28 languages, Multilingual Translator based on Gemma. A node for ComfyUI.",
+            "files": [
+                "https://github.com/billwuhao/ComfyUI_gemmax"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/billwuhao/ComfyUI_gemmax",
+            "title": "MW-ComfyUI_gemmax"
+        },
+        {
+            "author": "svetozarov",
+            "description": "This ComfyUI extension provides custom nodes for working with Google Gemini and OpenAI ChatGPT.",
+            "files": [
+                "https://github.com/svetozarov/AS_LLM_nodes"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/svetozarov/AS_LLM_nodes",
+            "title": "AS_LLM_nodes"
+        },
+        {
+            "author": "Andro-Meta",
+            "description": "A ComfyUI custom node set for integrating [a/Ovis2](https://huggingface.co/AIDC-AI/Ovis2-34B), a powerful multimodal large language model designed to analyze images and videos.",
+            "files": [
+                "https://github.com/Andro-Meta/ComfyUI-Ovis2"
+            ],
+            "install_type": "git-clone",
+            "reference": "https://github.com/Andro-Meta/ComfyUI-Ovis2",
+            "title": "ComfyUI-Ovis2"
         },
         {
             "author": "Ser-Hilary",

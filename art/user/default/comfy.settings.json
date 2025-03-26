@@ -200,5 +200,6 @@
                 }
             }
         }
-    }
+    },
+    "Comfy.DevMode": true
 }

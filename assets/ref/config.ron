@@ -1,12 +1,24 @@
 (
-    camera_position: (
-        -4.107967,
-        5.5259957,
-        7.591358,
+    camera_eye: (
+        -6.224913,
+        1.1899642,
+        11.339453,
     ),
-    images: [
-        /*[0]*/ (name: "gem2.png", path: "ref/gem2.png", position: (-4.6026573, 7.783441, 0.0), scale: 1.0),
-        /*[1]*/ (name: "gem.png", path: "ref/gem.png", position: (-8.48867, 7.450938, 0.0), scale: 1.0),
-        /*[2]*/ (name: "gem.png", path: "ref/gem.png", position: (-0.92781055, 7.6057715, 0.0), scale: 1.0),
+    camera_target: (
+        -5.5499477,
+        2.644751,
+        0.32662773,
+    ),
+    camera_up: (
+        0.0,
+        1.0,
+        0.0,
+    ),
+    prefabs: [
+        /*[0]*/ (position: (2.6297662, 2.5850773, 0.0), scale: 1.0, prefab: (name: "node_7_image_2", workflow: StaticImage(image: Some("ref/node_7_image_2.png")))),
+        /*[1]*/ (position: (-0.49062398, 2.2115614, 0.1), scale: 1.0, prefab: (name: "node_7_image", workflow: StaticImage(image: Some("ref/node_7_image.png")))),
+        /*[2]*/ (position: (-4.115703, 2.2907012, 0.2), scale: 1.0, prefab: (name: "test", workflow: TextToImage(seed: 900000000, seed_random: false, prompt: "", image: Some("ref/test.png")))),
+        /*[3]*/ (position: (-4.328281, 4.4526534, 0.4), scale: 1.0, prefab: (name: "test_3", workflow: TextToImage(seed: 2900000000, seed_random: false, prompt: "", image: Some("ref/test.png")))),
+        /*[4]*/ (position: (-7.1277337, 2.4694505, 0.3), scale: 1.0, prefab: (name: "test_2", workflow: TextToImage(seed: 2900000000, seed_random: false, prompt: "", image: Some("ref/test.png")))),
     ],
 )

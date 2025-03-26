@@ -1,19 +1,32 @@
 use bevy::prelude::*;
 use serde::{Deserialize, Serialize};
 
+use crate::Prefab;
+
 /// only used for init load, not updated currently
-#[derive(Default, Resource, Serialize, Deserialize, Reflect)]
+#[derive(Resource, Serialize, Deserialize, Reflect)]
 #[reflect(Resource)]
 pub struct RefConfig {
-    pub camera_position: Vec3,
-    pub images: Vec<PositionedImage>,
+    pub camera_eye: Vec3,
+    pub camera_target: Vec3,
+    pub camera_up: Vec3,
+    pub prefabs: Vec<PrefabConfig>,
 }
 
+impl Default for RefConfig {
+    fn default() -> Self {
+        Self {
+            camera_eye: Vec3::new(0.0, 0.0, 10.0),
+            camera_target: Vec3::new(0.0, 0.0, 0.0),
+            camera_up: Vec3::Y,
+            prefabs: Vec::new(),
+        }
+    }
+}
 #[derive(Serialize, Deserialize, Reflect)]
-pub struct PositionedImage {
-    pub name: String,
-    pub path: String,
+pub struct PrefabConfig {
     pub position: Vec3,
     pub scale: f32,
+    pub prefab: Prefab
 }
 

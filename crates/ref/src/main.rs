@@ -1,35 +1,38 @@
+#![feature(trivial_bounds)]
 mod actions;
 use std::path::PathBuf;
 
 pub use actions::*;
 mod assets;
 pub use assets::*;
-mod components;
-use bevy_mod_outline::OutlinePlugin;
-pub use components::*;
+
+mod comfy;
+use bevy_tokio_tasks::TokioTasksPlugin;
+pub use comfy::*;
 mod save;
 pub use save::*;
-mod events;
-pub use events::*;
 mod copy_paste;
 pub use copy_paste::*;
 mod select;
 pub use select::*;
-
+mod prefab;
+pub use prefab::*;
+mod ui;
+pub use ui::*;
 
 use avian3d::prelude::*;
 use bevy::{
-    app::AppExit, core_pipeline::{bloom::Bloom, tonemapping::Tonemapping}, input::common_conditions::input_just_pressed, log::Level, math::vec3, prelude::*
+    app::AppExit, core_pipeline::{bloom::Bloom, tonemapping::Tonemapping}, log::Level, math::vec3, prelude::*
 };
-use sly_common::prelude::*;
-use leafwing_input_manager::{common_conditions::action_just_pressed, prelude::*};
+use bevy_infinite_grid::{InfiniteGridBundle, InfiniteGridPlugin};
+use bevy_mod_outline::OutlinePlugin;
 
-#[derive(Default, States, Debug, Hash, PartialEq, Eq, Clone, Reflect)]
-pub enum AppState {
-    #[default]
-    Loading,
-    Playing,
-}
+//use bevy_eventwork::{ConnectionId, EventworkRuntime, Network, NetworkData, NetworkEvent};
+//use bevy_eventwork_mod_websockets::{NetworkSettings, WebSocketProvider};
+use leafwing_input_manager::{common_conditions::action_just_pressed, prelude::*};
+use sly_common::prelude::*;
+//use url::Url;
+//use uuid::Uuid;
 
 fn main() {
     let file_path = config_file_path();
@@ -42,62 +45,62 @@ fn main() {
     };
 
     let mut app = App::new();
-        app.insert_resource(config)
-        .add_plugins((
-            sly_common::SlyCommonPlugin {
-                title: "sly_ref",
-                level: Level::INFO,
-            },           
-            MeshPickingPlugin,
-            PhysicsPlugins::default(), // using for collision detection
-            InputManagerPlugin::<Action>::default(),
-            bevy_inspector_egui::quick::StateInspectorPlugin::<AppState>::default(),
-        ));
+    app.insert_resource(config).add_plugins((
+        sly_common::SlyCommonPlugin {
+            title: "sly_ref",
+            level: Level::INFO,
+        },
+        MeshPickingPlugin,
+        PhysicsPlugins::default(), // using for collision detection
+        InputManagerPlugin::<Action>::default(),
+        //FilterQueryInspectorPlugin::<With<Selected>>::default(),
+        InfiniteGridPlugin,
+        TokioTasksPlugin::default()
+    ))
+    .add_systems(Update, ui_select.run_if(|query: Query<Entity, With<Selected>>| {
+        !query.is_empty()
+    }));
 
-        if !app.is_plugin_added::<OutlinePlugin>() {
-            app.add_plugins(OutlinePlugin);
-        }
+    if !app.is_plugin_added::<OutlinePlugin>() {
+        app.add_plugins(OutlinePlugin);
+    }
 
-        app.init_state::<AppState>()
+    app
         .init_resource::<ActionState<Action>>()
         .insert_resource(Action::input_map())
         .init_resource::<SaveTimer>()
-        .add_event::<SaveEvent>()
-        .add_event::<DeleteEvent>()
-
-        .add_systems(Startup, setup)        
-        .add_systems(OnEnter(AppState::Playing), load)
-        .add_systems(Update, (      
-            on_add_ref_image,
-            on_update_select,
-            autosave,      
-            save::save.run_if(input_just_pressed(KeyCode::KeyS)),
-            paste.run_if(action_just_pressed(Action::Paste)),
-            file_drop,
-            image_delete.run_if(on_event::<DeleteEvent>),
-        ))
+        .add_event::<Save>()
+        .add_systems(Startup, setup)
+        .add_systems(
+            Update,
+            (
+                duplicate_selected.run_if(action_just_pressed(Action::Duplicate)),
+                delete_selected.run_if(action_just_pressed(Action::Delete)),
+                on_add_prefab,
+                on_update_select,
+                autosave,
+                save::save.run_if(action_just_pressed(Action::Save)),
+                paste.run_if(action_just_pressed(Action::Paste)),
+                file_drop,
+            ),
+        )
         .add_systems(PostUpdate, save_on_exit.run_if(on_event::<AppExit>))
-        .add_systems(Last, save.run_if(on_event::<SaveEvent>))
-
-        .register_type::<RefImage>()
+        .add_systems(Last, save.run_if(on_event::<Save>))
+        .register_type::<Prefab>()        
         .register_type::<RefConfig>()
-        .register_type::<PositionedImage>()
+        .register_type::<PrefabConfig>()
         .register_type::<SaveTimer>()
-        .register_type::<DeleteEvent>()
-        .register_type::<SaveEvent>()
-
+        .register_type::<Save>()
         .run();
 }
 
 fn setup(
     mut commands: Commands,
-
-    mut clear_color: ResMut<ClearColor>,
-    //mut materials: ResMut<Assets<StandardMaterial>>,
-    //mut meshes: ResMut<Assets<Mesh>>,
-    mut app_state: ResMut<NextState<AppState>>,
+   
+    mut meshes: ResMut<Assets<Mesh>>,
+    config: Res<RefConfig>,
 ) {
-    clear_color.0 = Color::srgb(0.1, 0.1, 0.1);
+    commands.spawn(InfiniteGridBundle::default());
 
     commands.spawn((
         Name::new("MainCamera"),
@@ -110,106 +113,57 @@ fn setup(
         Bloom {
             intensity: 0.2,
             ..default()
-        },        
+        },
         // movement
         LookTransform {
-            eye: Vec3::new(0.0, 0.0, 10.0),
-            target: Vec3::ZERO,
-            up: Vec3::Y
-            
+            eye: config.camera_eye,
+            target: config.camera_target,
+            up: Vec3::Y,
         },
-        FpsCameraController::default(),
+        UnrealCameraController::default(),
     ));
 
-    app_state.set(AppState::Playing);
-}
+    // background, used to deselect
+    commands.spawn((
+        Name::new("Backdrop"),
+        Mesh3d(meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(100.0)))),
+        Transform::from_translation(Vec3::new(0.0, 0.0, -10.0)),
+    )).observe(|_: Trigger<Pointer<Click>>, selected: Query<Entity, With<Selected>>, mut commands: Commands| {
+        for e in selected.iter() {
+            commands.entity(e).remove::<Selected>();
+        }
+    });
 
-
-
-fn load(
-    mut commands: Commands,
-    config: Res<RefConfig>,
-    mut camera: Single<&mut Transform, With<Camera>>,
-    asset_server: Res<AssetServer>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>
-) {
-    camera.translation = config.camera_position;
-    
-    for (i, r) in config.images.iter().enumerate() {
-        let image_handle: Handle<Image> = asset_server.load(&r.path);
-        // search our loaded config file for this image
-        // get image size
+    // add prefabs
+    for (i, p) in config.prefabs.iter().enumerate() {
         commands.spawn((
-            Mesh3d(meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(1.0)))),
-            MeshMaterial3d(materials.add(StandardMaterial {
-                base_color_texture: Some(image_handle.clone()),
-                alpha_mode: AlphaMode::Blend,
-                unlit: true,
-                ..default()
-            })), 
-            //BillboardTexture(image_handle.clone()),
-            //BillboardMesh(meshes.add(Rectangle::from_size(Vec2::splat(2.0)))),
-            Transform::from_translation( vec3(r.position.x, r.position.y, i as f32 * 0.1))
-                .rotate_local_x(std::f32::consts::FRAC_PI_2),
-            Name::new(r.name.clone()),
-            RefImage {
-                path: r.path.clone(),
-            },
+            Transform::from_translation(vec3(p.position.x, p.position.y, i as f32 * 0.1)), // offset z so no z fighting
+            Name::new(p.prefab.name.clone()),
+            p.prefab.clone(),
         ));
     }
 }
 
-fn image_delete(
+
+fn duplicate_selected(
+    selected: Query<Entity, (With<Selected>, With<Prefab>)>,
     mut commands: Commands,
-    query: Query<&RefImage>,
-    mut delete_events: EventReader<DeleteEvent>,
 ) {
-    for DeleteEvent(e) in delete_events.read() {
-        if let Ok(image) = query.get(*e) {
-            commands.entity(*e).despawn_recursive();
-            info!("Deleted image: {:?}", image.path);
-            std::fs::remove_file(&image.path).unwrap();
-        }
+    for e in selected.iter() {
+        commands.trigger_targets(Duplicate, e);
     }
 }
 
-
+fn delete_selected(
+    selected: Query<Entity, (With<Selected>, With<Prefab>)>,
+    mut commands: Commands,
+) {
+    for e in selected.iter() {
+        commands.trigger_targets(Delete, e);
+    }
+}
 
 fn config_file_path() -> PathBuf {
     let root = std::env::var("BEVY_ASSET_ROOT").unwrap_or("".to_string());
     std::path::Path::new(&root).join("assets/ref/config.ron")
-}
-
-// TODO: doesnt work on wayland
-fn file_drop(
-    mut evr_dnd: EventReader<FileDragAndDrop>,    
-) {
-    for ev in evr_dnd.read() {
-        // TODO: on wayland this event never fires        
-        dbg!("File drop event never fire!!!!!!");
-        match ev {
-            FileDragAndDrop::DroppedFile { window, path_buf } => {
-                info!("Dropped file: {:?} at {:?}", path_buf, window);
-                //let texture_handle = asset_server.load(path_buf.to_str().unwrap().to_string());
-
-                // commands.spawn(
-                //     SpriteBundle {
-                //         texture: texture_handle,
-                //         transform: Transform::from_xyz(world_cursor.0.x, world_cursor.0.y, 0.0),
-                //         ..default()
-                //     });
-            }
-            FileDragAndDrop::HoveredFile {
-                window: _,
-                path_buf: _,
-            } => {
-                // On wayland this sometimes prints multiple times for one drop
-                info!("Hovered file");
-            }
-            FileDragAndDrop::HoveredFileCanceled { window: _ } => {
-                info!("File canceled!");
-            }
-        }
-    }
 }

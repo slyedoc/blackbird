@@ -16,13 +16,13 @@ source ../ComfyUI/.venv/bin/activate
 python ../ComfyUI/main.py --lowvram --output-directory art/output --user-directory art/user --input-directory art/input #--verbose DEBUG
 ```
 
-
 ## Setup 
 
 > Needed for Python.h in Hunyuan3D
 ```bash
     sudo apt-get install python3-dev
-
+    sudo apt-get install ffmpeg
+    pip install xxhash 
 ```
 
 ```bash
@@ -53,6 +53,8 @@ cd ../..
 
 [ComfyUI-Hunyan3dWrapper](https://github.com/kijai/ComfyUI-Hunyuan3DWrapper)
 
+[Blog](https://comfyuiblog.com/hunyuan3d-comfyui-workflow-2/#google_vignette) 
+
 ```bash
 cd custom_nodes 
 git clone https://github.com/kijai/ComfyUI-Hunyuan3DWrapper.git
@@ -82,12 +84,25 @@ mv workflow_examples example_workflows
 ```
 > Note: Renaming workflows so they show as example
 
-### other
-```bash
-    pip install xxhash 
-    sudo apt-get install ffmpeg
-```
+<!-- 
 
+### Install ComfyUI-CSM-Nodes
+
+breaks everything, uses transforms, always have issue with it locked to very specific version of python
+
+[repo and notes](https://github.com/thezveroboy/ComfyUI-CSM-Nodes?tab=readme-ov-file)
+
+```bash
+cd custom_nodes
+git clone https://github.com/thezveroboy/ComfyUI-CSM-Nodes.git
+cd ComfyUI-CSM-Nodes
+pip install -r requirements.txt
+cd ../..
+mkdir models/sesame
+mkdir models/sesame_tokenizer
+``` -->
+
+see repo for models to download
 
 # Point of no return
 

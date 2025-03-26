@@ -10,14 +10,11 @@ pub enum Action {
     #[actionlike(DualAxis)]
     MoveDrag,
 
+    
+    Save,
     Delete,
-
+    Duplicate,
     SelectAll,
-    SelectMove,
-    SelectMoveCamera,
-    SelectScale,
-    SelectOrder,
-
     Paste,
 }
 
@@ -30,12 +27,10 @@ impl Action {
             .with(Action::SelectAll, KeyCode::ShiftLeft)
             .with(Action::SelectAll, KeyCode::ShiftRight)
             
-            .with(Action::SelectMove, MouseButton::Left)
-            .with(Action::SelectMoveCamera, MouseButton::Middle)
-            .with(Action::SelectScale, KeyCode::ShiftLeft)
-            .with(Action::SelectOrder, KeyCode::ControlLeft)
             .with(Action::Delete, KeyCode::KeyX)
+            .with(Action::Save,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyS]))
             .with(Action::Paste,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyV]))
+            .with(Action::Duplicate,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyD]))
             // f1 used to toggle editor
     }
 }
