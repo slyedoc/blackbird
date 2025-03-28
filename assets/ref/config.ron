@@ -1,13 +1,13 @@
 (
     camera_eye: (
-        -6.224913,
-        1.1899642,
-        11.339453,
+        -9.794855,
+        22.105312,
+        44.022255,
     ),
     camera_target: (
-        -5.5499477,
-        2.644751,
-        0.32662773,
+        -5.3500786,
+        8.634771,
+        14.30154,
     ),
     camera_up: (
         0.0,
@@ -15,10 +15,15 @@
         0.0,
     ),
     prefabs: [
-        /*[0]*/ (position: (2.6297662, 2.5850773, 0.0), scale: 1.0, prefab: (name: "node_7_image_2", workflow: StaticImage(image: Some("ref/node_7_image_2.png")))),
-        /*[1]*/ (position: (-0.49062398, 2.2115614, 0.1), scale: 1.0, prefab: (name: "node_7_image", workflow: StaticImage(image: Some("ref/node_7_image.png")))),
-        /*[2]*/ (position: (-4.115703, 2.2907012, 0.2), scale: 1.0, prefab: (name: "test", workflow: TextToImage(seed: 900000000, seed_random: false, prompt: "", image: Some("ref/test.png")))),
-        /*[3]*/ (position: (-4.328281, 4.4526534, 0.4), scale: 1.0, prefab: (name: "test_3", workflow: TextToImage(seed: 2900000000, seed_random: false, prompt: "", image: Some("ref/test.png")))),
-        /*[4]*/ (position: (-7.1277337, 2.4694505, 0.3), scale: 1.0, prefab: (name: "test_2", workflow: TextToImage(seed: 2900000000, seed_random: false, prompt: "", image: Some("ref/test.png")))),
+        /*[0]*/ (position: (760.92914, 129.83154, 0.0), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[1]*/ (position: (2856.8757, 300.90677, 0.1), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[2]*/ (position: (2688.573, -806.44586, 0.2), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[3]*/ (position: (-2103.204, -440.6365, 0.3), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[4]*/ (position: (0.0, -65.808495, 0.4), scale: 1.0, prefab: (name: "Prefab", workflow: TextToImage(seed: 0, seed_random: false, prompt: "", image: None))),
+        /*[5]*/ (position: (0.0, 2.5, 0.0), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[6]*/ (position: (0.0, 2.5, 0.0), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[7]*/ (position: (590.29443, 5067.0117, 0.6), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[8]*/ (position: (-2314.872, 2134.2869, 0.7), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
+        /*[9]*/ (position: (0.0, 2.5, 0.5), scale: 1.0, prefab: (name: "Prefab", workflow: StaticImage(image: None))),
     ],
 )

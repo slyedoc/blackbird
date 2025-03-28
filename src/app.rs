@@ -50,7 +50,6 @@ pub fn App() -> impl IntoView {
     );
     provide_context(user);
 
-
     //provide_context::<(Signal<ColorMode>, WriteSignal<ColorMode>)>((color_mode, set_color_mode));
 
     // App setup based on https://tailwindcss.com/plus/ui-blocks/application-ui/application-shells/stacked

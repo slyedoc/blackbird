@@ -1,20 +1,20 @@
 use crate::pipeline::{
-    prepare_billboard_bind_group, prepare_billboard_view_bind_groups, queue_billboard_texture,
     BillboardImageBindGroups, BillboardPipeline, BillboardUniform, DrawBillboard,
+    prepare_billboard_bind_group, prepare_billboard_view_bind_groups, queue_billboard_texture,
 };
 use crate::text::{
-    detect_billboard_text_color_change, extract_billboard_text, update_billboard_text_layout,
-    BillboardTextHandles,
+    BillboardTextHandles, detect_billboard_text_color_change, extract_billboard_text,
+    update_billboard_text_layout,
 };
 use crate::texture::extract_billboard_texture;
-use crate::{prelude::*, Billboard, BILLBOARD_SHADER_HANDLE};
+use crate::{BILLBOARD_SHADER_HANDLE, Billboard, prelude::*};
 use bevy::prelude::*;
 use bevy::render::camera::CameraUpdateSystem;
 use bevy::render::extract_component::{ExtractComponentPlugin, UniformComponentPlugin};
 use bevy::render::render_phase::AddRenderCommand;
 use bevy::render::render_resource::SpecializedMeshPipelines;
-use bevy::render::view::check_visibility;
 use bevy::render::view::VisibilitySystems::CheckVisibility;
+use bevy::render::view::check_visibility;
 use bevy::render::{RenderApp, RenderSet};
 use bevy::text::detect_text_needs_rerender;
 use bevy::{asset::load_internal_asset, core_pipeline::core_3d::Transparent3d, render::Render};

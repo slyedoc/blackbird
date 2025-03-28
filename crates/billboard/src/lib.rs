@@ -135,7 +135,7 @@ impl BillboardLockAxis {
 
 pub mod prelude {
     pub use crate::{
-        plugin::BillboardPlugin, text::BillboardTextBounds, BillboardDepth, BillboardLockAxis,
-        BillboardMesh, BillboardText, BillboardTexture,
+        BillboardDepth, BillboardLockAxis, BillboardMesh, BillboardText, BillboardTexture,
+        plugin::BillboardPlugin, text::BillboardTextBounds,
     };
 }

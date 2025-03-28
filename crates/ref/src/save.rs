@@ -25,16 +25,13 @@ pub fn autosave(mut commands: Commands, mut save_timer: ResMut<SaveTimer>, time:
     }
 }
 
-// save when 
+// save when
 pub fn save_on_exit(mut commands: Commands) {
     commands.send_event(Save);
 }
 
 // save the current state of the world
-pub fn save(
-    camera: Single<&LookTransform, With<Camera>>,
-    query: Query<(&Transform, &Prefab)>,
-) {
+pub fn save(camera: Single<&LookTransform, With<Camera>>, query: Query<(&Transform, &Prefab)>) {
     let mut config = RefConfig {
         camera_eye: camera.eye,
         camera_target: camera.target,

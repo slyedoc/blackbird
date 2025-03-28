@@ -3,7 +3,7 @@ use bevy::{
     transform::components::{GlobalTransform, Transform},
 };
 
-use crate::{pipeline::BillboardUniform, BillboardLockAxis};
+use crate::{BillboardLockAxis, pipeline::BillboardUniform};
 
 // TODO: Maybe add scale as uniform to shader and do this in shader?
 pub fn compute_matrix_without_rotation(

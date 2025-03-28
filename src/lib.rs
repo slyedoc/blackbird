@@ -7,6 +7,7 @@ pub mod pages;
 pub mod todos;
 
 pub mod prelude {
+    pub use chrono::NaiveDateTime;
     pub use icondata as i; // list at https://carloskiki.github.io/icondata/
     pub use leptos::Params;
     pub use leptos::prelude::*;
@@ -17,7 +18,6 @@ pub mod prelude {
         params::Params,
         path,
     };
-    pub use chrono::NaiveDateTime;
 
     pub use leptos_bevy_canvas::prelude::*;
 
@@ -25,11 +25,11 @@ pub mod prelude {
 
     cfg_if::cfg_if! {
         if #[cfg(feature = "ssr")] {
-            
+
             pub type DbPool = sqlx::PgPool;
             pub type DbPoolOptions = sqlx::postgres::PgPoolOptions;
             pub type SessionDbPool = axum_session_sqlx::SessionPgPool;
-            
+
         }
     }
 }

@@ -4,9 +4,7 @@ use wl_clipboard_rs::paste::{get_contents, ClipboardType, MimeType, Seat};
 
 use crate::{Prefab, Workflow};
 
-pub fn paste(
-    mut commands: Commands,
-) {
+pub fn paste(mut commands: Commands) {
     info!("Paste event triggered");
     use std::io::Read;
 
@@ -14,43 +12,42 @@ pub fn paste(
     match result {
         Ok((mut pipe, _)) => {
             let mut contents = vec![];
-            if let Ok(_) = pipe.read_to_end(&mut contents) {                
+            if let Ok(_) = pipe.read_to_end(&mut contents) {
                 let clipboard = String::from_utf8_lossy(&contents).to_string();
                 info!("Clipboard contents: {:?}", &clipboard);
 
                 if clipboard.ends_with(".png") {
                     let path = std::path::Path::new(&clipboard);
-                    let file_name = path.file_name()
+                    let file_name = path
+                        .file_name()
                         .and_then(|s| s.to_str())
                         .unwrap_or("clipboard_image.png")
                         .to_string();
-                    let file_stem = path.file_stem()
-                    .and_then(|s| s.to_str())
-                    .unwrap_or("clipboard_image")
-                    .to_string();
+                    let file_stem = path
+                        .file_stem()
+                        .and_then(|s| s.to_str())
+                        .unwrap_or("clipboard_image")
+                        .to_string();
 
                     let new_path = std::path::Path::new("assets/ref/").join(&file_name);
 
                     let new_asset_path = format!("ref/{}", &file_name);
                     // copy to ref assets
-                    std::fs::copy(&path, &new_path)
-                        .expect("Failed to copy file");
+                    std::fs::copy(&path, &new_path).expect("Failed to copy file");
 
-                    commands.spawn((                        
+                    commands.spawn((
                         Transform::default(),
                         Name::new(file_stem.clone()),
                         Prefab {
                             name: file_stem,
-                            workflow: Workflow::StaticImage { image: Some(new_asset_path) },
+                            workflow: Workflow::StaticImage {
+                                image: Some(new_asset_path),
+                            },
                         },
                     ));
-                        
-                }
-                else {
+                } else {
                     warn!("Clipboard contents not an image: {:?}", &clipboard);
                 }
-                
-
             }
         }
         Err(err) => {
@@ -59,13 +56,10 @@ pub fn paste(
     }
 }
 
-
 // TODO: doesnt work on wayland
-pub fn file_drop(
-    mut evr_dnd: EventReader<FileDragAndDrop>,    
-) {
+pub fn file_drop(mut evr_dnd: EventReader<FileDragAndDrop>) {
     for ev in evr_dnd.read() {
-        // TODO: on wayland this event never fires        
+        // TODO: on wayland this event never fires
         dbg!("File drop event never fire!!!!!!");
         match ev {
             FileDragAndDrop::DroppedFile { window, path_buf } => {

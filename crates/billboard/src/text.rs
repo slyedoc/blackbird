@@ -3,10 +3,10 @@ use crate::utils::calculate_billboard_uniform;
 use crate::{BillboardDepth, BillboardLockAxis, BillboardText, BillboardTextNeedsRerender};
 use bevy::color::palettes;
 use bevy::prelude::*;
+use bevy::render::Extract;
 use bevy::render::mesh::{Indices, PrimitiveTopology};
 use bevy::render::render_asset::RenderAssetUsages;
 use bevy::render::sync_world::RenderEntity;
-use bevy::render::Extract;
 use bevy::sprite::Anchor;
 use bevy::text::{
     ComputedTextBlock, CosmicFontSystem, FontAtlasSets, PositionedGlyph, SwashCache, TextBounds,

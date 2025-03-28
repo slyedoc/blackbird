@@ -55,7 +55,7 @@ pub async fn get_todos() -> Result<Vec<Todo>, ServerFnError> {
     let pool = pool()?;
 
     Ok(join_all(
-        sqlx::query_as!( SqlTodo, "SELECT * FROM todos")
+        sqlx::query_as!(SqlTodo, "SELECT * FROM todos")
             .fetch_all(&pool)
             .await?
             .iter()
@@ -77,14 +77,14 @@ pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
     // fake API delay
     std::thread::sleep(std::time::Duration::from_millis(1250));
 
-    Ok(
-        sqlx::query!("INSERT INTO todos (title, user_id, completed) VALUES ($1, $2, false)",
-            title,
-            id)            
-            .execute(&pool)
-            .await
-            .map(|_| ())?,
+    Ok(sqlx::query!(
+        "INSERT INTO todos (title, user_id, completed) VALUES ($1, $2, false)",
+        title,
+        id
     )
+    .execute(&pool)
+    .await
+    .map(|_| ())?)
 }
 
 // The struct name and path prefix arguments are optional.
@@ -92,7 +92,7 @@ pub async fn add_todo(title: String) -> Result<(), ServerFnError> {
 pub async fn delete_todo(id: i32) -> Result<(), ServerFnError> {
     let pool = pool()?;
 
-    Ok(sqlx::query!("DELETE FROM todos WHERE id = $1", id)        
+    Ok(sqlx::query!("DELETE FROM todos WHERE id = $1", id)
         .execute(&pool)
         .await
         .map(|_| ())?)

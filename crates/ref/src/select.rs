@@ -3,8 +3,6 @@ use bevy_mod_outline::OutlineVolume;
 
 use crate::Prefab;
 
-
-
 #[derive(Debug, Resource, Deref, DerefMut)]
 pub struct CurrentSelected(pub Option<Entity>);
 
@@ -26,14 +24,14 @@ pub struct Selected;
 // }
 
 pub fn on_update_select(
-    mut selected_query: Query<Entity, (Added<Selected>, With<Prefab>)>,    
+    mut selected_query: Query<Entity, (Added<Selected>, With<Prefab>)>,
     mut removed: RemovedComponents<Selected>,
-    mut images: Query<&mut OutlineVolume>,  
+    mut images: Query<&mut OutlineVolume>,
 ) {
-    for e  in selected_query.iter_mut() {
+    for e in selected_query.iter_mut() {
         if let Ok(mut outline) = images.get_mut(e) {
             outline.visible = true;
-        }        
+        }
     }
 
     removed.read().for_each(|removed_entity| {
@@ -42,5 +40,3 @@ pub fn on_update_select(
         }
     });
 }
-
-

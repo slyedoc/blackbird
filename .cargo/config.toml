@@ -1,11 +1,8 @@
 #https://doc.rust-lang.org/nightly/cargo/reference/config.html#env
 
-[alias] # command aliases
-b = ["leptos", "build"]
-r = ["leptos", "build", "--release", "--features", "all_games"]
-w = ["leptos", "watch"]
-tic = ["run", "-p", "tic_tac_toe", "--features", "editor"]
-breakout = ["run", "-p", "breakout", "--features", "editor"]
+#[alias] # command aliases
+#r = ["leptos", "build", "--release", "--features", "all_games"]
+
 
 #https://github.com/leptos-rs/leptos/issues/1059
 #https://book.leptos.dev/deployment/binary_size.html?highlight=build#things-to-do

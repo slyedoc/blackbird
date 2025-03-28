@@ -19,7 +19,7 @@ edition = "2021"
 tungstenite = "*"
 url = { version = "2.5.4" }
 uuid = { version = "*", features = ["v4"] }
-reqwest = { version = "*", features = [ "json", "blocking"] }
+reqwest = { version = "*", features = [ "json", "blocking", "multipart"] }
 
 #bevy_asset_loader = { version = "0.22", features = ["2d","3d"] }
 #bevy_common_assets = { version = "0.12", features = ["ron" ] }

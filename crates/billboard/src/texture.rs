@@ -1,14 +1,14 @@
 use bevy::{
     ecs::system::{Commands, Local, Query},
-    render::{sync_world::RenderEntity, view::ViewVisibility, Extract},
+    render::{Extract, sync_world::RenderEntity, view::ViewVisibility},
     transform::components::{GlobalTransform, Transform},
 };
 
 use crate::{
+    BillboardDepth, BillboardLockAxis, BillboardMesh, BillboardTexture,
     pipeline::{RenderBillboardImage, RenderBillboardMesh},
     text::RenderBillboard,
     utils::calculate_billboard_uniform,
-    BillboardDepth, BillboardLockAxis, BillboardMesh, BillboardTexture,
 };
 
 pub fn extract_billboard_texture(

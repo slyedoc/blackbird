@@ -10,7 +10,6 @@ pub enum Action {
     #[actionlike(DualAxis)]
     MoveDrag,
 
-    
     Save,
     Delete,
     Duplicate,
@@ -23,14 +22,22 @@ impl Action {
         InputMap::default()
             .with_axis(Action::Zoom, MouseScrollAxis::Y)
             .with_dual_axis(Action::Move, VirtualDPad::wasd())
-            .with_dual_axis(Action::MoveDrag, MouseMove::default())            
+            .with_dual_axis(Action::MoveDrag, MouseMove::default())
             .with(Action::SelectAll, KeyCode::ShiftLeft)
             .with(Action::SelectAll, KeyCode::ShiftRight)
-            
             .with(Action::Delete, KeyCode::KeyX)
-            .with(Action::Save,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyS]))
-            .with(Action::Paste,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyV]))
-            .with(Action::Duplicate,  ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyD]))
-            // f1 used to toggle editor
+            .with(
+                Action::Save,
+                ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyS]),
+            )
+            .with(
+                Action::Paste,
+                ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyV]),
+            )
+            .with(
+                Action::Duplicate,
+                ButtonlikeChord::new([KeyCode::ControlLeft, KeyCode::KeyD]),
+            )
+        // f1 used to toggle editor
     }
 }

@@ -1,5 +1,5 @@
 use crate::text::RenderBillboard;
-use crate::{Billboard, BILLBOARD_SHADER_HANDLE};
+use crate::{BILLBOARD_SHADER_HANDLE, Billboard};
 use bevy::asset::AssetId;
 use bevy::core_pipeline::core_3d::Transparent3d;
 use bevy::ecs::query::ROQueryItem;
@@ -9,8 +9,8 @@ use bevy::image::BevyDefault;
 use bevy::log::error;
 use bevy::math::Mat4;
 use bevy::prelude::{
-    default, AssetEvent, Commands, Component, Entity, FromWorld, Image, Mesh, Msaa, Query, Res,
-    ResMut, Resource, With, World,
+    AssetEvent, Commands, Component, Entity, FromWorld, Image, Mesh, Msaa, Query, Res, ResMut,
+    Resource, With, World, default,
 };
 use bevy::render::extract_component::{ComponentUniforms, DynamicUniformIndex};
 use bevy::render::mesh::allocator::MeshAllocator;

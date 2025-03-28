@@ -1,5 +1,5 @@
 mod sync_app;
-use leptos_use::{use_element_size, UseElementSizeReturn};
+use leptos_use::{UseElementSizeReturn, use_element_size};
 pub use sync_app::*;
 
 mod unidir_events;
@@ -38,58 +38,58 @@ pub enum Game {
 #[component]
 pub fn Games() -> impl IntoView {
     view! {
-      <div class="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
-    <aside class="sticky top-8 hidden w-44 shrink-0 lg:block">
-      "Left column area"
-      <ul
-      role="list"
-      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
-    >
-      {Game::iter()
-        .map(|game| {
-          view! {
-            <li>
-              <A
-                href=game.get_str("path").unwrap()
-                {..}
-                class="block overflow-hidden rounded-lg bg-gray-100 aria-[current=page]:ring-2 aria-[current=page]:ring-indigo-500 aria-[current=page]:ring-offset-2 aria-[current=page]:ring-offset-gray-100 "
-              >
-                <span class="block text-sm font-medium text-gray-900">
-                  {format!("{:?}", game)}
-                </span>
+        <div class="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
+      <aside class="sticky top-8 hidden w-44 shrink-0 lg:block">
+        "Left column area"
+        <ul
+        role="list"
+        class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+      >
+        {Game::iter()
+          .map(|game| {
+            view! {
+              <li>
+                <A
+                  href=game.get_str("path").unwrap()
+                  {..}
+                  class="block overflow-hidden rounded-lg bg-gray-100 aria-[current=page]:ring-2 aria-[current=page]:ring-indigo-500 aria-[current=page]:ring-offset-2 aria-[current=page]:ring-offset-gray-100 "
+                >
+                  <span class="block text-sm font-medium text-gray-900">
+                    {format!("{:?}", game)}
+                  </span>
 
-                // <Show when={game == } fallback=move || view! { <p>"Loading..."</p> }>
-                <span class="relative flex size-3">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
-                  <span class="relative inline-flex size-3 rounded-full bg-sky-500"></span>
-                </span>
-                // </Show>
-                <div class="w-full h-full aspect-w-16 aspect-h-9">
-                  <img src=game.get_str("img").unwrap() class="w-full h-full object-cover" />
-                </div>
-              </A>
-            </li>
-          }
-        })
-        .collect_view()}
-    </ul>
-
-
-    </aside>
-
-    <main class="flex-1">
-      "Main area"
-      <Outlet />
-    </main>
-
-    <aside class="sticky top-8 hidden w-96 shrink-0 xl:block">
-      "Right column area"
-    </aside>
-  </div>
+                  // <Show when={game == } fallback=move || view! { <p>"Loading..."</p> }>
+                  <span class="relative flex size-3">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                    <span class="relative inline-flex size-3 rounded-full bg-sky-500"></span>
+                  </span>
+                  // </Show>
+                  <div class="w-full h-full aspect-w-16 aspect-h-9">
+                    <img src=game.get_str("img").unwrap() class="w-full h-full object-cover" />
+                  </div>
+                </A>
+              </li>
+            }
+          })
+          .collect_view()}
+      </ul>
 
 
+      </aside>
 
-    }
+      <main class="flex-1">
+        "Main area"
+        <Outlet />
+      </main>
+
+      <aside class="sticky top-8 hidden w-96 shrink-0 xl:block">
+        "Right column area"
+      </aside>
+    </div>
+
+
+
+      }
 }
 
 #[derive(Params, PartialEq)]
@@ -130,20 +130,20 @@ pub fn GameProfile() -> impl IntoView {
 
     // create new event channels
     let exit_tx_signal: RwSignal<Option<LeptosEventSender<StopSignal>>> = RwSignal::new(None);
-      
+
     Effect::watch(
         move || game.get(),
         move |curr, prev, _| {
             //log::info!("Previous: {:?}, Current: {}", prev, curr);
-            if prev.is_some() {                
+            if prev.is_some() {
                 if let Some(tx) = exit_tx_signal.get_untracked() {
                     match tx.send(StopSignal) {
                         Err(_) => log::error!("StopSignal failed"),
                         _ => (),
                     };
-                }                                
+                }
             }
-            
+
             let g = curr.clone();
             spawn_local(async move {
                 // TODO: find better, delaying here to allow the previous game to stop
@@ -153,28 +153,28 @@ pub fn GameProfile() -> impl IntoView {
                 exit_tx_signal.set(Some(tx));
 
                 let app: Option<App> = match g {
-                  #[cfg(all(feature = "breakout", feature = "hydrate"))]
-                  Game::Breakout => Some(breakout::init_bevy_app()),
-                  #[cfg(all(feature = "tic_tac_toe", feature = "hydrate"))]
-                  Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
-                  #[cfg(all(feature = "cast_app", feature = "hydrate"))]
-                  Game::CastApp => Some(cast_app::init_bevy_app()),
-                  #[cfg(all(feature = "mine" , feature = "hydrate"))]
-                  Game::Mine => Some(mine::init_bevy_app()),
-                  #[allow(unreachable_patterns)]
-                  game => {
-                      log::error!("game feature '{:?}' wasn't enabled", game);
-                      None
-                  }
+                    #[cfg(all(feature = "breakout", feature = "hydrate"))]
+                    Game::Breakout => Some(breakout::init_bevy_app()),
+                    #[cfg(all(feature = "tic_tac_toe", feature = "hydrate"))]
+                    Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
+                    #[cfg(all(feature = "cast_app", feature = "hydrate"))]
+                    Game::CastApp => Some(cast_app::init_bevy_app()),
+                    #[cfg(all(feature = "mine", feature = "hydrate"))]
+                    Game::Mine => Some(mine::init_bevy_app()),
+                    #[allow(unreachable_patterns)]
+                    game => {
+                        log::error!("game feature '{:?}' wasn't enabled", game);
+                        None
+                    }
                 };
-      
+
                 if let Some(mut app) = app {
-                  app.import_event_from_leptos(bevy_rx)
-                      .add_systems(Update, stop_bevy.run_if(on_event::<StopSignal>));
-                      // delay so canvas exists
-                      request_animation_frame(move || {
-                          app.run();
-                      });
+                    app.import_event_from_leptos(bevy_rx)
+                        .add_systems(Update, stop_bevy.run_if(on_event::<StopSignal>));
+                    // delay so canvas exists
+                    request_animation_frame(move || {
+                        app.run();
+                    });
                 }
             });
         },

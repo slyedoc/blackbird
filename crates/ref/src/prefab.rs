@@ -1,19 +1,25 @@
-
-use std::collections::HashMap;
 use std::fmt::{Display, Formatter};
 use std::path::Path;
+use std::time::{Duration, Instant};
 
+use bevy::pbr::NotShadowCaster;
 use bevy::prelude::*;
-use bevy::tasks::{AsyncComputeTaskPool, Task};
 use bevy_inspector_egui::{prelude::ReflectInspectorOptions, InspectorOptions};
 use bevy_mod_outline::{OutlineMode, OutlineVolume};
+use bevy_prng::WyRand;
+use bevy_rand::global::GlobalEntropy;
 use bevy_tokio_tasks::{TaskContext, TokioTasksRuntime};
 use leafwing_input_manager::prelude::ActionState;
+use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use strum::EnumIter;
+use crate::{comfy, Action, Selected, WorkflowProgress};
+use bevy_health_bar3d::prelude::*;
 
-use crate::{comfy, Action, Selected};
+// TODO: remove need for this
+// hack to delay upating assets so reload works
+const FILE_DELAY: f32 = 1.0;
 
 #[derive(Component, Debug, Default, Clone, Reflect, Serialize, Deserialize, InspectorOptions)]
 #[reflect(Component, InspectorOptions)]
@@ -23,10 +29,17 @@ use crate::{comfy, Action, Selected};
     width: 5.0,
 }))]
 #[require(OutlineMode(|| OutlineMode::FloodFlat))]
+#[require(BarSettings::<WorkflowProgress>(|| BarSettings::<WorkflowProgress> {
+    offset: 1.5,
+    width: 2.0,
+    ..default()
+}))]
 pub struct Prefab {
     pub name: String,
     pub workflow: Workflow,
-} 
+}
+
+
 
 #[derive(Component, EnumIter, PartialEq, Reflect, Debug, Clone, Serialize, Deserialize)]
 #[reflect(Component)]
@@ -44,6 +57,7 @@ pub enum Workflow {
         seed: u32,
         seed_random: bool,
         prompt: String,
+        num_faces: u32,
         image: Option<String>,
         model: Option<String>,
     },
@@ -55,7 +69,6 @@ impl Default for Workflow {
     }
 }
 
-
 impl Display for Workflow {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -66,43 +79,15 @@ impl Display for Workflow {
     }
 }
 
-#[derive(Component)]
-pub struct ComfyImageTask(pub Task<HashMap<String, Vec<Vec<u8>>>>);
-
-
-// impl ReloadImageTask {
-//     fn new(asset_processsor: &AssetProcessor) -> Self {
-//         let thread_pool = AsyncComputeTaskPool::get();
-//         let proc = asset_processsor.clone();
-//         let task = thread_pool.spawn(async move {
-//             // wait before we start checking so file watcher has time to detect the change
-//             task::sleep(Duration::from_secs_f32(0.1)).await;
-//             // check the status
-//             let status = proc.get_state().await;
-//             status
-//         });
-//         Self(task)
-//     }
-
-//     fn retry(&mut self, asset_processsor: &AssetProcessor) {
-//         let thread_pool = AsyncComputeTaskPool::get();
-//         let proc = asset_processsor.clone();
-//         let task = thread_pool.spawn(async move {
-//             let status = proc.get_state().await;
-//             status
-//         });
-//         self.0 = task;
-//     }
-// }
-
 pub fn on_add_prefab(
     mut commands: Commands,
-    added_query: Query<(Entity, &Prefab), Added<Prefab>>,
+    added_query: Query<(Entity, &Prefab)>,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
     asset_server: Res<AssetServer>,
 ) {
     for (entity, prefab) in added_query.iter() {
+
         commands
             .entity(entity)
             .observe(on_drag)
@@ -110,7 +95,9 @@ pub fn on_add_prefab(
             .observe(on_duplicate)
             .observe(on_delete)
             .observe(on_rename)
-            .observe(on_generate);
+            .observe(on_generate)
+            .observe(on_refresh_image)
+            .observe(on_refresh_model);
 
         let (image, model) = match &prefab.workflow {
             Workflow::TextToImage { image, .. } => (image.clone(), None),
@@ -123,15 +110,33 @@ pub fn on_add_prefab(
             None => Handle::<Image>::default(),
         };
 
-        commands.entity(entity).insert((
-            Mesh3d(meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(1.0)))),
-            MeshMaterial3d(materials.add(StandardMaterial {
-                base_color_texture: Some(image_handle.clone()),
-                alpha_mode: AlphaMode::Blend,
-                unlit: true,
-                ..default()
-            })),
-        ));
+        let e = commands
+            .entity(entity)
+            .insert((
+                NotShadowCaster,
+                Mesh3d(meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(1.0)))),
+                MeshMaterial3d(materials.add(StandardMaterial {
+                    base_color_texture: Some(image_handle.clone()),
+                    alpha_mode: AlphaMode::Blend,
+                    unlit: true,
+                    ..default()
+                })),
+            ))
+            .id();
+
+        let model_entity = commands
+            .spawn((
+                Name::new("Model"),
+                Transform::from_translation(Vec3::new(0.0, -3.0, 0.0)),
+            ))
+            .set_parent(e)
+            .id();
+
+        if let Some(model) = model {
+            commands.entity(model_entity).insert(SceneRoot(
+                asset_server.load(GltfAssetLabel::Scene(0).from_asset(model)),
+            ));
+        }
     }
 }
 
@@ -152,14 +157,19 @@ fn on_select(
     for (e, selected) in query.iter_mut() {
         if e == target.target {
             if selected.is_none() {
-                commands.entity(e).insert(Selected);
+                commands.entity(e).insert(
+                    Selected
+                );
             }
         } else {
             if !actions.pressed(&Action::SelectAll) {
                 if selected.is_some() {
-                    commands.entity(e).remove::<Selected>();
+                    commands.entity(e)
+                    .remove::<Selected>();
                 }
+                
             }
+            
         }
     }
 }
@@ -188,15 +198,22 @@ fn on_duplicate(
     new_prefab.name = new_name.clone();
 
     match &mut new_prefab.workflow {
-        Workflow::TextToImage { .. } => {
-            info!("TextToImage: {:?}", new_prefab);
-        }
-        Workflow::TextToModel { .. } => {
-            info!("TextToModel: {:?}", new_prefab);
-        }
         Workflow::StaticImage { image } => {
             if let Some(img) = image {
-                *img = update_image(&img, &new_prefab.name, true);
+                *img = copy_asset(&img, &new_prefab.name);
+            }
+        }
+        Workflow::TextToImage { image, .. } => {
+            if let Some(img) = image {
+                *img = copy_asset(&img, &new_prefab.name);
+            }
+        }
+        Workflow::TextToModel { image, model, .. } => {
+            if let Some(img) = image {
+                *img = copy_asset(&img, &new_prefab.name);
+            }
+            if let Some(m) = model {
+                *m = copy_asset(&m, &new_prefab.name);
             }
         }
     }
@@ -209,7 +226,7 @@ fn on_duplicate(
 }
 
 /// can be used to copy or rename the image, delete meta file
-fn update_image(img: &String, name: &String, copy: bool) -> String {
+fn copy_asset(img: &String, name: &String) -> String {
     let asset_path = Path::new("./assets/");
 
     let image_path = Path::new(&img);
@@ -221,17 +238,30 @@ fn update_image(img: &String, name: &String, copy: bool) -> String {
 
     let src = asset_path.join(&image_path);
     let dst = asset_path.join(&new_image_path);
-    if copy {
-        dbg!("Copying image from {:?} to {:?}", &src, &dst);
-        std::fs::copy(&src, &dst).unwrap_or_default();
-    } else {
-        dbg!("Renaming image from {:?} to {:?}", &src, &dst);
-        std::fs::rename(&src, &dst).unwrap_or_default();
-    }
-    // delete meta file
-    // let meta_path = format!("{}.meta", &src.to_str().unwrap());
-    // dbg!("Deleting meta file {:?}", &meta_path);
-    // std::fs::remove_file(meta_path).unwrap_or_default();
+
+    dbg!("Copying asset from {:?} to {:?}", &src, &dst);
+    std::fs::copy(&src, &dst).unwrap_or_default();
+
+    let path = new_image_path.to_str().unwrap().to_string();
+    path
+}
+
+fn rename_asset(img: &String, name: &String) -> String {
+    let asset_path = Path::new("./assets/");
+
+    let image_path = Path::new(&img);
+    let file_ext = image_path
+        .extension()
+        .and_then(|s| s.to_str())
+        .unwrap_or("png");
+    let new_image_path = Path::new("ref").join(format!("{}.{}", name, file_ext));
+
+    let src = asset_path.join(&image_path);
+    let dst = asset_path.join(&new_image_path);
+
+    dbg!("Renaming asset from {:?} to {:?}", &src, &dst);
+    std::fs::rename(&src, &dst).unwrap_or_default();
+
     let path = new_image_path.to_str().unwrap().to_string();
     path
 }
@@ -255,18 +285,22 @@ fn on_delete(trigger: Trigger<Delete>, mut commands: Commands, query: Query<&Pre
     let prefab = query.get(entity).unwrap();
 
     match &prefab.workflow {
-        Workflow::TextToImage { .. } => {
-            dbg!("TODO: TextToImage {:?}", prefab);
-        }
-        Workflow::TextToModel { .. } => {
-            dbg!("TODO: TextToModel: {:?}", prefab);
-        }
         Workflow::StaticImage { image } => {
             if let Some(img) = image {
-                let path = std::path::Path::new("assets").join(img);
-                if path.exists() {
-                    std::fs::remove_file(path).unwrap_or_default();
-                }
+                std::fs::remove_file(Path::new("assets").join(img)).unwrap_or_default();
+            }
+        }
+        Workflow::TextToImage { image, .. } => {
+            if let Some(img) = image {
+                std::fs::remove_file(Path::new("assets").join(img)).unwrap_or_default();
+            }
+        }
+        Workflow::TextToModel { image, model, .. } => {
+            if let Some(img) = image {
+                std::fs::remove_file(Path::new("assets").join(img)).unwrap_or_default();
+            }
+            if let Some(m) = model {
+                std::fs::remove_file(Path::new("assets").join(m)).unwrap_or_default();
             }
         }
     }
@@ -277,18 +311,10 @@ fn on_delete(trigger: Trigger<Delete>, mut commands: Commands, query: Query<&Pre
 #[derive(Event)]
 pub struct Rename(pub String);
 
-pub fn on_rename(
-    trigger: Trigger<Rename>,
-    mut query: Query<&mut Prefab>,
-) {
+pub fn on_rename(trigger: Trigger<Rename>, mut query: Query<&mut Prefab>) {
     let entity = trigger.entity();
     let mut new_name = trigger.0.clone();
-
-    let names = query
-        .iter()
-        .map(|p| p.name.clone())
-        .collect::<Vec<_>>();
-
+    let names = query.iter().map(|p| p.name.clone()).collect::<Vec<_>>();
     new_name = create_unique_name(&new_name, names);
 
     let mut prefab = query.get_mut(entity).unwrap();
@@ -297,26 +323,23 @@ pub fn on_rename(
     match &mut prefab.workflow {
         Workflow::TextToImage { image, .. } => {
             if let Some(img) = image {
-                let image_path = update_image(&img, &new_name, false);
-                *img = image_path.clone();
+                *img = rename_asset(&img, &new_name);
             }
         }
-        Workflow::TextToModel { image, .. } => {
+        Workflow::TextToModel { image, model, .. } => {
             if let Some(img) = image {
-                let image_path = update_image(&img, &new_name, false);
-                *img = image_path.clone();
+                *img = rename_asset(&img, &new_name);
+            }
+            if let Some(m) = model {
+                *m = rename_asset(&m, &new_name);
             }
         }
         Workflow::StaticImage { image } => {
             if let Some(img) = image {
-                let image_path = update_image(&img, &new_name, false);
-                *img = image_path.clone();
+                *img = rename_asset(&img, &new_name);
             }
         }
     }
-    // rename image
-
-    //prefab.name = new_name.clone();
 }
 
 fn create_unique_name(new_name: &String, names: Vec<String>) -> String {
@@ -335,150 +358,347 @@ fn create_unique_name(new_name: &String, names: Vec<String>) -> String {
     new_name
 }
 
-// #[derive(Component)]
-// pub struct ReloadImageTask(pub Task<ProcessorState>);
-
-// impl ReloadImageTask {
-//     fn new(asset_processsor: &AssetProcessor) -> Self {
-//         let thread_pool = AsyncComputeTaskPool::get();
-//         let proc = asset_processsor.clone();
-//         let task = thread_pool.spawn(async move {
-//             // wait before we start checking so file watcher has time to detect the change
-//             task::sleep(Duration::from_secs_f32(0.1)).await;
-//             // check the status
-//             let status = proc.get_state().await;
-//             status
-//         });
-//         Self(task)
-//     }
-
-//     fn retry(&mut self, asset_processsor: &AssetProcessor) {
-//         let thread_pool = AsyncComputeTaskPool::get();
-//         let proc = asset_processsor.clone();
-//         let task = thread_pool.spawn(async move {
-//             let status = proc.get_state().await;
-//             status
-//         });
-//         self.0 = task;
-//     }
-// }
-
-// pub fn check_reload_image(
-//     mut commands: Commands,
-//     asset_processsor: Res<AssetProcessor>,
-//     mut tasks: Query<(Entity, &Prefab, &mut MeshMaterial3d<StandardMaterial>, &mut ReloadImageTask)>,
-//     mut materials: ResMut<Assets<StandardMaterial>>,
-//     asset_server: Res<AssetServer>,
-// ) {
-//     // check for existing tasks
-//     for (e, prefab, mat, mut task) in tasks.iter_mut() {
-//         dbg!("Checking task {:?}", e);
-//         // check the status, if complete, remove the task
-//         if let Some(status) = block_on(future::poll_once(&mut task.0)) {
-//             dbg!( status == ProcessorState::Finished );
-//             if status == ProcessorState::Finished {
-//                 commands.entity(e).remove::<ReloadImageTask>();
-//                 // reload the image
-//                 dbg!("Reloading image if any");
-//                 if let Some(image) = &prefab.image {
-//                     dbg!("Reloading image {:?}", image);
-//                     let asset_path = Path::new("./assets/");
-//                     if !std::fs::exists( asset_path.join(image) ).unwrap() {
-//                         error!("image not found");
-//                     } else {
-//                         info!("image found");
-//                     }
-//                     let image_handle: Handle<Image> = asset_server.load(image);
-//                     let mat = materials.get_mut(&mat.0).unwrap();
-//                     mat.base_color_texture = Some(image_handle.clone());
-//                 }
-//             }
-//             else {
-//                 dbg!("retry task");
-//                 task.retry(&asset_processsor);
-//             }
-//         } else {
-//             // task is still running
-//             dbg!("Task still running");
-//         }
-//     }
-// }
-
+// each prefab workflow can be made up of multiple stages, if none are selected, runs all stages
 #[derive(Event)]
-pub struct Generate;
+pub struct Generate(pub Option<u8>);
 
-pub fn on_generate(trigger: Trigger<Generate>, mut query: Query<&mut Prefab>, runtime: ResMut<TokioTasksRuntime>) {
+// TODO: setup history tracking, or progress from api
+const IMAGE_TIME: f32 = 10.0;
+const MODEL_TIME: f32 = 90.0;
 
+pub fn on_generate(
+    trigger: Trigger<Generate>,
+    mut query: Query<&mut Prefab>,
+    runtime: ResMut<TokioTasksRuntime>,
+    mut rng: GlobalEntropy<WyRand>,
+    mut commands: Commands,
+) {
     let mut prefab = query.get_mut(trigger.entity()).unwrap();
     let e = trigger.entity();
+    let stage = trigger.0;
     let name = prefab.name.clone();
     match &mut prefab.workflow {
         Workflow::StaticImage { .. } => {}
-        Workflow::TextToImage { image, seed, .. } => {
-            // Create a reqwest client.
-
-
-
-            // // Set the seed for our KSampler node.
-            // if let Some(seed_value) = prompt.pointer_mut("/3/inputs/seed") {
-            //     *seed_value = Value::Number(serde_json::Number::from(5));
-            // }
-            let image_path = match image {
-                Some(img) => img.clone(),
-                None => {
-                    Path::new("ref").join(format!("{}.png", name)).to_str().unwrap().to_string()                    
-                }
-            };
-            let seed = seed.clone();
-            runtime.spawn_background_task(async move |mut ctx: TaskContext| {                       
-                // JSON prompt text.
-                let prompt_text = include_str!("workflows/ref_image_gen.json");
-
-                // Parse the prompt JSON.
-                let mut prompt: Value = serde_json::from_str(prompt_text).unwrap();
-                            // Set the text prompt for our positive CLIPTextEncode.
-                if let Some(text_value) = prompt.pointer_mut("/9/inputs/seed") {
-                     *text_value = json!(seed);
-                } else {
-                    panic!("Failed to set seed");
-                }
-
-
-                // Connect to the websocket.
-                let (client, client_id, mut ws) = comfy::connect_comfy().await.unwrap();
-
-                // Wait for execution to complete and download the images.
-                let images = comfy::get_images(&mut ws, &client, &prompt, &client_id).await.unwrap();
-
-                ws.close(None).await.unwrap();   
-                assert!(images.len() == 1, "No images generated");        
-
-                for (_node_id, images_vec) in images.iter() {
-                    for (_i, image_data) in images_vec.iter().enumerate() {
-                        let file_path = Path::new("assets").join(&image_path);
-                        tokio::fs::write(&file_path, image_data).await.unwrap();
-                        info!("Saved image to {:?}", file_path);
-                    }
-                }
-
-                ctx.run_on_main_thread(move |ctx| {                    
-                    if let Some(mut p) = ctx.world.get_mut::<Prefab>(e) {
-                        match &mut p.workflow {
-                            Workflow::TextToImage { image, .. } => {
-                                *image = Some(image_path.clone());                                    
-                            }
-                            _ => {}
-                        }
-                    }
-                }).await;
-                dbg!("generated images: {}", images.len());
+        Workflow::TextToImage {
+            image,
+            seed,
+            seed_random,
+            prompt,
+        } => {
+            commands.entity(e).insert(WorkflowProgress {
+                timer: Timer::new(Duration::from_secs_f32(IMAGE_TIME), TimerMode::Once),
             });
 
-
-            
+            let start = Instant::now();
+            // only 1 stage here
+            let image_path = get_image_path(&name, image);
+            let new_seed = update_seed(&mut rng, seed, seed_random);
+            let prompt = prompt.clone();
+            runtime.spawn_background_task(async move |mut ctx| {
+                generate_image(&name, &image_path, new_seed, &prompt)
+                    .await
+                    .unwrap();
+                
+                tokio::time::sleep(Duration::from_secs_f32(FILE_DELAY)).await;
+                
+                ctx.run_on_main_thread(move |ctx| {
+                    ctx.world.trigger_targets(RefreshImage(image_path.clone()), e);
+                    ctx.world.entity_mut(e).remove::<WorkflowProgress>();
+                    let end = Instant::now();
+                    info!("TextToImage generated in {:?}", end.duration_since(start));
+                }).await;
+            });
         }
         Workflow::TextToModel {
-            ..
-        } => {},
-    }        
+            image,
+            seed,
+            seed_random,
+            prompt,
+            model,
+            num_faces,
+        } => {
+            commands.entity(e).insert(WorkflowProgress {
+                timer: Timer::new(
+                    Duration::from_secs_f32(match stage {
+                        Some(x) => match x {
+                            0 => IMAGE_TIME,
+                            1 => MODEL_TIME,
+                            _ => IMAGE_TIME + MODEL_TIME,
+                        },
+                        None => IMAGE_TIME + MODEL_TIME,
+                    }),
+                    TimerMode::Once,
+                ),
+            });
+            let start = Instant::now();
+
+            let image_path = get_image_path(&name, image);
+            let model_path = get_model_path(&name, model);
+            let new_seed = update_seed(&mut rng, seed, seed_random);
+            let prompt = prompt.clone();
+            let num_faces = *num_faces;
+            runtime.spawn_background_task(async move |mut ctx: TaskContext| {
+                // if stage is None, or stage == Some(0) run image
+                if stage.is_none() || stage == Some(0) {
+                    generate_image(&name, &image_path, new_seed, &prompt)
+                        .await
+                        .unwrap();
+                        
+                    tokio::time::sleep(Duration::from_secs_f32(FILE_DELAY)).await;
+
+                    let image_path_c = image_path.clone();
+                    ctx.run_on_main_thread(move |ctx| {
+                        ctx.world
+                            .trigger_targets(RefreshImage(image_path_c.clone()), e);
+
+                        let stage0 = Instant::now();
+                        info!("TextToImage stage 0 in {:?}", stage0.duration_since(start));
+                    })
+                    .await;
+                }
+
+                if stage.is_none() || stage == Some(1) {
+                    generate_model(&name, &image_path, &model_path, new_seed, num_faces)
+                        .await
+                        .unwrap();
+
+                    tokio::time::sleep(Duration::from_secs_f32(FILE_DELAY)).await;
+
+                    ctx.run_on_main_thread(move |ctx| {
+                        ctx.world
+                            .trigger_targets(RefreshModel(model_path.clone()), e);
+                        let end = Instant::now();
+                        info!("TextToImage generated in {:?}", end.duration_since(start));
+                    })
+                    .await;
+                }
+                ctx.run_on_main_thread(move |ctx| {
+                    ctx.world.entity_mut(e).remove::<WorkflowProgress>();
+                })
+                .await;
+            });
+        }
+    }
+}
+
+async fn generate_image(
+    name: &String,
+    image_path: &String,
+    new_seed: u32,
+    prompt: &String,
+) -> Result<(), Box<dyn std::error::Error>> {
+    // Parse the JSON workflow.
+    let mut workflow: Value = serde_json::from_str(include_str!("workflows/ref_image_gen.json"))?;
+
+    // update the seed
+    if let Some(text_value) = workflow.pointer_mut("/9/inputs/seed") {
+        *text_value = json!(new_seed);
+    }
+    // update the prompt text
+    if let Some(text_value) = workflow.pointer_mut("/11/inputs/text") {
+        *text_value = json!(prompt);
+    }
+    // update save_path
+    if let Some(text_value) = workflow.pointer_mut("/13/inputs/value") {
+        *text_value = json!(name);
+    }
+
+    // Connect to the websocket.
+    let (client, client_id, mut ws) = comfy::connect_comfy().await.unwrap();
+
+    // Wait for execution to complete and download the images.
+    let images = comfy::get_images(&mut ws, &client, &workflow, &client_id).await?;
+    assert!(images.len() == 1, "Wrong number of images generated");
+
+    ws.close(None).await?;
+
+    for (_node_id, images_vec) in images.iter() {
+        for (_i, image_data) in images_vec.iter().enumerate() {
+            let file_path = Path::new("assets").join(&image_path);
+            tokio::fs::write(&file_path, image_data).await?;
+        }
+    }
+    Ok(())
+}
+
+async fn generate_model(
+    name: &String,
+    image_path: &String,
+    model_path: &String,
+    new_seed: u32,
+    num_faces: u32,
+) -> Result<(), Box<dyn std::error::Error>> {
+    // Parse the JSON workflow.
+    let mut workflow: Value = serde_json::from_str(include_str!("workflows/ref_3d_gen.json"))?;
+
+    // update the seed gen mesh
+    if let Some(text_value) = workflow.pointer_mut("/141/inputs/seed") {
+        *text_value = json!(new_seed);
+    }
+
+    // update input image with what we call it when we upload it
+    let filename = Path::new(&image_path)
+        .file_name()
+        .unwrap()
+        .to_string_lossy()
+        .to_string();
+    if let Some(text_value) = workflow.pointer_mut("/174/inputs/image") {
+        *text_value = json!(&filename);
+    }
+
+    // update save_path
+    if let Some(text_value) = workflow.pointer_mut("/175/inputs/value") {
+        *text_value = json!(name);
+    }
+
+    if let Some(text_value) = workflow.pointer_mut("/59/inputs/max_facenum") {
+        *text_value = json!(num_faces);
+    }
+
+    // "59": {
+    //     "inputs": {
+    //       "remove_floaters": true,
+    //       "remove_degenerate_faces": true,
+    //       "reduce_faces": true,
+    //       "max_facenum": 50000,
+
+    // Connect to the websocket.
+    let (client, client_id, mut ws) = comfy::connect_comfy().await.unwrap();
+
+    // upload image
+    let file_path = Path::new("assets")
+        .join(&image_path)
+        .to_string_lossy()
+        .to_string();
+    comfy::upload_image(&client, file_path, filename.clone())
+        .await
+        .unwrap();
+    // Wait for execution to complete and download the images.
+    let models = comfy::get_models(&mut ws, &client, &workflow, &client_id, "154").await?;
+
+    ws.close(None).await?;
+    //dbg!("models", &models);
+    assert!(models.len() == 1, "Wrong number of models generated");
+
+    for (_node_id, images_vec) in models.iter() {
+        for (_i, image_data) in images_vec.iter().enumerate() {
+            let file_path = Path::new("assets").join(&model_path);
+            tokio::fs::write(&file_path, image_data).await?;
+            info!("Saved model to {:?}", file_path);
+        }
+    }
+    Ok(())
+}
+
+fn get_image_path(name: &String, image: &Option<String>) -> String {
+    let path = match image {
+        Some(img) => img.clone(),
+        None => Path::new("ref")
+            .join(format!("{}.png", name))
+            .to_str()
+            .unwrap()
+            .to_string(),
+    };
+    path
+}
+
+fn get_model_path(name: &String, model: &Option<String>) -> String {
+    let path = match model {
+        Some(img) => img.clone(),
+        None => Path::new("ref")
+            .join(format!("{}.glb", name))
+            .to_str()
+            .unwrap()
+            .to_string(),
+    };
+    path
+}
+
+// creates new seed and sets it if needed, returns the new seed
+fn update_seed(
+    rng: &mut bevy_rand::prelude::Entropy<WyRand>,
+    seed: &mut u32,
+    seed_random: &mut bool,
+) -> u32 {
+    let new_seed = if *seed_random {
+        let x = rng.r#gen::<u32>();
+        *seed = x;
+        x
+    } else {
+        *seed
+    };
+    new_seed
+}
+
+// called when there is a new Image available
+#[derive(Event)]
+pub struct RefreshImage(pub String);
+
+pub fn on_refresh_image(
+    trigger: Trigger<RefreshImage>,
+    mut query: Query<(&mut Prefab, &MeshMaterial3d<StandardMaterial>)>,
+    mut materials: ResMut<Assets<StandardMaterial>>,
+    asset_server: Res<AssetServer>,
+) {
+    let entity = trigger.entity();
+    let (mut p, mat_handle) = query.get_mut(entity).unwrap();
+    // update the image in the prefab
+    //let mut changed = false;
+    match &mut p.workflow {
+        Workflow::TextToModel { image, .. } => {
+            if *image != Some(trigger.0.clone()) {
+                //changed = true;
+                *image = Some(trigger.0.clone());
+            }
+        }
+        Workflow::TextToImage { image, .. } => {
+            if *image != Some(trigger.0.clone()) {
+                //changed = true;
+                *image = Some(trigger.0.clone());
+            }
+        }
+        _ => unreachable!(),
+    }
+
+    // TODO: shouldnt need to do this, but not reloading not working without
+    // update the material
+    //if changed {
+    //     warn!("Updating image {:?}", &trigger.0);
+         let mat = materials.get_mut(&mat_handle.0).unwrap();
+         mat.base_color_texture = Some(asset_server.load(&trigger.0));
+    //}
+}
+
+#[derive(Event)]
+pub struct RefreshModel(pub String);
+
+pub fn on_refresh_model(
+    trigger: Trigger<RefreshModel>,
+    mut query: Query<(&mut Prefab, &Children)>,
+    //mut scene_query: Query<&SceneRoot>,
+    asset_server: Res<AssetServer>,
+    mut commands: Commands,
+) {
+    let entity = trigger.entity();
+    let (mut p, children) = query.get_mut(entity).unwrap();
+    //let mut changed = false;
+    // update path
+    match &mut p.workflow {
+        Workflow::TextToModel { model, .. } => {
+            if *model != Some(trigger.0.clone()) {
+                //changed = true;
+                *model = Some(trigger.0.clone());
+            }
+        }
+        _ => unreachable!(),
+    }
+
+    // update the model
+    // TODO: shouldnt need to do this
+    //if changed {
+        let child = children[0];
+        commands.entity(child).insert(SceneRoot(
+            asset_server.load(GltfAssetLabel::Scene(0).from_asset(trigger.0.clone())),
+        ));
+    //}
 }

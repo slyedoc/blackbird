@@ -29,25 +29,25 @@ impl Default for User {
 cfg_if! {
     if #[cfg(feature = "ssr")] {
         use crate::prelude::*;
-        
+
         pub use axum_session_auth::{Authentication, HasPermission};
         pub type AuthSession = axum_session_auth::AuthSession<User, i32, SessionDbPool, DbPool>;
-        
+
         pub use async_trait::async_trait;
         pub use bcrypt::{hash, verify, DEFAULT_COST};
 
         impl User {
             pub async fn get_with_passhash(id: i32, pool: &DbPool) -> Option<(Self, UserPasshash)> {
-                let sqluser = sqlx::query_as!( SqlUser, "SELECT * FROM users WHERE id = $1", id)                    
+                let sqluser = sqlx::query_as!( SqlUser, "SELECT * FROM users WHERE id = $1", id)
                     .fetch_one(pool)
                     .await
                     .ok()?;
 
                 //lets just get all the tokens the user can use, we will only use the full permissions if modifying them.
-                let sql_user_perms = sqlx::query_as!(SqlPermissionTokens, 
+                let sql_user_perms = sqlx::query_as!(SqlPermissionTokens,
                     "SELECT token FROM user_permissions WHERE user_id = $1",
                     id
-                )                
+                )
                 .fetch_all(pool)
                 .await
                 .ok()?;
@@ -65,16 +65,16 @@ cfg_if! {
                 name: String,
                 pool: &DbPool,
             ) -> Option<(Self, UserPasshash)> {
-                let sqluser = sqlx::query_as!( SqlUser, "SELECT * FROM users WHERE username = $1", name)                    
+                let sqluser = sqlx::query_as!( SqlUser, "SELECT * FROM users WHERE username = $1", name)
                     .fetch_one(pool)
                     .await
                     .ok()?;
 
                 //lets just get all the tokens the user can use, we will only use the full permissions if modifying them.
-                let sql_user_perms = sqlx::query_as!(SqlPermissionTokens, 
+                let sql_user_perms = sqlx::query_as!(SqlPermissionTokens,
                     "SELECT token FROM user_permissions WHERE user_id = $1",
                     sqluser.id
-                )                
+                )
                 .fetch_all(pool)
                 .await
                 .ok()?;
@@ -219,12 +219,14 @@ pub async fn signup(
 
     let password_hashed = hash(password, DEFAULT_COST).unwrap();
 
-    sqlx::query!("INSERT INTO users (email, username, password) VALUES ($1,$2,$3)",
+    sqlx::query!(
+        "INSERT INTO users (email, username, password) VALUES ($1,$2,$3)",
         email.clone(),
-     username.clone(),
-      password_hashed)        
-        .execute(&pool)
-        .await?;
+        username.clone(),
+        password_hashed
+    )
+    .execute(&pool)
+    .await?;
 
     let user = User::get_from_username(username, &pool)
         .await

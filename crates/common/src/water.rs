@@ -1,4 +1,7 @@
-use bevy::{prelude::*, render::render_resource::{AsBindGroup, ShaderRef}, };
+use bevy::{
+    prelude::*,
+    render::render_resource::{AsBindGroup, ShaderRef},
+};
 use bevy_inspector_egui::{inspector_options::std_options::*, prelude::*};
 pub struct WaterPlugin;
 
@@ -9,7 +12,7 @@ impl Plugin for WaterPlugin {
             // but the meshes using it should not contribute to the prepass render, so we can disable it.
             prepass_enabled: true,
             ..default()
-        })        
+        })
         .register_type::<WaterMaterial>();
     }
 }

@@ -1166,6 +1166,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_health_bar3d"
+version = "3.4.0"
+source = "git+https://github.com/sparten11740/bevy_health_bar3d?branch=main#fe4c39747a8eba7187fb83add8c2966b698f83f8"
+dependencies = [
+ "bevy",
+ "ordered-float 3.9.2",
+]
+
+[[package]]
 name = "bevy_heavy"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5944,6 +5953,15 @@ dependencies = [
 
 [[package]]
 name = "ordered-float"
+version = "3.9.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f1e1c390732d15f1d48471625cd92d154e66db2c56645e29a9cd26f4699f72dc"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
+name = "ordered-float"
 version = "4.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7bb71e1b3fa6ca1c61f383464aaf2bb0e2f8e772a1f01d486832464de363b951"
@@ -6021,7 +6039,7 @@ dependencies = [
  "nalgebra",
  "num-derive",
  "num-traits",
- "ordered-float",
+ "ordered-float 4.6.0",
  "rayon",
  "rstar",
  "rustc-hash 2.1.1",
@@ -6048,7 +6066,7 @@ dependencies = [
  "nalgebra",
  "num-derive",
  "num-traits",
- "ordered-float",
+ "ordered-float 4.6.0",
  "rayon",
  "rstar",
  "rustc-hash 2.1.1",
@@ -6659,6 +6677,7 @@ dependencies = [
  "js-sys",
  "log",
  "mime",
+ "mime_guess",
  "native-tls",
  "once_cell",
  "percent-encoding",
@@ -6671,11 +6690,13 @@ dependencies = [
  "system-configuration",
  "tokio",
  "tokio-native-tls",
+ "tokio-util",
  "tower 0.5.2",
  "tower-service",
  "url",
  "wasm-bindgen",
  "wasm-bindgen-futures",
+ "wasm-streams",
  "web-sys",
  "windows-registry",
 ]
@@ -7293,11 +7314,14 @@ dependencies = [
  "bevy",
  "bevy-inspector-egui",
  "bevy-tokio-tasks",
+ "bevy_health_bar3d",
  "bevy_infinite_grid",
  "bevy_mod_outline",
+ "bevy_prng",
+ "bevy_rand",
  "billboard",
- "disqualified",
  "leafwing-input-manager",
+ "rand",
  "reqwest",
  "ron",
  "serde",
@@ -7307,6 +7331,7 @@ dependencies = [
  "strum_macros",
  "tokio",
  "tokio-tungstenite",
+ "tokio-util",
  "url",
  "uuid",
  "wl-clipboard-rs",
@@ -8126,8 +8151,12 @@ checksum = "6b9590b93e6fcc1739458317cccd391ad3955e2bde8913edf6f95f9e65a8f034"
 dependencies = [
  "bytes",
  "futures-core",
+ "futures-io",
  "futures-sink",
+ "futures-util",
+ "hashbrown 0.14.5",
  "pin-project-lite",
+ "slab",
  "tokio",
 ]
 

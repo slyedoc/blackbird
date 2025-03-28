@@ -3,16 +3,10 @@
 #[cfg(feature = "avian3d")]
 use avian3d::{debug_render::PhysicsDebugPlugin, prelude::*};
 use bevy::{
-    color::palettes::{css, tailwind},
-    dev_tools::ui_debug_overlay::DebugUiPlugin,
-    diagnostic::FrameTimeDiagnosticsPlugin,
-    input::common_conditions::{input_just_pressed, input_toggle_active},
-    pbr::{
+    color::palettes::{css, tailwind}, dev_tools::ui_debug_overlay::DebugUiPlugin, diagnostic::FrameTimeDiagnosticsPlugin, gizmos::light::LightGizmoPlugin, input::common_conditions::{input_just_pressed, input_toggle_active}, pbr::{
         irradiance_volume::IrradianceVolume,
         wireframe::{WireframeConfig, WireframePlugin},
-    },
-    picking::pointer::PointerInteraction,
-    prelude::*,
+    }, picking::pointer::PointerInteraction, prelude::*
 };
 use bevy_inspector_egui::quick::{ResourceInspectorPlugin, WorldInspectorPlugin};
 
@@ -24,7 +18,7 @@ mod stepping;
 pub use stepping::*;
 
 pub mod prelude {
-    pub use crate::{selected::*, stepping::*, *};    
+    pub use crate::{selected::*, stepping::*, *};
 }
 
 #[cfg(feature = "fps")]
@@ -51,7 +45,6 @@ impl Plugin for SlyEditorPlugin {
                 .at(Val::Percent(35.0), Val::Percent(50.0)),
             EditorSelectedPlugin,
             #[cfg(feature = "fps")]
-            #[cfg(feature = "fps")]
             FpsPlugin,
         ))
         .init_state::<EditorState>()
@@ -62,7 +55,7 @@ impl Plugin for SlyEditorPlugin {
             Update,
             (
                 toggle_editor.run_if(input_toggle_active(false, KeyCode::Backquote)),
-                toggle_ui_overlay.run_if(input_just_pressed(KeyCode::F2)),        
+                toggle_ui_overlay.run_if(input_just_pressed(KeyCode::F2)),
                 toggle_physics.run_if(input_just_pressed(KeyCode::F2)),
                 toggle_wireframe.run_if(input_just_pressed(KeyCode::F3)),
                 toggle_aabb.run_if(input_just_pressed(KeyCode::F4)),

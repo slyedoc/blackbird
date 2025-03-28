@@ -18,7 +18,7 @@ pub fn init_bevy_app() -> App {
             ..default()
         },
         MeshPickingPlugin,
-        EntropyPlugin::<WyRand>::default(),        
+        EntropyPlugin::<WyRand>::default(),
     ))
     .add_systems(Startup, (setup_scene,))
     .add_systems(Update, (change_name.run_if(input_pressed(KeyCode::Enter)),));
