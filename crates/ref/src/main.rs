@@ -1,13 +1,15 @@
 #![feature(trivial_bounds)]
 mod actions;
-use std::path::PathBuf;
+use std::{f32::consts::PI, path::PathBuf};
 
 pub use actions::*;
 mod assets;
 pub use assets::*;
 
 mod comfy;
-use bevy_health_bar3d::{plugin::HealthBarPlugin, prelude::*};
+use bevy_enhanced_input::prelude::*;
+use bevy_health_bar3d::prelude::*;
+
 use bevy_tokio_tasks::TokioTasksPlugin;
 pub use comfy::*;
 mod save;
@@ -19,27 +21,24 @@ pub use select::*;
 mod prefab;
 pub use prefab::*;
 mod ui;
-
+use sly_editor::SlyEditorPlugin;
 pub use ui::*;
 mod progress;
 pub use progress::*;
+// mod camera;
+// pub use camera::*;
 
 use avian3d::prelude::*;
 use bevy::{
-    app::AppExit, color::palettes::tailwind, core_pipeline::{bloom::Bloom, tonemapping::Tonemapping}, log::Level, math::vec3, prelude::*
+    color::palettes::tailwind,
+    core_pipeline::{bloom::Bloom, tonemapping::Tonemapping},
+    log::{Level, LogPlugin},
+    math::vec3,
+    prelude::*,
 };
-use bevy_infinite_grid::InfiniteGridPlugin;
-use bevy_mod_outline::OutlinePlugin;
 use bevy_prng::WyRand;
 use bevy_rand::prelude::*;
 //use rand::prelude::*;
-
-//use bevy_eventwork::{ConnectionId, EventworkRuntime, Network, NetworkData, NetworkEvent};
-//use bevy_eventwork_mod_websockets::{NetworkSettings, WebSocketProvider};
-use leafwing_input_manager::{common_conditions::action_just_pressed, prelude::*};
-use sly_common::prelude::*;
-//use url::Url;
-//use uuid::Uuid;
 
 fn main() {
     let file_path = config_file_path();
@@ -54,18 +53,34 @@ fn main() {
     let mut app = App::new();
     app.insert_resource(config)
         .add_plugins((
-            sly_common::SlyCommonPlugin {
-                title: "sly_ref",
-                level: Level::INFO,
-            },
+            DefaultPlugins
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: "Ref".to_string(),
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .set(AssetPlugin {
+                    mode: AssetMode::Processed,
+                    ..default()
+                }),
+                // .set(LogPlugin {
+                //     filter: "info,wgpu_core=warn,wgpu_hal=warn,cosmic_text=warn,naga=warn".into(),
+                //     level: Level::INFO,
+                //     ..default()
+                // }),
             MeshPickingPlugin,
+            EnhancedInputPlugin,
             PhysicsPlugins::default(), // using for collision detection
-            InputManagerPlugin::<Action>::default(),
-            //FilterQueryInspectorPlugin::<With<Selected>>::default(),
-            InfiniteGridPlugin,
+            //bevy_inspector_egui::quick::FilterQueryInspectorPlugin::<With<Selected>>::default(),
+            
             TokioTasksPlugin::default(),
             HealthBarPlugin::<WorkflowProgress>::default(),
             EntropyPlugin::<WyRand>::default(),
+            
+            SlyEditorPlugin,
+            AppActionPlugin,        
         ))
         .insert_resource(
             ColorScheme::<WorkflowProgress>::new()
@@ -74,36 +89,22 @@ fn main() {
         .add_systems(
             Update,
             ui_select.run_if(|query: Query<Entity, With<Selected>>| !query.is_empty()),
-        );
-
-    if !app.is_plugin_added::<OutlinePlugin>() {
-        app.add_plugins(OutlinePlugin);
-    }
-
-    app.init_resource::<ActionState<Action>>()
-        .insert_resource(Action::input_map())
-        // .insert_resource(AmbientLight {
-        //     color: Color::WHITE,
-        //     brightness: 0.0, // none
-        // })
+        )
         .init_resource::<SaveTimer>()
         .add_event::<Save>()
+        .add_event::<SpawnPrefab>()
         .add_systems(Startup, (setup, setup_ui))
         .add_systems(
             Update,
             (
+                spawn_prefab.run_if(on_event::<SpawnPrefab>),
                 update_progress,
-                duplicate_selected.run_if(action_just_pressed(Action::Duplicate)),
-                delete_selected.run_if(action_just_pressed(Action::Delete)),
-                on_add_prefab,
-                on_update_select,
                 autosave,
-                save::save.run_if(action_just_pressed(Action::Save)),
-                paste.run_if(action_just_pressed(Action::Paste)),
                 file_drop,
+
             ),
         )
-        .add_systems(PostUpdate, save_on_exit.run_if(on_event::<AppExit>))
+        //.add_systems(PostUpdate, save_on_exit.run_if(on_event::<AppExit>))
         .add_systems(Last, save.run_if(on_event::<Save>))
         .register_type::<Prefab>()
         .register_type::<RefConfig>()
@@ -118,7 +119,6 @@ fn setup(
 
     mut meshes: ResMut<Assets<Mesh>>,
     config: Res<RefConfig>,
-    asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
     //commands.spawn(InfiniteGridBundle::default());
@@ -147,23 +147,32 @@ fn setup(
         //     ..default()
         // },
         // movement
-        LookTransform {
-            eye: config.camera_eye,
-            target: config.camera_target,
-            up: Vec3::Y,
-        },
-        UnrealCameraController::default(),
+        Transform::from_xyz(0.0, 7., 14.0).looking_at(Vec3::new(0.0, 0.0, 0.0), Vec3::Y),
     ));
 
+    // directional 'sun' light
     commands.spawn((
-        PointLight {   
-            intensity: 20_000_000.,
-            range: 500.0,
+        DirectionalLight {
+            illuminance: light_consts::lux::FULL_DAYLIGHT,
             shadows_enabled: true,
             ..default()
         },
-        Transform::from_xyz(4.0, 20.0, 4.0),
+        Transform {
+            translation: Vec3::new(0.0, 2.0, 0.0),
+            rotation: Quat::from_rotation_x(-PI / 4.),
+            ..default()
+        },
     ));
+
+    // commands.spawn((
+    //     PointLight {
+    //         intensity: 20_000_000.,
+    //         range: 500.0,
+    //         shadows_enabled: true,
+    //         ..default()
+    //     },
+    //     Transform::from_xyz(4.0, 20.0, 4.0),
+    // ));
 
     // Spawn the light.
     // commands.spawn((
@@ -187,61 +196,40 @@ fn setup(
         Mesh3d(meshes.add(Plane3d::new(Vec3::Y, Vec2::splat(1000.0)))),
         Transform::from_translation(Vec3::new(0.0, 0.0, -10.0)),
         MeshMaterial3d(materials.add(StandardMaterial {
-            base_color: Color::from(tailwind::GRAY_800),
+            base_color: Color::from(tailwind::GREEN_900),
             metallic: 0.0,
             reflectance: 0.0,
             ..default()
         })),
     ));
 
-    // background, used to deselect
-    commands
-        .spawn((
-            Name::new("Backdrop"),
-            Mesh3d(meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(100.0)))),
-            Transform::from_translation(Vec3::new(0.0, 0.0, -10.0)),
-        ))
-        .observe(
-            |_: Trigger<Pointer<Click>>,
-             selected: Query<Entity, With<Selected>>,
-             mut commands: Commands| {
-                for e in selected.iter() {
-                    commands.entity(e).remove::<Selected>();
-                }
-            },
-        );
-
     // add prefabs
     for (i, p) in config.prefabs.iter().enumerate() {
         commands.spawn((
-            Transform::from_translation(vec3(p.position.x, p.position.y, i as f32 * 0.1)), // offset z so no z fighting
+            Transform::from_translation(vec3(p.translation.x, p.translation.y, i as f32 * 0.1)), // offset z so no z fighting
             Name::new(p.prefab.name.clone()),
             p.prefab.clone(),
         ));
     }
 }
 
-
-
-fn duplicate_selected(
-    selected: Query<Entity, (With<Selected>, With<Prefab>)>,
-    mut commands: Commands,
-) {
-    for e in selected.iter() {
-        commands.trigger_targets(Duplicate, e);
-    }
-}
-
-fn delete_selected(
-    selected: Query<Entity, (With<Selected>, With<Prefab>)>,
-    mut commands: Commands,
-) {
-    for e in selected.iter() {
-        commands.trigger_targets(Delete, e);
-    }
-}
-
 fn config_file_path() -> PathBuf {
     let root = std::env::var("BEVY_ASSET_ROOT").unwrap_or("".to_string());
     std::path::Path::new(&root).join("assets/ref/config.ron")
+}
+
+#[derive(Event)]
+pub struct SpawnPrefab;
+
+fn spawn_prefab(camera_transform: Single<&mut Transform, With<Camera>>, mut commands: Commands) {
+    info!("Spawning prefab");
+    let pos = camera_transform.translation + camera_transform.forward() * 4.0;
+    commands.spawn((
+        Name::new("Prefab"),
+        Prefab {
+            name: "Prefab".to_string(),
+            workflow: Workflow::StaticImage { image: None },
+        },
+        Transform::from_translation(pos),
+    ));
 }

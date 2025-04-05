@@ -55,5 +55,5 @@ fn _handle_stop_signal(
     //     info!("closing window entity: {:x}", entity.to_bits());
     //     event_writer.send(WindowCloseRequested { window: entity });
     // }
-    app_exit.send(AppExit::Success);
+    app_exit.write(AppExit::Success);
 }

@@ -99,11 +99,11 @@ fn default_input_map(
     }
 
     if keyboard.pressed(KeyCode::ControlLeft) {
-        events.send(ControlEvent::Orbit(mouse_rotate_sensitivity * cursor_delta));
+        events.write(ControlEvent::Orbit(mouse_rotate_sensitivity * cursor_delta));
     }
 
     if mouse_buttons.pressed(MouseButton::Right) {
-        events.send(ControlEvent::TranslateTarget(
+        events.write(ControlEvent::TranslateTarget(
             mouse_translate_sensitivity * cursor_delta,
         ));
     }
@@ -117,7 +117,7 @@ fn default_input_map(
         };
         scalar *= 1.0 - scroll_amount * mouse_wheel_zoom_sensitivity;
     }
-    events.send(ControlEvent::Zoom(scalar));
+    events.write(ControlEvent::Zoom(scalar));
 }
 
 fn control_system(

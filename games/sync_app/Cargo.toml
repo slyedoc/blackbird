@@ -14,6 +14,7 @@ sly_common = { workspace = true }
 
 bevy-inspector-egui.workspace = true
 bevy_rand.workspace = true
+bevy_prng.workspace = true
 rand.workspace = true
 
 console_error_panic_hook.workspace = true

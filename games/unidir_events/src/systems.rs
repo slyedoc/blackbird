@@ -154,13 +154,13 @@ fn spawn_letter(
 }
 
 fn on_char_click(
-    trigger: Trigger<Pointer<Down>>,
+    trigger: Trigger<Pointer<Click>>,
     index_query: Query<&CharIndex>,
     mut transform_query: Query<&mut Transform>,
     mut event_writer: EventWriter<ClickEvent>,
     mut selected_glyph: ResMut<SelectedGlyph>,
 ) {
-    let entity = trigger.entity();
+    let entity = trigger.target();
 
     if let Ok(index) = index_query.get(entity) {
         let index = **index;
@@ -177,6 +177,6 @@ fn on_char_click(
             transform.translation.y = 0.5;
         }
 
-        event_writer.send(ClickEvent { char_index: index });
+        event_writer.write(ClickEvent { char_index: index });
     }
 }

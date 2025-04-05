@@ -13,5 +13,5 @@ web = ["bevy/webgpu"]
 sly_common.workspace = true 
 bevy = { workspace = true }
 avian3d.workspace = true
-bevy_hanabi = { workspace = true, default-features = false, features = ["3d"] }
+#bevy_hanabi = { workspace = true, default-features = false, features = ["3d"] }
 leafwing-input-manager.workspace = true

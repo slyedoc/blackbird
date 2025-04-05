@@ -1,0 +1,14 @@
+[package]
+name = "sly_assets"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = ["stars"]
+stars = []
+
+[dependencies]
+bevy.workspace = true
+serde = { workspace = true, features = ["derive"] }
+thiserror.workspace = true
+serde_json = { workspace = true }

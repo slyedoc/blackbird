@@ -1,10 +1,15 @@
 use bevy::prelude::*;
+use bevy_enhanced_input::events::Fired;
 //use billboard::prelude::*;
 use wl_clipboard_rs::paste::{get_contents, ClipboardType, MimeType, Seat};
 
-use crate::{Prefab, Workflow};
+use crate::{PasteAction, Prefab, Workflow};
 
-pub fn paste(mut commands: Commands) {
+pub fn paste( 
+    _trigger: Trigger<Fired<PasteAction>>,
+    mut commands: Commands,
+    camera_transform: Single<&Transform, With<Camera>>,  
+) {
     info!("Paste event triggered");
     use std::io::Read;
 
@@ -35,8 +40,9 @@ pub fn paste(mut commands: Commands) {
                     // copy to ref assets
                     std::fs::copy(&path, &new_path).expect("Failed to copy file");
 
+                    let pos = camera_transform.translation + camera_transform.forward() * 4.0;
                     commands.spawn((
-                        Transform::default(),
+                        Transform::from_translation(pos),
                         Name::new(file_stem.clone()),
                         Prefab {
                             name: file_stem,

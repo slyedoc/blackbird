@@ -10,16 +10,20 @@ default = ["bevy/wayland", "bevy/file_watcher", "sly_common/editor", "bevy/asset
 
 [dependencies]
 sly_common = { workspace = true, features = ["camera", "ui"] }
-billboard = { workspace = true }
+sly_editor = { workspace = true, features = ["fps"] }
+#billboard = { workspace = true }
 
 bevy = { workspace = true }
 leafwing-input-manager.workspace = true
 avian3d = { workspace = true }
 bevy-inspector-egui.workspace = true
-bevy_mod_outline.workspace = true
-bevy_health_bar3d = { workspace = true}
-bevy_infinite_grid = { workspace = true}
-bevy-tokio-tasks = "0.15.0"
+#bevy_mod_outline.workspace = true
+
+#bevy_health_bar3d = { workspace = true}
+bevy_health_bar3d = { path = "../../../../f/bevy_health_bar3d" }
+
+#bevy_infinite_grid = { workspace = true}
+bevy-tokio-tasks.workspace = true
 
 #bevy_eventwork = "*"
 #bevy_eventwork_mod_websockets = "*"
@@ -33,12 +37,14 @@ bevy_rand = { workspace = true }
 bevy_prng = { workspace = true, features = ["wyrand"] }
 rand.workspace = true
 
+bevy_enhanced_input = { workspace = true, features = ["egui_priority"]}
+
 ron = { version = "0.8" }
 strum = { workspace = true, features = ["derive"] }
 strum_macros.workspace = true
 approx.workspace = true
 serde = { workspace = true, features = ["derive"] }
-serde_json = { version = "1.0" }
+serde_json = { workspace = true }
 wl-clipboard-rs = "0.9.2"
 
 tokio = { version = "1", features = ["full"] }

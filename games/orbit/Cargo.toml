@@ -1,0 +1,19 @@
+[package]
+name = "orbit"
+version.workspace = true
+edition.workspace = true
+
+
+[features]
+default = ["bevy/wayland", "dev"]
+editor = [ ]
+dev = ["sly_common/editor", "bevy/file_watcher", "bevy/asset_processor"]
+web = ["bevy/webgpu"]
+
+[dependencies]
+sly_common.workspace = true 
+bevy = { workspace = true }
+avian3d.workspace = true
+#bevy_hanabi = { workspace = true, default-features = false, features = ["3d"] }
+leafwing-input-manager.workspace = true
+bevy_enhanced_input = { workspace = true, features = ["egui_priority"]}

@@ -13,7 +13,6 @@ pub struct UiConfig {
     pub pressed_button_border: Color,
     pub panel_background: Color,
     pub panel_border: Color,
-
 }
 
 impl Default for UiConfig {
@@ -21,7 +20,7 @@ impl Default for UiConfig {
         Self {
             normal_button: tailwind::SLATE_500.into(),
             normal_button_border: tailwind::SLATE_600.into(),
-            normal_button_text: tailwind::SLATE_100.into(),             
+            normal_button_text: tailwind::SLATE_100.into(),
             hovered_button: tailwind::SLATE_600.into(),
             hovered_button_border: tailwind::SLATE_700.into(),
             pressed_button: tailwind::SLATE_700.into(),
@@ -34,8 +33,7 @@ impl Default for UiConfig {
 
 impl Plugin for UiPlugin {
     fn build(&self, app: &mut App) {
-        app
-        .insert_resource(UiConfig::default());
+        app.insert_resource(UiConfig::default());
         //.add_systems(Update, button_system);
     }
 }

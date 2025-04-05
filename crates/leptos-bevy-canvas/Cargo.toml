@@ -13,3 +13,4 @@ crossbeam-channel = "0.5"
 leptos.workspace = true
 leptos-use = { version = "0.15.1", default-features = false, features = ["use_raf_fn"] }
 paste = "1.0.15"
+variadics_please = { version = "1.1" }

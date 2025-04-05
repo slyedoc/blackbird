@@ -74,7 +74,7 @@ fn default_input_map(
         cursor_delta += event.delta;
     }
 
-    events.send(ControlEvent::Rotate(
+    events.write(ControlEvent::Rotate(
         mouse_rotate_sensitivity * cursor_delta,
     ));
 
@@ -90,7 +90,7 @@ fn default_input_map(
     .cloned()
     {
         if keyboard.pressed(key) {
-            events.send(ControlEvent::TranslateEye(translate_sensitivity * dir));
+            events.write(ControlEvent::TranslateEye(translate_sensitivity * dir));
         }
     }
 }

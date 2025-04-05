@@ -24,7 +24,7 @@ pub struct FpsPlugin;
 impl Plugin for FpsPlugin {
     fn build(&self, app: &mut App) {
         if !app.is_plugin_added::<FrameTimeDiagnosticsPlugin>() {
-            app.add_plugins(FrameTimeDiagnosticsPlugin);
+            app.add_plugins(FrameTimeDiagnosticsPlugin::default());
         }
 
         // app.add_plugins(bevy::dev_tools::fps_overlay::FpsOverlayPlugin {

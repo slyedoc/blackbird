@@ -155,8 +155,6 @@ pub fn GameProfile() -> impl IntoView {
                 let app: Option<App> = match g {
                     #[cfg(all(feature = "breakout", feature = "hydrate"))]
                     Game::Breakout => Some(breakout::init_bevy_app()),
-                    #[cfg(all(feature = "tic_tac_toe", feature = "hydrate"))]
-                    Game::TicTacToe => Some(tic_tac_toe::init_bevy_app()),
                     #[cfg(all(feature = "cast_app", feature = "hydrate"))]
                     Game::CastApp => Some(cast_app::init_bevy_app()),
                     #[cfg(all(feature = "mine", feature = "hydrate"))]
@@ -212,5 +210,5 @@ pub struct StopSignal;
 #[allow(dead_code)]
 fn stop_bevy(mut app_exit: EventWriter<AppExit>) {
     log::info!("STOP BEVY");
-    app_exit.send(AppExit::Success);
+    app_exit.write(AppExit::Success);
 }

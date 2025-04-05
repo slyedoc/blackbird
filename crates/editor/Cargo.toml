@@ -4,8 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [features]
-default = ["fps", "outline", "avian3d" ]
-outline = ["dep:bevy_mod_outline"]
+default = ["fps", "avian3d" ]
 fps = []
 avian3d = ["dep:avian3d"]
 
@@ -15,7 +14,6 @@ sly_camera.workspace = true
 
 bevy = { workspace = true, features = ["bevy_dev_tools", "bevy_debug_stepping"] }
 bevy-inspector-egui.workspace = true
-bevy_mod_outline = { workspace = true, optional = true }
 
 avian3d = { workspace = true, optional = true }
 leafwing-input-manager.workspace = true

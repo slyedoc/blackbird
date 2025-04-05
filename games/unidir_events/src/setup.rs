@@ -4,7 +4,6 @@ use bevy::color::Color;
 use bevy::core_pipeline::Skybox;
 use bevy::math::Vec3;
 use bevy::pbr::{MeshMaterial3d, PointLight, StandardMaterial};
-use bevy::picking::PickingBehavior;
 use bevy::prelude::*;
 
 pub fn setup_scene(
@@ -40,7 +39,6 @@ pub fn setup_scene(
     commands.spawn((
         Mesh3d(meshes.add(Plane3d::default().mesh().size(50.0, 50.0).subdivisions(10))),
         MeshMaterial3d(ground_matl.clone()),
-        PickingBehavior::IGNORE, // Disable picking for the ground plane.
     ));
 
     // Light

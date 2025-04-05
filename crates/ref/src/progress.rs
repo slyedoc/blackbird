@@ -2,6 +2,7 @@ use bevy::prelude::*;
 use bevy_health_bar3d::prelude::*;
 
 #[derive(Component, Reflect)]
+#[reflect()]
 pub struct WorkflowProgress {
     pub timer: Timer,
 }

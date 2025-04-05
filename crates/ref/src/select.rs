@@ -1,14 +1,11 @@
 use bevy::prelude::*;
-use bevy_mod_outline::OutlineVolume;
-
-use crate::Prefab;
 
 #[derive(Debug, Resource, Deref, DerefMut)]
 pub struct CurrentSelected(pub Option<Entity>);
 
 #[derive(Debug, Component, Reflect, Default)]
-//#[component(on_remove = on_add_ray_caster)]
 #[reflect(Component)]
+//#[component(on_remove = on_add_ray_caster)]
 pub struct Selected;
 
 // fn on_add_ray_caster(mut world: DeferredWorld, ctx: HookContext) {
@@ -23,20 +20,19 @@ pub struct Selected;
 //     // world.get_mut::<RayHits>(ctx.entity).unwrap().vector = Vec::with_capacity(max_hits);
 // }
 
-pub fn on_update_select(
-    mut selected_query: Query<Entity, (Added<Selected>, With<Prefab>)>,
-    mut removed: RemovedComponents<Selected>,
-    mut images: Query<&mut OutlineVolume>,
-) {
-    for e in selected_query.iter_mut() {
-        if let Ok(mut outline) = images.get_mut(e) {
-            outline.visible = true;
-        }
-    }
+// pub fn on_update_select(
+//     mut selected_query: Query<Entity, (Added<Selected>, With<Prefab>)>,
+//     mut removed: RemovedComponents<Selected>
+// ) {
+//     for e in selected_query.iter_mut() {
+//         // if let Ok(mut outline) = images.get_mut(e) {
+//         //     outline.visible = true;
+//         // }
+//     }
 
-    removed.read().for_each(|removed_entity| {
-        if let Ok(mut outline) = images.get_mut(removed_entity) {
-            outline.visible = false;
-        }
-    });
-}
+//     removed.read().for_each(|removed_entity| {
+//         // if let Ok(mut outline) = images.get_mut(removed_entity) {
+//         //     outline.visible = false;
+//         // }
+//     });
+// }

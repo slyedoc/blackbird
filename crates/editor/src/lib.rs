@@ -3,22 +3,24 @@
 #[cfg(feature = "avian3d")]
 use avian3d::{debug_render::PhysicsDebugPlugin, prelude::*};
 use bevy::{
-    color::palettes::{css, tailwind}, dev_tools::ui_debug_overlay::DebugUiPlugin, diagnostic::FrameTimeDiagnosticsPlugin, gizmos::light::LightGizmoPlugin, input::common_conditions::{input_just_pressed, input_toggle_active}, pbr::{
+    color::palettes::{css, tailwind},
+    diagnostic::FrameTimeDiagnosticsPlugin,
+    gizmos::light::LightGizmoPlugin,
+    input::common_conditions::{input_just_pressed, input_toggle_active},
+    pbr::{
         irradiance_volume::IrradianceVolume,
         wireframe::{WireframeConfig, WireframePlugin},
-    }, picking::pointer::PointerInteraction, prelude::*
+    },
+    picking::pointer::PointerInteraction,
+    prelude::*,
 };
 use bevy_inspector_egui::quick::{ResourceInspectorPlugin, WorldInspectorPlugin};
-
-mod selected;
-use fps::FpsPlugin;
-pub use selected::*;
 
 mod stepping;
 pub use stepping::*;
 
 pub mod prelude {
-    pub use crate::{selected::*, stepping::*, *};
+    pub use crate::{stepping::*, *};
 }
 
 #[cfg(feature = "fps")]
@@ -32,20 +34,18 @@ impl Plugin for SlyEditorPlugin {
             WireframePlugin,
             #[cfg(feature = "avian3d")]
             PhysicsDebugPlugin::default(),
-            DebugUiPlugin,
             //ResourceInspectorPlugin::<LevelSetup>::default(),
             //#[cfg(feature = "debug")]
             WorldInspectorPlugin::new().run_if(input_toggle_active(false, KeyCode::F1)),
             // ResourceInspectorPlugin::<AppStatus>::default()
             //     .run_if(input_toggle_active(true, KeyCode::F1)),
             // TODO: come back to stepping debugging
-            SteppingPlugin::default()
-                .add_schedule(Update)
-                .add_schedule(FixedUpdate)
-                .at(Val::Percent(35.0), Val::Percent(50.0)),
-            EditorSelectedPlugin,
+            // SteppingPlugin::default()
+            //     .add_schedule(Update)
+            //     .add_schedule(FixedUpdate)
+            //     .at(Val::Percent(35.0), Val::Percent(50.0)),
             #[cfg(feature = "fps")]
-            FpsPlugin,
+            fps::FpsPlugin,
         ))
         .init_state::<EditorState>()
         .enable_state_scoped_entities::<EditorState>()
@@ -55,7 +55,6 @@ impl Plugin for SlyEditorPlugin {
             Update,
             (
                 toggle_editor.run_if(input_toggle_active(false, KeyCode::Backquote)),
-                toggle_ui_overlay.run_if(input_just_pressed(KeyCode::F2)),
                 toggle_physics.run_if(input_just_pressed(KeyCode::F2)),
                 toggle_wireframe.run_if(input_just_pressed(KeyCode::F3)),
                 toggle_aabb.run_if(input_just_pressed(KeyCode::F4)),
@@ -138,11 +137,6 @@ fn toggle_physics(mut config_store: ResMut<GizmoConfigStore>) {
 //         _ => DebugPickingMode::Disabled,
 //     };
 // }
-
-// The system that will enable/disable the debug outlines around the nodes
-fn toggle_ui_overlay(mut options: ResMut<bevy::dev_tools::ui_debug_overlay::UiDebugOptions>) {
-    options.toggle();
-}
 
 fn toggle_editor(mut next_state: ResMut<NextState<EditorState>>, state: Res<State<EditorState>>) {
     match state.get() {

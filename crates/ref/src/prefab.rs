@@ -2,20 +2,20 @@ use std::fmt::{Display, Formatter};
 use std::path::Path;
 use std::time::{Duration, Instant};
 
+use crate::{comfy, Selected, WorkflowProgress};
+use bevy::ecs::component::HookContext;
+use bevy::ecs::world::DeferredWorld;
 use bevy::pbr::NotShadowCaster;
 use bevy::prelude::*;
+use bevy_health_bar3d::prelude::*;
 use bevy_inspector_egui::{prelude::ReflectInspectorOptions, InspectorOptions};
-use bevy_mod_outline::{OutlineMode, OutlineVolume};
 use bevy_prng::WyRand;
 use bevy_rand::global::GlobalEntropy;
 use bevy_tokio_tasks::{TaskContext, TokioTasksRuntime};
-use leafwing_input_manager::prelude::ActionState;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use strum::EnumIter;
-use crate::{comfy, Action, Selected, WorkflowProgress};
-use bevy_health_bar3d::prelude::*;
 
 // TODO: remove need for this
 // hack to delay upating assets so reload works
@@ -23,23 +23,16 @@ const FILE_DELAY: f32 = 1.0;
 
 #[derive(Component, Debug, Default, Clone, Reflect, Serialize, Deserialize, InspectorOptions)]
 #[reflect(Component, InspectorOptions)]
-#[require(OutlineVolume(|| OutlineVolume {
-    visible: false,
-    colour: Color::srgb(1.0, 1.0, 1.0),
-    width: 5.0,
-}))]
-#[require(OutlineMode(|| OutlineMode::FloodFlat))]
-#[require(BarSettings::<WorkflowProgress>(|| BarSettings::<WorkflowProgress> {
+#[require(BarSettings::<WorkflowProgress> = BarSettings::<WorkflowProgress> {
     offset: 1.5,
     width: 2.0,
     ..default()
-}))]
+})]
+#[component(on_add = on_add_prefab)]
 pub struct Prefab {
     pub name: String,
     pub workflow: Workflow,
 }
-
-
 
 #[derive(Component, EnumIter, PartialEq, Reflect, Debug, Clone, Serialize, Deserialize)]
 #[reflect(Component)]
@@ -79,71 +72,94 @@ impl Display for Workflow {
     }
 }
 
-pub fn on_add_prefab(
-    mut commands: Commands,
-    added_query: Query<(Entity, &Prefab)>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
-    asset_server: Res<AssetServer>,
-) {
-    for (entity, prefab) in added_query.iter() {
+pub fn on_add_prefab(mut world: DeferredWorld<'_>, HookContext { entity, .. }: HookContext) {
+    world
+        .commands()
+        .entity(entity)
+        .observe(on_drag)
+        .observe(on_select)
+        .observe(on_duplicate)
+        .observe(on_delete)
+        .observe(on_rename)
+        .observe(on_generate)
+        .observe(on_refresh_image)
+        .observe(on_refresh_model);
 
-        commands
-            .entity(entity)
-            .observe(on_drag)
-            .observe(on_select)
-            .observe(on_duplicate)
-            .observe(on_delete)
-            .observe(on_rename)
-            .observe(on_generate)
-            .observe(on_refresh_image)
-            .observe(on_refresh_model);
+    let prefab = world.entity(entity).get::<Prefab>().unwrap();
 
-        let (image, model) = match &prefab.workflow {
-            Workflow::TextToImage { image, .. } => (image.clone(), None),
-            Workflow::TextToModel { image, model, .. } => (image.clone(), model.clone()),
-            Workflow::StaticImage { image } => (image.clone(), None),
-        };
+    let (image, model) = match &prefab.workflow {
+        Workflow::TextToImage { image, .. } => (image.clone(), None),
+        Workflow::TextToModel { image, model, .. } => (image.clone(), model.clone()),
+        Workflow::StaticImage { image } => (image.clone(), None),
+    };
 
-        let image_handle: Handle<Image> = match image {
-            Some(img) => asset_server.load(img),
-            None => Handle::<Image>::default(),
-        };
+    let asset_server = world.get_resource::<AssetServer>().unwrap();
+    let image_handle: Handle<Image> = match image {
+        Some(img) => asset_server.load(img),
+        None => Handle::<Image>::default(),
+    };
+    let scene = if let Some(model) = model {
+        Some(asset_server.load(GltfAssetLabel::Scene(0).from_asset(model)))
+    } else {
+        None
+    };
 
-        let e = commands
-            .entity(entity)
-            .insert((
-                NotShadowCaster,
-                Mesh3d(meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(1.0)))),
-                MeshMaterial3d(materials.add(StandardMaterial {
-                    base_color_texture: Some(image_handle.clone()),
-                    alpha_mode: AlphaMode::Blend,
-                    unlit: true,
-                    ..default()
-                })),
-            ))
-            .id();
+    let mut meshes = world.get_resource_mut::<Assets<Mesh>>().unwrap();
+    let mesh = meshes.add(Plane3d::new(Vec3::Z, Vec2::splat(1.0)));
 
-        let model_entity = commands
-            .spawn((
-                Name::new("Model"),
-                Transform::from_translation(Vec3::new(0.0, -3.0, 0.0)),
-            ))
-            .set_parent(e)
-            .id();
+    let mut materials = world
+        .get_resource_mut::<Assets<StandardMaterial>>()
+        .unwrap();
+    let mat = materials.add(StandardMaterial {
+        base_color_texture: Some(image_handle),
+        alpha_mode: AlphaMode::Blend,
+        unlit: true,
+        ..default()
+    });
 
-        if let Some(model) = model {
-            commands.entity(model_entity).insert(SceneRoot(
-                asset_server.load(GltfAssetLabel::Scene(0).from_asset(model)),
-            ));
-        }
+    let e = world
+        .commands()
+        .entity(entity)
+        .insert((NotShadowCaster, Mesh3d(mesh), MeshMaterial3d(mat)))
+        .id();
+
+    let model_entity = world
+        .commands()
+        .spawn((
+            Name::new("Model"),
+            Transform::from_translation(Vec3::new(0.0, -3.0, 0.0)),
+            ChildOf { parent: e },
+        ))
+        .id();
+
+    if let Some(scene) = scene {
+        world
+            .commands()
+            .entity(model_entity)
+            .insert(SceneRoot(scene));
     }
 }
 
-fn on_drag(drag: Trigger<Pointer<Drag>>, mut transforms: Query<&mut Transform>) {
+// move relative to camera
+fn on_drag(
+    drag: Trigger<Pointer<Drag>>,
+    mut transforms: Query<&mut Transform, (Without<Camera>, With<Prefab>)>,
+    camera_transforms: Single<&mut Transform, With<Camera>>,
+    time: Res<Time>,
+) {
     if let Ok(mut transform) = transforms.get_mut(drag.target) {
-        transform.translation.x += drag.delta.x * 0.02;
-        transform.translation.y -= drag.delta.y * 0.02;
+        let scale = camera_transforms
+            .translation
+            .distance(transform.translation)
+            * 0.1;
+
+        let movement = Vec3::new(
+            drag.delta.x * time.delta_secs(),
+            -drag.delta.y * time.delta_secs(),
+            0.0,
+        );
+
+        transform.translation += camera_transforms.rotation * movement * scale;
     }
 }
 
@@ -151,25 +167,18 @@ fn on_drag(drag: Trigger<Pointer<Drag>>, mut transforms: Query<&mut Transform>) 
 fn on_select(
     target: Trigger<Pointer<Click>>,
     mut commands: Commands,
-    actions: Res<ActionState<Action>>,
     mut query: Query<(Entity, Option<&Selected>), With<Prefab>>,
 ) {
     for (e, selected) in query.iter_mut() {
         if e == target.target {
             if selected.is_none() {
-                commands.entity(e).insert(
-                    Selected
-                );
+                commands.entity(e).insert(Selected);
             }
         } else {
-            if !actions.pressed(&Action::SelectAll) {
-                if selected.is_some() {
-                    commands.entity(e)
-                    .remove::<Selected>();
-                }
-                
+            if selected.is_some() {
+                commands.entity(e)
+                .remove::<Selected>();
             }
-            
         }
     }
 }
@@ -182,7 +191,7 @@ fn on_duplicate(
     mut commands: Commands,
     query: Query<(&Prefab, &Transform)>,
 ) {
-    let entity = trigger.entity();
+    let entity = trigger.target();
 
     let (prefab, trans) = query.get(entity).unwrap();
 
@@ -280,7 +289,7 @@ fn remove_numeric_suffix(name: String) -> String {
 pub struct Delete;
 
 fn on_delete(trigger: Trigger<Delete>, mut commands: Commands, query: Query<&Prefab>) {
-    let entity = trigger.entity();
+    let entity = trigger.target();
 
     let prefab = query.get(entity).unwrap();
 
@@ -305,14 +314,14 @@ fn on_delete(trigger: Trigger<Delete>, mut commands: Commands, query: Query<&Pre
         }
     }
 
-    commands.entity(entity).despawn_recursive();
+    commands.entity(entity).despawn();
 }
 
 #[derive(Event)]
 pub struct Rename(pub String);
 
 pub fn on_rename(trigger: Trigger<Rename>, mut query: Query<&mut Prefab>) {
-    let entity = trigger.entity();
+    let entity = trigger.target();
     let mut new_name = trigger.0.clone();
     let names = query.iter().map(|p| p.name.clone()).collect::<Vec<_>>();
     new_name = create_unique_name(&new_name, names);
@@ -373,8 +382,8 @@ pub fn on_generate(
     mut rng: GlobalEntropy<WyRand>,
     mut commands: Commands,
 ) {
-    let mut prefab = query.get_mut(trigger.entity()).unwrap();
-    let e = trigger.entity();
+    let e = trigger.target();
+    let mut prefab = query.get_mut(e).unwrap();
     let stage = trigger.0;
     let name = prefab.name.clone();
     match &mut prefab.workflow {
@@ -398,15 +407,17 @@ pub fn on_generate(
                 generate_image(&name, &image_path, new_seed, &prompt)
                     .await
                     .unwrap();
-                
+
                 tokio::time::sleep(Duration::from_secs_f32(FILE_DELAY)).await;
-                
+
                 ctx.run_on_main_thread(move |ctx| {
-                    ctx.world.trigger_targets(RefreshImage(image_path.clone()), e);
+                    ctx.world
+                        .trigger_targets(RefreshImage(image_path.clone()), e);
                     ctx.world.entity_mut(e).remove::<WorkflowProgress>();
                     let end = Instant::now();
                     info!("TextToImage generated in {:?}", end.duration_since(start));
-                }).await;
+                })
+                .await;
             });
         }
         Workflow::TextToModel {
@@ -443,7 +454,7 @@ pub fn on_generate(
                     generate_image(&name, &image_path, new_seed, &prompt)
                         .await
                         .unwrap();
-                        
+
                     tokio::time::sleep(Duration::from_secs_f32(FILE_DELAY)).await;
 
                     let image_path_c = image_path.clone();
@@ -555,13 +566,6 @@ async fn generate_model(
         *text_value = json!(num_faces);
     }
 
-    // "59": {
-    //     "inputs": {
-    //       "remove_floaters": true,
-    //       "remove_degenerate_faces": true,
-    //       "reduce_faces": true,
-    //       "max_facenum": 50000,
-
     // Connect to the websocket.
     let (client, client_id, mut ws) = comfy::connect_comfy().await.unwrap();
 
@@ -578,13 +582,16 @@ async fn generate_model(
 
     ws.close(None).await?;
     //dbg!("models", &models);
-    assert!(models.len() == 1, "Wrong number of models generated");
 
     for (_node_id, images_vec) in models.iter() {
-        for (_i, image_data) in images_vec.iter().enumerate() {
+        for (i, image_data) in images_vec.iter().enumerate() {
             let file_path = Path::new("assets").join(&model_path);
             tokio::fs::write(&file_path, image_data).await?;
             info!("Saved model to {:?}", file_path);
+            if i > 0 {
+                warn!("more than one model generated, only keeping first");
+                break;
+            } 
         }
     }
     Ok(())
@@ -640,8 +647,8 @@ pub fn on_refresh_image(
     mut materials: ResMut<Assets<StandardMaterial>>,
     asset_server: Res<AssetServer>,
 ) {
-    let entity = trigger.entity();
-    let (mut p, mat_handle) = query.get_mut(entity).unwrap();
+    let e = trigger.target();
+    let (mut p, mat_handle) = query.get_mut(e).unwrap();
     // update the image in the prefab
     //let mut changed = false;
     match &mut p.workflow {
@@ -664,8 +671,8 @@ pub fn on_refresh_image(
     // update the material
     //if changed {
     //     warn!("Updating image {:?}", &trigger.0);
-         let mat = materials.get_mut(&mat_handle.0).unwrap();
-         mat.base_color_texture = Some(asset_server.load(&trigger.0));
+    let mat = materials.get_mut(&mat_handle.0).unwrap();
+    mat.base_color_texture = Some(asset_server.load(&trigger.0));
     //}
 }
 
@@ -679,8 +686,8 @@ pub fn on_refresh_model(
     asset_server: Res<AssetServer>,
     mut commands: Commands,
 ) {
-    let entity = trigger.entity();
-    let (mut p, children) = query.get_mut(entity).unwrap();
+    let e = trigger.target();
+    let (mut p, children) = query.get_mut(e).unwrap();
     //let mut changed = false;
     // update path
     match &mut p.workflow {
@@ -696,9 +703,9 @@ pub fn on_refresh_model(
     // update the model
     // TODO: shouldnt need to do this
     //if changed {
-        let child = children[0];
-        commands.entity(child).insert(SceneRoot(
-            asset_server.load(GltfAssetLabel::Scene(0).from_asset(trigger.0.clone())),
-        ));
+    let child = children[0];
+    commands.entity(child).insert(SceneRoot(
+        asset_server.load(GltfAssetLabel::Scene(0).from_asset(trigger.0.clone())),
+    ));
     //}
 }

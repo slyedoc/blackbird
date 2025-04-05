@@ -67,10 +67,10 @@ impl Plugin for SlyCommonPlugin {
                 .disable::<bevy::log::LogPlugin>(),
             #[cfg(feature = "editor")]
             sly_editor::SlyEditorPlugin,
-            #[cfg(feature = "camera")]
-            sly_camera::SlyCameraPlugin,
-            #[cfg(feature = "camera")]
-            UiPlugin,
+            //#[cfg(feature = "camera")]
+            //sly_camera::SlyCameraPlugin,
+            //#[cfg(feature = "camera")]
+            //UiPlugin,
         ));
         // https://github.com/bevyengine/bevy/issues/12126
         // #[cfg(target_arch = "wasm32")]

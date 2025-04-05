@@ -15,7 +15,6 @@ use bevy::{
     pbr::NotShadowCaster,
     prelude::*,
 };
-use bevy_hanabi::prelude::*;
 use leafwing_input_manager::prelude::*;
 
 pub fn init_bevy_app() -> App {
@@ -28,7 +27,6 @@ pub fn init_bevy_app() -> App {
         },
         PhysicsPlugins::default(),
         InputManagerPlugin::<PlayerAction>::default(),
-        HanabiPlugin,
         UiPlugin,
         SpellPlugin,
         WaterPlugin,
@@ -79,7 +77,7 @@ fn setup(
 
     let player_collider = Collider::capsule(0.4, 1.0);
     let player_seplls = PlayerSpells {
-        spells: vec![Spell::FrostBolt, Spell::ArcaneExplosion, Spell::Blizzard],
+        //spells: vec![Spell::FrostBolt, Spell::ArcaneExplosion, Spell::Blizzard],
     };
     let mut caster_shape = player_collider.clone();
     caster_shape.set_scale(Vec3::ONE * 0.99, 10);
@@ -218,56 +216,57 @@ fn setup(
         justify_content: JustifyContent::Center,
         ..default()
     })
-    .with_children(|parent| {
-        for s in player_seplls.spells.iter() {
-            parent
-                .spawn((
-                    Button,
-                    Node {
-                        width: Val::Px(100.0),
-                        height: Val::Px(100.0),
-                        border: UiRect::all(Val::Px(5.0)),
-                        // horizontally center child text
-                        justify_content: JustifyContent::Center,
-                        // vertically center child text
-                        align_items: AlignItems::Center,
-                        ..default()
-                    },
-                    BorderColor(Color::BLACK),
-                    BorderRadius::MAX,
-                    BackgroundColor(NORMAL_BUTTON),
-                    s.clone(),
-                ))
-                .with_child((
-                    Text::new(format!("{:?}", s)),
-                    TextFont {
-                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                        font_size: 20.0,
-                        ..default()
-                    },
-                    TextColor(Color::srgb(0.9, 0.9, 0.9)),
-                ))
-                .observe(on_spell_click);
-        }
+    .with_children(|_parent| {
+        // for s in player_seplls.spells.iter() {
+        //     parent
+        //         .spawn((
+        //             Button,
+        //             Node {
+        //                 width: Val::Px(100.0),
+        //                 height: Val::Px(100.0),
+        //                 border: UiRect::all(Val::Px(5.0)),
+        //                 // horizontally center child text
+        //                 justify_content: JustifyContent::Center,
+        //                 // vertically center child text
+        //                 align_items: AlignItems::Center,
+        //                 ..default()
+        //             },
+        //             BorderColor(Color::BLACK),
+        //             BorderRadius::MAX,
+        //             BackgroundColor(NORMAL_BUTTON),
+        //             s.clone(),
+        //         ))
+        //         .with_child((
+        //             Text::new(format!("{:?}", s)),
+        //             TextFont {
+        //                 font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+        //                 font_size: 20.0,
+        //                 ..default()
+        //             },
+        //             TextColor(Color::srgb(0.9, 0.9, 0.9)),
+        //         ))
+        //         .observe(on_spell_click);
+        // }
     });
 }
 
 /// Returns an observer that updates the entity's material to the one specified.
+#[allow(dead_code)]
 fn on_spell_click(
     _trigger: Trigger<Pointer<Click>>,
     mut cmd: Commands,
     players: Single<&Transform, With<Player>>,
-    spell_effects: Res<SpellEffects>,
+    _spell_effects: Res<SpellEffects>,
 ) {
-    let player_pos = players.translation;
-    let effect = spell_effects.hashmap.get(&Spell::FrostBolt).unwrap();
+    let _player_pos = players.translation;
+    //let effect = spell_effects.hashmap.get(&Spell::FrostBolt).unwrap();
     cmd.spawn((
-        Name::new("firework"),
-        ParticleEffectBundle {
-            effect: ParticleEffect::new(effect.clone()),
-            transform: Transform::from_translation(player_pos),
-            ..Default::default()
-        },
+        // Name::new("firework"),
+        // ParticleEffectBundle {
+        //     effect: ParticleEffect::new(effect.clone()),
+        //     transform: Transform::from_translation(player_pos),
+        //     ..Default::default()
+        // },
     ));
 }
 
@@ -276,7 +275,7 @@ struct Player;
 
 #[derive(Component, Clone)]
 struct PlayerSpells {
-    spells: Vec<Spell>,
+    //spells: Vec<Spell>,
 }
 
 #[derive(Component)]

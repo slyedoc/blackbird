@@ -8,7 +8,10 @@ use bevy::{
     color::palettes::tailwind::*, core_pipeline::Skybox, input::common_conditions::input_pressed,
     prelude::*,
 };
+
+use bevy_prng::WyRand;
 use bevy_rand::prelude::*;
+use rand::prelude::*;
 
 pub fn init_bevy_app() -> App {
     let mut app = App::new();
@@ -59,7 +62,7 @@ pub fn setup_scene(
     commands.spawn((
         Mesh3d(meshes.add(Plane3d::default().mesh().size(50.0, 50.0).subdivisions(10))),
         MeshMaterial3d(ground_matl.clone()),
-        PickingBehavior::IGNORE, // Disable picking for the ground plane.
+        //PickingBehavior::IGNORE, // Disable picking for the ground plane.
         Name::new("Ground"),
     ));
 

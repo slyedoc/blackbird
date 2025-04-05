@@ -1,34 +1,110 @@
-use bevy::{ecs::system::SystemState, prelude::*, window::PrimaryWindow};
+use bevy::{
+    color::palettes::tailwind,
+    ecs::{component::HookContext, system::SystemState, world::DeferredWorld},
+    prelude::*,
+    window::PrimaryWindow,
+};
 use bevy_inspector_egui::{
     bevy_egui::EguiContext,
     egui::{self},
 };
-use sly_common::UiConfig;
 use strum::IntoEnumIterator;
 
-use crate::{Generate, Prefab, Rename, Selected, Workflow};
+use crate::{Generate, Prefab, Rename, Save, Selected, SpawnPrefab, Workflow};
+
+const NORMAL_BUTTON: Color = Color::Srgba(tailwind::SLATE_500);
+const NORMAL_BUTTON_BORDER: Color = Color::Srgba(tailwind::SLATE_600);
+//const NORMAL_BUTTON_TEXT: Color = Color::Srgba(tailwind::SLATE_100);
+const HOVERED_BUTTON: Color = Color::Srgba(tailwind::SLATE_600);
+const HOVERED_BUTTON_BORDER: Color = Color::Srgba(tailwind::SLATE_700);
+const PRESSED_BUTTON: Color = Color::Srgba(tailwind::SLATE_700);
+const PRESSED_BUTTON_BORDER: Color = Color::Srgba(tailwind::SLATE_800);
+const PANEL_BACKGROUND: Color = Color::Srgba(tailwind::GRAY_900);
+const PANEL_BORDER: Color = Color::Srgba(tailwind::GRAY_800);
 
 #[derive(Component)]
-#[require(Button)]
-pub struct Btn;
+#[require(
+    Button,
+    Node = Node {
+        padding: UiRect::all(Val::Px(2.0)),
+        margin: UiRect::all(Val::Px(4.0)),
+        flex_direction: FlexDirection::Column,
+        justify_content: JustifyContent::Center,
+        align_items: AlignItems::Center,
+        ..default()
+    },
+    BackgroundColor(NORMAL_BUTTON),
+    //BorderColor(PANEL_BORDER),
+    Outline = Outline {
+        width: Val::Px(2.),
+        color: NORMAL_BUTTON_BORDER,
+        ..default()
+    },
+    BorderRadius::all(Val::Px(5.)),
+)]
+#[component(on_add = on_add_quick_button)]
+pub struct QuickButton;
 
-pub fn on_add_button() {
-    // .observe(update_material_on::<Pointer<Over>>(hover_matl.clone()))
-    // .observe(update_material_on::<Pointer<Out>>(white_matl.clone()))
-    // .observe(update_material_on::<Pointer<Pressed>>(pressed_matl.clone()))
-    // .observe(update_material_on::<Pointer<Released>>(hover_matl.clone()))
+pub fn on_add_quick_button(mut world: DeferredWorld<'_>, HookContext { entity, .. }: HookContext) {
+    world
+        .commands()
+        .entity(entity)
+        .observe(update_colors_on::<Pointer<Over>>(
+            HOVERED_BUTTON,
+            HOVERED_BUTTON_BORDER,
+        ))
+        .observe(update_colors_on::<Pointer<Out>>(
+            NORMAL_BUTTON,
+            NORMAL_BUTTON_BORDER,
+        ))
+        .observe(update_colors_on::<Pointer<Pressed>>(
+            PRESSED_BUTTON,
+            PRESSED_BUTTON_BORDER,
+        ))
+        .observe(update_colors_on::<Pointer<Released>>(
+            HOVERED_BUTTON,
+            HOVERED_BUTTON_BORDER,
+        ));
+    //  .insert(
+    //      BackgroundColor(normal_button),
+    //  )
 }
 
+fn update_colors_on<E>(
+    background: Color,
+    outline: Color,
+) -> impl Fn(Trigger<E>, Query<(&mut BackgroundColor, &mut Outline)>) {
+    // An observer closure that captures `new_material`. We do this to avoid needing to write four
+    // versions of this observer, each triggered by a different event and with a different hardcoded
+    // material. Instead, the event type is a generic, and the material is passed in.
+    move |trigger, mut query| {
+        if let Ok((mut bg, mut out)) = query.get_mut(trigger.target()) {
+            bg.0 = background;
+            out.color = outline;
+        }
+    }
+}
 
-pub fn setup_ui(mut commands: Commands, ui: Res<UiConfig>, asset_server: Res<AssetServer>) {
+#[derive(Component)]
+#[require(
+    Node = Node {
+        width: Val::Px(30.0),
+        height: Val::Px(30.0),
+        ..default()
+    },
+)]
+pub struct QuickButtonInner;
+
+pub fn setup_ui(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands
         .spawn((
+            Name::new("Quick Panel"),
             Node {
                 position_type: PositionType::Absolute,
-                
+
                 right: Val::Px(10.),
                 bottom: Val::Px(10.),
-                padding: UiRect::all(Val::Px(2.0)),
+                padding: UiRect::all(Val::Px(4.0)),
                 // horizontally center child text
                 flex_direction: FlexDirection::Column,
                 justify_content: JustifyContent::Center,
@@ -37,8 +113,8 @@ pub fn setup_ui(mut commands: Commands, ui: Res<UiConfig>, asset_server: Res<Ass
                 ..Default::default()
             },
             BorderRadius::all(Val::Px(5.)),
-            BackgroundColor(ui.panel_background),
-            BorderColor(ui.panel_border),
+            BackgroundColor(PANEL_BACKGROUND),
+            BorderColor(PANEL_BORDER),
             Outline {
                 width: Val::Px(2.),
                 color: Color::WHITE,
@@ -46,53 +122,47 @@ pub fn setup_ui(mut commands: Commands, ui: Res<UiConfig>, asset_server: Res<Ass
             },
         ))
         .with_children(|parent| {
-            // add button
             parent
                 .spawn((
-                    Button,
-                    Node {
-                        padding: UiRect::all(Val::Px(2.0)),
-                        margin: UiRect::all(Val::Px(2.0)),
-                        flex_direction: FlexDirection::Column,
-                        justify_content: JustifyContent::Center,
-                        // vertically center child text
-                        align_items: AlignItems::Center,
-                        ..default()
-                    },
-                    BackgroundColor(ui.normal_button),
-                ))
-                .with_children(|parent| {
-                    parent.spawn((
+                    Name::new("Quick Add Button"),
+                    QuickButton,
+                    children!((
+                        QuickButtonInner,
                         ImageNode::new(asset_server.load("textures/icon/white/plus.png")),
-                        Node {
-                            // This will set the logo to be 200px wide, and auto adjust its height
-                            width: Val::Px(30.0),
-                            height: Val::Px(30.0),
-                            ..default()
-                        },
-                        Outline {
-                            width: Val::Px(2.),
-                            color: ui.normal_button_border,
-                            ..default()
-                        },
-                        // TextFont {
-                        //     font_size: 33.0,
-                        //     ..default()
-                        // },
-                        // TextColor(ui.normal_button_text),
-                        // Text::new("Add"),
-                    ));
-                })
+                    )),
+                ))
                 .observe(
                     |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
-                        commands.spawn((
-                            Name::new("Prefab"),
-                            Prefab {
-                                name: "Prefab".to_string(),
-                                workflow: Workflow::StaticImage { image: None },
-                            },
-                            Transform::from_translation(Vec3::new(0.0, 2.5, 0.0)),
-                        ));
+                        commands.send_event(SpawnPrefab);
+                    },
+                );
+            parent
+                .spawn((
+                    Name::new("Quick Save Button"),
+                    QuickButton,
+                    children!((
+                        QuickButtonInner,
+                        ImageNode::new(asset_server.load("textures/icon/white/checkmark.png")),
+                    )),
+                ))
+                .observe(
+                    |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
+                        commands.send_event(Save);
+                    },
+                );
+
+            parent
+                .spawn((
+                    Name::new("Quick Exit Button"),
+                    QuickButton,
+                    children!((
+                        QuickButtonInner,
+                        ImageNode::new(asset_server.load("textures/icon/white/exitRight.png")),
+                    )),
+                ))
+                .observe(
+                    |_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
+                        commands.send_event(AppExit::Success);
                     },
                 );
         });
@@ -102,6 +172,7 @@ pub fn ui_select(world: &mut World) {
     let mut egui_context = world
         .query_filtered::<&mut EguiContext, With<PrimaryWindow>>()
         .single(world)
+        .expect("No EguiContext found")
         .clone();
 
     let mut system_state: SystemState<(Commands, Query<(Entity, &mut Prefab), With<Selected>>)> =

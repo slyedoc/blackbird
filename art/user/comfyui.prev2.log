@@ -1,179 +1,370 @@
-Popen(['git', 'version'], cwd=/home/slyedoc/code/p/blackbird, stdin=None, shell=False, universal_newlines=False)
-[2025-03-27 23:38:51.254] Popen(['git', 'version'], cwd=/home/slyedoc/code/p/blackbird, stdin=None, shell=False, universal_newlines=False)
 ## ComfyUI-Manager: installing dependencies done.
-[2025-03-27 23:38:51.257] ** ComfyUI startup time: 2025-03-27 23:38:51.257
-[2025-03-27 23:38:51.257] ** Platform: Linux
-[2025-03-27 23:38:51.257] ** Python version: 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]
-[2025-03-27 23:38:51.257] ** Python executable: /home/slyedoc/code/p/ComfyUI/.venv/bin/python
-[2025-03-27 23:38:51.257] ** ComfyUI Path: /home/slyedoc/code/p/ComfyUI
-[2025-03-27 23:38:51.257] ** ComfyUI Base Folder Path: /home/slyedoc/code/p/ComfyUI
-[2025-03-27 23:38:51.258] ** User directory: /home/slyedoc/code/p/blackbird/art/user
-[2025-03-27 23:38:51.258] ** ComfyUI-Manager config path: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/config.ini
-[2025-03-27 23:38:51.258] ** Log path: /home/slyedoc/code/p/blackbird/art/user/comfyui.log
-[2025-03-27 23:38:51.939] 
-Prestartup times for custom nodes:
-[2025-03-27 23:38:51.939]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
-[2025-03-27 23:38:51.939]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
-[2025-03-27 23:38:51.939]    1.3 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
-[2025-03-27 23:38:51.939] 
-[2025-03-27 23:38:52.584] Checkpoint files will always be loaded safely.
-[2025-03-27 23:38:52.822] Total VRAM 10821 MB, total RAM 64080 MB
-[2025-03-27 23:38:52.822] pytorch version: 2.6.0+cu124
-[2025-03-27 23:38:53.343] xformers version: 0.0.29.post2
-[2025-03-27 23:38:53.343] Set vram state to: LOW_VRAM
-[2025-03-27 23:38:53.343] Device: cuda:0 NVIDIA GeForce RTX 2080 Ti : cudaMallocAsync
-[2025-03-27 23:38:53.462] Using xformers attention
-[2025-03-27 23:38:53.746] ComfyUI version: 0.3.26
-[2025-03-27 23:38:53.747] Using selector: EpollSelector
-[2025-03-27 23:38:53.748] ComfyUI frontend version: 1.12.14
-[2025-03-27 23:38:53.749] [Prompt Server] web root: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package/static
-[2025-03-27 23:38:53.749] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_latent.py
-[2025-03-27 23:38:53.749] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hypernetwork.py
-[2025-03-27 23:38:53.749] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_upscale_model.py
-[2025-03-27 23:38:53.769] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_post_processing.py
-[2025-03-27 23:38:53.770] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_mask.py
-[2025-03-27 23:38:53.770] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_compositing.py
-[2025-03-27 23:38:53.770] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_rebatch.py
-[2025-03-27 23:38:53.770] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_merging.py
-[2025-03-27 23:38:53.770] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_tomesd.py
-[2025-03-27 23:38:53.770] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_clip_sdxl.py
-[2025-03-27 23:38:53.771] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_canny.py
-[2025-03-27 23:38:53.909] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_freelunch.py
-[2025-03-27 23:38:53.909] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_custom_sampler.py
-[2025-03-27 23:38:53.909] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hypertile.py
-[2025-03-27 23:38:53.909] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_advanced.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_downscale.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_images.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_video_model.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_sag.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_perpneg.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_stable3d.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_sdupscale.py
-[2025-03-27 23:38:53.910] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_photomaker.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_pixart.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_cond.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_morphology.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_stable_cascade.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_differential_diffusion.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_ip2p.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_merging_model_specific.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_pag.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_align_your_steps.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_attention_multiply.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_advanced_samplers.py
-[2025-03-27 23:38:53.911] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_webcam.py
-[2025-03-27 23:38:53.912] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_audio.py
-[2025-03-27 23:38:53.918] Loading FFmpeg6
-[2025-03-27 23:38:53.964] Successfully loaded FFmpeg6
-[2025-03-27 23:38:53.977] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_sd3.py
-[2025-03-27 23:38:53.977] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_gits.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_controlnet.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hunyuan.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_flux.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_lora_extract.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_torch_compile.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_mochi.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_slg.py
-[2025-03-27 23:38:53.978] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_mahiro.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_lt.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hooks.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_load_3d.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_cosmos.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_video.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_lumina2.py
-[2025-03-27 23:38:53.979] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_wan.py
-[2025-03-27 23:38:53.980] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
-[2025-03-27 23:38:54.462] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
-[2025-03-27 23:38:54.463] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/checkpoints
-[2025-03-27 23:38:54.464] found 10 files
-[2025-03-27 23:38:54.465] 
-[2025-03-27 23:38:54.466] [92m[rgthree-comfy] Loaded 42 epic nodes. 🎉[00m
-[2025-03-27 23:38:54.466] 
-[2025-03-27 23:38:54.466] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
-[2025-03-27 23:38:54.493] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/loras
-[2025-03-27 23:38:54.493] found 6 files
-[2025-03-27 23:38:54.493] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/vae
-[2025-03-27 23:38:54.493] found 4 files
-[2025-03-27 23:38:54.496] Popen(['git', 'rev-list', 'HEAD', '--'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-27 23:38:54.515] [34m[ComfyUI-Easy-Use] server: [0mv1.2.8 [92mLoaded[0m
-[2025-03-27 23:38:54.515] [34m[ComfyUI-Easy-Use] web root: [0m/home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use/web_version/v2 [92mLoaded[0m
-[2025-03-27 23:38:54.516] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
-[2025-03-27 23:38:54.517] ### Loading: ComfyUI-Impact-Pack (V8.10)
-[2025-03-27 23:38:54.537] [Impact Pack] Wildcards loading done.
-[2025-03-27 23:38:54.538] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
-[2025-03-27 23:38:54.540] ### Loading: ComfyUI-Manager (V3.31.8)
-[2025-03-27 23:38:54.540] [ComfyUI-Manager] network_mode: public
-[2025-03-27 23:38:54.540] Popen(['git', 'rev-list', 'HEAD', '--'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-27 23:38:54.555] Popen(['git', 'cat-file', '--batch-check'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=<valid stream>, shell=False, universal_newlines=False)
-[2025-03-27 23:38:54.556] Popen(['git', 'cat-file', '--batch'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=<valid stream>, shell=False, universal_newlines=False)
-[2025-03-27 23:38:54.557] Popen(['git', 'describe', '--tags'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-27 23:38:54.562] ### ComfyUI Version: v0.2.2-624-g3b19fc76 | Released on '2025-03-18'
-[2025-03-27 23:38:54.569] Using selector: EpollSelector
-[2025-03-27 23:38:54.571] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
-[2025-03-27 23:38:54.572] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-MVAdapter
-[2025-03-27 23:38:54.607] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
-[2025-03-27 23:38:54.607] ### Loading: ComfyUI-Impact-Subpack (V1.2.9)
-[2025-03-27 23:38:54.632] matplotlib data path: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/matplotlib/mpl-data
-[2025-03-27 23:38:54.634] CONFIGDIR=/home/slyedoc/.config/matplotlib
-[2025-03-27 23:38:54.635] interactive is False
-[2025-03-27 23:38:54.635] platform is linux
-[2025-03-27 23:38:54.658] CACHEDIR=/home/slyedoc/.cache/matplotlib
-[2025-03-27 23:38:54.660] Using fontManager instance from /home/slyedoc/.cache/matplotlib/fontlist-v390.json
-[2025-03-27 23:38:54.706] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
-[2025-03-27 23:38:54.707] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
-[2025-03-27 23:38:54.718] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
-[2025-03-27 23:38:54.775] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
-[2025-03-27 23:38:54.784] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
-[2025-03-27 23:38:54.787] Popen(['git', 'describe', '--tags'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-27 23:38:54.804] [Impact Subpack] ultralytics_bbox: /home/slyedoc/code/p/ComfyUI/models/ultralytics/bbox
-[2025-03-27 23:38:54.804] [Impact Subpack] ultralytics_segm: /home/slyedoc/code/p/ComfyUI/models/ultralytics/segm
-[2025-03-27 23:38:54.804] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
-[2025-03-27 23:38:54.804] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
-[2025-03-27 23:38:54.807] Total VRAM 10821 MB, total RAM 64080 MB
-[2025-03-27 23:38:54.807] pytorch version: 2.6.0+cu124
-[2025-03-27 23:38:54.807] xformers version: 0.0.29.post2
-[2025-03-27 23:38:54.807] Set vram state to: LOW_VRAM
-[2025-03-27 23:38:54.807] Device: cuda:0 NVIDIA GeForce RTX 2080 Ti : cudaMallocAsync
-[2025-03-27 23:38:54.810] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
-[2025-03-27 23:38:55.284] [34mWAS Node Suite: [0mOpenCV Python FFMPEG support is enabled[0m
-[2025-03-27 23:38:55.284] [34mWAS Node Suite [93mWarning: [0m`ffmpeg_bin_path` is not set in `/home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui/was_suite_config.json` config file. Will attempt to use system ffmpeg binaries if available.[0m
-[2025-03-27 23:38:55.563] [34mWAS Node Suite: [0mFinished.[0m [32mLoaded[0m [0m220[0m [32mnodes successfully.[0m
-[2025-03-27 23:38:55.564] 
-	[3m[93m"The only person you should try to be better than is the person you were yesterday."[0m[3m - Unknown[0m
-[2025-03-27 23:38:55.564] 
-[2025-03-27 23:38:55.564] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
-[2025-03-27 23:38:55.564] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
-[2025-03-27 23:38:55.565] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
-[2025-03-27 23:38:55.567] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
-[2025-03-27 23:38:55.568] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/controlnet
-[2025-03-27 23:38:55.568] found 2 files
-[2025-03-27 23:38:55.573] ------------------------------------------
-[2025-03-27 23:38:55.573] [34mComfyroll Studio v1.76 : [92m 175 Nodes Loaded[0m
-[2025-03-27 23:38:55.573] ------------------------------------------
-[2025-03-27 23:38:55.573] ** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
-[2025-03-27 23:38:55.573] ** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
-[2025-03-27 23:38:55.573] ------------------------------------------
-[2025-03-27 23:38:55.573] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
-[2025-03-27 23:38:55.575] 
-Import times for custom nodes:
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
-[2025-03-27 23:38:55.575]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-MVAdapter
-[2025-03-27 23:38:55.575]    0.1 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
-[2025-03-27 23:38:55.575]    0.2 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
-[2025-03-27 23:38:55.575]    0.5 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
-[2025-03-27 23:38:55.575]    0.8 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
-[2025-03-27 23:38:55.575] 
-[2025-03-27 23:38:55.581] Starting server
+[2025-04-02 08:16:04.576] ** ComfyUI startup time: 2025-04-02 08:16:04.576
+[2025-04-02 08:16:04.576] ** Platform: Linux
+[2025-04-02 08:16:04.576] ** Python version: 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]
+[2025-04-02 08:16:04.576] ** Python executable: /home/slyedoc/code/p/ComfyUI/.venv/bin/python
+[2025-04-02 08:16:04.576] ** ComfyUI Path: /home/slyedoc/code/p/ComfyUI
+[2025-04-02 08:16:04.576] ** ComfyUI Base Folder Path: /home/slyedoc/code/p/ComfyUI
+[2025-04-02 08:16:04.576] ** User directory: /home/slyedoc/code/p/blackbird/art/user
+[2025-04-02 08:16:04.576] ** ComfyUI-Manager config path: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/config.ini
+[2025-04-02 08:16:04.576] ** Log path: /home/slyedoc/code/p/blackbird/art/user/comfyui.log
 
-[2025-03-27 23:38:55.581] To see the GUI go to: http://127.0.0.1:8188
-[2025-03-27 23:38:57.790] FETCH ComfyRegistry Data: 5/79
+Prestartup times for custom nodes:
+[2025-04-02 08:16:05.271]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
+[2025-04-02 08:16:05.271]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
+[2025-04-02 08:16:05.271]    1.5 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
+[2025-04-02 08:16:05.271] 
+[2025-04-02 08:16:06.044] Checkpoint files will always be loaded safely.
+[2025-04-02 08:16:06.259] Total VRAM 32075 MB, total RAM 64053 MB
+[2025-04-02 08:16:06.259] pytorch version: 2.8.0.dev20250401+cu128
+[2025-04-02 08:16:06.259] Set vram state to: NORMAL_VRAM
+[2025-04-02 08:16:06.259] Device: cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync
+[2025-04-02 08:16:06.962] Using pytorch attention
+[2025-04-02 08:16:07.554] ComfyUI version: 0.3.26
+[2025-04-02 08:16:07.556] Failed to check frontend version: 'NoneType' object has no attribute 'split'
+[2025-04-02 08:16:07.556] [Prompt Server] web root: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package/static
+[2025-04-02 08:16:08.454] 
+[2025-04-02 08:16:08.454] [92m[rgthree-comfy] Loaded 42 fantastic nodes. 🎉[00m
+[2025-04-02 08:16:08.454] 
+[2025-04-02 08:16:08.500] [34m[ComfyUI-Easy-Use] server: [0mv1.2.8 [92mLoaded[0m
+[2025-04-02 08:16:08.500] [34m[ComfyUI-Easy-Use] web root: [0m/home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use/web_version/v2 [92mLoaded[0m
+[2025-04-02 08:16:08.501] ### Loading: ComfyUI-Impact-Pack (V8.10)
+[2025-04-02 08:16:08.521] [Impact Pack] Wildcards loading done.
+[2025-04-02 08:16:08.522] ### Loading: ComfyUI-Manager (V3.31.8)
+[2025-04-02 08:16:08.522] [ComfyUI-Manager] network_mode: public
+[2025-04-02 08:16:08.542] ### ComfyUI Version: v0.2.2-624-g3b19fc76 | Released on '2025-03-18'
+[2025-04-02 08:16:08.546] ### Loading: ComfyUI-Impact-Subpack (V1.2.9)
+[2025-04-02 08:16:08.641] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
+[2025-04-02 08:16:08.643] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
+[2025-04-02 08:16:08.676] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
+[2025-04-02 08:16:08.732] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+[2025-04-02 08:16:08.743] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+[2025-04-02 08:16:08.781] [Impact Subpack] ultralytics_bbox: /home/slyedoc/code/p/ComfyUI/models/ultralytics/bbox
+[2025-04-02 08:16:08.781] [Impact Subpack] ultralytics_segm: /home/slyedoc/code/p/ComfyUI/models/ultralytics/segm
+[2025-04-02 08:16:08.784] Total VRAM 32075 MB, total RAM 64053 MB
+[2025-04-02 08:16:08.784] pytorch version: 2.8.0.dev20250401+cu128
+[2025-04-02 08:16:08.784] Set vram state to: NORMAL_VRAM
+[2025-04-02 08:16:08.784] Device: cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync
+[2025-04-02 08:16:09.159] [34mWAS Node Suite: [0mOpenCV Python FFMPEG support is enabled[0m
+[2025-04-02 08:16:09.159] [34mWAS Node Suite [93mWarning: [0m`ffmpeg_bin_path` is not set in `/home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui/was_suite_config.json` config file. Will attempt to use system ffmpeg binaries if available.[0m
+[2025-04-02 08:16:09.452] [34mWAS Node Suite: [0mFinished.[0m [32mLoaded[0m [0m220[0m [32mnodes successfully.[0m
+[2025-04-02 08:16:09.452] 
+	[3m[93m"Art is the breath of life."[0m[3m - Liza Donnelly[0m
+[2025-04-02 08:16:09.452] 
+[2025-04-02 08:16:09.599] ------------------------------------------
+[2025-04-02 08:16:09.600] [34mComfyroll Studio v1.76 : [92m 175 Nodes Loaded[0m
+[2025-04-02 08:16:09.600] ------------------------------------------
+[2025-04-02 08:16:09.600] ** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
+[2025-04-02 08:16:09.600] ** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
+[2025-04-02 08:16:09.600] ------------------------------------------
+[2025-04-02 08:16:09.602] ### Loading: ComfyUI-IG2MV Nodes ###
+[2025-04-02 08:16:09.604] 
+Import times for custom nodes:
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-IG2MV
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
+[2025-04-02 08:16:09.604]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
+[2025-04-02 08:16:09.604]    0.1 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mvadapter
+[2025-04-02 08:16:09.604]    0.2 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
+[2025-04-02 08:16:09.604]    0.6 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
+[2025-04-02 08:16:09.604]    0.7 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
+[2025-04-02 08:16:09.604] 
+[2025-04-02 08:16:09.610] Starting server
+
+[2025-04-02 08:16:09.610] To see the GUI go to: http://127.0.0.1:8188
+[2025-04-02 08:16:11.830] FETCH ComfyRegistry Data: 5/80
+[2025-04-02 08:16:15.195] FETCH ComfyRegistry Data: 10/80
+[2025-04-02 08:16:18.472] FETCH ComfyRegistry Data: 15/80
+[2025-04-02 08:16:21.757] FETCH ComfyRegistry Data: 20/80
+[2025-04-02 08:16:25.000] [view] query: <MultiDictProxy('type': 'input', 'filename': 'image_fx__-_2025-04-01T190751.959.jpg', 'subfolder': '', 'rand': '0.00515076893380173')>
+[2025-04-02 08:16:25.000] [view] filename: image_fx__-_2025-04-01T190751.959.jpg
+[2025-04-02 08:16:25.000] [view] output_dir: None
+[2025-04-02 08:16:25.000] [view] type: input
+[2025-04-02 08:16:25.000] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-02 08:16:25.000] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-02 08:16:25.000] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-02 08:16:25.000] [view] filename: image_fx__-_2025-04-01T190751.959.jpg
+[2025-04-02 08:16:25.000] [view] file: /home/slyedoc/code/p/blackbird/art/input/image_fx__-_2025-04-01T190751.959.jpg
+[2025-04-02 08:16:25.015] [view] query: <MultiDictProxy('type': 'input', 'filename': 'image_fx__-_2025-04-01T190751.959.jpg', 'subfolder': '', 'rand': '0.00515076893380173')>
+[2025-04-02 08:16:25.015] [view] filename: image_fx__-_2025-04-01T190751.959.jpg
+[2025-04-02 08:16:25.015] [view] output_dir: None
+[2025-04-02 08:16:25.015] [view] type: input
+[2025-04-02 08:16:25.015] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-02 08:16:25.015] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-02 08:16:25.015] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-02 08:16:25.015] [view] filename: image_fx__-_2025-04-01T190751.959.jpg
+[2025-04-02 08:16:25.015] [view] file: /home/slyedoc/code/p/blackbird/art/input/image_fx__-_2025-04-01T190751.959.jpg
+[2025-04-02 08:16:25.842] FETCH ComfyRegistry Data: 25/80
+[2025-04-02 08:16:29.155] FETCH ComfyRegistry Data: 30/80
+[2025-04-02 08:16:32.664] FETCH ComfyRegistry Data: 35/80
+[2025-04-02 08:16:33.822] [ComfyUI-Manager] The ComfyRegistry cache update is still in progress, so an outdated cache is being used.
+[2025-04-02 08:16:33.855] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/1514988643_custom-node-list.json [DONE]
+[2025-04-02 08:16:33.865] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/746607195_github-stats.json [DONE]
+[2025-04-02 08:16:33.866] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/832903789_extras.json [DONE]
+[2025-04-02 08:16:33.898] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/1742899825_extension-node-map.json [DONE]
+[2025-04-02 08:16:33.925] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/1742899825_extension-node-map.json [DONE]
+[2025-04-02 08:16:35.977] FETCH ComfyRegistry Data: 40/80
+[2025-04-02 08:16:39.282] FETCH ComfyRegistry Data: 45/80
+[2025-04-02 08:16:40.047] FETCH DATA from: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager/custom-node-list.json [DONE]
+[2025-04-02 08:16:40.060] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/1514988643_custom-node-list.json [DONE]
+[2025-04-02 08:16:40.090] Download: git clone 'https://github.com/XLabs-AI/x-flux-comfyui'
+[2025-04-02 08:16:40.090] 0it [00:00, ?it/s]100%|████████████████████████████████████████████████████████████████| 232.0/232.0 [00:00<00:00, 998.63it/s]100%|████████████████████████████████████████████████████████████████| 232.0/232.0 [00:00<00:00, 998.31it/s]100%|██████████████████████████████████████████████████████████████████| 65.0/65.0 [00:00<00:00, 269.30it/s]100%|██████████████████████████████████████████████████████████████████| 65.0/65.0 [00:00<00:00, 269.19it/s]100%|███████████████████████████████████████████████████████████████| 669.0/669.0 [00:00<00:00, 1820.55it/s]100%|███████████████████████████████████████████████████████████████| 669.0/669.0 [00:00<00:00, 1820.23it/s]100%|███████████████████████████████████████████████████████████████| 407.0/407.0 [00:00<00:00, 1097.59it/s]100%|███████████████████████████████████████████████████████████████| 407.0/407.0 [00:00<00:00, 1097.42it/s]100%|███████████████████████████████████████████████████████████████| 407.0/407.0 [00:00<00:00, 1020.90it/s]
+[2025-04-02 08:16:40.489] Install: pip packages
+[2025-04-02 08:16:40.847] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'GitPython']
+[2025-04-02 08:16:41.119] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:41.119] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:41.122] [!] [!] [2025-04-02 08:16:41.138]    [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:41.740] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:41.792] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'einops==0.8.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:42.336] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:42.338] [!] [!] [2025-04-02 08:16:42.420]  Collecting einops==0.8.0
+[2025-04-02 08:16:42.420]    Downloading einops-0.8.0-py3-none-any.whl.metadata (12 kB)
+[2025-04-02 08:16:42.502]  Downloading einops-0.8.0-py3-none-any.whl (43 kB)
+[2025-04-02 08:16:42.524]     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.2/43.2 kB 2.6 MB/s eta 0:00:00
+[2025-04-02 08:16:42.543] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:43.129] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:43.182] FETCH ComfyRegistry Data: 50/80
+[2025-04-02 08:16:43.481]  Installing collected packages: einops
+[2025-04-02 08:16:43.481]    Attempting uninstall: einops
+[2025-04-02 08:16:43.481]      Found existing installation: einops 0.8.1
+[2025-04-02 08:16:43.492]      Uninstalling einops-0.8.1:
+[2025-04-02 08:16:43.495]        Successfully uninstalled einops-0.8.1
+[2025-04-02 08:16:43.496] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:43.540] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:43.542]  Successfully installed einops-0.8.0
+[2025-04-02 08:16:43.549] [ComfyUI-Manager] skip black listed pip installation: 'transformers'
+[2025-04-02 08:16:43.582] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'diffusers']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:43.779] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:43.782] [!] [!] [2025-04-02 08:16:43.798]                    [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:44.501] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:44.554] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'sentencepiece']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:45.101] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:45.103] [!] [!] [2025-04-02 08:16:45.118]  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:45.698] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:45.751] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'opencv-python']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:46.295] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:46.298] [!] [!] [2025-04-02 08:16:46.314]   FETCH ComfyRegistry Data: 55/80
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:46.915] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:46.968] [2025-04-02 08:16:47.640] Installation was successful.
+
+[ComfyUI-Manager] Queued works are completed.
+{'install': 1}
+[2025-04-02 08:16:47.641] 
+After restarting ComfyUI, please refresh the browser.
+[2025-04-02 08:16:49.843] FETCH ComfyRegistry Data: 60/80
+[2025-04-02 08:16:53.125] FETCH DATA from: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager/custom-node-list.json [DONE]
+[2025-04-02 08:16:53.135] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/1514988643_custom-node-list.json [DONE]
+[2025-04-02 08:16:53.146] Download: git clone 'https://github.com/1038lab/ComfyUI-RMBG'
+[2025-04-02 08:16:53.146] 0it [00:00, ?it/s][2025-04-02 08:16:53.238] FETCH ComfyRegistry Data: 65/80
+100%|████████████████████████████████████████████████████████████████| 199.0/199.0 [00:00<00:00, 860.46it/s]100%|████████████████████████████████████████████████████████████████| 199.0/199.0 [00:00<00:00, 860.17it/s]100%|████████████████████████████████████████████████████████████████| 121.0/121.0 [00:00<00:00, 508.75it/s]100%|████████████████████████████████████████████████████████████████| 121.0/121.0 [00:00<00:00, 508.57it/s]100%|███████████████████████████████████████████████████████████████| 560.0/560.0 [00:00<00:00, 1839.02it/s]100%|███████████████████████████████████████████████████████████████| 560.0/560.0 [00:00<00:00, 1838.57it/s]100%|███████████████████████████████████████████████████████████████| 334.0/334.0 [00:00<00:00, 1085.01it/s]100%|███████████████████████████████████████████████████████████████| 334.0/334.0 [00:00<00:00, 1084.85it/s]100%|███████████████████████████████████████████████████████████████| 334.0/334.0 [00:00<00:00, 1015.15it/s]
+[2025-04-02 08:16:53.477] Install: pip packages
+[2025-04-02 08:16:53.477] [ComfyUI-Manager] skip black listed pip installation: 'torch>=2.0.0'
+[2025-04-02 08:16:53.477] [ComfyUI-Manager] skip black listed pip installation: 'torchvision>=0.15.0'
+[2025-04-02 08:16:53.478] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'Pillow>=9.0.0']
+[2025-04-02 08:16:53.671] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:53.671] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:53.673] [!] [!] [2025-04-02 08:16:53.689]  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:54.278] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:54.330] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'numpy>=1.22.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:54.884] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:54.886] [!] [!] [2025-04-02 08:16:54.904]  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:55.481] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:55.534] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'huggingface-hub>=0.19.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:56.093] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:56.096] [!] [!] [2025-04-02 08:16:56.112]             FETCH ComfyRegistry Data: 70/80
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:56.767] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:56.820] [2025-04-02 08:16:57.143] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'transformers>=4.35.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:57.349] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:57.351] [!] [!] [2025-04-02 08:16:57.368]                  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:58.136] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:58.190] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'transparent-background>=1.2.4']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:58.719] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:58.722] [!] [!] [2025-04-02 08:16:58.738]              Collecting albucore==0.0.16 (from transparent-background>=1.2.4)
+[2025-04-02 08:16:58.820]    Using cached albucore-0.0.16-py3-none-any.whl.metadata (3.1 kB)
+[2025-04-02 08:16:58.821]       INFO: pip is looking at multiple versions of albumentations to determine which version is compatible with other requirements. This could take a while.
+[2025-04-02 08:16:58.836]  Collecting albumentations>=1.3.1 (from transparent-background>=1.2.4)
+[2025-04-02 08:16:58.864]    Using cached albumentations-2.0.4-py3-none-any.whl.metadata (41 kB)
+[2025-04-02 08:16:58.865]    Using cached albumentations-2.0.3-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.875]    Using cached albumentations-2.0.2-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.885]    Using cached albumentations-2.0.1-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.894]    Using cached albumentations-2.0.0-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.903]    Using cached albumentations-1.4.24-py3-none-any.whl.metadata (37 kB)
+[2025-04-02 08:16:58.912]    Using cached albumentations-1.4.23-py3-none-any.whl.metadata (36 kB)
+[2025-04-02 08:16:58.922]  INFO: pip is still looking at multiple versions of albumentations to determine which version is compatible with other requirements. This could take a while.
+[2025-04-02 08:16:58.928]    Using cached albumentations-1.4.22-py3-none-any.whl.metadata (33 kB)
+[2025-04-02 08:16:58.931]    Using cached albumentations-1.4.21-py3-none-any.whl.metadata (31 kB)
+[2025-04-02 08:16:58.940]    Using cached albumentations-1.4.20-py3-none-any.whl.metadata (32 kB)
+[2025-04-02 08:16:58.949]    Using cached albumentations-1.4.19-py3-none-any.whl.metadata (32 kB)
+[2025-04-02 08:16:58.959]    Using cached albumentations-1.4.18-py3-none-any.whl.metadata (32 kB)
+[2025-04-02 08:16:58.967]   INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+[2025-04-02 08:16:58.975]    Using cached albumentations-1.4.17-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.978]    Using cached albumentations-1.4.16-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.987]    Using cached albumentations-1.4.15-py3-none-any.whl.metadata (38 kB)
+[2025-04-02 08:16:58.996]                                                     Using cached albucore-0.0.16-py3-none-any.whl (9.5 kB)
+[2025-04-02 08:16:59.364]  Using cached albumentations-1.4.15-py3-none-any.whl (200 kB)
+[2025-04-02 08:16:59.365] FETCH ComfyRegistry Data: 75/80
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:16:59.947] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.001] [2025-04-02 08:17:00.304]  Installing collected packages: albucore, albumentations
+[2025-04-02 08:17:00.304]    Attempting uninstall: albucore
+[2025-04-02 08:17:00.304]      Found existing installation: albucore 0.0.23
+[2025-04-02 08:17:00.322]      Uninstalling albucore-0.0.23:
+[2025-04-02 08:17:00.324]        Successfully uninstalled albucore-0.0.23
+[2025-04-02 08:17:00.324]    Attempting uninstall: albumentations
+[2025-04-02 08:17:00.333] [!]     WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.359] [!]     WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.361]      Found existing installation: albumentations 2.0.5
+[2025-04-02 08:17:00.370]      Uninstalling albumentations-2.0.5:
+[2025-04-02 08:17:00.373]        Successfully uninstalled albumentations-2.0.5
+[2025-04-02 08:17:00.374] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.467] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.469]  Successfully installed albucore-0.0.16 albumentations-1.4.15
+[2025-04-02 08:17:00.479] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'tqdm>=4.65.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.741] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:00.744] [!] [!] [2025-04-02 08:17:00.760]  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:01.348] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:01.402] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'segment-anything>=1.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:01.928] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:01.931] [!] [!] [2025-04-02 08:17:01.946]  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:02.537] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:02.597] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'groundingdino-py>=0.4.0']
+[2025-04-02 08:17:03.040] FETCH ComfyRegistry Data: 80/80
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:03.121] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:03.123] [!] [!] [2025-04-02 08:17:03.243]  Collecting groundingdino-py>=0.4.0
+[2025-04-02 08:17:03.243]    Downloading groundingdino-py-0.4.0.tar.gz (82 kB)
+[2025-04-02 08:17:03.293]       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.3/82.3 kB 2.9 MB/s eta 0:00:00
+[2025-04-02 08:17:03.326]    Preparing metadata (setup.py): started
+[2025-04-02 08:17:03.342]    Preparing metadata (setup.py): finished with status 'done'
+[2025-04-02 08:17:03.493]     Collecting addict (from groundingdino-py>=0.4.0)
+[2025-04-02 08:17:03.523]    Downloading addict-2.4.0-py3-none-any.whl.metadata (1.0 kB)
+[2025-04-02 08:17:03.535] FETCH ComfyRegistry Data [DONE]
+[2025-04-02 08:17:03.571]  Collecting yapf (from groundingdino-py>=0.4.0)
+[2025-04-02 08:17:03.571]    Downloading yapf-0.43.0-py3-none-any.whl.metadata (46 kB)
+[2025-04-02 08:17:03.580]       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.8/46.8 kB 5.1 MB/s eta 0:00:00
+[2025-04-02 08:17:03.589] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+   FETCH DATA from: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json [DONE]
+[2025-04-02 08:17:03.675]  Collecting supervision==0.6.0 (from groundingdino-py>=0.4.0)
+[2025-04-02 08:17:03.675] [2025-04-02 08:17:03.675] [ComfyUI-Manager] All startup tasks have been completed.
+   Downloading supervision-0.6.0-py3-none-any.whl.metadata (6.2 kB)
+[2025-04-02 08:17:03.682]  Collecting pycocotools (from groundingdino-py>=0.4.0)
+[2025-04-02 08:17:03.710]    Downloading pycocotools-2.0.8-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.1 kB)
+[2025-04-02 08:17:03.721]                                                Downloading supervision-0.6.0-py3-none-any.whl (31 kB)
+[2025-04-02 08:17:04.109]  Downloading addict-2.4.0-py3-none-any.whl (3.8 kB)
+[2025-04-02 08:17:04.125]  Downloading pycocotools-2.0.8-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (443 kB)
+[2025-04-02 08:17:04.142]     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 443.5/443.5 kB 9.2 MB/s eta 0:00:00
+[2025-04-02 08:17:04.191]  Downloading yapf-0.43.0-py3-none-any.whl (256 kB)
+[2025-04-02 08:17:04.203]     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 256.2/256.2 kB 10.4 MB/s eta 0:00:00
+[2025-04-02 08:17:04.228]  Building wheels for collected packages: groundingdino-py
+[2025-04-02 08:17:04.231]    Building wheel for groundingdino-py (setup.py): started
+[2025-04-02 08:17:04.232]    Building wheel for groundingdino-py (setup.py): finished with status 'done'
+[2025-04-02 08:17:04.421]    Created wheel for groundingdino-py: filename=groundingdino_py-0.4.0-py2.py3-none-any.whl size=88734 sha256=d4bff346e63a8ff470c23ae88ccd403582a2f77e12bc09ab901830b9b716b07b
+[2025-04-02 08:17:04.421]    Stored in directory: /home/slyedoc/.cache/pip/wheels/74/c4/d6/2c6ded61819d391715b4f1ae483f2cfdc8f2eeb6bbb63e748b
+[2025-04-02 08:17:04.421]  Successfully built groundingdino-py
+[2025-04-02 08:17:04.424] [2025-04-02 08:17:05.015] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:05.015] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:05.069]  Installing collected packages: addict, yapf, supervision, pycocotools, groundingdino-py
+[2025-04-02 08:17:05.373] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:05.568] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:05.570]  Successfully installed addict-2.4.0 groundingdino-py-0.4.0 pycocotools-2.0.8 supervision-0.6.0 yapf-0.43.0
+[2025-04-02 08:17:05.619] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'opencv-python>=4.7.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:05.871] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:05.873] [!] [!] [2025-04-02 08:17:05.889]   [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:06.493] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:06.546] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'scipy>=1.10.0']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:07.078] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:07.081] [!] [!] [2025-04-02 08:17:07.099]   [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:07.706] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:07.759] Installation was successful.
+
+[ComfyUI-Manager] Queued works are completed.
+{'install': 1}
+[2025-04-02 08:17:08.429] 
+After restarting ComfyUI, please refresh the browser.
+[2025-04-02 08:17:11.566] FETCH DATA from: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager/custom-node-list.json [DONE]
+[2025-04-02 08:17:11.571] FETCH DATA from: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/cache/1514988643_custom-node-list.json [DONE]
+[2025-04-02 08:17:11.579] Download: git clone 'https://github.com/toyxyz/ComfyUI_rgbx_Wrapper'
+[2025-04-02 08:17:11.579] 0it [00:00, ?it/s]100%|██████████████████████████████████████████████████████████████████| 62.0/62.0 [00:00<00:00, 241.49it/s]100%|██████████████████████████████████████████████████████████████████| 62.0/62.0 [00:00<00:00, 241.30it/s]100%|██████████████████████████████████████████████████████████████████| 52.0/52.0 [00:00<00:00, 138.94it/s]100%|██████████████████████████████████████████████████████████████████| 52.0/52.0 [00:00<00:00, 138.90it/s]100%|███████████████████████████████████████████████████████████████████| 62.0/62.0 [00:00<00:00, 93.11it/s]100%|███████████████████████████████████████████████████████████████████| 62.0/62.0 [00:00<00:00, 93.05it/s]100%|███████████████████████████████████████████████████████████████████| 16.0/16.0 [00:00<00:00, 23.92it/s]100%|███████████████████████████████████████████████████████████████████| 16.0/16.0 [00:00<00:00, 23.90it/s]100%|███████████████████████████████████████████████████████████████████| 16.0/16.0 [00:00<00:00, 20.99it/s]
+[2025-04-02 08:17:12.342] Install: pip packages
+[2025-04-02 08:17:12.343] [ComfyUI-Manager] skip black listed pip installation: 'torch'
+[2025-04-02 08:17:12.344] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'imageio']
+[2025-04-02 08:17:12.582] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:12.582] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:12.585] [!] [!] [2025-04-02 08:17:12.600]    [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:13.212] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:13.265] [ComfyUI-Manager] 'numpy' is remapped to 'numpy<2'
+[2025-04-02 08:17:13.586] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'numpy<2']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:13.782] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:13.784] [!] [!] [2025-04-02 08:17:13.802]  [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:14.387] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:14.439] 
+## ComfyUI-Manager: EXECUTE => ['/home/slyedoc/code/p/ComfyUI/.venv/bin/python', '-m', 'pip', 'install', 
+'huggingface-hub']
+[!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:14.958] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:14.960] [!] [!] [2025-04-02 08:17:14.976]             [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/datasets-3.5.0.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:15.638] [!] WARNING: Skipping /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package-1.15.8.dist-info due to invalid metadata entry 'name'
+[2025-04-02 08:17:15.692] Installation was successful.
+
+[ComfyUI-Manager] Queued works are completed.
+{'install': 1}
+[2025-04-02 08:17:16.366] 
+After restarting ComfyUI, please refresh the browser.

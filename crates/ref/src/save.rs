@@ -1,5 +1,4 @@
 use bevy::prelude::*;
-use sly_common::prelude::LookTransform;
 
 use crate::{Prefab, PrefabConfig, RefConfig};
 
@@ -31,18 +30,18 @@ pub fn save_on_exit(mut commands: Commands) {
 }
 
 // save the current state of the world
-pub fn save(camera: Single<&LookTransform, With<Camera>>, query: Query<(&Transform, &Prefab)>) {
+pub fn save(query: Query<(&Transform, &Prefab)>) {
+    info!("Saving...");
     let mut config = RefConfig {
-        camera_eye: camera.eye,
-        camera_target: camera.target,
-        camera_up: camera.up,
         prefabs: Vec::new(),
     };
 
     for (trans, prefab) in query.iter() {
         config.prefabs.push(PrefabConfig {
+
             prefab: prefab.clone(),
-            position: trans.translation,
+            translation: trans.translation,
+            rotation: trans.rotation,
             scale: trans.scale.x,
         });
     }

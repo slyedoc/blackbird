@@ -1,198 +1,613 @@
-Popen(['git', 'version'], cwd=/home/slyedoc/code/p/blackbird, stdin=None, shell=False, universal_newlines=False)
-[2025-03-28 15:23:47.261] Popen(['git', 'version'], cwd=/home/slyedoc/code/p/blackbird, stdin=None, shell=False, universal_newlines=False)
 ## ComfyUI-Manager: installing dependencies done.
-[2025-03-28 15:23:47.265] ** ComfyUI startup time: 2025-03-28 15:23:47.265
-[2025-03-28 15:23:47.265] ** Platform: Linux
-[2025-03-28 15:23:47.265] ** Python version: 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]
-[2025-03-28 15:23:47.265] ** Python executable: /home/slyedoc/code/p/ComfyUI/.venv/bin/python
-[2025-03-28 15:23:47.265] ** ComfyUI Path: /home/slyedoc/code/p/ComfyUI
-[2025-03-28 15:23:47.265] ** ComfyUI Base Folder Path: /home/slyedoc/code/p/ComfyUI
-[2025-03-28 15:23:47.265] ** User directory: /home/slyedoc/code/p/blackbird/art/user
-[2025-03-28 15:23:47.265] ** ComfyUI-Manager config path: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/config.ini
-[2025-03-28 15:23:47.265] ** Log path: /home/slyedoc/code/p/blackbird/art/user/comfyui.log
-[2025-03-28 15:23:47.934] 
-Prestartup times for custom nodes:
-[2025-03-28 15:23:47.934]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
-[2025-03-28 15:23:47.934]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
-[2025-03-28 15:23:47.934]    1.5 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
-[2025-03-28 15:23:47.934] 
-[2025-03-28 15:23:49.028] Checkpoint files will always be loaded safely.
-[2025-03-28 15:23:49.249] Total VRAM 10821 MB, total RAM 64080 MB
-[2025-03-28 15:23:49.249] pytorch version: 2.6.0+cu124
-[2025-03-28 15:23:50.090] xformers version: 0.0.29.post2
-[2025-03-28 15:23:50.090] Set vram state to: LOW_VRAM
-[2025-03-28 15:23:50.090] Device: cuda:0 NVIDIA GeForce RTX 2080 Ti : cudaMallocAsync
-[2025-03-28 15:23:50.319] Using xformers attention
-[2025-03-28 15:23:50.848] ComfyUI version: 0.3.26
-[2025-03-28 15:23:50.848] Using selector: EpollSelector
-[2025-03-28 15:23:50.851] ComfyUI frontend version: 1.12.14
-[2025-03-28 15:23:50.852] [Prompt Server] web root: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package/static
-[2025-03-28 15:23:50.852] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_latent.py
-[2025-03-28 15:23:50.853] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hypernetwork.py
-[2025-03-28 15:23:50.854] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_upscale_model.py
-[2025-03-28 15:23:50.912] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_post_processing.py
-[2025-03-28 15:23:50.912] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_mask.py
-[2025-03-28 15:23:50.912] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_compositing.py
-[2025-03-28 15:23:50.913] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_rebatch.py
-[2025-03-28 15:23:50.913] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_merging.py
-[2025-03-28 15:23:50.913] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_tomesd.py
-[2025-03-28 15:23:50.913] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_clip_sdxl.py
-[2025-03-28 15:23:50.913] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_canny.py
-[2025-03-28 15:23:51.117] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_freelunch.py
-[2025-03-28 15:23:51.117] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_custom_sampler.py
-[2025-03-28 15:23:51.118] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hypertile.py
-[2025-03-28 15:23:51.118] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_advanced.py
-[2025-03-28 15:23:51.118] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_downscale.py
-[2025-03-28 15:23:51.118] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_images.py
-[2025-03-28 15:23:51.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_video_model.py
-[2025-03-28 15:23:51.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_sag.py
-[2025-03-28 15:23:51.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_perpneg.py
-[2025-03-28 15:23:51.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_stable3d.py
-[2025-03-28 15:23:51.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_sdupscale.py
-[2025-03-28 15:23:51.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_photomaker.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_pixart.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_cond.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_morphology.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_stable_cascade.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_differential_diffusion.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_ip2p.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_model_merging_model_specific.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_pag.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_align_your_steps.py
-[2025-03-28 15:23:51.120] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_attention_multiply.py
-[2025-03-28 15:23:51.121] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_advanced_samplers.py
-[2025-03-28 15:23:51.121] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_webcam.py
-[2025-03-28 15:23:51.121] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_audio.py
-[2025-03-28 15:23:51.134] Loading FFmpeg6
-[2025-03-28 15:23:51.255] Successfully loaded FFmpeg6
-[2025-03-28 15:23:51.273] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_sd3.py
-[2025-03-28 15:23:51.273] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_gits.py
-[2025-03-28 15:23:51.274] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_controlnet.py
-[2025-03-28 15:23:51.274] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hunyuan.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_flux.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_lora_extract.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_torch_compile.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_mochi.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_slg.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_mahiro.py
-[2025-03-28 15:23:51.275] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_lt.py
-[2025-03-28 15:23:51.276] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_hooks.py
-[2025-03-28 15:23:51.276] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_load_3d.py
-[2025-03-28 15:23:51.276] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_cosmos.py
-[2025-03-28 15:23:51.276] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_video.py
-[2025-03-28 15:23:51.276] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_lumina2.py
-[2025-03-28 15:23:51.277] Trying to load custom node /home/slyedoc/code/p/ComfyUI/comfy_extras/nodes_wan.py
-[2025-03-28 15:23:51.277] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
-[2025-03-28 15:23:52.114] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
-[2025-03-28 15:23:52.116] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/checkpoints
-[2025-03-28 15:23:52.116] found 10 files
-[2025-03-28 15:23:52.119] 
-[2025-03-28 15:23:52.119] [92m[rgthree-comfy] Loaded 42 magnificent nodes. 🎉[00m
-[2025-03-28 15:23:52.119] 
-[2025-03-28 15:23:52.119] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
-[2025-03-28 15:23:52.150] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/loras
-[2025-03-28 15:23:52.150] found 6 files
-[2025-03-28 15:23:52.150] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/vae
-[2025-03-28 15:23:52.150] found 4 files
-[2025-03-28 15:23:52.154] Popen(['git', 'rev-list', 'HEAD', '--'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-28 15:23:52.177] [34m[ComfyUI-Easy-Use] server: [0mv1.2.8 [92mLoaded[0m
-[2025-03-28 15:23:52.177] [34m[ComfyUI-Easy-Use] web root: [0m/home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use/web_version/v2 [92mLoaded[0m
-[2025-03-28 15:23:52.178] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
-[2025-03-28 15:23:52.179] ### Loading: ComfyUI-Impact-Pack (V8.10)
-[2025-03-28 15:23:52.205] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
-[2025-03-28 15:23:52.205] [Impact Pack] Wildcards loading done.
-[2025-03-28 15:23:52.208] ### Loading: ComfyUI-Manager (V3.31.8)
-[2025-03-28 15:23:52.208] [ComfyUI-Manager] network_mode: public
-[2025-03-28 15:23:52.208] Popen(['git', 'rev-list', 'HEAD', '--'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-28 15:23:52.226] Popen(['git', 'cat-file', '--batch-check'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=<valid stream>, shell=False, universal_newlines=False)
-[2025-03-28 15:23:52.227] Popen(['git', 'cat-file', '--batch'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=<valid stream>, shell=False, universal_newlines=False)
-[2025-03-28 15:23:52.229] Popen(['git', 'describe', '--tags'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-28 15:23:52.234] ### ComfyUI Version: v0.2.2-624-g3b19fc76 | Released on '2025-03-18'
-[2025-03-28 15:23:52.245] Using selector: EpollSelector
-[2025-03-28 15:23:52.247] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
-[2025-03-28 15:23:52.247] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-MVAdapter
-[2025-03-28 15:23:52.293] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
-[2025-03-28 15:23:52.293] ### Loading: ComfyUI-Impact-Subpack (V1.2.9)
-[2025-03-28 15:23:52.330] matplotlib data path: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/matplotlib/mpl-data
-[2025-03-28 15:23:52.332] CONFIGDIR=/home/slyedoc/.config/matplotlib
-[2025-03-28 15:23:52.333] interactive is False
-[2025-03-28 15:23:52.333] platform is linux
-[2025-03-28 15:23:52.345] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
-[2025-03-28 15:23:52.359] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
-[2025-03-28 15:23:52.371] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
-[2025-03-28 15:23:52.372] CACHEDIR=/home/slyedoc/.cache/matplotlib
-[2025-03-28 15:23:52.374] Using fontManager instance from /home/slyedoc/.cache/matplotlib/fontlist-v390.json
-[2025-03-28 15:23:52.431] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
-[2025-03-28 15:23:52.493] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
-[2025-03-28 15:23:52.498] Popen(['git', 'describe', '--tags'], cwd=/home/slyedoc/code/p/ComfyUI, stdin=None, shell=False, universal_newlines=False)
-[2025-03-28 15:23:52.620] [Impact Subpack] ultralytics_bbox: /home/slyedoc/code/p/ComfyUI/models/ultralytics/bbox
-[2025-03-28 15:23:52.620] [Impact Subpack] ultralytics_segm: /home/slyedoc/code/p/ComfyUI/models/ultralytics/segm
-[2025-03-28 15:23:52.620] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
-[2025-03-28 15:23:52.621] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
-[2025-03-28 15:23:52.625] Total VRAM 10821 MB, total RAM 64080 MB
-[2025-03-28 15:23:52.625] pytorch version: 2.6.0+cu124
-[2025-03-28 15:23:52.625] xformers version: 0.0.29.post2
-[2025-03-28 15:23:52.625] Set vram state to: LOW_VRAM
-[2025-03-28 15:23:52.625] Device: cuda:0 NVIDIA GeForce RTX 2080 Ti : cudaMallocAsync
-[2025-03-28 15:23:52.630] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
-[2025-03-28 15:23:53.218] [34mWAS Node Suite: [0mOpenCV Python FFMPEG support is enabled[0m
-[2025-03-28 15:23:53.218] [34mWAS Node Suite [93mWarning: [0m`ffmpeg_bin_path` is not set in `/home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui/was_suite_config.json` config file. Will attempt to use system ffmpeg binaries if available.[0m
-[2025-03-28 15:23:53.506] [34mWAS Node Suite: [0mFinished.[0m [32mLoaded[0m [0m220[0m [32mnodes successfully.[0m
-[2025-03-28 15:23:53.506] 
-	[3m[93m"Art is the only way to run away without leaving home."[0m[3m - Twyla Tharp[0m
-[2025-03-28 15:23:53.506] 
-[2025-03-28 15:23:53.506] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
-[2025-03-28 15:23:53.507] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
-[2025-03-28 15:23:53.507] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
-[2025-03-28 15:23:53.510] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
-[2025-03-28 15:23:53.512] recursive file list on directory /home/slyedoc/code/p/ComfyUI/models/controlnet
-[2025-03-28 15:23:53.513] found 2 files
-[2025-03-28 15:23:53.518] ------------------------------------------
-[2025-03-28 15:23:53.518] [34mComfyroll Studio v1.76 : [92m 175 Nodes Loaded[0m
-[2025-03-28 15:23:53.518] ------------------------------------------
-[2025-03-28 15:23:53.518] ** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
-[2025-03-28 15:23:53.518] ** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
-[2025-03-28 15:23:53.518] ------------------------------------------
-[2025-03-28 15:23:53.519] Trying to load custom node /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
-[2025-03-28 15:23:53.521] 
-Import times for custom nodes:
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
-[2025-03-28 15:23:53.521]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-MVAdapter
-[2025-03-28 15:23:53.521]    0.1 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
-[2025-03-28 15:23:53.521]    0.3 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
-[2025-03-28 15:23:53.521]    0.8 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
-[2025-03-28 15:23:53.521]    0.9 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
-[2025-03-28 15:23:53.521] 
-[2025-03-28 15:23:53.526] Starting server
+[2025-04-03 20:34:02.649] ** ComfyUI startup time: 2025-04-03 20:34:02.649
+[2025-04-03 20:34:02.649] ** Platform: Linux
+[2025-04-03 20:34:02.649] ** Python version: 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]
+[2025-04-03 20:34:02.649] ** Python executable: /home/slyedoc/code/p/ComfyUI/.venv/bin/python
+[2025-04-03 20:34:02.649] ** ComfyUI Path: /home/slyedoc/code/p/ComfyUI
+[2025-04-03 20:34:02.649] ** ComfyUI Base Folder Path: /home/slyedoc/code/p/ComfyUI
+[2025-04-03 20:34:02.649] ** User directory: /home/slyedoc/code/p/blackbird/art/user
+[2025-04-03 20:34:02.649] ** ComfyUI-Manager config path: /home/slyedoc/code/p/blackbird/art/user/default/ComfyUI-Manager/config.ini
+[2025-04-03 20:34:02.649] ** Log path: /home/slyedoc/code/p/blackbird/art/user/comfyui.log
 
-[2025-03-28 15:23:53.527] To see the GUI go to: http://127.0.0.1:8188
-[2025-03-28 15:23:55.478] FETCH ComfyRegistry Data: 5/80
-[2025-03-28 15:23:58.785] FETCH ComfyRegistry Data: 10/80
-[2025-03-28 15:24:02.088] FETCH ComfyRegistry Data: 15/80
-[2025-03-28 15:24:05.365] FETCH ComfyRegistry Data: 20/80
-[2025-03-28 15:24:08.638] FETCH ComfyRegistry Data: 25/80
-[2025-03-28 15:24:11.920] FETCH ComfyRegistry Data: 30/80
-[2025-03-28 15:24:15.190] FETCH ComfyRegistry Data: 35/80
-[2025-03-28 15:24:18.445] FETCH ComfyRegistry Data: 40/80
-[2025-03-28 15:24:21.713] FETCH ComfyRegistry Data: 45/80
-[2025-03-28 15:24:24.965] FETCH ComfyRegistry Data: 50/80
-[2025-03-28 15:24:28.234] FETCH ComfyRegistry Data: 55/80
-[2025-03-28 15:24:31.508] FETCH ComfyRegistry Data: 60/80
-[2025-03-28 15:24:34.791] FETCH ComfyRegistry Data: 65/80
-[2025-03-28 15:24:38.346] FETCH ComfyRegistry Data: 70/80
-[2025-03-28 15:24:42.212] FETCH ComfyRegistry Data: 75/80
-[2025-03-28 15:24:45.740] FETCH ComfyRegistry Data: 80/80
-[2025-03-28 15:24:46.240] FETCH ComfyRegistry Data [DONE]
-[2025-03-28 15:24:46.293] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
-[2025-03-28 15:24:46.301] FETCH DATA from: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json [DONE]
-[2025-03-28 15:24:46.412] [ComfyUI-Manager] All startup tasks have been completed.
+Prestartup times for custom nodes:
+[2025-04-03 20:34:03.358]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
+[2025-04-03 20:34:03.358]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
+[2025-04-03 20:34:03.358]    1.4 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
+[2025-04-03 20:34:03.358] 
+[2025-04-03 20:34:04.394] Checkpoint files will always be loaded safely.
+[2025-04-03 20:34:04.577] Total VRAM 32075 MB, total RAM 64053 MB
+[2025-04-03 20:34:04.577] pytorch version: 2.8.0.dev20250401+cu128
+[2025-04-03 20:34:04.578] Set vram state to: NORMAL_VRAM
+[2025-04-03 20:34:04.578] Device: cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync
+[2025-04-03 20:34:05.455] Using pytorch attention
+[2025-04-03 20:34:06.111] ComfyUI version: 0.3.26
+[2025-04-03 20:34:06.116] Failed to check frontend version: 'NoneType' object has no attribute 'split'
+[2025-04-03 20:34:06.117] [Prompt Server] web root: /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/comfyui_frontend_package/static
+[2025-04-03 20:34:07.279] 
+[2025-04-03 20:34:07.279] [92m[rgthree-comfy] Loaded 42 exciting nodes. 🎉[00m
+[2025-04-03 20:34:07.279] 
+[2025-04-03 20:34:07.327] [34m[ComfyUI-Easy-Use] server: [0mv1.2.8 [92mLoaded[0m
+[2025-04-03 20:34:07.327] [34m[ComfyUI-Easy-Use] web root: [0m/home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use/web_version/v2 [92mLoaded[0m
+[2025-04-03 20:34:07.328] ### Loading: ComfyUI-Impact-Pack (V8.10)
+[2025-04-03 20:34:07.351] [Impact Pack] Wildcards loading done.
+[2025-04-03 20:34:07.352] ### Loading: ComfyUI-Manager (V3.31.8)
+[2025-04-03 20:34:07.352] [ComfyUI-Manager] network_mode: public
+[2025-04-03 20:34:07.375] ### ComfyUI Version: v0.2.2-624-g3b19fc76 | Released on '2025-03-18'
+[2025-04-03 20:34:07.400] ### Loading: ComfyUI-Impact-Subpack (V1.2.9)
+[2025-04-03 20:34:07.446] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
+[2025-04-03 20:34:07.455] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
+[2025-04-03 20:34:07.470] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
+[2025-04-03 20:34:07.525] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+[2025-04-03 20:34:07.543] [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+[2025-04-03 20:34:07.669] [Impact Subpack] ultralytics_bbox: /home/slyedoc/code/p/ComfyUI/models/ultralytics/bbox
+[2025-04-03 20:34:07.669] [Impact Subpack] ultralytics_segm: /home/slyedoc/code/p/ComfyUI/models/ultralytics/segm
+[2025-04-03 20:34:07.673] Total VRAM 32075 MB, total RAM 64053 MB
+[2025-04-03 20:34:07.673] pytorch version: 2.8.0.dev20250401+cu128
+[2025-04-03 20:34:07.673] Set vram state to: NORMAL_VRAM
+[2025-04-03 20:34:07.673] Device: cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync
+[2025-04-03 20:34:08.250] [34mWAS Node Suite: [0mOpenCV Python FFMPEG support is enabled[0m
+[2025-04-03 20:34:08.250] [34mWAS Node Suite [93mWarning: [0m`ffmpeg_bin_path` is not set in `/home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui/was_suite_config.json` config file. Will attempt to use system ffmpeg binaries if available.[0m
+[2025-04-03 20:34:08.552] [34mWAS Node Suite: [0mFinished.[0m [32mLoaded[0m [0m220[0m [32mnodes successfully.[0m
+[2025-04-03 20:34:08.552] 
+	[3m[93m"Art is the mirror that reflects the beauty within us."[0m[3m - Unknown[0m
+[2025-04-03 20:34:08.552] 
+[2025-04-03 20:34:08.607] ------------------------------------------
+[2025-04-03 20:34:08.607] [34mComfyroll Studio v1.76 : [92m 175 Nodes Loaded[0m
+[2025-04-03 20:34:08.607] ------------------------------------------
+[2025-04-03 20:34:08.607] ** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
+[2025-04-03 20:34:08.607] ** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
+[2025-04-03 20:34:08.607] ------------------------------------------
+[2025-04-03 20:34:08.608] ### Loading: ComfyUI-IG2MV Nodes ###
+[2025-04-03 20:34:08.654] [Crystools [0;32mINFO[0m] Crystools version: 1.22.1
+[2025-04-03 20:34:08.658] /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Crystools/nodes/image.py:350: SyntaxWarning: invalid escape sequence '\/'
+  "Description": "More info: https:\/\/www.instagram.com\/crystian.ia", # "\/" is for escape / on json
+[2025-04-03 20:34:08.682] [Crystools [0;32mINFO[0m] CPU: Intel(R) Core(TM) i9-14900KF - Arch: x86_64 - OS: Linux 6.12.10-76061203-generic
+[2025-04-03 20:34:08.683] [Crystools [0;32mINFO[0m] Pynvml (Nvidia) initialized.
+[2025-04-03 20:34:08.683] [Crystools [0;32mINFO[0m] GPU/s:
+[2025-04-03 20:34:08.683] [Crystools [0;32mINFO[0m] 0) NVIDIA GeForce RTX 5090
+[2025-04-03 20:34:08.684] [Crystools [0;32mINFO[0m] NVIDIA Driver: 570.133.07
+[2025-04-03 20:34:08.685] 
+Import times for custom nodes:
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/websocket_image_save.py
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-detail-daemon
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-IG2MV
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-fitsize
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui_rgbx_wrapper
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mxtoolkit
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_essentials
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-tooling-nodes
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/rgthree-comfy
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-KJNodes
+[2025-04-03 20:34:08.685]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI_Comfyroll_CustomNodes
+[2025-04-03 20:34:08.686]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/x-flux-comfyui
+[2025-04-03 20:34:08.686]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-rmbg
+[2025-04-03 20:34:08.686]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-impact-pack
+[2025-04-03 20:34:08.686]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-manager
+[2025-04-03 20:34:08.686]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-mvadapter
+[2025-04-03 20:34:08.686]    0.0 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/comfyui-easy-use
+[2025-04-03 20:34:08.686]    0.1 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Crystools
+[2025-04-03 20:34:08.686]    0.3 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Impact-Subpack
+[2025-04-03 20:34:08.686]    0.8 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper
+[2025-04-03 20:34:08.686]    0.9 seconds: /home/slyedoc/code/p/ComfyUI/custom_nodes/was-node-suite-comfyui
+[2025-04-03 20:34:08.686] 
+[2025-04-03 20:34:08.709] Starting server
+
+[2025-04-03 20:34:08.710] To see the GUI go to: http://127.0.0.1:8188
+[2025-04-03 20:34:10.992] []
+[2025-04-03 20:34:10.992] []
+[2025-04-03 20:34:11.154] FETCH ComfyRegistry Data: 5/80
+[2025-04-03 20:34:11.259] [view] query: <MultiDictProxy('type': 'input', 'filename': 'boots.jpg', 'subfolder': '', 'rand': '0.8100933521913181')>
+[2025-04-03 20:34:11.259] [view] filename: boots.jpg
+[2025-04-03 20:34:11.259] [view] output_dir: None
+[2025-04-03 20:34:11.259] [view] type: input
+[2025-04-03 20:34:11.259] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:11.259] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:11.259] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:34:11.259] [view] filename: boots.jpg
+[2025-04-03 20:34:11.259] [view] file: /home/slyedoc/code/p/blackbird/art/input/boots.jpg
+[2025-04-03 20:34:11.285] [view] query: <MultiDictProxy('type': 'input', 'filename': 'boots.jpg', 'subfolder': '', 'rand': '0.8100933521913181')>
+[2025-04-03 20:34:11.285] [view] filename: boots.jpg
+[2025-04-03 20:34:11.285] [view] output_dir: None
+[2025-04-03 20:34:11.285] [view] type: input
+[2025-04-03 20:34:11.285] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:11.285] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:11.285] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:34:11.285] [view] filename: boots.jpg
+[2025-04-03 20:34:11.285] [view] file: /home/slyedoc/code/p/blackbird/art/input/boots.jpg
+[2025-04-03 20:34:14.465] FETCH ComfyRegistry Data: 10/80
+[2025-04-03 20:34:15.186] [view] query: <MultiDictProxy('type': 'input', 'filename': 'boots.jpg', 'subfolder': '', 'rand': '0.5910374306473689')>
+[2025-04-03 20:34:15.186] [view] filename: boots.jpg
+[2025-04-03 20:34:15.186] [view] output_dir: None
+[2025-04-03 20:34:15.186] [view] type: input
+[2025-04-03 20:34:15.186] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:15.186] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:15.186] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:34:15.186] [view] filename: boots.jpg
+[2025-04-03 20:34:15.186] [view] file: /home/slyedoc/code/p/blackbird/art/input/boots.jpg
+[2025-04-03 20:34:15.208] [view] query: <MultiDictProxy('type': 'input', 'filename': 'boots.jpg', 'subfolder': '', 'rand': '0.5910374306473689')>
+[2025-04-03 20:34:15.208] [view] filename: boots.jpg
+[2025-04-03 20:34:15.208] [view] output_dir: None
+[2025-04-03 20:34:15.208] [view] type: input
+[2025-04-03 20:34:15.208] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:15.208] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:34:15.208] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:34:15.208] [view] filename: boots.jpg
+[2025-04-03 20:34:15.208] [view] file: /home/slyedoc/code/p/blackbird/art/input/boots.jpg
+[2025-04-03 20:34:17.750] FETCH ComfyRegistry Data: 15/80
+[2025-04-03 20:34:21.861] FETCH ComfyRegistry Data: 20/80
+[2025-04-03 20:34:25.151] FETCH ComfyRegistry Data: 25/80
+[2025-04-03 20:34:29.382] FETCH ComfyRegistry Data: 30/80
+[2025-04-03 20:34:29.948] got prompt
+[2025-04-03 20:34:29.952] Failed to validate prompt for output 113:
+[2025-04-03 20:34:29.952] * LoadImage 13:
+[2025-04-03 20:34:29.952]   - Custom validation failed for node: image - Invalid image file: boots.jpg
+[2025-04-03 20:34:29.952] * Hy3DModelLoader 10:
+[2025-04-03 20:34:29.952]   - Value not in list: model: 'hunyuan3d-dit-v2-0-fp16.safetensors' not in ['hy3dgen/hunyuan3d-dit-v2-0-fp16.safetensors', 'hy3dgen/hunyuan3d-dit-v2-mini-turbo-fp.safetensors', 'hy3dgen/hunyuan3d-dit-v2-mv-fast.safetensors', 'hy3dgen/hunyuan3d-dit-v2-mv-mini-turbo.safetensors', 'hy3dgen/hunyuan3d-dit-v2-mv-turbo-fp16.safetensors', 'hy3dgen/hunyuan3d-dit-v2-turbo.safetensors']
+[2025-04-03 20:34:29.952] Output will be ignored
+[2025-04-03 20:34:29.952] Failed to validate prompt for output 53:
+[2025-04-03 20:34:29.952] Output will be ignored
+[2025-04-03 20:34:29.952] Failed to validate prompt for output 104:
+[2025-04-03 20:34:29.952] Output will be ignored
+[2025-04-03 20:34:29.952] Failed to validate prompt for output 43:
+[2025-04-03 20:34:29.952] Output will be ignored
+[2025-04-03 20:34:29.952] Failed to validate prompt for output 97:
+[2025-04-03 20:34:29.952] Output will be ignored
+[2025-04-03 20:34:29.952] invalid prompt: {'type': 'prompt_outputs_failed_validation', 'message': 'Prompt outputs failed validation', 'details': '', 'extra_info': {}}
+[2025-04-03 20:34:32.689] FETCH ComfyRegistry Data: 35/80
+[2025-04-03 20:34:35.992] FETCH ComfyRegistry Data: 40/80
+[2025-04-03 20:34:39.304] FETCH ComfyRegistry Data: 45/80
+[2025-04-03 20:34:42.586] FETCH ComfyRegistry Data: 50/80
+[2025-04-03 20:34:47.255] FETCH ComfyRegistry Data: 55/80
+[2025-04-03 20:34:50.562] FETCH ComfyRegistry Data: 60/80
+[2025-04-03 20:34:53.836] FETCH ComfyRegistry Data: 65/80
+[2025-04-03 20:34:57.139] FETCH ComfyRegistry Data: 70/80
+[2025-04-03 20:35:00.431] FETCH ComfyRegistry Data: 75/80
+[2025-04-03 20:35:02.611] got prompt
+[2025-04-03 20:35:02.613] Failed to validate prompt for output 113:
+[2025-04-03 20:35:02.613] * LoadImage 13:
+[2025-04-03 20:35:02.613]   - Custom validation failed for node: image - Invalid image file: boots.jpg
+[2025-04-03 20:35:02.613] Output will be ignored
+[2025-04-03 20:35:02.613] Failed to validate prompt for output 53:
+[2025-04-03 20:35:02.613] Output will be ignored
+[2025-04-03 20:35:02.613] Failed to validate prompt for output 104:
+[2025-04-03 20:35:02.613] Output will be ignored
+[2025-04-03 20:35:02.613] Failed to validate prompt for output 43:
+[2025-04-03 20:35:02.613] Output will be ignored
+[2025-04-03 20:35:02.613] Failed to validate prompt for output 97:
+[2025-04-03 20:35:02.613] Output will be ignored
+[2025-04-03 20:35:02.613] invalid prompt: {'type': 'prompt_outputs_failed_validation', 'message': 'Prompt outputs failed validation', 'details': '', 'extra_info': {}}
+[2025-04-03 20:35:03.743] FETCH ComfyRegistry Data: 80/80
+[2025-04-03 20:35:04.243] FETCH ComfyRegistry Data [DONE]
+[2025-04-03 20:35:04.303] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+[2025-04-03 20:35:04.311] FETCH DATA from: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json [DONE]
+[2025-04-03 20:35:04.410] [ComfyUI-Manager] All startup tasks have been completed.
+[2025-04-03 20:35:19.779] [view] query: <MultiDictProxy('type': 'input', 'filename': 'image (1).png', 'subfolder': 'pasted', 'rand': '0.5299502977698995')>
+[2025-04-03 20:35:19.779] [view] filename: image (1).png
+[2025-04-03 20:35:19.780] [view] output_dir: None
+[2025-04-03 20:35:19.780] [view] type: input
+[2025-04-03 20:35:19.780] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:35:19.780] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:35:19.780] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/pasted
+[2025-04-03 20:35:19.780] [view] filename: image (1).png
+[2025-04-03 20:35:19.780] [view] file: /home/slyedoc/code/p/blackbird/art/input/pasted/image (1).png
+[2025-04-03 20:35:19.780] view file_extension: .png
+[2025-04-03 20:35:19.780] view content_type: image/png
+[2025-04-03 20:35:22.122] got prompt
+[2025-04-03 20:35:22.535] /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/albumentations/__init__.py:13: UserWarning: A new version of Albumentations is available: 2.0.5 (you have 1.4.15). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+[2025-04-03 20:35:23.051] /home/slyedoc/code/p/ComfyUI/.venv/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+[2025-04-03 20:35:24.639] Settings -> Mode=base, Device=cuda:0, Torchscript=enabled
+[2025-04-03 20:35:25.472] Loading model from /home/slyedoc/code/p/ComfyUI/models/diffusion_models/hy3dgen/hunyuan3d-dit-v2-0-fp16.safetensors
+[2025-04-03 20:35:28.900] guidance:  None
+[2025-04-03 20:35:35.830] Diffusion Sampling:: 100%|███████████████████████████████████████| 50/50 [00:06<00:00,  7.26it/s]Diffusion Sampling:: 100%|███████████████████████████████████████| 50/50 [00:06<00:00,  7.22it/s]
+[2025-04-03 20:35:35.830] latents shape:  torch.Size([1, 3072, 64])
+[2025-04-03 20:35:35.830] Allocated memory: memory=2.453 GB
+[2025-04-03 20:35:35.830] Max allocated memory: max_memory=4.638 GB
+[2025-04-03 20:35:35.830] Max reserved memory: max_reserved=4.688 GB
+[2025-04-03 20:35:36.851] 2025-04-03 20:35:36,851 - hy3dgen.shapgen - INFO - FlashVDMVolumeDecoding Resolution: [95, 190, 380]
+[2025-04-03 20:35:36.851] FlashVDMVolumeDecoding Resolution: [95, 190, 380]
+[2025-04-03 20:35:36.999] FlashVDM Volume Decoding: 100%|█████████████████████████████████| 64/64 [00:00<00:00, 465.84it/s]
+[2025-04-03 20:35:37.742] MC Surface Extractor
+[2025-04-03 20:35:38.727] Decoded mesh with 489448 vertices and 1749422 faces
+[2025-04-03 20:35:39.534] Removed floaters, resulting in 486224 vertices and 972468 faces
+[2025-04-03 20:35:40.128] Removed degenerate faces, resulting in 486224 vertices and 972468 faces
+[2025-04-03 20:35:47.795] Reduced faces, resulting in 24990 vertices and 50000 faces
+[2025-04-03 20:35:50.326] camera_distance: 1.45
+[2025-04-03 20:35:53.343] Loading pipeline components...: 100%|██████████████████████████████| 6/6 [00:02<00:00,  2.07it/s]
+[2025-04-03 20:35:55.171] image in shape torch.Size([1, 512, 512, 3])
+[2025-04-03 20:35:57.163] 100%|████████████████████████████████████████████████████████████| 50/50 [00:01<00:00, 27.37it/s]
+[2025-04-03 20:36:04.664] 100%|████████████████████████████████████████████████████████████| 20/20 [00:05<00:00,  5.49it/s]100%|████████████████████████████████████████████████████████████| 20/20 [00:05<00:00,  3.73it/s]
+[2025-04-03 20:36:07.134] Prompt executed in 45.01 seconds
+[2025-04-03 20:36:07.304] [view] query: <MultiDictProxy('filename': 'Hy3D_00002_.glb', 'type': 'output', 'subfolder': '3D', 'rand': '0.8640726571161248')>
+[2025-04-03 20:36:07.304] [view] filename: Hy3D_00002_.glb
+[2025-04-03 20:36:07.304] [view] output_dir: None
+[2025-04-03 20:36:07.304] [view] type: output
+[2025-04-03 20:36:07.304] [view] type: /home/slyedoc/code/p/blackbird/art/output
+[2025-04-03 20:36:07.304] [view] output_dir: /home/slyedoc/code/p/blackbird/art/output
+[2025-04-03 20:36:07.304] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/output/3D
+[2025-04-03 20:36:07.304] [view] filename: Hy3D_00002_.glb
+[2025-04-03 20:36:07.304] [view] file: /home/slyedoc/code/p/blackbird/art/output/3D/Hy3D_00002_.glb
+[2025-04-03 20:36:07.304] view file_extension: .glb
+[2025-04-03 20:36:07.304] view content_type: model/gltf-binary
+[2025-04-03 20:36:43.926] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_rdgid_00001_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.5779485200529362')>
+[2025-04-03 20:36:43.926] [view] filename: ComfyUI_temp_rdgid_00001_.png
+[2025-04-03 20:36:43.926] [view] output_dir: None
+[2025-04-03 20:36:43.926] [view] type: temp
+[2025-04-03 20:36:43.927] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.927] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.927] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.927] [view] filename: ComfyUI_temp_rdgid_00001_.png
+[2025-04-03 20:36:43.927] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_rdgid_00001_.png
+[2025-04-03 20:36:43.927] view file_extension: .png
+[2025-04-03 20:36:43.927] view content_type: image/png
+[2025-04-03 20:36:43.927] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_dziit_00001_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.051037859009853026')>
+[2025-04-03 20:36:43.927] [view] filename: ComfyUI_temp_dziit_00001_.png
+[2025-04-03 20:36:43.927] [view] output_dir: None
+[2025-04-03 20:36:43.927] [view] type: temp
+[2025-04-03 20:36:43.927] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.927] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.927] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.927] [view] filename: ComfyUI_temp_dziit_00001_.png
+[2025-04-03 20:36:43.927] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_dziit_00001_.png
+[2025-04-03 20:36:43.927] view file_extension: .png
+[2025-04-03 20:36:43.927] view content_type: image/png
+[2025-04-03 20:36:43.927] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_dziit_00002_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.051037859009853026')>
+[2025-04-03 20:36:43.927] [view] filename: ComfyUI_temp_dziit_00002_.png
+[2025-04-03 20:36:43.927] [view] output_dir: None
+[2025-04-03 20:36:43.927] [view] type: temp
+[2025-04-03 20:36:43.927] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.927] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.927] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.927] [view] filename: ComfyUI_temp_dziit_00002_.png
+[2025-04-03 20:36:43.927] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_dziit_00002_.png
+[2025-04-03 20:36:43.927] view file_extension: .png
+[2025-04-03 20:36:43.927] view content_type: image/png
+[2025-04-03 20:36:43.928] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_dziit_00003_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.051037859009853026')>
+[2025-04-03 20:36:43.928] [view] filename: ComfyUI_temp_dziit_00003_.png
+[2025-04-03 20:36:43.928] [view] output_dir: None
+[2025-04-03 20:36:43.928] [view] type: temp
+[2025-04-03 20:36:43.928] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.928] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.928] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.928] [view] filename: ComfyUI_temp_dziit_00003_.png
+[2025-04-03 20:36:43.928] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_dziit_00003_.png
+[2025-04-03 20:36:43.928] view file_extension: .png
+[2025-04-03 20:36:43.928] view content_type: image/png
+[2025-04-03 20:36:43.928] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_dziit_00004_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.051037859009853026')>
+[2025-04-03 20:36:43.928] [view] filename: ComfyUI_temp_dziit_00004_.png
+[2025-04-03 20:36:43.928] [view] output_dir: None
+[2025-04-03 20:36:43.928] [view] type: temp
+[2025-04-03 20:36:43.928] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.928] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.928] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.928] [view] filename: ComfyUI_temp_dziit_00004_.png
+[2025-04-03 20:36:43.928] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_dziit_00004_.png
+[2025-04-03 20:36:43.928] view file_extension: .png
+[2025-04-03 20:36:43.928] view content_type: image/png
+[2025-04-03 20:36:43.928] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_dziit_00005_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.051037859009853026')>
+[2025-04-03 20:36:43.928] [view] filename: ComfyUI_temp_dziit_00005_.png
+[2025-04-03 20:36:43.928] [view] output_dir: None
+[2025-04-03 20:36:43.928] [view] type: temp
+[2025-04-03 20:36:43.928] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.928] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.928] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.928] [view] filename: ComfyUI_temp_dziit_00005_.png
+[2025-04-03 20:36:43.928] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_dziit_00005_.png
+[2025-04-03 20:36:43.928] view file_extension: .png
+[2025-04-03 20:36:43.928] view content_type: image/png
+[2025-04-03 20:36:43.932] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_dziit_00006_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.051037859009853026')>
+[2025-04-03 20:36:43.932] [view] filename: ComfyUI_temp_dziit_00006_.png
+[2025-04-03 20:36:43.932] [view] output_dir: None
+[2025-04-03 20:36:43.932] [view] type: temp
+[2025-04-03 20:36:43.932] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.932] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.932] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.932] [view] filename: ComfyUI_temp_dziit_00006_.png
+[2025-04-03 20:36:43.933] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_dziit_00006_.png
+[2025-04-03 20:36:43.933] view file_extension: .png
+[2025-04-03 20:36:43.933] view content_type: image/png
+[2025-04-03 20:36:43.933] [view] query: <MultiDictProxy('filename': 'ComfyUI_temp_fplak_00001_.png', 'subfolder': '', 'type': 'temp', 'rand': '0.41465841823394256')>
+[2025-04-03 20:36:43.933] [view] filename: ComfyUI_temp_fplak_00001_.png
+[2025-04-03 20:36:43.933] [view] output_dir: None
+[2025-04-03 20:36:43.933] [view] type: temp
+[2025-04-03 20:36:43.933] [view] type: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.933] [view] output_dir: /home/slyedoc/code/p/ComfyUI/temp
+[2025-04-03 20:36:43.933] [view] full output_dir: /home/slyedoc/code/p/ComfyUI/temp/
+[2025-04-03 20:36:43.933] [view] filename: ComfyUI_temp_fplak_00001_.png
+[2025-04-03 20:36:43.933] [view] file: /home/slyedoc/code/p/ComfyUI/temp/ComfyUI_temp_fplak_00001_.png
+[2025-04-03 20:36:43.933] view file_extension: .png
+[2025-04-03 20:36:43.933] view content_type: image/png
+[2025-04-03 20:37:13.825] [view] query: <MultiDictProxy('type': 'input', 'filename': 'bird_2.png', 'subfolder': '', 'rand': '0.979739501097088')>
+[2025-04-03 20:37:13.826] [view] filename: bird_2.png
+[2025-04-03 20:37:13.826] [view] output_dir: None
+[2025-04-03 20:37:13.826] [view] type: input
+[2025-04-03 20:37:13.826] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:37:13.826] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:37:13.827] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:37:13.827] [view] filename: bird_2.png
+[2025-04-03 20:37:13.827] [view] file: /home/slyedoc/code/p/blackbird/art/input/bird_2.png
+[2025-04-03 20:37:13.827] view file_extension: .png
+[2025-04-03 20:37:13.827] view content_type: image/png
+[2025-04-03 20:37:15.578] got prompt
+[2025-04-03 20:37:15.580] Failed to validate prompt for output 113:
+[2025-04-03 20:37:15.580] * Hy3DMeshUVWrap 118:
+[2025-04-03 20:37:15.580]   - Required input is missing: trimesh
+[2025-04-03 20:37:15.580] * Hy3DDelightImage 35:
+[2025-04-03 20:37:15.580]   - Required input is missing: delight_pipe
+[2025-04-03 20:37:15.580] * Hy3DSampleMultiView 116:
+[2025-04-03 20:37:15.580]   - Required input is missing: pipeline
+[2025-04-03 20:37:15.580] Output will be ignored
+[2025-04-03 20:37:15.580] Failed to validate prompt for output 104:
+[2025-04-03 20:37:15.581] Output will be ignored
+[2025-04-03 20:37:15.581] Failed to validate prompt for output 43:
+[2025-04-03 20:37:15.581] Output will be ignored
+[2025-04-03 20:37:15.581] Failed to validate prompt for output 97:
+[2025-04-03 20:37:15.581] Output will be ignored
+[2025-04-03 20:37:17.481] Prompt executed in 1.90 seconds
+[2025-04-03 20:37:49.808] got prompt
+[2025-04-03 20:37:49.812] Failed to validate prompt for output 113:
+[2025-04-03 20:37:49.812] * Hy3DMeshUVWrap 118:
+[2025-04-03 20:37:49.812]   - Required input is missing: trimesh
+[2025-04-03 20:37:49.812] * Hy3DSampleMultiView 116:
+[2025-04-03 20:37:49.812]   - Required input is missing: pipeline
+[2025-04-03 20:37:49.812] Output will be ignored
+[2025-04-03 20:37:49.812] Failed to validate prompt for output 104:
+[2025-04-03 20:37:49.812] Output will be ignored
+[2025-04-03 20:37:49.813] Failed to validate prompt for output 43:
+[2025-04-03 20:37:49.813] Output will be ignored
+[2025-04-03 20:37:49.813] Failed to validate prompt for output 97:
+[2025-04-03 20:37:49.813] Output will be ignored
+[2025-04-03 20:37:49.827] Prompt executed in 0.01 seconds
+[2025-04-03 20:37:53.234] got prompt
+[2025-04-03 20:37:53.239] Failed to validate prompt for output 113:
+[2025-04-03 20:37:53.239] * Hy3DMeshUVWrap 118:
+[2025-04-03 20:37:53.240]   - Required input is missing: trimesh
+[2025-04-03 20:37:53.240] * Hy3DSampleMultiView 116:
+[2025-04-03 20:37:53.240]   - Required input is missing: pipeline
+[2025-04-03 20:37:53.240] Output will be ignored
+[2025-04-03 20:37:53.240] Failed to validate prompt for output 104:
+[2025-04-03 20:37:53.240] Output will be ignored
+[2025-04-03 20:37:53.240] Failed to validate prompt for output 43:
+[2025-04-03 20:37:53.241] Output will be ignored
+[2025-04-03 20:37:53.241] Failed to validate prompt for output 97:
+[2025-04-03 20:37:53.241] Output will be ignored
+[2025-04-03 20:37:53.260] Prompt executed in 0.01 seconds
+[2025-04-03 20:37:57.911] [view] query: <MultiDictProxy('type': 'input', 'filename': 'bird_2.png', 'subfolder': '', 'rand': '0.3583551495556523')>
+[2025-04-03 20:37:57.912] [view] filename: bird_2.png
+[2025-04-03 20:37:57.912] [view] output_dir: None
+[2025-04-03 20:37:57.912] [view] type: input
+[2025-04-03 20:37:57.912] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:37:57.912] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:37:57.912] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:37:57.912] [view] filename: bird_2.png
+[2025-04-03 20:37:57.912] [view] file: /home/slyedoc/code/p/blackbird/art/input/bird_2.png
+[2025-04-03 20:37:57.912] view file_extension: .png
+[2025-04-03 20:37:57.912] view content_type: image/png
+[2025-04-03 20:37:57.916] [view] query: <MultiDictProxy('type': 'input', 'filename': 'bird_2.png', 'subfolder': '', 'rand': '0.602669414915824')>
+[2025-04-03 20:37:57.916] [view] filename: bird_2.png
+[2025-04-03 20:37:57.916] [view] output_dir: None
+[2025-04-03 20:37:57.916] [view] type: input
+[2025-04-03 20:37:57.916] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:37:57.916] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:37:57.916] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:37:57.916] [view] filename: bird_2.png
+[2025-04-03 20:37:57.916] [view] file: /home/slyedoc/code/p/blackbird/art/input/bird_2.png
+[2025-04-03 20:37:57.916] view file_extension: .png
+[2025-04-03 20:37:57.916] view content_type: image/png
+[2025-04-03 20:46:08.212] [view] query: <MultiDictProxy('type': 'input', 'filename': 'ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png', 'subfolder': '', 'rand': '0.31346110503700997')>
+[2025-04-03 20:46:08.212] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:08.212] [view] output_dir: None
+[2025-04-03 20:46:08.212] [view] type: input
+[2025-04-03 20:46:08.212] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.212] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.212] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:08.212] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:08.212] [view] file: /home/slyedoc/code/p/blackbird/art/input/ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:08.212] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_53PM.png.jpeg', 'subfolder': '', 'rand': '0.11189649426531045')>
+[2025-04-03 20:46:08.213] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:08.213] [view] output_dir: None
+[2025-04-03 20:46:08.213] [view] type: input
+[2025-04-03 20:46:08.213] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.213] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.213] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:08.213] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:08.213] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:08.213] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_54PM.png.jpeg', 'subfolder': '', 'rand': '0.8558389653983796')>
+[2025-04-03 20:46:08.213] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:08.213] [view] output_dir: None
+[2025-04-03 20:46:08.213] [view] type: input
+[2025-04-03 20:46:08.213] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.213] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.213] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:08.213] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:08.213] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:08.248] [view] query: <MultiDictProxy('type': 'input', 'filename': 'ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png', 'subfolder': '', 'rand': '0.31346110503700997')>
+[2025-04-03 20:46:08.248] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:08.248] [view] output_dir: None
+[2025-04-03 20:46:08.248] [view] type: input
+[2025-04-03 20:46:08.248] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.248] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.248] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:08.248] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:08.248] [view] file: /home/slyedoc/code/p/blackbird/art/input/ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:08.249] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_53PM.png.jpeg', 'subfolder': '', 'rand': '0.11189649426531045')>
+[2025-04-03 20:46:08.249] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:08.249] [view] output_dir: None
+[2025-04-03 20:46:08.249] [view] type: input
+[2025-04-03 20:46:08.249] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.249] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.249] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:08.249] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:08.249] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:08.249] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_54PM.png.jpeg', 'subfolder': '', 'rand': '0.8558389653983796')>
+[2025-04-03 20:46:08.249] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:08.249] [view] output_dir: None
+[2025-04-03 20:46:08.249] [view] type: input
+[2025-04-03 20:46:08.249] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.249] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:08.249] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:08.249] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:08.249] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:29.946] [view] query: <MultiDictProxy('type': 'input', 'filename': 'ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png', 'subfolder': '', 'rand': '0.39061947365323246')>
+[2025-04-03 20:46:29.946] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:29.947] [view] output_dir: None
+[2025-04-03 20:46:29.947] [view] type: input
+[2025-04-03 20:46:29.947] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:29.947] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:29.947] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:29.947] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:29.947] [view] file: /home/slyedoc/code/p/blackbird/art/input/ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:29.953] [view] query: <MultiDictProxy('type': 'input', 'filename': 'ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png', 'subfolder': '', 'rand': '0.39061947365323246')>
+[2025-04-03 20:46:29.953] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:29.953] [view] output_dir: None
+[2025-04-03 20:46:29.953] [view] type: input
+[2025-04-03 20:46:29.953] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:29.953] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:29.953] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:29.954] [view] filename: ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:29.954] [view] file: /home/slyedoc/code/p/blackbird/art/input/ComfyUI_00021_puxaq_1742657618_irpyl_1742657620.png
+[2025-04-03 20:46:30.005] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_53PM.png.jpeg', 'subfolder': '', 'rand': '0.2425394686591531')>
+[2025-04-03 20:46:30.005] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:30.005] [view] output_dir: None
+[2025-04-03 20:46:30.005] [view] type: input
+[2025-04-03 20:46:30.005] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.005] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.006] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:30.006] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:30.006] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:30.009] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_53PM.png.jpeg', 'subfolder': '', 'rand': '0.2425394686591531')>
+[2025-04-03 20:46:30.009] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:30.009] [view] output_dir: None
+[2025-04-03 20:46:30.009] [view] type: input
+[2025-04-03 20:46:30.009] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.009] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.010] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:30.010] [view] filename: Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:30.010] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_53PM.png.jpeg
+[2025-04-03 20:46:30.541] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_54PM.png.jpeg', 'subfolder': '', 'rand': '0.32578659735438453')>
+[2025-04-03 20:46:30.541] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:30.541] [view] output_dir: None
+[2025-04-03 20:46:30.541] [view] type: input
+[2025-04-03 20:46:30.541] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.541] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.541] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:30.541] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:30.541] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:30.544] [view] query: <MultiDictProxy('type': 'input', 'filename': 'Generated Image March 22, 2025 - 11_54PM.png.jpeg', 'subfolder': '', 'rand': '0.32578659735438453')>
+[2025-04-03 20:46:30.545] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:30.545] [view] output_dir: None
+[2025-04-03 20:46:30.545] [view] type: input
+[2025-04-03 20:46:30.545] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.545] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:46:30.545] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:46:30.545] [view] filename: Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:46:30.545] [view] file: /home/slyedoc/code/p/blackbird/art/input/Generated Image March 22, 2025 - 11_54PM.png.jpeg
+[2025-04-03 20:50:45.517] [view] query: <MultiDictProxy('type': 'input', 'filename': 'back (1).png', 'subfolder': '', 'rand': '0.5377385781849309')>
+[2025-04-03 20:50:45.517] [view] filename: back (1).png
+[2025-04-03 20:50:45.517] [view] output_dir: None
+[2025-04-03 20:50:45.517] [view] type: input
+[2025-04-03 20:50:45.517] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.518] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.518] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.518] [view] filename: back (1).png
+[2025-04-03 20:50:45.518] [view] file: /home/slyedoc/code/p/blackbird/art/input/back (1).png
+[2025-04-03 20:50:45.518] [view] query: <MultiDictProxy('type': 'input', 'filename': 'left (1).png', 'subfolder': '', 'rand': '0.3329469141747796')>
+[2025-04-03 20:50:45.518] [view] filename: left (1).png
+[2025-04-03 20:50:45.518] [view] output_dir: None
+[2025-04-03 20:50:45.518] [view] type: input
+[2025-04-03 20:50:45.518] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.518] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.518] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.518] [view] filename: left (1).png
+[2025-04-03 20:50:45.518] [view] file: /home/slyedoc/code/p/blackbird/art/input/left (1).png
+[2025-04-03 20:50:45.518] [view] query: <MultiDictProxy('type': 'input', 'filename': 'front (1).png', 'subfolder': '', 'rand': '0.17737840953847472')>
+[2025-04-03 20:50:45.518] [view] filename: front (1).png
+[2025-04-03 20:50:45.518] [view] output_dir: None
+[2025-04-03 20:50:45.519] [view] type: input
+[2025-04-03 20:50:45.519] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.519] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.519] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.519] [view] filename: front (1).png
+[2025-04-03 20:50:45.519] [view] file: /home/slyedoc/code/p/blackbird/art/input/front (1).png
+[2025-04-03 20:50:45.537] [view] query: <MultiDictProxy('type': 'input', 'filename': 'back (1).png', 'subfolder': '', 'rand': '0.5377385781849309')>
+[2025-04-03 20:50:45.537] [view] filename: back (1).png
+[2025-04-03 20:50:45.537] [view] output_dir: None
+[2025-04-03 20:50:45.537] [view] type: input
+[2025-04-03 20:50:45.537] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.537] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.537] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.537] [view] filename: back (1).png
+[2025-04-03 20:50:45.537] [view] file: /home/slyedoc/code/p/blackbird/art/input/back (1).png
+[2025-04-03 20:50:45.537] [view] query: <MultiDictProxy('type': 'input', 'filename': 'left (1).png', 'subfolder': '', 'rand': '0.3329469141747796')>
+[2025-04-03 20:50:45.537] [view] filename: left (1).png
+[2025-04-03 20:50:45.537] [view] output_dir: None
+[2025-04-03 20:50:45.537] [view] type: input
+[2025-04-03 20:50:45.537] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.537] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.537] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.538] [view] filename: left (1).png
+[2025-04-03 20:50:45.538] [view] file: /home/slyedoc/code/p/blackbird/art/input/left (1).png
+[2025-04-03 20:50:45.538] [view] query: <MultiDictProxy('type': 'input', 'filename': 'front (1).png', 'subfolder': '', 'rand': '0.17737840953847472')>
+[2025-04-03 20:50:45.538] [view] filename: front (1).png
+[2025-04-03 20:50:45.538] [view] output_dir: None
+[2025-04-03 20:50:45.538] [view] type: input
+[2025-04-03 20:50:45.538] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.538] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.538] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.538] [view] filename: front (1).png
+[2025-04-03 20:50:45.538] [view] file: /home/slyedoc/code/p/blackbird/art/input/front (1).png
+[2025-04-03 20:50:45.547] [view] query: <MultiDictProxy('type': 'input', 'filename': 'left (1).png', 'subfolder': '', 'rand': '0.29545202290714134')>
+[2025-04-03 20:50:45.547] [view] filename: left (1).png
+[2025-04-03 20:50:45.547] [view] output_dir: None
+[2025-04-03 20:50:45.547] [view] type: input
+[2025-04-03 20:50:45.547] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.547] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.547] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.547] [view] filename: left (1).png
+[2025-04-03 20:50:45.547] [view] file: /home/slyedoc/code/p/blackbird/art/input/left (1).png
+[2025-04-03 20:50:45.547] [view] query: <MultiDictProxy('type': 'input', 'filename': 'front (1).png', 'subfolder': '', 'rand': '0.6710947514638648')>
+[2025-04-03 20:50:45.547] [view] filename: front (1).png
+[2025-04-03 20:50:45.547] [view] output_dir: None
+[2025-04-03 20:50:45.547] [view] type: input
+[2025-04-03 20:50:45.547] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.547] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.547] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.547] [view] filename: front (1).png
+[2025-04-03 20:50:45.547] [view] file: /home/slyedoc/code/p/blackbird/art/input/front (1).png
+[2025-04-03 20:50:45.552] [view] query: <MultiDictProxy('type': 'input', 'filename': 'left (1).png', 'subfolder': '', 'rand': '0.29545202290714134')>
+[2025-04-03 20:50:45.552] [view] filename: left (1).png
+[2025-04-03 20:50:45.552] [view] output_dir: None
+[2025-04-03 20:50:45.552] [view] type: input
+[2025-04-03 20:50:45.552] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.552] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.552] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.552] [view] filename: left (1).png
+[2025-04-03 20:50:45.552] [view] file: /home/slyedoc/code/p/blackbird/art/input/left (1).png
+[2025-04-03 20:50:45.552] [view] query: <MultiDictProxy('type': 'input', 'filename': 'front (1).png', 'subfolder': '', 'rand': '0.6710947514638648')>
+[2025-04-03 20:50:45.552] [view] filename: front (1).png
+[2025-04-03 20:50:45.552] [view] output_dir: None
+[2025-04-03 20:50:45.552] [view] type: input
+[2025-04-03 20:50:45.552] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.552] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:45.552] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:45.552] [view] filename: front (1).png
+[2025-04-03 20:50:45.552] [view] file: /home/slyedoc/code/p/blackbird/art/input/front (1).png
+[2025-04-03 20:50:56.650] [view] query: <MultiDictProxy('type': 'input', 'filename': 'back (1).png', 'subfolder': '', 'rand': '0.5353298678045575')>
+[2025-04-03 20:50:56.650] [view] filename: back (1).png
+[2025-04-03 20:50:56.651] [view] output_dir: None
+[2025-04-03 20:50:56.651] [view] type: input
+[2025-04-03 20:50:56.651] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:56.651] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:56.651] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:56.651] [view] filename: back (1).png
+[2025-04-03 20:50:56.651] [view] file: /home/slyedoc/code/p/blackbird/art/input/back (1).png
+[2025-04-03 20:50:56.652] [view] query: <MultiDictProxy('type': 'input', 'filename': 'back (1).png', 'subfolder': '', 'rand': '0.5353298678045575')>
+[2025-04-03 20:50:56.652] [view] filename: back (1).png
+[2025-04-03 20:50:56.653] [view] output_dir: None
+[2025-04-03 20:50:56.653] [view] type: input
+[2025-04-03 20:50:56.653] [view] type: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:56.653] [view] output_dir: /home/slyedoc/code/p/blackbird/art/input
+[2025-04-03 20:50:56.653] [view] full output_dir: /home/slyedoc/code/p/blackbird/art/input/
+[2025-04-03 20:50:56.653] [view] filename: back (1).png
+[2025-04-03 20:50:56.653] [view] file: /home/slyedoc/code/p/blackbird/art/input/back (1).png

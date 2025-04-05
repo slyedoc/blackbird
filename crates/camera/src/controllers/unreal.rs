@@ -183,17 +183,17 @@ fn default_input_map(
     }
 
     if !left_pressed && !middle_pressed && right_pressed {
-        events.send(ControlEvent::Rotate(
+        events.write(ControlEvent::Rotate(
             mouse_rotate_sensitivity * cursor_delta,
         ));
     }
 
     if panning.length_squared() > 0.0 {
-        events.send(ControlEvent::TranslateEye(panning));
+        events.write(ControlEvent::TranslateEye(panning));
     }
 
     if locomotion.length_squared() > 0.0 {
-        events.send(ControlEvent::Locomotion(locomotion));
+        events.write(ControlEvent::Locomotion(locomotion));
     }
 }
 

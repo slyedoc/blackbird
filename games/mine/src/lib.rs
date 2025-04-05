@@ -1,8 +1,8 @@
 //! Demonstrates how to observe life-cycle triggers as well as define custom ones.
 
 use bevy::{
+    platform_support::collections::{HashMap, HashSet},
     prelude::*,
-    utils::{HashMap, HashSet},
 };
 
 use bevy_prng::WyRand;
@@ -123,12 +123,13 @@ fn on_add_mine(
     query: Query<&Mine>,
     mut index: ResMut<SpatialIndex>,
 ) {
-    let mine = query.get(trigger.entity()).unwrap();
+    let e = trigger.target();
+    let mine = query.get(e).unwrap();
     let tile = (
         (mine.pos.x / CELL_SIZE).floor() as i32,
         (mine.pos.y / CELL_SIZE).floor() as i32,
     );
-    index.map.entry(tile).or_default().insert(trigger.entity());
+    index.map.entry(tile).or_default().insert(e);
 }
 
 // Remove despawned mines from our index
@@ -137,25 +138,26 @@ fn on_remove_mine(
     query: Query<&Mine>,
     mut index: ResMut<SpatialIndex>,
 ) {
-    let mine = query.get(trigger.entity()).unwrap();
+    let e = trigger.target();
+    let mine = query.get(e).unwrap();
     let tile = (
         (mine.pos.x / CELL_SIZE).floor() as i32,
         (mine.pos.y / CELL_SIZE).floor() as i32,
     );
     index.map.entry(tile).and_modify(|set| {
-        set.remove(&trigger.entity());
+        set.remove(&e);
     });
 }
 
 fn explode_mine(trigger: Trigger<Explode>, query: Query<&Mine>, mut commands: Commands) {
     // If a triggered event is targeting a specific entity you can access it with `.entity()`
-    let id = trigger.entity();
-    let Some(mut entity) = commands.get_entity(id) else {
+    let e = trigger.target();
+    let Ok(mut entity_command) = commands.get_entity(e) else {
         return;
     };
-    info!("Boom! {:?} exploded.", id.index());
-    entity.despawn();
-    let mine = query.get(id).unwrap();
+    info!("Boom! {:?} exploded.", e.index());
+    entity_command.despawn();
+    let mine = query.get(e).unwrap();
     // Trigger another explosion cascade.
     commands.trigger(ExplodeMines {
         pos: mine.pos,
