@@ -17,6 +17,12 @@
   },
   "css.validate": false,
   "editor.inlayHints.enabled": "offUnlessPressed",
+
+  // Copilot
+  "github.copilot.chat.reviewSelection.instructions": [
+    { "file": ".github/copilot/code-style.md" },
+    { "file": "Cargo.toml" }
+  ],
   // "rust-analyzer.rustfmt.overrideCommand": [
   //   "leptosfmt",
   //   "--stdin",

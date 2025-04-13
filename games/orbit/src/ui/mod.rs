@@ -2,6 +2,10 @@ mod quick;
 pub use quick::*;
 mod menu;
 pub use menu::*;
+mod widgets;
+pub use widgets::*;
+mod fade;
+pub use fade::*;
 
 
 use bevy::{
@@ -14,7 +18,9 @@ pub struct UiPlugin;
 
 impl Plugin for UiPlugin {
     fn build(&self, app: &mut App) {
-        app.init_resource::<UiAssets>();
+        app
+            .add_plugins(FadePlugin)
+            .init_resource::<UiAssets>();
     }
 }
 
@@ -29,6 +35,11 @@ pub const PRESSED_BUTTON: Color = Color::Srgba(tailwind::SLATE_700);
 pub const PRESSED_BUTTON_BORDER: Color = Color::Srgba(tailwind::SLATE_800);
 pub const PANEL_BACKGROUND: Color = Color::Srgba(tailwind::GRAY_900);
 pub const PANEL_BORDER: Color = Color::Srgba(tailwind::GRAY_800);
+pub const SLIDER_TRACK_COLOR: Color = Color::Srgba(tailwind::GRAY_800);
+pub const HOVERED_SLIDER_TRACK: Color = Color::Srgba(tailwind::GRAY_400);
+pub const SLIDER_THUMB_COLOR: Color = Color::Srgba(tailwind::GRAY_200);
+pub const HOVERED_SLIDER_THUMB: Color = Color::Srgba(tailwind::GRAY_400);
+
 
 #[derive(Resource)]
 pub struct UiAssets {

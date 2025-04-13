@@ -81,7 +81,7 @@ ssr = [
 ]
 
 [workspace.dependencies]
-
+#wasm_bindgen = { version = "0.2.100", features = ["wasm-bindgen"], optional = true }
 
 # Local Crates
 sly_common = { path = "crates/common" }
@@ -111,6 +111,7 @@ bevy-inspector-egui = { git = "https://github.com/slyedoc/bevy-inspector-egui", 
 #bevy_mod_outline = { git = "https://github.com/komadori/bevy_mod_outline.git" }
 bevy_health_bar3d = { git = "https://github.com/slyedoc/bevy_health_bar3d", branch = "bevy_0.16" }
 bevy-tokio-tasks = { git = "https://github.com/slyedoc/bevy-tokio-tasks" }
+bevy_tweening = { git = "https://github.com/slyedoc/bevy_tweening.git", branch = "bevy_0.16" }
 #bevy_infinite_grid = { git = "https://github.com/ForesightMiningSoftwareCorporation/bevy_infinite_grid", branch = "main" }
 #bevy_hanabi = { version = "0.14", default-features = false }
 

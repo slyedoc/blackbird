@@ -4,11 +4,11 @@ use crate::{
 
 use bevy::{core_pipeline::{bloom::Bloom, tonemapping::Tonemapping, Skybox}, prelude::*};
 
-pub struct IntroPlugin;
+pub struct HangerPlugin;
 
-impl Plugin for IntroPlugin {
+impl Plugin for HangerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(AppState::Intro), (setup, setup_ui));
+        app.add_systems(OnEnter(AppState::Hanger), (setup, setup_ui));
     }
 }
 
@@ -47,7 +47,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     ));
 
     commands.spawn((
-        Name::new("Player"),
+        
         StateScoped(AppState::Intro),
         SolarSystem::default(),
         Transform::from_xyz(0.0, 0.0, 0.0)

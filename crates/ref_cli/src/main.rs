@@ -21,7 +21,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let prompt_text = include_str!("workflows/ref_image_gen.json");
 
     // Parse the prompt JSON.
-    let mut prompt: Value = serde_json::from_str(prompt_text)?;
+    let prompt: Value = serde_json::from_str(prompt_text)?;
 
     // // Set the text prompt for our positive CLIPTextEncode.
     // if let Some(text_value) = prompt.pointer_mut("/6/inputs/text") {
@@ -94,6 +94,7 @@ fn get_history(client: &Client, prompt_id: &str) -> Result<Value, Box<dyn Error>
 }
 
 /// Uploads an image to the server.
+#[allow(dead_code)]
 fn upload_image(client: &Client, filename: String) -> Result<(), Box<dyn Error>> {
     let url = format!("http://{}/upload/image", SERVER_ADDRESS);
 

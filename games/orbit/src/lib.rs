@@ -4,12 +4,16 @@ use std::f32::consts::PI;
 use avian3d::prelude::*;
 use bevy::{color::palettes::tailwind, core_pipeline::{bloom::Bloom, tonemapping::Tonemapping}, prelude::*};
 use bevy_enhanced_input::EnhancedInputPlugin;
+use bevy_tweening::TweeningPlugin;
 
 pub mod states;
 pub mod ui;
-pub mod scene;
+pub mod prefabs;
 pub mod skybox;
 pub mod actions;
+pub mod assets;
+pub mod music;
+//pub mod solar_system;
 
 
 pub fn init_bevy_app() -> App {
@@ -20,14 +24,23 @@ pub fn init_bevy_app() -> App {
             title: "Orbit",
             ..default()
         },
+        bevy_inspector_egui::quick::StateInspectorPlugin::<states::AppState>::default(),
         PhysicsPlugins::default(),
+        TweeningPlugin,
+
         states::StatePlugin,
         ui::UiPlugin,
-        scene::sol::SolPlugin,
         EnhancedInputPlugin,
         actions::AppActionPlugin,        
-        //skybox::SkyboxPlugin,
-    ));    
+        //assets::AssetPlugin,
+        prefabs::PrefabPlugin,
+        music::MusicPlugin,
+    ))
+    .insert_resource(AmbientLight {
+        color: Color::WHITE,
+        brightness: 0.0,
+        ..default()
+    });    
 
     app
 }

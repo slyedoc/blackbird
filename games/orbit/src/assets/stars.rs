@@ -1,16 +1,42 @@
-use bevy::{
-    asset::{io::Reader, *},
-    prelude::*
-};
-use thiserror::Error;
+use bevy::{asset::{io::Reader, AssetLoader, LoadContext}, prelude::*};
 use serde::{Deserialize, Serialize};
+use serde_json::from_slice;
+use thiserror::Error;
 
-pub struct StarAssetPlugin;
+#[derive(Default)]
+pub struct StarAssetLoader;
 
-impl Plugin for StarAssetPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_asset::<Stars>()
-        .init_asset_loader::<StarAssetLoader>();
+/// Possible errors that can be produced by [`CustomAssetLoader`]
+#[non_exhaustive]
+#[derive(Debug, Error)]
+pub enum StarAssetLoaderError {
+    /// An [IO](std::io) Error
+    #[error("Could not load file: {0}")]
+    Io(#[from] std::io::Error),
+    /// A [Json](ron) Error
+    #[error("Could not parse Json: {0}")]
+    JsonError(#[from] serde_json::error::Error),
+}
+
+impl AssetLoader for StarAssetLoader {
+    type Asset = Stars;
+    type Error = StarAssetLoaderError;
+    type Settings = ();
+
+    async fn load(
+        &self,
+        reader: &mut dyn Reader,
+        _settings: &(),
+        _load_context: &mut LoadContext<'_>,
+    ) -> Result<Self::Asset, Self::Error> {
+        let mut bytes = Vec::new();
+        reader.read_to_end(&mut bytes).await?;
+        let custom_asset = from_slice(&bytes)?;        
+        Ok(custom_asset)
+    }
+
+    fn extensions(&self) -> &[&str] {
+        &[".json"]
     }
 }
 
@@ -108,46 +134,4 @@ pub struct DbStar {
     pub luminosity: Option<f32>,
     #[serde(rename = "K")]
     pub color: Option<DbColor>,
-}
-
-#[derive(Default)]
-pub struct StarAssetLoader;
-
-/// Possible errors that can be produced by [`CustomAssetLoader`]
-#[non_exhaustive]
-#[derive(Debug, Error)]
-pub enum StarAssetLoaderError {
-    /// An [IO](std::io) Error
-    #[error("Could not load file: {0}")]
-    Io(#[from] std::io::Error),
-    /// A [Json](ron) Error
-    #[error("Could not parse Json: {0}")]
-    JsonError(#[from] serde_json::error::Error),
-}
-
-impl AssetLoader for StarAssetLoader {
-    type Asset = Stars;
-    type Error = StarAssetLoaderError;
-    type Settings = ();
-
-    fn load<'a>(
-        &'a self,
-        reader: &'a mut Reader,
-        _settings: &'a (),
-        _load_context: &'a mut LoadContext,
-    ) -> BoxedFuture<'a, Result<Self::Asset, Self::Error>> {
-        Box::pin(async move {
-            let mut bytes = Vec::new();
-            reader.read_to_end(&mut bytes).await?;
-            let custom_asset = serde_json::de::from_slice::<DbStars>(&bytes)?;
-
-            let custom_asset = Stars::from(&custom_asset);
-
-            Ok(custom_asset)
-        })
-    }
-
-    fn extensions(&self) -> &[&str] {
-        &["stars.json"]
-    }
 }
