@@ -12,14 +12,16 @@ web = ["bevy/webgpu"]
 
 [dependencies]
 sly_common.workspace = true 
-bevy = { workspace = true }
+bevy = { workspace = true, features = ["meshlet", "meshlet_processor"] }
 bevy_tweening = { workspace = true }
+bevy_mod_mipmap_generator = { workspace = true, features = ["debug_text"] }
 avian3d.workspace = true
 #bevy_hanabi = { workspace = true, default-features = false, features = ["3d"] }
-leafwing-input-manager.workspace = true
+#leafwing-input-manager.workspace = true
 bevy_enhanced_input = { workspace = true, features = ["egui_priority"]}
 bevy-inspector-egui = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 anise = { version = "0.5.3" }
 thiserror = { workspace = true}
+clap = { version = "4.0", features = ["derive"] }

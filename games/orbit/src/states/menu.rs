@@ -1,4 +1,4 @@
-use crate::music::MyMusic;
+use crate::music::BackgroundMusic;
 use crate::prefabs::solar_system::SolarSystem;
 use crate::skybox::Cubemap;
 use crate::states::AppState;
@@ -138,20 +138,20 @@ fn setup_main(mut commands: Commands, asset_server: Res<AssetServer>, ui: Res<Ui
                     },
                 );
 
-            parent
-                .spawn((
-                    Name::new("Resume Button"),
-                    MenuButton,
-                    children!((
-                        MenuButtonInner,
-                        Text::new("*Resume*"),
-                        //ImageNode::new(asset_server.load("textures/icon/white/checkmark.png")),
-                    )),
-                ))
-                .observe(|_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
-                        //commands.send_event(Save);
-                    },
-                );
+            // parent
+            //     .spawn((
+            //         Name::new("Resume Button"),
+            //         MenuButton,
+            //         children!((
+            //             MenuButtonInner,
+            //             Text::new("*Resume*"),
+            //             //ImageNode::new(asset_server.load("textures/icon/white/checkmark.png")),
+            //         )),
+            //     ))
+            //     .observe(|_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
+            //             //commands.send_event(Save);
+            //         },
+            //     );
 
             parent
                 .spawn((
@@ -187,9 +187,62 @@ fn setup_main(mut commands: Commands, asset_server: Res<AssetServer>, ui: Res<Ui
                 );
         });
 
+    
+        commands
+        .spawn((
+            Name::new("Menu Panel"),
+            StateScoped(MenuState::Main),
+            Node {
+                position_type: PositionType::Absolute,
+                left: Val::Percent(80.),
+                height: Val::Percent(100.),
+                padding: UiRect::all(Val::Px(4.0)),
+                flex_direction: FlexDirection::Column,
+                justify_content: JustifyContent::Center,
+                align_items: AlignItems::Center,
+                ..Default::default()
+            },
+            BorderRadius::all(Val::Px(5.)),
+            BackgroundColor(PANEL_BACKGROUND),
+            BorderColor(PANEL_BORDER),
+        ))
+        .with_children(|parent| {
+            parent.spawn((
+                Node {
+                    padding: UiRect::all(Val::Px(30.0)),
+                    ..default()
+                },
+                children![(Name::new("Title"),
+                 Text::new("Scenes"), 
+                 H1,)],
+            ));
+
+            parent
+                .spawn((
+                    Name::new("Hanger Button"),
+                    MenuButton,
+                    children!((
+                        MenuButtonInner,
+                        //ImageNode::new(asset_server.load("textures/icon/white/plus.png")),
+                        Text("Hanger".to_string()),
+                    )),
+                ))
+                .observe(
+                    |_trigger: Trigger<Pointer<Click>>,
+                     mut commands: Commands| {
+                        commands.send_event(FadeTo(AppState::Hanger));
+                        
+                    },
+                );
+
+      
+        
+        });
+
+
     commands.spawn((
         Name::new("Version Text"),
-        //StateScoped(MenuState::Main),
+        StateScoped(AppState::Menu),
         Node {
             position_type: PositionType::Absolute,
             right: Val::Px(5.),
@@ -239,9 +292,7 @@ fn setup_settings(
         .id();
 
     commands.spawn((
-        ChildOf {
-            parent: settings_panel,
-        },
+        ChildOf( settings_panel ),
         Node {
             padding: UiRect::all(Val::Px(30.0)),
             ..default()
@@ -251,9 +302,7 @@ fn setup_settings(
 
     let row = commands
         .spawn((
-            ChildOf {
-                parent: settings_panel,
-            },
+            ChildOf(settings_panel),
             Node {
                 flex_direction: FlexDirection::Row,
                 ..default()
@@ -266,20 +315,18 @@ fn setup_settings(
         .id();
 
     commands
-        .spawn((ChildOf { parent: row }, Slider { value: 0.5 }))
+        .spawn((ChildOf(row), Slider { value: 0.5 }))
         .observe(
             |trigger: Trigger<SliderChanged>,
              mut commands: Commands,
-             mut music_controller: Single<&mut AudioSink, With<MyMusic>>| {
+             mut music_controller: Single<&mut AudioSink, With<BackgroundMusic>>| {
                 music_controller.set_volume(Volume::Linear(trigger.event().value));
             },
         );
 
     commands
         .spawn((
-            ChildOf {
-                parent: settings_panel,
-            },
+            ChildOf(settings_panel),
             Name::new("Exit Button"),
             MenuButton,
             children!((

@@ -3,12 +3,10 @@ pub use ui::*;
 mod water;
 pub use water::*;
 
-use bevy::{log::LogPlugin, prelude::*};
+use bevy::{log::LogPlugin, prelude::*, render::{settings::{RenderCreation, WgpuFeatures, WgpuSettings}, RenderPlugin}};
 
 pub mod prelude {
     pub use crate::water::*;
-    #[cfg(feature = "camera")]
-    pub use sly_camera::*;
 }
 pub struct SlyCommonPlugin {
     pub title: &'static str,
@@ -36,6 +34,16 @@ impl Plugin for SlyCommonPlugin {
                     }),
                     ..default()
                 })
+                .set(RenderPlugin {
+                    render_creation: RenderCreation::Automatic(WgpuSettings {
+                        // WARN this is a native only feature. It will not work with webgl or webgpu
+                        features: WgpuFeatures::POLYGON_MODE_LINE,
+                        ..default()
+                    }),
+                    ..default()
+                })
+                
+                
                 .set(AssetPlugin {
                     mode: AssetMode::Processed,
                     ..default()
@@ -65,13 +73,14 @@ impl Plugin for SlyCommonPlugin {
                     ..default()
                 })
                 .disable::<bevy::log::LogPlugin>(),
+
+
             #[cfg(feature = "editor")]
             sly_editor::SlyEditorPlugin,
-            //#[cfg(feature = "camera")]
-            //sly_camera::SlyCameraPlugin,
-            //#[cfg(feature = "camera")]
-            //UiPlugin,
+            // You need to add this plugin to enable wireframe rendering along with POLYGON_MODE_LINE
         ));
+
+        
         // https://github.com/bevyengine/bevy/issues/12126
         // #[cfg(target_arch = "wasm32")]
         // app.insert_resource(WinitSettings {

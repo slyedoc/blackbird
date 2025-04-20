@@ -39,7 +39,6 @@ impl Plugin for UiPlugin {
 }
 
 #[derive(Component)]
-
 pub struct Panel;
 
 // fn button_system(

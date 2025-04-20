@@ -3,6 +3,49 @@ use serde::{Deserialize, Serialize};
 use serde_json::from_slice;
 use thiserror::Error;
 
+
+
+#[derive(Resource)]
+pub struct StarAssets {
+    handle: Handle<Stars>,
+    printed: bool,
+}
+
+impl FromWorld for StarAssets {
+    fn from_world(world: &mut World) -> Self {
+        let asset_server = world.resource::<AssetServer>();
+        let handle = asset_server.load("stars/bsc5p_3d.stars.json");    
+        
+        StarAssets { 
+            handle,
+            printed: false,
+        }
+    }
+}
+
+// pub fn print_on_load(
+//     mut state: ResMut<StarAssets>,
+//     custom_assets: Res<Assets<Stars>>,    
+// ) {
+//     let custom_asset = custom_assets.get(&state.handle);    
+
+//     // Can't print results if the assets aren't ready
+//     if state.printed {
+//         return;
+//     }
+
+//     if custom_asset.is_none() {
+//         info_once!("Custom Asset Not Ready");
+//         return;
+//     }
+
+//     //info!("Custom asset loaded: {:?}", custom_asset.unwrap());        
+
+//     // Once printed, we won't print again
+//     state.printed = true;
+// }
+
+
 #[derive(Default)]
 pub struct StarAssetLoader;
 
@@ -31,12 +74,13 @@ impl AssetLoader for StarAssetLoader {
     ) -> Result<Self::Asset, Self::Error> {
         let mut bytes = Vec::new();
         reader.read_to_end(&mut bytes).await?;
-        let custom_asset = from_slice(&bytes)?;        
-        Ok(custom_asset)
+        let custom_asset: DbStars = from_slice(&bytes)?;  
+        let stars = Stars::from(&custom_asset);      
+        Ok(stars)
     }
 
     fn extensions(&self) -> &[&str] {
-        &[".json"]
+        &["stars.json"]
     }
 }
 
@@ -46,29 +90,6 @@ impl AssetLoader for StarAssetLoader {
 #[derive(Asset, TypePath, Debug, Serialize, Deserialize)]
 pub struct Stars(pub Vec<Star>);
 
-impl From<&DbStars> for Stars {
-    fn from(db_stars: &DbStars) -> Self {
-        let mut stars = Vec::new();
-        for db_star in &db_stars.0 {
-            let star = Star {
-                name: db_star.name.clone(),
-                position: Vec3::new(
-                    db_star.x.unwrap_or(0.0),
-                    db_star.y.unwrap_or(0.0),
-                    db_star.z.unwrap_or(0.0),
-                ),
-                distance: db_star.distance.unwrap_or(0.0),
-                color: db_star.color.as_ref().map_or(Color::WHITE, |c| {
-                    Color::LinearRgba(LinearRgba::rgb( c.r, c.g, c.b))
-                }),
-                luminosity: db_star.luminosity.unwrap_or(0.0),
-                index: db_star.i,
-            };
-            stars.push(star);
-        }
-        Self(stars)
-    }
-}
 
 /// custom asset loader for height files, this avoids the need to know the
 /// bounds of any noise function we use
@@ -134,4 +155,28 @@ pub struct DbStar {
     pub luminosity: Option<f32>,
     #[serde(rename = "K")]
     pub color: Option<DbColor>,
+}
+
+impl From<&DbStars> for Stars {
+    fn from(db_stars: &DbStars) -> Self {
+        let mut stars = Vec::new();
+        for db_star in &db_stars.0 {
+            let star = Star {
+                name: db_star.name.clone(),
+                position: Vec3::new(
+                    db_star.x.unwrap_or(0.0),
+                    db_star.y.unwrap_or(0.0),
+                    db_star.z.unwrap_or(0.0),
+                ),
+                distance: db_star.distance.unwrap_or(0.0),
+                color: db_star.color.as_ref().map_or(Color::WHITE, |c| {
+                    Color::LinearRgba(LinearRgba::rgb( c.r, c.g, c.b))
+                }),
+                luminosity: db_star.luminosity.unwrap_or(0.0),
+                index: db_star.i,
+            };
+            stars.push(star);
+        }
+        Self(stars)
+    }
 }

@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy_mod_mipmap_generator::generate_mipmaps;
 use stars::*;
 pub mod stars;
 
@@ -7,45 +8,27 @@ pub struct AssetPlugin;
 impl Plugin for AssetPlugin {
     fn build(&self, app: &mut App) {
         app.init_asset::<stars::Stars>()
+        .init_resource::<BuildingAssets>()
         .init_asset_loader::<stars::StarAssetLoader>()
-        .init_resource::<StarAssets>()
-        .add_systems(Startup, setup)
-        .add_systems(Update, print_on_load);
+        .init_resource::<stars::StarAssets>()        ;
+        // TODO: use with save
+        //.add_systems(Update, generate_mipmaps::<StandardMaterial>);
     }
 }
 
-
-
-#[derive(Resource, Default)]
-struct StarAssets {
-    handle: Handle<Stars>,
-    printed: bool,
+#[derive(Resource)]
+pub struct BuildingAssets {
+    pub building_lg_a: Handle<Scene>,    
+    //pub art_nouveau: Handle<Scene>,    
 }
 
-fn setup(mut state: ResMut<StarAssets>, asset_server: Res<AssetServer>) {
-    // Recommended way to load an asset
-    state.handle = asset_server.load("stars/bsc5p_3d.json");    
-}
-
-
-fn print_on_load(
-    mut state: ResMut<StarAssets>,
-    custom_assets: Res<Assets<Stars>>,    
-) {
-    let custom_asset = custom_assets.get(&state.handle);    
-
-    // Can't print results if the assets aren't ready
-    if state.printed {
-        return;
+impl FromWorld for BuildingAssets {
+    fn from_world(world: &mut World) -> Self {
+        let asset_server = world.resource::<AssetServer>();
+        //let lunarbase = asset_server.load(GltfAssetLabel::Scene(0).from_asset("models/kb3d_lunarbase.glb"));
+        let building_lg_a = asset_server.load(GltfAssetLabel::Scene(0).from_asset("models/KB3D_LNB_BldgLG_A_grp/KB3D_LNB_BldgLG_A_grp.gltf"));
+        //let art_nouveau = asset_server.load(GltfAssetLabel::Scene(0).from_asset("models/kb3d_art_nouveau.glb"));
+        BuildingAssets { building_lg_a }
     }
-
-    if custom_asset.is_none() {
-        info!("Custom Asset Not Ready");
-        return;
-    }
-
-    info!("Custom asset loaded: {:?}", custom_asset.unwrap());        
-
-    // Once printed, we won't print again
-    state.printed = true;
 }
+

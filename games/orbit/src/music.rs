@@ -11,24 +11,15 @@ impl Plugin for MusicPlugin {
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
+        Name::new("Music"),
         AudioPlayer::new(asset_server.load("sounds/music/1 - Astro Reverie (Loop).ogg")),
-        MyMusic,
+        BackgroundMusic,
     ));
 
-    // example instructions
-    commands.spawn((
-        Text::new("-/=: Volume Down/Up\nSpace: Toggle Playback\nM: Toggle Mute"),
-        Node {
-            position_type: PositionType::Absolute,
-            bottom: Val::Px(12.0),
-            left: Val::Px(12.0),
-            ..default()
-        },
-    ));
 }
 
 #[derive(Component)]
-pub struct MyMusic;
+pub struct BackgroundMusic;
 
 // fn update_speed(music_controller: Query<&AudioSink, With<MyMusic>>, time: Res<Time>) {
 //     let Ok(sink) = music_controller.single() else {
@@ -40,7 +31,7 @@ pub struct MyMusic;
 
 fn pause(
     keyboard_input: Res<ButtonInput<KeyCode>>,
-    music_controller: Query<&AudioSink, With<MyMusic>>,
+    music_controller: Query<&AudioSink, With<BackgroundMusic>>,
 ) {
     let Ok(sink) = music_controller.single() else {
         return;
@@ -53,7 +44,7 @@ fn pause(
 
 fn mute(
     keyboard_input: Res<ButtonInput<KeyCode>>,
-    mut music_controller: Query<&mut AudioSink, With<MyMusic>>,
+    mut music_controller: Query<&mut AudioSink, With<BackgroundMusic>>,
 ) {
     let Ok(mut sink) = music_controller.single_mut() else {
         return;
@@ -66,7 +57,7 @@ fn mute(
 
 fn volume(
     keyboard_input: Res<ButtonInput<KeyCode>>,
-    mut music_controller: Query<&mut AudioSink, With<MyMusic>>,
+    mut music_controller: Query<&mut AudioSink, With<BackgroundMusic>>,
 ) {
     let Ok(mut sink) = music_controller.single_mut() else {
         return;

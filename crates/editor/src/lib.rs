@@ -4,17 +4,33 @@
 use avian3d::{debug_render::PhysicsDebugPlugin, prelude::*};
 use bevy::{
     color::palettes::{css, tailwind},
+    dev_tools::picking_debug::{DebugPickingMode, DebugPickingPlugin},
     diagnostic::FrameTimeDiagnosticsPlugin,
+    ecs::hierarchy,
     gizmos::light::LightGizmoPlugin,
     input::common_conditions::{input_just_pressed, input_toggle_active},
     pbr::{
         irradiance_volume::IrradianceVolume,
-        wireframe::{WireframeConfig, WireframePlugin},
+        wireframe::{Wireframe, WireframeConfig, WireframePlugin},
     },
-    picking::pointer::PointerInteraction,
+    picking::{backend::ray::RayMap, pointer::PointerInteraction},
     prelude::*,
+    window::PrimaryWindow,
 };
-use bevy_inspector_egui::quick::{ResourceInspectorPlugin, WorldInspectorPlugin};
+use bevy_inspector_egui::{
+    bevy_egui::{EguiContext, EguiContextPass, EguiPlugin},
+    bevy_inspector::{
+        hierarchy::{Hierarchy, SelectedEntities, SelectionMode},
+        ui_for_all_assets, ui_for_entities, ui_for_resources,
+    },
+    egui,
+    quick::{ResourceInspectorPlugin, WorldInspectorPlugin},
+    DefaultInspectorConfigPlugin,
+};
+mod select;
+use select::*;
+mod prefab;
+pub use prefab::*;
 
 mod stepping;
 pub use stepping::*;
@@ -31,12 +47,17 @@ pub struct SlyEditorPlugin;
 impl Plugin for SlyEditorPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins((
-            WireframePlugin,
+            WireframePlugin::default(),
+            DebugPickingPlugin::default(),
             #[cfg(feature = "avian3d")]
             PhysicsDebugPlugin::default(),
             //ResourceInspectorPlugin::<LevelSetup>::default(),
             //#[cfg(feature = "debug")]
-            WorldInspectorPlugin::new().run_if(input_toggle_active(false, KeyCode::F1)),
+            EguiPlugin {
+                enable_multipass_for_primary_context: true,
+            },
+            DefaultInspectorConfigPlugin,
+            //WorldInspectorPlugin::new().run_if(input_toggle_active(false, KeyCode::F1)),
             // ResourceInspectorPlugin::<AppStatus>::default()
             //     .run_if(input_toggle_active(true, KeyCode::F1)),
             // TODO: come back to stepping debugging
@@ -46,7 +67,10 @@ impl Plugin for SlyEditorPlugin {
             //     .at(Val::Percent(35.0), Val::Percent(50.0)),
             #[cfg(feature = "fps")]
             fps::FpsPlugin,
+            select::SelectPlugin,
+            prefab::PrefabPlugin,
         ))
+        .init_resource::<Selected>()
         .init_state::<EditorState>()
         .enable_state_scoped_entities::<EditorState>()
         .add_systems(Startup, setup)
@@ -54,7 +78,8 @@ impl Plugin for SlyEditorPlugin {
         .add_systems(
             Update,
             (
-                toggle_editor.run_if(input_toggle_active(false, KeyCode::Backquote)),
+                toggle_editor.run_if(input_just_pressed(KeyCode::F1)),
+                //toggle_editor.run_if(input_toggle_active(false, KeyCode::Backquote)),
                 toggle_physics.run_if(input_just_pressed(KeyCode::F2)),
                 toggle_wireframe.run_if(input_just_pressed(KeyCode::F3)),
                 toggle_aabb.run_if(input_just_pressed(KeyCode::F4)),
@@ -67,12 +92,105 @@ impl Plugin for SlyEditorPlugin {
                 //toggle_irradiance_volumes.run_if(input_just_pressed(KeyCode::F9)),
                 //reload_scene.run_if(action_just_pressed(DebugAction::Reload)),
             ),
+        )
+        .add_systems(EguiContextPass, inspector_ui.run_if(in_editor))
+        .add_systems(
+            PreUpdate,
+            (|mut mode: ResMut<DebugPickingMode>| {
+                *mode = match *mode {
+                    DebugPickingMode::Disabled => DebugPickingMode::Normal,
+                    DebugPickingMode::Normal => DebugPickingMode::Noisy,
+                    DebugPickingMode::Noisy => DebugPickingMode::Disabled,
+                }
+            })
+            .distributive_run_if(input_just_pressed(KeyCode::F5)),
         );
         // .add_systems(
         //     Update,
         //     draw_irradiance_volume,
         // );
     }
+}
+
+fn inspector_ui(world: &mut World) {
+    world.resource_scope(|world, mut selected_entities: Mut<Selected>| {
+        let mut egui_context = world
+            .query_filtered::<&mut EguiContext, With<PrimaryWindow>>()
+            .single(world)
+            .expect("EguiContext not found")
+            .clone();
+
+        egui::SidePanel::left("hierarchy")
+            .default_width(200.0)
+            .show(egui_context.get_mut(), |ui| {
+                egui::ScrollArea::both().show(ui, |ui| {
+                    // bevy_inspector::ui_for_world(world, ui);
+                    // ui.allocate_space(ui.available_size());
+
+                    ui.heading("Hierarchy");
+                    egui::CollapsingHeader::new("Entities")
+                        .default_open(true)
+                        .show(ui, |ui| {
+                            // ui_for_entities(world, ui);
+                            let type_registry = world.resource::<AppTypeRegistry>().clone();
+                            let type_registry = type_registry.read();
+
+                            let mut hierarchy = Hierarchy {
+                                world,
+                                type_registry: &type_registry,
+                                selected: &mut selected_entities.0,
+                                context_menu: None,
+                                shortcircuit_entity: None,
+                                extra_state: &mut (),
+                            };
+                            if hierarchy.show_with_default_filter::<()>(ui) {
+                                // selected changed
+                            };
+                        });
+                    egui::CollapsingHeader::new("Resources").show(ui, |ui| {
+                        ui_for_resources(world, ui);
+                    });
+                    egui::CollapsingHeader::new("Assets").show(ui, |ui| {
+                        ui_for_all_assets(world, ui);
+                    });
+
+                    ui.label("Press ` to toggle UI");
+                    ui.allocate_space(ui.available_size());
+                });
+            });
+
+        egui::SidePanel::right("inspector")
+            .default_width(250.0)
+            .show(egui_context.get_mut(), |ui| {
+                egui::ScrollArea::both().show(ui, |ui| {
+                    if ui.button("Prefab").clicked() {
+                        match selected_entities.0.as_slice() {
+                            &[entity] => {
+                                world.trigger_targets(BuildPrefab, entity);
+                            }
+                            entities => {
+                                warn_once!("more than one selected, not creating prefab");
+                            }
+                        }
+                    }
+
+                    ui.heading("Inspector");
+
+                    match selected_entities.0.as_slice() {
+                        &[entity] => {
+                            bevy_inspector_egui::bevy_inspector::ui_for_entity(world, entity, ui);
+                        }
+                        entities => {
+                            bevy_inspector_egui::bevy_inspector::ui_for_entities_shared_components(
+                                world, entities, ui,
+                            );
+                        }
+                    }
+
+                    ui.allocate_space(ui.available_size());
+                });
+            });
+    });
 }
 
 static GIZMO_COLOR: Color = Color::Srgba(css::YELLOW);

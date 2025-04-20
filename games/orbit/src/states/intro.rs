@@ -83,7 +83,7 @@ fn setup_ui(mut commands: Commands, asset_server: Res<AssetServer>, ui: Res<UiAs
                 )
             ]
         )).observe(|_trigger: Trigger<Pointer<Click>>, mut commands: Commands| {
-            commands.send_event(FadeTo(AppState::Hanger));            
+            commands.send_event(FadeTo(AppState::Menu));            
         });
     });
 }

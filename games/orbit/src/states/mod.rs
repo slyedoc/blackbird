@@ -4,6 +4,7 @@ mod splash;
 mod hanger;
 
 use bevy::prelude::*;
+use clap::ValueEnum;
 
 pub struct StatePlugin;
 
@@ -20,7 +21,7 @@ impl Plugin for StatePlugin {
     }
 }
 
-#[derive(Default, States, Debug, Clone, Eq, PartialEq, Hash, Reflect)]
+#[derive(Default, States, Debug, Clone, Eq, PartialEq, Hash, Reflect, ValueEnum)]
 pub enum AppState {
     #[default]
     Splash,    

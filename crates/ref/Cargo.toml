@@ -9,7 +9,7 @@ default = ["bevy/wayland", "bevy/file_watcher", "sly_common/editor", "bevy/asset
  #"bevy/embedded_watcher"
 
 [dependencies]
-sly_common = { workspace = true, features = ["camera", "ui"] }
+sly_common = { workspace = true, features = ["ui"] }
 sly_editor = { workspace = true, features = ["fps"] }
 #billboard = { workspace = true }
 

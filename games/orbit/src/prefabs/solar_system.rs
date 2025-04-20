@@ -77,7 +77,7 @@ impl CelestialBody {
         // mercury
 
         let e = commands.spawn((
-            ChildOf { parent },
+            ChildOf(parent),
             Name::new(format!("{} - Pivot", self.name)),
             Transform::default(),
             CelestialOrbit {
@@ -319,7 +319,7 @@ pub fn spawn_solor_system(
 
         // spawn new children
         commands.spawn((
-                ChildOf { parent: e },
+                ChildOf(e),
                 Name::new("Star"),
                 Mesh3d(meshes.add(Sphere {                    
                     radius:  (695_700.0 / 149_600_000.0) * config.star_scale,
@@ -385,7 +385,7 @@ fn draw_orbit(
 ) {
     for (orbit, child_of) in orbit_query.iter() {
         // Get the global transform of the parent entity.
-        let global_trans = trans_query.get(child_of.parent).unwrap();
+        let global_trans = trans_query.get(child_of.0).unwrap();
         let center = global_trans.translation();
         let a = orbit.orbit_radius;
         let b = a * (1.0 - orbit.orbit_eccentricity);

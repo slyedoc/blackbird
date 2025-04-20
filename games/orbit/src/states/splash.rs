@@ -57,8 +57,7 @@ fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
 // Tick the timer, and change state when finished
 fn countdown(mut commands: Commands, time: Res<Time>, mut timer: ResMut<SplashTimer>) {
-    if timer.tick(time.delta()).finished() {
-        dbg!("Finished");
+    if timer.tick(time.delta()).finished() {        
         commands.remove_resource::<SplashTimer>();
         commands.send_event(FadeTo(AppState::Menu));
     }

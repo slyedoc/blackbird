@@ -10,11 +10,8 @@ avian3d = ["dep:avian3d"]
 
 
 [dependencies]
-sly_camera.workspace = true
-
-bevy = { workspace = true, features = ["bevy_dev_tools", "bevy_debug_stepping"] }
+bevy = { workspace = true, features = ["bevy_dev_tools", "bevy_debug_stepping" ] }
 bevy-inspector-egui.workspace = true
-
 avian3d = { workspace = true, optional = true }
 leafwing-input-manager.workspace = true
 strum = { workspace = true, features = ["derive"] }

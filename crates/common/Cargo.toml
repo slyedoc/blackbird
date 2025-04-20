@@ -6,14 +6,12 @@ edition = "2021"
 [features]
 default = []
 editor = ["dep:sly_editor"]
-camera = ["dep:sly_camera"]
 ui = []
 
 
 [dependencies]
 bevy.workspace = true
 sly_editor = { workspace = true, optional = true }
-sly_camera = { workspace = true, optional = true }
 bevy-inspector-egui.workspace = true
 #bevy-persistent = { version = "0.7.0", features = ["ron"] }
 serde.workspace = true
